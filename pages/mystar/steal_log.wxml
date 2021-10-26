@@ -1,0 +1,25 @@
+<view style="padding:20rpx;font-size:20rpx;height:100%">
+  <view  style="display:flex;justify-content:space-between;align-items:center;">
+  <view style="width:10%">#</view>
+  <view style="width:10%">UID</view>
+  <view style="width:50%">资料</view>
+  
+  <view style="width:20%">矿石数量</view>
+  <view style="width:10%">类型</view>
+</view>
+<view wx:for="{{steallist}}" style="margin-top:20rpx;display:flex;justify-content:space-between;align-items:center;">
+  <view style="width:10%">#{{index}}</view>
+  <view style="width:10%">{{item.thief.id}}</view>
+  <view style="width:50%;">
+  <view style="display:flex;align-items:center;"><image src="{{item.thief.avatar}}" style="width:50rpx;height:50rpx;margin-right:10rpx;"></image>{{item.thief.nickname}}</view>
+  <view style="display:flex;margin-top:5rpx;">
+    <view style="" class="bg-orange">LV{{item.thief.star_lv}}</view>
+    <view style="">{{item.time}}</view>
+    
+  </view>
+  
+</view>
+<view style="width:20%;font-size:35rpx;" class="numfont {{item.type=='thief'?'text-red':'text-olive'}}">{{item.type=='thief'?'+':'-'}}{{item.integral}}</view>
+<view style="width:10%" class="{{item.type=='thief'?'text-red':'text-olive'}}">{{item.type=='thief'?'获取':'被偷'}}</view>
+</view>
+</view>

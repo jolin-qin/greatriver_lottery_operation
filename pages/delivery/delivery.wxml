@@ -1,0 +1,32 @@
+<view class="cu-custom" style="height:{{CustomBar}}px;position:fixed;width:100%;top:0;background:#f7f8fd;z-index:999">
+  <view class="titlefont" style="position:absolute;bottom:2rpx;left:20rpx;font-size:45rpx;font-weight:500;color:#000;display:flex;align-items:center;"><navigator open-type="navigateBack" hover-class="none"><view class="icon-back" style="margin-right:20rpx;"></view></navigator>{{page_title}}</view>
+</view>
+
+<view style="margin-top:{{CustomBar}}px;padding:20rpx 0">
+<view wx:for="{{delivery}}" style="margin-top:20rpx;padding:0 20rpx;">
+        <view
+          bindtap="fahuo" data-id="{{item.members_prize_id}}" style="width:100%;background:#fff;display:flex;justify-content:space-between;padding:20rpx 20rpx;border-radius:20rpx;">
+         
+          <view style="display:flex;align-items:center;">
+            <view style="margin-right:20rpx;font-weight:bold;" class="text-grey">#{{index<9?'0'+(index+1):index+1}}</view>
+            <view style="border-radius:10rpx;width:130rpx;height:130rpx;overflow:hidden;background:#f7f7f7;padding:10rpx;">
+              <image src="{{item.prize.prize_pic}}" style="border-radius:10rpx;width:100%;height:100%;"
+                mode="aspectFill"></image>
+              </view>
+            <view style="margin-left:20rpx;">
+              <view
+                style="display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 2;overflow: hidden;font-weight:500;font-size:26rpx;">
+                {{item.prize.prize_title}}</view>
+              <view style="margin-top:10rpx;"><view class='cu-tag radius sm'>提交时间</view><text style="font-size:20rpx;">{{item.time}}</text></view>
+              <view><view class='cu-tag radius sm'>物品类型</view><text style="font-size:20rpx;">{{item.prize.prize_type=='4'?'红包':''}}{{item.prize.prize_type=='1'?'实物':''}}{{item.prize.prize_type=='2'?'虚拟物品':''}}{{item.prize.prize_type=='3'?'卡密':''}}{{item.prize.prize_type=='5'?'其他':''}}</text></view>
+            </view>
+          </view>
+          <view style="display:flex;align-items:center;">
+           <text class="icon-right" ></text>
+          </view>
+          
+
+        </view>
+      </view>
+      <view style="height:400rpx;margin-top:30rpx;text-align:center;font-weight:20rpx;">没有更多了</view>
+    </view>

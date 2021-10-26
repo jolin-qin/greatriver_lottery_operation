@@ -1,0 +1,362 @@
+<view style="padding:20rpx 20rpx 0 20rpx;position:relative;">
+
+
+  <view
+    style="width:100%;background:#fff;display:flex;flex-direction:column;padding:20rpx 30rpx 40rpx 30rpx;border-radius:20rpx;">
+
+
+    <view style="display:flex;margin-top:20rpx;align-items:center;padding:0 0 30rpx 0;border-bottom:2rpx solid #f7f7f7">
+      <view class="bg-gradual-orange"
+        style="padding:10rpx;border-radius:30rpx;min-width:180rpx;height:180rpx;overflow:hidden">
+        <image src="{{prize.prize.prize_pic}}" style="border-radius:20rpx;width:100%;height:100%;" mode="aspectFill">
+        </image>
+      </view>
+      <view style="margin-left:20rpx;">
+        <view
+          style="display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 2;overflow: hidden;font-weight:500;font-size:26rpx;">
+          {{prize.prize.prize_isfragment=='1' && prize.prize_first_state!==0?prize.prize.prize_title:prize.prize.complete_prize_title}}
+        </view>
+        <block wx:if="{{prize.prize.prize_isfragment=='1' && prize.prize_first_state==0}}">
+          <view wx:if="{{prize.prize.prize_fragment.all_prize_fragment_list.length>1}}"
+            style="font-size:25rpx;margin-top:20rpx;">碎片列表</view>
+          <scroll-view scroll-x="true" style="width:500rpx">
+            <view style="display:flex;">
+              <view wx:if="{{prize.prize.prize_fragment.all_prize_fragment_list.length>1}}" class=""
+                style="display:block;font-size:20rpx;font-weight:700;margin-top:5rpx;text-overflow:ellipsis;white-space: nowrap;border-radius:5rpx;text-align:center;margin-right:10rpx;"
+                wx:for="{{prize.prize.prize_fragment.all_prize_fragment_list}}" wx:for-item="subitem">
+                <view class="{{subitem.owned_quantity>0?'':'gray'}}"
+                  style="background:#f7f7f7;width:80rpx;height:80rpx;background-size:100% 100%; background-repeat:no-repeat;color:#fff;display:flex;align-items:center;justify-content:center;">
+                  <view>
+                    <view style="font-weight:bold;font-size:25rpx;margin-top:5rpx;" class="text-orange">
+                      {{subitem.prizes_fragment_title}}</view>
+                    <view style="font-size:20rpx;" class="text-orange">x {{subitem.owned_quantity}}</view>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </scroll-view>
+        </block>
+      </view>
+     
+    </view>
+
+    <view style="padding:25rpx 0rpx;width:100%">
+      <view style="background:#fff;">
+        <view style="display:flex;justify-content:space-between;">
+          <view class="text-grey">物品ID</view>
+          <view>{{prize.prize.id}}</view>
+        </view>
+        <view style="display:flex;justify-content:space-between;">
+          <view class="text-grey">类型</view>
+          <view class="" style="">
+            {{prize.prize.prize_type==1?'实物':''}}{{prize.prize.prize_type==2?'虚拟物品':''}}{{prize.prize.prize_type==3?'卡密':''}}{{prize.prize.prize_type==4?'现金红包':''}}{{prize.prize.prize_type==5?'跳转领取':''}}
+          </view>
+        </view>
+        <view style="display:flex;justify-content:space-between;">
+          <view class="text-grey">物品来源</view>
+          <view>{{prize.prize_source}}</view>
+        </view>
+        <view style="display:flex;justify-content:space-between;">
+          <view class="text-grey">抽中者</view>
+          <view>{{prize.prize_first_owner.nickname}}</view>
+        </view>
+        <view style="display:flex;justify-content:space-between;">
+          <view class="text-grey">抽中时间</view>
+          <view>{{prize.prize_first_time}}</view>
+        </view>
+        <view style="display:flex;justify-content:space-between;">
+          <view class="text-grey">回收价格</view>
+          <view class="text-price">{{prize.prize.prize_fragment.prizes_fragments_recovery_price}}</view>
+        </view>
+        <view style="display:flex;justify-content:space-between;">
+          <view class="text-grey">物品状态</view>
+          <view class="text-bold" wx:if="{{prize.prize.prize_state!=='0'}}" style="">已失效</view>
+          <view class="text-bold" wx:else style="">
+            {{prize.prize_first_state==0?'未申请发货':''}}{{prize.prize_first_state==1?'发货审核中':''}}{{prize.prize_first_state==2?'已发货':''}}{{prize.prize_first_state==3?'已回收':''}}{{prize.prize_first_state==4?'已收货':''}}{{prize.prize_first_state==5?'等待平台发货':''}}{{prize.prize_first_state==-1?'已失效2':''}}{{prize.prize_first_state==6?'已审核待支付运费':''}}{{prize.prize_first_state==7?'已审核待领取':''}}{{prize.prize_first_state==-2?'发货申请已被驳回':''}}
+          </view>
+        </view>
+        <view wx:if="{{prize.prize.need_audit_deliver==0}}" style="display:flex;justify-content:space-between;">
+          <view class="text-grey">运费(快递)</view>
+          <view class="{{prize.prize.prize_postage_type==0?'':'text-price'}}">
+            {{prize.prize.prize_postage_type==0?'包邮':prize.prize.prize_postage}}</view>
+        </view>
+
+      </view>
+
+    </view>
+
+    <view class="numfont"
+      wx:if="{{(prize.prize.prize_type==1 && prize.prize.need_audit_deliver==0) || prize.prize_first_state==6}}"
+      style="text-align:right;">需支付快递运费<text style="font-size:35rpx;line-height:35rpx;color:#ff9700"> ¥ </text><text
+        style="font-size:60rpx;line-height:60rpx;color:#ff9700">{{prize.prize.prize_postage}}</text></view>
+    <view style="display:flex;margin-top:30rpx;justify-content:space-between">
+      <view style="display:flex;">
+        <button open-type="share" bindtap="sendprize" class="cu-btn round  button-hover"
+          style="height:50rpx;padding:0 20rpx;font-size:25rpx;font-weight:700;background:#fff;border:2rpx solid #eee;margin-right:20rpx;"
+          role="button" aria-disabled="false">送给朋友</button>
+        <button bindtap="recovery" class="cu-btn round  button-hover"
+          style="height:50rpx;padding:0 20rpx;font-size:25rpx;font-weight:700;background:#fff;border:2rpx solid #eee"
+          role="button" aria-disabled="false">平台回收</button>
+      </view>
+
+      <!--
+        <button class="cu-btn round  button-hover"
+          style="margin-left:20rpx;height:50rpx;padding:0 20rpx;font-size:25rpx;font-weight:700;background:#fff;border:2rpx solid #eee"
+          role="button" aria-disabled="false" bindtap="fahuo" data-id="{{item.id}}">申请发货</button>
+-->
+      <block
+        wx:if="{{(prize.prize_first_state==0 && prize.prize.prize_state==0) || prize.prize_first_state==7 || prize.prize_first_state==6 || prize.prize_first_state==-2}}">
+        <button bindtap="clickdelivery" wx:if="{{prize.force_phonenumber_fahuo_enable==0}}"
+          class="{{openthebox_animation4}} cu-btn round button-hover"
+          style="margin-left:20rpx;height:50rpx;padding:0 20rpx;font-size:25rpx;font-weight:700;background:#fff;border:2rpx solid orange">{{prize.prize_first_state==7?'立即领取':prize.prize_first_state==6?'立即发货':prize.prize_first_state==-2?'重新申请发货':'申请发货'}}</button>
+
+
+        <button wx:if="{{prize.force_phonenumber_fahuo_enable==1}}" open-type="getPhoneNumber"
+          bindgetphonenumber="getPhoneNumber" class="{{openthebox_animation4}} cu-btn round button-hover"
+          style="margin-left:20rpx;height:50rpx;padding:0 20rpx;font-size:25rpx;font-weight:700;background:#fff;border:2rpx solid orange">{{prize.prize_first_state==7?'立即领取':prize.prize_first_state==6?'立即发货':prize.prize_first_state==-2?'重新申请发货':'申请发货'}}</button>
+
+      </block>
+
+      <button wx:else class="{{openthebox_animation4}} cu-btn round button-hover"
+        style="margin-left:20rpx;height:50rpx;padding:0 20rpx;font-size:25rpx;font-weight:700;background:#fff;border:2rpx solid #eee">
+        <block wx:if="{{prize.prize.prize_state==0}}">
+          {{prize.prize_first_state==1?'发货审核中':''}}{{prize.prize_first_state==2?'已发货':''}}{{prize.prize_first_state==3?'已回收':''}}{{prize.prize_first_state==4?'已收货':''}}{{prize.prize_first_state==5?'等待平台发货':''}}{{prize.prize_first_state==-1?'已失效':''}}{{prize.prize_first_state==-2?'发货申请被驳回 ':''}}
+        </block>
+        <block wx:else>{{prize.prize.prize_state?'已失效':''}}</block>
+      </button>
+
+    </view>
+  </view>
+
+</view>
+
+<view wx:if="{{prize.prize.prize_type==4 && prize.prize_first_state==4}}"
+  style="margin:20rpx;background:#fff;border-radius:20rpx;">
+  <view style="padding:25rpx 30rpx 0 30rpx;">
+    <view style="padding-bottom:20rpx;border-bottom:2rpx solid #f7f7f7;width:100%;font-size:32rpx;font-weight:bold">
+      红包发放结果
+    </view>
+  </view>
+
+  <view style="display:flex;justify-content:space-between;position:relative;border-radius:20rpx;overflow:hidden">
+    <view style="padding:25rpx 30rpx;width:100%;">
+      <view class="numfont">红包金额<text style="font-size:35rpx;line-height:35rpx;color:red"> ¥ </text><text
+          style="font-size:60rpx;line-height:60rpx;color:red">{{prize.prize.prize_redpaper_price}}
+        </text>已成功发放到你的{{prize.prize.prize_redpaper_type==0?'微信零钱':'账户余额'}}</view>
+
+    </view>
+
+
+  </view>
+
+</view>
+
+<view wx:if="{{prize.prize.prize_type==2 && prize.prize_first_state==4}}"
+  style="margin:20rpx;background:#fff;border-radius:20rpx;">
+  <view style="padding:25rpx 30rpx 0 30rpx;">
+    <view style="padding-bottom:20rpx;border-bottom:2rpx solid #f7f7f7;width:100%;font-size:32rpx;font-weight:bold">
+      虚拟物品内容
+    </view>
+  </view>
+
+  <view style="display:flex;justify-content:space-between;position:relative;border-radius:20rpx;overflow:hidden">
+    <view style="padding:25rpx 30rpx;width:100%;">
+
+      <rich-text nodes="{{prize.prize.prize_xuni_content!==''?prize.prize.prize_xuni_content:'空空如也'}}"></rich-text>
+    </view>
+
+
+  </view>
+
+</view>
+
+<view wx:if="{{prize.prize.prize_type==3 && prize.prize_first_state==4}}"
+  style="margin:20rpx;background:#fff;border-radius:20rpx;">
+  <view style="padding:25rpx 30rpx 0 30rpx;">
+    <view style="padding-bottom:20rpx;border-bottom:2rpx solid #f7f7f7;width:100%;font-size:32rpx;font-weight:bold">
+      卡密发放结果
+      <view class="text-grey" style="font-size:25rpx;float:right;">点击内容可以复制</view>
+    </view>
+  </view>
+
+  <view style="display:flex;justify-content:space-between;position:relative;border-radius:20rpx;overflow:hidden">
+    <view style="padding:25rpx 30rpx;width:100%;" bindtap="copycdkey">
+      <view style="display:flex;flex-direction:column;width:100%;">
+        <view>
+          <view class="text-grey">卡密内容</view>
+          <view style="margin:20rpx 0;font-size:25rpx;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">
+            {{prize.prize_inclusion.cdkey.cdkey.cdkey}}</view>
+        </view>
+
+      </view>
+      <view style="margin-top:20rpx;display:flex;flex-direction:column;width:100%;">
+        <view style="line-height:50rpx;">
+          <view class="text-grey">使用方法</view>
+          <view style="margin:10rpx 0 20rpx 0;font-size:25rpx;">{{prize.prize_inclusion.cdkey.cdkey_instructions}}
+          </view>
+        </view>
+
+      </view>
+    </view>
+
+
+  </view>
+
+</view>
+
+
+<view wx:if="{{prize.prize.prize_type==5 && prize.prize_first_state==4}}"
+  style="margin:20rpx;background:#fff;border-radius:20rpx;">
+  <view style="padding:25rpx 30rpx 0 30rpx;">
+    <view style="padding-bottom:20rpx;border-bottom:2rpx solid #f7f7f7;width:100%;font-size:32rpx;font-weight:bold">
+      虚拟物品发放结果
+    </view>
+  </view>
+
+  <view style="display:flex;justify-content:space-between;position:relative;border-radius:20rpx;overflow:hidden">
+    <view style="padding:25rpx 30rpx;width:100%;display:flex;justify-content:space-between;">
+      <view style="line-height:50rpx;padding:0 15rpx 0 0">
+        <view class="cu-tag sm" style="margin-right:20rpx;">使用方法</view><text
+          style="font-size:25rpx;">{{prize.prize_inclusion.cps.cps_instructions}}</text>
+      </view>
+      <view class="bg-gradual-orange" bindtap="jumpminiapp" data-appid="{{prize.prize_inclusion.cps.cps_appid}}"
+        data-path="{{prize.prize_inclusion.cps.cps_path}}"
+        style="height:90rpx;min-width:120rpx;border-radius:10rpx;display:flex;align-items:center;justify-content:center;">
+        领取</view>
+    </view>
+
+
+  </view>
+
+</view>
+
+
+
+
+
+<view wx:if="{{prize.prize.prize_type==1}}" style="margin:20rpx;background:#fff;border-radius:20rpx;">
+  <view style="padding:25rpx 30rpx 0 30rpx;">
+    <view style="padding-bottom:20rpx;border-bottom:2rpx solid #eee;width:100%;font-size:32rpx;font-weight:bold">配送地址
+    </view>
+  </view>
+
+  <view style="display:flex;justify-content:space-between;position:relative;border-radius:20rpx;overflow:hidden">
+    <block wx:if="{{useraddress}}">
+      <view style="padding:25rpx 30rpx;width:100%">
+
+        <view style="font-size:28rpx;font-weight:bold;display:flex;align-items:center;">
+          <view wx:if="{{useraddress.isdefault==1}}" class='cu-tag radius bg-red sm' style="margin-right:10rpx;">默认
+          </view>
+          {{useraddress.province+useraddress.city+useraddress.district}}
+        </view>
+        <view style="font-size:30rpx;font-weight:bold;margin-top:20rpx;">{{useraddress.address}}</view>
+        <view style="font-size:28rpx;margin-top:5rpx;"><text
+            style="margin-right:20rpx;">{{useraddress.name}}</text>{{useraddress.phone}}</view>
+        <block wx:if="{{prize.prize_first_state=='2'}}">
+          <view class="text-grey" style="margin-top:20rpx;">快递公司：{{prize.poster.express}}</view>
+          <view class="text-grey" style="diaplay:flex;flex-wrap: nowrap">快递单号：<text
+              bindtap="copyexpress">{{prize.poster.express_sn}}</text></view>
+        </block>
+      </view>
+    </block>
+    <block wx:else>
+      <navigator url="/pages/my/address/address" hover-class="none">
+        <view style="padding:40rpx 30rpx;">
+          <text>没有默认收货地址,请点击添加</text>
+        </view>
+      </navigator>
+    </block>
+    <block wx:if="{{prize.prize_first_state==0}}">
+      <navigator url="/pages/my/address/address" hover-class="none"
+        style="display:flex;align-items:center;margin-right:20rpx;" class="icon-right text-grey"></navigator>
+    </block>
+
+    <image src="/resource/images/line.jpg" style="width:100%;height:7rpx;position:absolute;bottom:0rpx;"></image>
+  </view>
+
+</view>
+<view style="margin:20rpx;background:#fff;border-radius:20rpx;">
+  <view style="padding:25rpx 30rpx 0 30rpx;">
+    <view style="padding-bottom:20rpx;border-bottom:2rpx solid #f7f7f7;width:100%;font-size:32rpx;font-weight:bold">物品介绍
+    </view>
+  </view>
+
+  <view style="display:flex;justify-content:space-between;position:relative;border-radius:20rpx;overflow:hidden">
+    <view style="padding:25rpx 30rpx;width:100%;text-align:center;">
+
+      <image wx:if="{{prize.prize.prize_content==''}}" src="/resource/images/notext.png"
+        style="width:500rpx;height:400rpx;" mode="aspectFit"></image>
+
+
+      <rich-text nodes="{{prize.prize.prize_content!==''?prize.prize.prize_content:'物品介绍空空如也'}}"></rich-text>
+    </view>
+
+
+  </view>
+
+</view>
+
+
+
+
+
+
+
+
+<view class="cu-modal {{payloading==1 || payloading==2 || payloading==3?'show':''}}" style="">
+
+  <view
+    style="background:#fff;position:absolute;left:0;right:0;top:0;bottom:0;margin:auto;border-radius:30rpx;width:300rpx;height:300rpx;overflow:hidden;z-index:9999;text-align:center;padding:50rpx 0rpx 0rpx 0rpx;border:10rpx solid #f7f7f7;">
+    <view class='' style="position:absolute; right:10rpx;z-index:999;top:10rpx;" bindtap='hidecheckpaymodal'>
+      <button class='cu-btn icon' style="height:40rpx;width:40rpx;">
+        <text class='icon-close text-red'></text>
+      </button>
+    </view>
+    <view wx:if="{{payloading==1}}">
+      <image src="/resource/images/loading.gif" style="width:170rpx;height:170rpx;"></image>
+      <view style="font-size:25rpx;">
+        正在校检支付结果
+      </view>
+    </view>
+    <view wx:if="{{payloading==2 || payloading==3}}">
+      <view style="height:150rpx;padding:{{payloading==3?'0':'50'}}rpx 0 0 0">
+        <view wx:if="{{payloading==3}}" style="text-align:center;">
+          <image src="/resource/images/paysuccess.png" style="width:100rpx;height:100rpx;"></image>
+          <view>支付成功</view>
+        </view>
+
+        <block wx:else>{{payresnotice}}</block>
+      </view>
+
+      <button class='cu-btn bg-gradual-orange margin-tb-sm sm round'
+        bindtap="{{payloading==3?'regetinfo':'checkpayresultclick'}}" style="z-index:9999;width:250rpx;"
+        data-orderid="{{paycheck_orderid}}">{{payloading==3?'确定':'点击重试'}}</button>
+    </view>
+
+
+  </view>
+</view>
+
+<view class='cu-tabbar-height'></view>
+<!--
+<view class="cu-bar bg-white tabbar border shop text-grey" style="position:fixed;bottom:0rpx;width:100%;z-index:980">
+
+  
+
+  <view class="action">
+    <view class=''>
+      <image src="/resource/images/share.png" style="width:40rpx;height:40rpx;margin-bottom:10rpx"></image>
+    </view> 送给朋友
+  </view>
+
+  <view class='btn-group' style="padding:0 20rpx;">
+ 
+    <button bindtap="clickdelivery" wx:if="{{(prize.prize_first_state==0 && prize.prize.prize_state==0) || prize.prize_first_state==7 || prize.prize_first_state==6 || prize.prize_first_state==-2}}"
+      class="{{openthebox_animation4}} cu-btn bg-gradual-orange round " style="width:500rpx;height:75rpx;">{{prize.prize_first_state==7?'立即领取':prize.prize_first_state==6?'立即发货':prize.prize_first_state==-2?'重新申请发货':'申请发货'}}</button>
+    <button wx:else class="{{openthebox_animation4}} cu-btn bg-gray round "
+      style="width:500rpx;height:75rpx;"><block wx:if="{{prize.prize.prize_state==0}}">{{prize.prize_first_state==1?'审核中':''}}{{prize.prize_first_state==2?'已发货':''}}{{prize.prize_first_state==3?'已回收':''}}{{prize.prize_first_state==4?'已收货':''}}{{prize.prize_first_state==5?'等待平台发货':''}}{{prize.prize_first_state==-1?'已失效':''}}{{prize.prize_first_state==-2?'发货申请被驳回 ':''}}</block><block wx:else>{{prize.prize.prize_state?'已失效':''}}</block></button>
+
+  </view>
+</view>
+-->
+<loginmodal wx:if="{{!islogin}}" />

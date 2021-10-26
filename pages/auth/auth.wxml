@@ -1,0 +1,17 @@
+<view class='' style="position:absolute; left:20rpx;top:{{MenuButton.top?MenuButton.top:'58'}}px;" bindtap='back'>
+        <button class='cu-btn icon' style="height:{{MenuButton.height?MenuButton.height:'40'}}px;width:{{MenuButton.height?MenuButton.height:'40'}}px;">
+          <text class='icon-close text-red'></text>
+        </button>
+      </view>
+
+      <view style="" >
+      <rich-text nodes="{{info}}"></rich-text>
+    </view>
+
+<view style="position:fixed;bottom:200rpx;width:100%;display:flex; flex-direction:column;justify-content:center;">
+<!--
+  <button style="border-radius: 0;font-weight:700;background-color:#fff;border-radius:50rpx;color:#303d4c;width:600rpx;height:85rpx;line-height:85rpx;font-size:30rpx;margin-top:30rpx" open-type="getUserInfo" bindgetuserinfo="updateUserInfo">授 权 登 录</button>
+  -->
+  <button style="border-radius: 0;font-weight:700;background-color:#fff;border-radius:50rpx;color:#303d4c;width:600rpx;height:85rpx;line-height:85rpx;font-size:30rpx;margin-top:30rpx"  bindtap="login">授 权 登 录</button>
+  <view style="text-align:center;margin-top:30rpx;font-size:25rpx;color:#fff" bindtap="backpage"><text>使用条款</text></view>
+</view>

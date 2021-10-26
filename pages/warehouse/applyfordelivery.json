@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+   
+    "loginmodal":"/pages/component/loginmodal/loginmodal"
+  },
+  "navigationBarTitleText": "奖品详情",
+  "navigationBarBackgroundColor":"#f7f8fd"
+}

@@ -1,0 +1,22 @@
+<view wx:for="{{address_list}}"  style="display:flex;justify-content:space-between;align-items:center;margin:30rpx;padding:20rpx 0;border-bottom:2rpx solid #f7f7f7">
+  <view bindtap="select" data-id="{{item.id}}" style="width:100%">
+    <view style="font-size:25rpx;color:#777777;display:flex;"><view wx:if="{{item.isdefault==1}}" class="cu-tag sm bg-gradual-orange" style="margin-right:10rpx;">默认</view>{{item.province+item.city+item.district}}</view>
+    <view style="font-size:30rpx;font-weight:bold">{{item.address}}</view>
+    <view style="font-size:25rpx;color:#777777"><text style="margin-right:60rpx;">{{item.name}}</text><text>{{item.phone}}</text></view>
+  </view>
+  <navigator url="/pages/my/address/editaddress?id={{item.id}}" style="height:50rpx;width:50rpx;text-aglin:center;"><text  class="icon-write" ></text></navigator>
+
+</view>
+
+
+<view style="{{address_list.length>0?'display:none;':'display:flex;'}}height:300rpx;width:100%;align-items:center;justify-content:center;">
+  暂无收货地址
+</view>
+
+
+
+<view class='btn-group' style="width:100%;padding:0 40rpx;position:fixed;bottom:50rpx">
+<button bindtap="addaddress" 
+           class=" cu-btn bg-gradual-orange round "
+          style="width:100%;height:75rpx;">+新增收货地址</button>
+        </view>

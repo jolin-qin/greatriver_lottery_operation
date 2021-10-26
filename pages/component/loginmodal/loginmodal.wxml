@@ -1,0 +1,20 @@
+<view class="cu-modal show"  style="padding:0 40rpx;">
+  <view class="cu-dialog" style="border-radius:30rpx">
+    <view class="cu-bar justify-end text-white" style="height:300rpx;">
+      <image src="/resource/images/3aa7ad82ed0fdc_97415.jpg" mode="aspectFill" style="position:absolute;top:0;left:0;width:100%;"></image>
+        <view class='' bindtap='hideModal'  style="z-index:999;position:absolute;top:20rpx;right:20rpx;">
+          <text class='icon-close '></text>
+        </view>
+      </view>
+    <view class="cu-bar bg-white" style="display:flex;flex-direction:column;padding:40rpx 20rpx;">
+
+      <text style="font-size:40rpx;">登录一下</text>
+      <text style="font-size:30rpx;margin-top:20rpx;">登录成功立即赠送新人专属盒子和更多惊喜</text>
+      <view style="display:flex;justify-content:space-around;margin-top:50rpx;width:100%">
+        <button bindtap="jumppage_index"   class='cu-btn bg-gary round shadow-blur' style="width:250rpx;height:75rpx;">看看再说</button>
+
+        <button bindtap="jumppage_login"  class='cu-btn bg-gradual-orange round shadow-blur' style="width:250rpx;height:75rpx;">立即登录</button>
+      </view>
+    </view>
+  </view>
+</view>

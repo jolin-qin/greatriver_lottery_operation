@@ -1,0 +1,156 @@
+<view style="width:100%;height:520rpx;position:absolute;">
+  <image src="/resource/images/d8e5d87fc6df629d0856e0b53efbcfdee2a03d2b148f6-6W3pvE_fw1200.jpg" mode="aspectFill" style="width:100%;"></image>
+</view>
+<view style="padding:140rpx 20rpx 20rpx 20rpx;">
+  <view style="display:flex;border-radius:30rpx;padding:20rpx 0;position:relative">
+      <image src="{{memberinfo.avatar}}" style="border-radius:50%;width:110rpx;height:110rpx;border:7rpx solid #fff"/>
+      <view style="margin-left:20rpx;display:flex;flex-direction:column;justify-content:space-between;padding:10rpx;color:#fff">
+        <view style="font-size:40rpx;font-weight:700;color:#fff">{{memberinfo.nickname}}</view>
+        <view class="text-grey" style="font-size:25rpx;color:#fff">未绑定手机号</view>
+      </view>
+  </view>
+  <view style="display:flex;position:relative;justify-content:space-between;padding:10rpx 50rpx;color:#fff">
+    <view style="text-align:center;">
+      <view style="font-size:40rpx;font-weight:bold">1</view>
+      <view style="font-size:25rpx;">待审核</view>
+    </view>
+    <view style="text-align:center;">
+      <view style="font-size:40rpx;font-weight:bold">12</view>
+      <view style="font-size:25rpx;">待发货</view>
+    </view>
+    <view style="text-align:center;">
+      <view style="font-size:40rpx;font-weight:bold">56</view>
+      <view style="font-size:25rpx;">待收货</view>
+    </view>
+    <view style="text-align:center;">
+      <view style="font-size:40rpx;font-weight:bold">154</view>
+      <view style="font-size:25rpx;">已完成</view>
+    </view>
+  </view>
+</view>
+
+<view class="shadow-warp" style="position:relative;margin:20rpx;background:#fff;padding:20rpx;border-radius:20rpx;">
+  
+  <view style="display:flex;justify-content:space-between;padding:10rpx;align-items:center;">
+    <view style="display:flex;align-items:center;text-align:center;">
+      <image src="/resource/images/kuangshi2.png" style="height:60rpx;width:60rpx;margin-right:20rpx;"></image>
+      <view>
+        <view style="font-size:{{memberinfo.integral>9999?'35':'40'}}rpx;line-height:50rpx;font-weight:500;color:#000;text-align:center;">
+        {{memberinfo_integral}}
+      </view>
+      <view class="text-grey" style="font-size:25rpx;font-weight:700;margin-top:5rpx;">
+      剩余矿石
+      </view>
+      </view>
+    </view>
+    <view style="background:#eee;width:3rpx;height:50rpx;"></view>
+    <view style="">
+      <view style="font-size:{{memberinfo.integral>9999?'35':'40'}}rpx;line-height:50rpx;font-weight:500;color:#000;text-align:center;">
+        {{memberinfo.money}}
+      </view>
+      <view class="text-grey" style="font-size:25rpx;font-weight:700;margin-top:5rpx;">
+      现金余额
+      </view>
+    </view>
+    <view style="background:#eee;width:3rpx;height:50rpx;"></view>
+    <view style="">
+      <view style="font-size:{{memberinfo.integral>9999?'35':'40'}}rpx;line-height:50rpx;font-weight:500;color:#fc4927;text-align:center;">
+        {{memberinfo.star_lv}}
+      </view>
+      <view  class="text-grey" style="font-size:25rpx;font-weight:700;margin-top:5rpx;">
+      星球等级
+      </view>
+    </view>
+
+  </view>
+
+</view>
+
+
+
+<view class="shadow-warp" style="margin:20rpx;padding:20rpx;background:#fff;border-radius:20rpx;">
+ 
+
+<view style="display:flex;flex-wrap:wrap;justify-content:space-between;">
+  
+  <view  style="text-align:center;width:150rpx;margin-top:10rpx;">
+    <image src="/resource/icon/order.png" style="width:70rpx;height:70rpx;"></image>
+    <view style="font-size:25rpx;font-weight:bold;color:#000">订单</view>
+    <view style="font-size:20rpx;" class="text-gray">订单管理</view>
+  </view>
+
+  <view  style="text-align:center;width:150rpx;margin-top:10rpx;">
+    <image src="/resource/icon/qianbao.png" style="width:70rpx;height:70rpx;"></image>
+    <view style="font-size:25rpx;font-weight:bold;color:#000">钱包</view>
+    <view style="font-size:20rpx;" class="text-gray">提现和流水</view>
+  </view>
+
+
+
+ 
+<button bindtap="addaddress" 
+           class=" cu-btn2 bg-white"
+          style="display:flex;flex-direction:column;width:150rpx;margin-top:10rpx;" open-type="contact">
+          <image src="/resource/icon/kefu.png" style="width:70rpx;height:70rpx;"></image>
+    <view style="font-size:25rpx;font-weight:bold;line-height: 48rpx;color:#000">客服</view>
+        </button>
+
+
+  <view  style="text-align:center;width:150rpx;margin-top:10rpx;">
+    <image src="/resource/icon/shezhi.png" style="width:70rpx;height:70rpx;"></image>
+    <view style="font-size:25rpx;font-weight:bold;color:#000">设置</view>
+  </view>
+
+
+  
+ 
+
+</view>
+</view>
+
+
+
+
+
+<view class="shadow" style="margin:20rpx;padding:20rpx 30rpx 50rpx 30rpx;background:#fff;border-radius:20rpx;">
+  <view style="font-size:40rpx;font-weight:700;margin-left:0rpx;">常用工具</view>
+
+<navigator url="{{item.path}}" hover-class="none" style="display:flex;flex-wrap:wrap;justify-content:space-between;margin:50rpx 0;" wx:for="{{menulist}}">
+
+  <view style="display:flex;align-items:center;">
+    <image src="{{item.icon}}" style="width:40rpx;height:40rpx;"></image>
+    <text style="margin-left:20rpx;font-weight:bold">{{item.title}}</text>
+  </view>
+  <view>
+    <text style="margin-left:20rpx;" class="text-gray">{{item.desc}}</text>
+    <text class="icon-right"></text>
+  </view>
+
+</navigator>
+</view>
+
+
+<view class="cu-modal {{loginmodal?'show':''}}"  style="padding:0 40rpx;">
+  <view class="cu-dialog" style="border-radius:30rpx">
+    <view class="cu-bar justify-end text-white" style="height:300rpx;">
+      <image src="/resource/images/3aa7ad82ed0fdc_97415.jpg" mode="aspectFill" style="position:absolute;top:0;left:0;width:100%;"></image>
+        <view class='' bindtap='hideModal'  style="z-index:999;position:absolute;top:20rpx;right:20rpx;">
+          <text class='icon-close '></text>
+        </view>
+      </view>
+    <view class="cu-bar bg-white" style="display:flex;flex-direction:column;padding:40rpx 20rpx;">
+
+      <text style="font-size:40rpx;">登录一下</text>
+      <text style="font-size:30rpx;margin-top:20rpx;">登录成功立即赠送新人专属盒子和更多惊喜</text>
+      <view style="display:flex;justify-content:space-around;margin-top:50rpx;width:100%">
+        <button bindtap="jumppage_index"   class='cu-btn bg-gary round shadow-blur' style="width:250rpx;height:75rpx;">看看再说</button>
+
+        <button bindtap="jumppage_login"  class='cu-btn bg-gradual-orange round shadow-blur' style="width:250rpx;height:75rpx;">立即登录</button>
+      </view>
+    </view>
+  </view>
+</view>
+
+
+<loginmodal wx:if="{{!islogin}}"/>
+<bar navtab="my" />

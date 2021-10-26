@@ -1,0 +1,343 @@
+<view class=""
+  style="position:relative;width:100%;height:500rpx;z-index:300;overflow:hidden;-webkit-transform: rotate(0deg)">
+
+  <view
+    style="position:relative;width:100%;padding:10rpx 20rpx;display:flex;flex-direction:column;align-items:center;overflow:hidden;-webkit-transform: rotate(0deg);z-index:300;margin-top:120rpx;">
+
+    <view style="position:relative;z-index:10;font-size:30rpx;font-weight:700" class="text-grey">待挖掘矿石</view>
+    <view class="numfont"
+      style="position:relative;z-index:10;margin-top:20rpx;font-size:80rpx;font-weight:500;line-height:80rpx;display:flex">
+      {{available_integral2==0.00?'--':available_integral2}}</view>
+
+    <view style="margin-top:10rpx;font-size:20rpx;font-weight:700;line-height:20rpx;display:flex">
+      星球生产力{{one_sec_productivity2}}矿石/分</view>
+
+      <navigator url="/pages/mystar/steal_log" style="margin-top:10rpx;font-size:20rpx;font-weight:700;line-height:20rpx;display:flex;align-items:center;">
+        <view style="border-radius:20rpx 0 0 20rpx;padding:5rpx 10rpx;font-size:15rpx;" class="bg-gradual-gold2">今日被偷</view>
+        <view style="padding:5rpx 10rpx;" class="bg-white">{{starparameter.calculate_available_integral.was_stolen_sum}}</view>
+        <view style="border-radius:0 20rpx 20rpx 0;padding:5rpx 10rpx; " class="bg-gradual-gold2 icon-info"></view>
+
+      </navigator>
+  </view>
+  <view
+    style="width:600rpx;height:600rpx;position:absolute;top:-200rpx;left:-200rpx;z-index:1;border-radius:30rpx;-webkit-transform: rotate(0deg);overflow:hidden;">
+    <image src="/resource/images/sun.png" mode="widthFix" class="sun-animation" style="" />
+  </view>
+  <view
+    style="width:350rpx;height:350rpx;position:absolute;bottom:0rpx;right:-120rpx;z-index:1;border-radius:30rpx;-webkit-transform: rotate(0deg);overflow:hidden;">
+    <image src="/resource/images/moon.png" mode="widthFix" class="sun-animation2" style="" />
+  </view>
+</view>
+<!--
+<view class="container" style="margin-top:0rpx;">
+  <view style="padding:0rpx 20rpx;">
+    <view
+      style="position:relative;background:#fff;width:100%;border-radius:30rpx;padding:40rpx 20rpx;display:flex;flex-direction:column;align-items:center;overflow:hidden;-webkit-transform: rotate(0deg);border:10rpx solid #fff;min-height:240rpx;">
+
+      <view style="position:relative;z-index:10;font-size:30rpx;font-weight:700" class="text-grey">待挖掘矿石</view>
+      <view
+        style="position:relative;z-index:10;margin-top:20rpx;font-size:80rpx;font-weight:700;line-height:80rpx;display:flex">
+        {{available_integral2==0.00?'--':available_integral2}}</view>
+      
+        <view style="margin-top:10rpx;font-size:20rpx;font-weight:700;line-height:20rpx;display:flex">星球生产力{{one_sec_productivity2}}矿石/分</view>
+        
+
+      <view
+        style="width:500rpx;height:500rpx;position:absolute;top:-200rpx;left:-200rpx;z-index:1;border-radius:30rpx;-webkit-transform: rotate(0deg);overflow:hidden;">
+        <image src="/resource/images/sun.png" mode="widthFix" class="sun-animation" style="" />
+      </view>
+      <view
+        style="width:300rpx;height:300rpx;position:absolute;bottom:-100rpx;right:-100rpx;z-index:1;border-radius:30rpx;-webkit-transform: rotate(0deg);overflow:hidden;">
+        <image src="/resource/images/moon.png" mode="widthFix" class="sun-animation2" style="" />
+      </view>
+
+
+    </view>
+
+
+  </view>
+</view>
+
+-->
+
+
+
+
+
+<view style="width:100%;padding:20rpx;margin-top:-150rpx;display:flex;position:relative;z-index:999">
+  <view style="">
+
+
+    <view
+      style="position:relative;margin-right:20rpx;min-width:180rpx;width:180rpx;height:260rpx;border-radius:30rpx;padding:20rpx;text-align:center;overflow:hidden">
+      <view style="position:relative;z-index:10;font-size:20rpx;color:#fff;">每日24:00清零</view>
+      <view style="position:relative;z-index:10;font-size:50rpx;font-weight:700;margin-top:20rpx;color:#fff">
+        <image src="/resource/images/kuangshi2.png" style="width:80rpx;height:80rpx;"></image>
+      </view>
+      <view style="position:relative;z-index:10;font-size:20rpx;color:#fff">
+        {{starparameter.jiliad_enable==1?'需完整观看视频':'不限次数'}}</view>
+      <view id="wjbutton"
+        style="position:relative;z-index:10;color:red;line-height:50rpx;font-weight:700;background:#fff;border-radius:50rpx;font-size:20rpx;margin-top:10rpx;"
+        bindtap="{{starparameter.jiliad_enable==1?'clickgetintegral':'getintegral'}}">
+        立即挖掘</view>
+      <image src="/resource/images/lingqu.jpg" style="width:100%;position:absolute;top:0;left:0;z-index:0"></image>
+    </view>
+    <view class="bg-gradual-gold2"
+      style="margin:20rpx 20rpx 0rpx 0;padding:20rpx;min-width:180rpx;width:180rpx;height:260rpx;border-radius:30rpx;position:relative;overflow:hidden;text-align:center;overflow:hidden">
+      <view class="numfont" style="position:relative;z-index:10;font-size:55rpx;font-weight:500;margin-top:35rpx;color:#fff">
+        {{onepeople_productivity}}</view>
+      <view style="position:relative;z-index:10;font-size:20rpx;color:#fff;margin-top:10rpx;">每位居民每天可发现矿石</view>
+      <button open-type="share"
+        style="height:50rpx;position:relative;z-index:10;color:red;line-height:50rpx;font-weight:700;background:#fff;border-radius:50rpx;font-size:20rpx;margin-top:20rpx;">
+        邀请居民</button>
+
+      <image src="/resource/images/dasdas.jpg" mode='aspectFill'
+        style="width:100%;position:absolute;top:0;left:0;z-index:0"></image>
+    </view>
+
+  </view>
+  <scroll-view scroll-y="true" style="width:100%;height:540rpx;background:#fff;border-radius:30rpx;">
+    <view style="width:100%;">
+      <block wx:for="{{tasklist}}">
+        <view style="margin:0 20rpx;{{index>0?'border-bottom:2rpx solid #f7f7f7':''}}"></view>
+        <view style="display:flex;justify-content:space-between;margin:10rpx 20rpx;align-items:center;">
+
+          <view style="display:flex;align-items:center;">
+            <image style="width:70rpx;height:70rpx;border-radius:50%" src="/resource/icon/{{item.task_type}}.png">
+            </image>
+            <view
+              style="margin-left:20rpx;height:60rpx;display:flex;flex-direction:column;justify-content:space-between;">
+              <view style="font-size:25rpx;font-weight:bold">{{item.task_title}}</view>
+              <view style="font-size:20rpx;font-weight:500;display:flex;align-items:center;" class="text-grey">+<image
+                  src="/resource/images/kuangshi2.png" style="width:20rpx;height:20rpx;"></image>{{item.integral}}
+              </view>
+            </view>
+          </view>
+
+          <button class="cu-btn {{item.state==0?'bg-gradual-orange':'bg-gray'}} margin-tb-sm sm round" bindtap="dotask"
+            data-index="{{index}}" disabled="{{item.state==0?false:true}}"
+            style="z-index:9999;width:250rpx;width:120rpx;">{{item.state==0?'做任务':'已完成'}}</button>
+
+        </view>
+      </block>
+      <view style="{{tasklist.length<6?'display:none':''}}font-size:25rpx;text-align:center;padding:20rpx;"
+        class="text-grey">没有更多了</view>
+
+
+    </view>
+  </scroll-view>
+</view>
+
+
+
+
+
+
+<block wx:for="{{ads}}">
+  <block wx:if="{{item.ad_id>0}}">
+    <view style="padding:20rpx 20rpx 0 20rpx;border-radius:20rpx;overflow:hidden;position:relative;"
+      bindtap="{{item.custom_parameter.type==0?'jumpminiapp':'jumpurl'}}" data-appid="{{item.custom_parameter.appid}}"
+      data-path="{{item.custom_parameter.path}}" data-url="{{item.custom_parameter.url}}">
+
+      <image style="border-radius:20rpx;width:100%;" mode="widthFix" src="{{item.custom_parameter.pic}}"></image>
+    </view>
+  </block>
+  <block wx:if="{{item.ad_id==-1}}">
+    <view style="padding:20rpx 20rpx 0 20rpx;border-radius:20rpx">
+      <ad unit-id="{{item.liuliangzhu_parameter}}"></ad>
+    </view>
+  </block>
+  <block wx:if="{{item.ad_id==-3}}">
+    <view style="padding:20rpx 20rpx 0 20rpx;border-radius:20rpx">
+      <ad unit-id="{{item.liuliangzhu_parameter}}" ad-type="video" ad-theme="white"></ad>
+
+    </view>
+  </block>
+  <block wx:if="{{item.ad_id==-4}}">
+    <view style="padding:20rpx 20rpx 0 20rpx;border-radius:20rpx">
+      <ad unit-id="{{item.liuliangzhu_parameter}}" ad-type="grid" grid-opacity="0.8" grid-count="5" ad-theme="white">
+      </ad>
+    </view>
+  </block>
+  <block wx:if="{{item.ad_id==-5}}">
+    <view style="padding:20rpx 20rpx 0 20rpx;border-radius:20rpx">
+      <ad-custom unit-id="{{item.liuliangzhu_parameter}}"></ad-custom>
+    </view>
+  </block>
+
+</block>
+
+<view style="display:flex;padding:0 20rpx;margin-top:20rpx;">
+
+  <view style="width:100%;height:260rpx;overflow:hidden">
+    <scroll-view scroll-x="true" style="height:100%;width:100%;">
+      <view style="display:flex">
+        <view class="bg-gradual-gold2"
+          style="padding:10rpx;2rpx;min-width:180rpx;width:180rpx;height:240rpx;border-radius:30rpx;position:relative;overflow:hidden;text-align:center;overflow:hidden;">
+          <view class="bg-orange" style="position:absolute;top:0;left:0;right:0;font-size:15rpx;margin:auto;padding:5rpx;width:110rpx;border-radius:0 0 15rpx 15rpx;">装备效果合计</view>
+          <view class="numfont" style="position:relative;z-index:10;font-size:55rpx;font-weight:500;margin-top:30rpx;color:#fff">
+            {{starparameter.member_tools_percentage}}%</view>
+          <view style="position:relative;z-index:10;font-size:20rpx;color:#fff;margin-top:10rpx;">加速引擎增益</view>
+          <view style="display:flex;justify-content:space-around;color:#fff;margin-top:20rpx;">
+           
+            <view>
+              <view  class="numfont" style="font-size:40rpx;">{{starparameter.max_steal_percentage}}%</view>
+              <view style="font-size:15rpx;">搬运比例</view>
+            </view>
+            <view>
+              <view  class="numfont" style="font-size:40rpx;">{{starparameter.steal_count}}</view>
+              <view style="font-size:15rpx;">搬运次数</view>
+            </view>
+
+          </view>
+<!--
+          <image src="/resource/images/dasdas.jpg"
+            mode='aspectFill' style="width:100%;position:absolute;top:0;left:0;z-index:0"></image>
+            -->
+        </view>
+        <block wx:if="{{starparameter.member_tools.length>0}}">
+        <view bindtap="taskcardtap" class="" data-id="{{item.member_toolid}}"
+          wx:for="{{starparameter.member_tools}}"
+          style="min-width:165rpx;width:165rpx;background:#fff;margin-left:20rpx;border-radius:30rpx;height:240rpx;margin-bottom:20rpx;padding:10rpx 10rpx;;display:flex;flex-direction:column;align-items:center;">
+
+          <image src="{{item.tool_pic}}"
+            style="width:145rpx;height:145rpx;border-radius:20rpx;" mode="aspectFill"></image>
+          <view class="text-grey"
+            style="width:100%;text-align:center;margin-top:10rpx;padding:0 5rpx;font-size:20rpx;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">{{item.tool_name}}
+          </view>
+          <view class="text-grey"
+            style="margin-top:5rpx;font-size:15rpx;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">
+            剩余{{item.effective_time}}小时
+          </view>
+        </view>
+        <view style="min-width:5rpx"></view>
+      </block>
+      <block wx:else>
+      <navigator open-type="switchTab" url="/pages/shop/shop" style="background:#fff;margin-left:20rpx;border-radius:30rpx;height:240rpx;margin-bottom:20rpx;width:100%;display:flex;align-items:center;padding:0 40rpx">
+        <image src="/resource/images/notool.png" style="width:200rpx;height:200rpx;" mode="aspectFill"></image>
+        <text style="font-size:25rpx;" class="text-grey">还没有装备哦\n到商店看看吧</text>
+      </navigator>
+      </block>
+      </view>
+    </scroll-view>
+
+  </view>
+
+</view>
+
+<view style="margin:20rpx 0 0rpx 40rpx;">
+  <text style="font-size:30rpx;font-weight:700;">星球矿工</text> <text
+    style="font-size:20rpx;margin-left:20rpx;color:#919191">My miners</text>
+</view>
+<view style="padding:20rpx;display:flex;flex-wrap:wrap;justify-content:space-between;width:100%;position:relative" bindtap="closenotice">
+  <view class="shadow-lg bg-gradual-orange a-wobble " style="{{juming_notice==true?'display:flex;':'display:none;'}}z-index:1;width:550rpx;border-radius:20rpx;height:80px;position:absolute;top:-160rpx;left:40rpx;align-items:center;">
+    <image style="position:absolute;height:80rpx;width:80rpx;top:-40rpx;left:-40rpx;" src="/resource/images/012-pirate.png"></image>
+    <button class='cu-btn icon' bindtap='hideboxcontentModal' style="height:30rpx;width:30rpx;right:10rpx;top:10rpx;position:absolute">
+        <text class='icon-close text-red'></text>
+      </button>
+    <view class="triangle-down-left"></view>
+    <view style="padding:35rpx;">这里是你的星球居民，商店里购买星际飞船装备后可以偷取居民星球里的矿石哦！</view>
+  </view>
+
+  
+
+
+
+
+  <view
+    style="width:165rpx;background:#fff;border-radius:30rpx;height:220rpx;margin-bottom:20rpx;padding:20rpx 10rpx;display:flex;flex-direction:column;align-items:center;justify-content:space-between" bindtap="steal" data-uid="{{item.id}}"
+    wx:for="{{inviterlist}}">
+    <view style="width:120rpx;height:120rpx;overflow: hidden;margin-bottom:10rpx;">
+      <image src="{{item.avatar}}" mode="aspectFill" style="border-radius:50%;width:100%"></image>
+    </view>
+    <view style="width:120rpx;text-align:center;color:#000;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">
+      {{item.nickname}}</view>
+
+
+  </view>
+  <block wx:if="{{inviterlist.length<2}}">
+   
+
+  <button open-type="share" style="width:{{inviterlist.length==0?'100%':'525rpx'}};background:#fff;height:220rpx;border-radius:30rpx;padding:0 40rpx;display:flex;align-items:center;justify-content:center;">
+    <image src="/resource/images/nopeople.png" style="width:200rpx;height:200rpx;" mode="aspectFill"></image>
+        <text style="font-size:25rpx;" class="text-grey">邀请更多好友\n丰富你的星球吧</text>
+        <view style="width:50rpx;"></view>
+  </button>
+  </block>  
+  <block wx:if="{{inviterlist.length>1}}">
+    <button open-type="share"
+        style="background:#fff;margin-left:0;margin-right:0;width:165rpx;height:220rpx;border-radius:30rpx;font-size:20rpx;padding:20rpx 10rpx;display:flex;flex-direction:column;align-items:center;">
+        <view style="width:120rpx;height:120rpx;overflow: hidden;margin-bottom:10rpx;padding:10rpx;">
+      <image src="/resource/images/yaoqing.png" mode="aspectFill" style="border-radius:100%;width:100%"></image>
+    </view>
+    <view class="text-grey" style="width:120rpx;text-align:center;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">
+      邀请居民</view>
+      
+      </button>
+  </block>
+ 
+  <view style="width:165rpx;" wx:for="{{3}}"></view>
+
+
+
+
+</view>
+
+
+<view class="cu-modal {{questionmodal?'show':''}}" bindtap='hidemodal'>
+  <view class=""
+    style="width:600rpx;border-radius:30rpx;position: relative;display: inline-block;vertical-align: middle;margin-left: auto;margin-right: auto;width: 100%;max-width: 100%;border-radius: 10rpx;overflow: hidden;"
+    catchtap>
+    <view class="cu-bar justify-end">
+
+      <view class='action' bindtap='hidemodal'>
+        <text class='icon-close text-red'></text>
+      </view>
+    </view>
+    <view class='padding-sm'>
+      <view
+        style="position:relative;background:#fff;padding:45rpx 30rpx 30rpx 30rpx;;margin-top:40rpx;border-radius:0 30rpx 30rpx 30rpx;min-height:200rpx;">
+        <view class="bg-gradual-gold"
+          style="position:absolute;width:200rpx;top:-25rpx;left:0rpx;height:50rpx;border-radius:30rpx  0 30rpx;font-size:25rpx;font-weight:700;text-align:left;">
+          <text style="margin-left:30rpx;line-height:50rpx;">答题任务</text></view>
+
+        <view style="display:flex;flex-direction:column;justify-content:flex-start;padding:40rpx 0 0 0;">
+          <text style="font-size:30rpx;font-weight:700;text-align:left;">Q:{{selecttask.task_question}}</text>
+
+          <view class="cu-form-group" style="margin-top:20rpx;">
+            <view class='title'>输入答案</view>
+            <input style="background:#f7f7f7;height:55rpx;" placeholder="" value="{{answer}}" bindinput="inputanswer"
+              class='radius' name='input'></input>
+          </view>
+          <view style="text-align:right;padding:20rpx;">
+            <button class='cu-btn bg-gradual-orange margin-tb-sm  round' bindtap="doanswertask"
+              style="z-index:9999;width:120rpx;">提交</button>
+          </view>
+
+        </view>
+
+
+      </view>
+    </view>
+  </view>
+</view>
+
+<view></view>
+<view class="shadow-lg bg-gradual-orange a-wobble " style="{{guide[4]?'display:flex;':'display:none;'}}z-index:1000;width:250px;border-radius:20rpx;height:80px;position:absolute;top:{{yindao_d.top-90}}px;left:40rpx;align-items:center;">
+    <image style="position:absolute;height:80rpx;width:80rpx;top:-40rpx;left:-40rpx;" src="/resource/images/025-money.png"></image>
+   
+    <view class="triangle-down-left"></view>
+    <view style="padding:20rpx;">点击这里可以将星球上所有待挖掘的矿石都收入账户哦！</view>
+  </view>
+
+
+
+  <view class="shadow-lg bg-gradual-orange a-wobble " style="{{guide[5]?'display:flex;':'display:none;'}}z-index:1000;width:250px;border-radius:20rpx;height:80px;position:absolute;bottom:180rpx;left:20rpx;align-items:center;">
+    <image style="position:absolute;height:80rpx;width:80rpx;top:-40rpx;left:-10rpx;" src="/resource/images/025-money.png"></image>
+   
+    <view class="triangle-down-left"></view>
+    <view style="padding:20rpx;">挖好矿啦，你是个富豪了，去首页用矿石兑换礼物盒子吧！</view>
+  </view>
+
+<loginmodal wx:if="{{!islogin}}" />
+<bar navtab="mystar" />

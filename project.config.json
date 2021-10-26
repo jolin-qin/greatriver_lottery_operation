@@ -1,0 +1,122 @@
+{
+    "description": "项目配置文件",
+    "packOptions": {
+        "ignore": []
+    },
+    "setting": {
+        "urlCheck": false,
+        "es6": false,
+        "enhance": true,
+        "postcss": true,
+        "preloadBackgroundData": false,
+        "minified": true,
+        "newFeature": false,
+        "coverView": true,
+        "nodeModules": false,
+        "autoAudits": false,
+        "showShadowRootInWxmlPanel": true,
+        "scopeDataCheck": false,
+        "uglifyFileName": false,
+        "checkInvalidKey": true,
+        "checkSiteMap": true,
+        "uploadWithSourceMap": true,
+        "compileHotReLoad": false,
+        "useMultiFrameRuntime": true,
+        "useApiHook": true,
+        "useApiHostProcess": true,
+        "babelSetting": {
+            "ignore": [],
+            "disablePlugins": [],
+            "outputPath": ""
+        },
+        "enableEngineNative": false,
+        "useIsolateContext": true,
+        "userConfirmedBundleSwitch": false,
+        "packNpmManually": false,
+        "packNpmRelationList": [],
+        "minifyWXSS": true,
+        "disableUseStrict": false,
+        "showES6CompileOption": false,
+        "useCompilerPlugins": false
+    },
+    "compileType": "miniprogram",
+    "libVersion": "2.16.0",
+    "appid": "wx2d80c02555201d93",
+    "projectname": "jiaochao",
+    "debugOptions": {
+        "hidedInDevtools": []
+    },
+    "scripts": {},
+    "isGameTourist": false,
+    "simulatorType": "wechat",
+    "simulatorPluginLibVersion": {},
+    "condition": {
+        "plugin": {
+            "list": []
+        },
+        "game": {
+            "list": []
+        },
+        "gamePlugin": {
+            "list": []
+        },
+        "miniprogram": {
+            "list": [
+                {
+                    "name": "pages/mystar/mystar",
+                    "pathName": "pages/mystar/mystar",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "pages/warehouse/warehouse",
+                    "pathName": "pages/warehouse/warehouse",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "pages/box/box",
+                    "pathName": "pages/box/box",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "pages/shop/shop",
+                    "pathName": "pages/shop/shop",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "pages/my/my",
+                    "pathName": "pages/my/my",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "pages/auth/auth",
+                    "pathName": "pages/auth/auth",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "pages/my/address/address",
+                    "pathName": "pages/my/address/address",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "pages/my/address/addaddress",
+                    "pathName": "pages/my/address/addaddress",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "pages/warehouse/applyfordelivery",
+                    "pathName": "pages/warehouse/applyfordelivery",
+                    "query": "id=72",
+                    "scene": null
+                }
+            ]
+        }
+    }
+}

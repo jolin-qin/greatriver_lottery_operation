@@ -1,0 +1,144 @@
+<view class="cu-custom" style="height:{{CustomBar}}px;">
+  <view class="cu-bar fixed tab" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;color:#d7d7d7;">
+    <view class="{{activeTab==1?' normal ':' active '}} titlefont"  style="margin-left:20rpx" bindtap="clickchange" data-tab="0">
+      物品仓库</view>
+    <view class="{{activeTab==0?' normal ':' active '}} titlefont" style="margin-left:40rpx" bindtap="clickchange" data-tab="1">
+      道具仓库</view>
+
+  </view>
+</view>
+
+
+<swiper style="height:100vh;" current="{{activeTab}}" bindchange="pageChange">
+  <swiper-item>
+
+    <scroll-view scroll-y="true" refresher-enabled="true" refresher-threshold="50" refresher-default-style="black"
+      bindrefresherrefresh="onRefresh" refresher-triggered="{{loading}}" bindscrolltolower="loadmore"
+      bindscrolltoupper="scrolltoupper" enable-back-to-top="true" class="tab-content" style="height:100vh;"
+      slot="tab-content-0">
+      <view style="background:#fff;display:flex;position:relative;padding:30rpx 20rpx;color:#000;margin:20rpx;border-radius:20rpx;">
+    <view style="font-size:25rpx;" class="icon-infofill">
+     仓库只显示没有申请发货的物品，已申请发货后请到个人中心查看
+    </view>
+  </view>
+
+      <view wx:for="{{prize_list}}" style="margin-top:20rpx;padding:0 20rpx;">
+        <view
+          bindtap="fahuo" data-id="{{item.id}}" style="width:100%;background:#fff;display:flex;justify-content:space-between;padding:20rpx 20rpx;border-radius:20rpx;">
+         
+          <view style="display:flex;align-items:center;">
+            <view style="margin-right:20rpx;font-weight:bold;" class="text-grey">#{{index<9?'0'+(index+1):index+1}}</view>
+            <view style="border-radius:10rpx;width:130rpx;min-width:130rpx;height:130rpx;overflow:hidden;background:#f7f7f7;padding:10rpx;">
+              <image src="{{item.prize.prize_pic}}" style="border-radius:10rpx;width:100%;height:100%;"
+                mode="aspectFill"></image>
+              </view>
+            <view style="margin-left:20rpx;">
+              <view
+                style="display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 2;overflow: hidden;font-weight:500;font-size:26rpx;">
+                {{item.prize.complete_prize_title}}</view>
+              <view style="margin-top:10rpx;"><view class='cu-tag radius sm'>获得时间</view><text style="font-size:20rpx;">{{item.time}}</text></view>
+              <view><view class='cu-tag radius sm'>物品来源</view><text style="font-size:20rpx;">{{item.prize_source!=='盒子'?item.prize_source:'已下架的盒子'}}</text></view>
+            </view>
+          </view>
+          <view style="display:flex;align-items:center;">
+           <text class="icon-right" ></text>
+          </view>
+          
+
+        </view>
+      </view>
+      <view style="height:400rpx;margin-top:30rpx;text-align:center;font-weight:20rpx;">没有更多了</view>
+
+
+    </scroll-view>
+  </swiper-item>
+  <swiper-item>
+    <scroll-view scroll-y="true" refresher-enabled="true" refresher-threshold="50" refresher-default-style="black"
+      bindrefresherrefresh="toolonRefresh" refresher-triggered="{{loading}}" class="tab-content"
+      style="height:100vh;padding:20rpx;" slot="tab-content-1">
+      <view style="display:flex;flex-wrap:wrap;justify-content:space-between;width:100%;">
+
+        <view style="display:flex;flex-wrap:wrap;justify-content:space-between;padding:0rpx;">
+          <view bindtap="taskcardtap" class="{{clicktaskid==item.id?'button-animation':''}}" data-id="{{item.id}}"
+            wx:for="{{tools_list}}"
+            style="position:relative;width:350rpx;border-radius:30rpx;background:#fff;padding:15rpx;margin-top:10rpx;">
+
+            <view style="display:flex;align-items:center;background:#f7f7f7;padding:10rpx;border-radius:30rpx;">
+              <image src="{{item.tool.pic}}" style="width:130rpx;height:130rpx;border-radius:20rpx;" mode="aspectFill">
+              </image>
+              <view
+                style="height:120rpx;width:155rpx;margin-left:20rpx;display:flex;justify-content:space-between;flex-direction:column">
+                <view style="font-size:30rpx;font-weight:700">{{item.tool.tool_name}}</view>
+
+              </view>
+            </view>
+            <view class="text-grey" style="margin-top:10rpx;font-size:20rpx;">{{item.tool.tool_content}}</view>
+
+          </view>
+
+        </view>
+
+
+      </view>
+      <view style="height:400rpx;margin-top:30rpx;text-align:center;font-weight:20rpx;">没有更多了</view>
+    </scroll-view>
+  </swiper-item>
+
+</swiper>
+
+<view class="cu-modal " bindtap='hidemodal'>
+  <view class="cu-dialog" style="width:600rpx;border-radius:30rpx;" catchtap>
+    <view class="cu-bar bg-white justify-end">
+      <view class='content'>222</view>
+      <view class='action' bindtap='hidemodal'>
+        <text class='icon-close text-red'></text>
+      </view>
+    </view>
+    <view class='' style="display:flex;flex-wrap:wrap;width:600rpx;justify-content:space-between;padding:20rpx;">
+      <view>
+
+      </view>>
+      <view wx:for="{{8}}" class="{{index==5?'':'gray'}}"
+        style="background:url(http://192.168.1.2/attachment/images/13/2021/01/y4KYAOJRP4J9snkpJjSYSzCOnySCnN.jpg);width:130rpx;height:130rpx;background-size:100% 100%; background-repeat:no-repeat;color:#fff;display:flex;align-items:center;justify-content:center;margin-bottom:12rpx;">
+        <view>
+          <view style="font-weight:bold;font-size:40rpx;margin-top:25rpx;">E</view>
+          <view style="font-size:25rpx;">X 1</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+
+
+<view class="cu-modal {{fahuosuccessmodal==true?'show':''}}" style="">
+
+  <view
+    style="background:#fff;position:absolute;left:0;right:0;top:0;bottom:0;margin:auto;border-radius:30rpx;width:400rpx;height:400rpx;overflow:hidden;z-index:9999;text-align:center;padding:50rpx 0rpx 0rpx 0rpx;border:10rpx solid #f7f7f7;">
+    <view class='' style="position:absolute; right:10rpx;z-index:999;top:10rpx;" bindtap='hidefahuosuccessmodal'>
+      <button class='cu-btn icon' style="height:40rpx;width:40rpx;">
+        <text class='icon-close text-red'></text>
+      </button>
+    </view>
+
+    <view>
+      <view style="height:220rpx;padding:0rpx 0 0 0">
+        <view style="text-align:center;">
+          <image src="/resource/images/paysuccess.png" style="width:130rpx;height:130rpx;"></image>
+          <view><text>{{resulttitle}}</text></view>
+        </view>
+
+
+      </view>
+
+      <button class='cu-btn bg-gradual-orange margin-tb-sm sm round' bindtap="hidefahuosuccessmodal"
+        style="z-index:9999;width:250rpx;">确定</button>
+    </view>
+
+
+  </view>
+</view>
+
+
+<loginmodal wx:if="{{!islogin}}" />
+
+<bar navtab="warehouse" />

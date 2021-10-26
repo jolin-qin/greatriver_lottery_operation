@@ -1,0 +1,46 @@
+<view style="padding:20rpx;">
+  <view
+    style="background:#fff;padding:20rpx;border-radius:20rpx;display:flex;justify-content:space-between;align-items:center;margin-top:20rpx;"
+    wx:for="{{dailylist}}">
+    <view style="display:flex;align-items:center;">
+      <view style="font-size:20rpx;margin-right:10rpx;">#{{index+1}}</view>
+      <image style="width:50rpx;height:50rpx;margin-right:20rpx;border-radius:50%" src="{{item.type==1?'/resource/images/kuangshi2.png':''}}{{item.type==2?'/resource/images/wepay.png':''}}{{item.type==3?'/resource/images/xianjin.png':''}}">
+      </image>
+      <view style="">
+        <view style="">
+          {{item.title}}
+
+        </view>
+        <view style="font-size:25rpx;" class="text-gray">
+          {{item.time}}
+
+        </view>
+      </view>
+    </view>
+    <view style="text-align:center;" wx:if="{{item.type==1}}">
+      <view style="font-size:45rpx;font-weight:500;text-align:right" class="numfont {{item.integral>=0?'text-red':'text-olive'}}">
+
+        {{item.integral>0?'+'+item.integral:item.integral}}
+      </view>
+      <view style="font-size:25rpx;text-align:right" class="text-gray">
+
+        矿石
+      </view>
+
+    </view>
+    <view style="text-align:center;" wx:else>
+      <view style="font-size:45rpx;font-weight:500;text-align:right" class="numfont {{item.money>=0?'text-red':'text-olive'}}">
+        {{item.money>0?'+'+item.money:item.money}}
+       
+      </view>
+      <view style="font-size:25rpx;text-align:right" class="text-gray">
+
+        {{item.type==2?'微信支付':'余额'}}
+      </view>
+
+    </view>
+  </view>
+  <view style="{{dailylist.length>0?'display:none;':'display:flex;'}}height:300rpx;width:100%;align-items:center;justify-content:center;">
+  暂无流水记录
+</view>
+</view>

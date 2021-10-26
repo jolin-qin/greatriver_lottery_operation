@@ -1,0 +1,108 @@
+@import "/icon.wxss";
+@import "/colorui.wxss";
+
+.animation {
+  animation-name: bounceIn;
+  animation-duration: 1s;
+  animation-fill-mode: both;
+  animation-timing-function:linear;
+  
+}
+.star-animation {
+  animation-name: baidong;
+  animation-duration: 1s;
+  animation-fill-mode: both;
+  animation-timing-function:linear;
+  
+}
+
+.rocket-animation {
+  animation-name: bounceIn2;
+  animation-duration: 1s;
+  animation-fill-mode: both;
+  animation-timing-function:linear;
+  
+}
+
+@-webkit-keyframes bounceIn{
+  0%,20%,40%,60%,80%,100%{-webkit-transition-timing-function:cubic-bezier(0.215,.610,.355,1.000);transition-timing-function:cubic-bezier(0.215,.610,.355,1.000)}
+  0%{opacity:0;-webkit-transform:scale3d(.3,.3,.3);transform:scale3d(.3,.3,.3)}
+  20%{-webkit-transform:scale3d(1.1,1.1,1.1);transform:scale3d(1.1,1.1,1.1)}
+  40%{-webkit-transform:scale3d(.9,.9,.9);transform:scale3d(.9,.9,.9)}
+  60%{opacity:1;-webkit-transform:scale3d(1.03,1.03,1.03);transform:scale3d(1.03,1.03,1.03)}
+  80%{-webkit-transform:scale3d(.97,.97,.97);transform:scale3d(.97,.97,.97)}
+  100%{opacity:1;-webkit-transform:scale3d(1,1,1);transform:scale3d(1,1,1)}
+}
+@keyframes bounceIn{
+  0%,20%,40%,60%,80%,100%{-webkit-transition-timing-function:cubic-bezier(0.215,.610,.355,1.000);transition-timing-function:cubic-bezier(0.215,.610,.355,1.000)}
+  0%{opacity:0;-webkit-transform:scale3d(.3,.3,.3);transform:scale3d(.3,.3,.3)}
+  20%{-webkit-transform:scale3d(1.1,1.1,1.1);transform:scale3d(1.1,1.1,1.1)}
+  40%{-webkit-transform:scale3d(.9,.9,.9);transform:scale3d(.9,.9,.9)}
+  60%{opacity:1;-webkit-transform:scale3d(1.03,1.03,1.03);transform:scale3d(1.03,1.03,1.03)}
+  80%{-webkit-transform:scale3d(.97,.97,.97);transform:scale3d(.97,.97,.97)}
+  100%{opacity:1;-webkit-transform:scale3d(1,1,1);transform:scale3d(1,1,1)}
+}
+
+@keyframes bounceIn2{
+  0%,20%,40%,60%,80%,100%{-webkit-transition-timing-function:cubic-bezier(0.215,.610,.355,1.000);transition-timing-function:cubic-bezier(0.215,.610,.355,1.000)}
+  0%{opacity:0;-webkit-transform:scale3d(.3,.3,.3);transform:scale3d(.3,.3,.3)}
+  20%{-webkit-transform:scale3d(1.1,1.1,1.1);transform:scale3d(1.1,1.1,1.1)}
+  40%{-webkit-transform:scale3d(.9,.9,.9);transform:scale3d(.9,.9,.9)}
+  60%{opacity:1;-webkit-transform:scale3d(1.03,1.03,1.03);transform:scale3d(1.03,1.03,1.03)}
+  80%{-webkit-transform:scale3d(.97,.97,.97);transform:scale3d(.97,.97,.97)}
+  100%{opacity:1;-webkit-transform:scale3d(1,1,1);transform:scale3d(1,1,1)}
+}
+.rocket-animation2 {
+  animation-name: bounceIn3;
+  animation-duration: 1s;
+  animation-fill-mode: both;
+  animation-timing-function:linear;
+  
+}
+@keyframes bounceIn3{
+  0%,20%,40%,60%,80%,100%{-webkit-transition-timing-function:cubic-bezier(0.215,.610,.355,1.000);transition-timing-function:cubic-bezier(0.215,.610,.355,1.000)}
+  0%{opacity:0;-webkit-transform:scale3d(.3,.3,.3);transform:scale3d(.3,.3,.3)}
+  20%{-webkit-transform:scale3d(1.1,1.1,1.1);transform:scale3d(1.1,1.1,1.1)}
+  40%{-webkit-transform:scale3d(.9,.9,.9);transform:scale3d(.9,.9,.9)}
+  60%{opacity:1;-webkit-transform:scale3d(1.03,1.03,1.03);transform:scale3d(1.03,1.03,1.03)}
+  80%{-webkit-transform:scale3d(.97,.97,.97);transform:scale3d(.97,.97,.97)}
+  100%{opacity:1;-webkit-transform:scale3d(1,1,1);transform:scale3d(1,1,1)}
+}
+@keyframes baidong{
+  0%, 65%{
+     -webkit-transform:rotate(0deg);
+     transform:rotate(0deg);
+   }
+   20% {  
+     -webkit-transform:rotate(6deg);
+     transform:rotate(6deg);
+   }
+   25% {  
+     -webkit-transform:rotate(-6deg);
+     transform:rotate(-6deg);
+   }
+   30% {  
+     -webkit-transform:rotate(6deg);
+     transform:rotate(6deg);
+   }
+   35% {  
+     -webkit-transform:rotate(-6deg);
+     transform:rotate(-6deg);
+   }
+   40% {  
+     -webkit-transform:rotate(6deg);
+     transform:rotate(6deg);
+   }
+   45% {  
+     -webkit-transform:rotate(-6deg);
+     transform:rotate(-6deg);
+   }
+   50% {  
+     -webkit-transform:rotate(0deg);
+     transform:rotate(0deg);
+   }
+   100% {  
+     -webkit-transform:rotate(0deg);
+     transform:rotate(0deg);
+   }
+ }

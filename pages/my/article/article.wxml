@@ -1,0 +1,4 @@
+<view style="padding:20rpx;border-radius:20rpx;background:#fff;margin:20rpx;min-height:400rpx;">
+  <rich-text nodes="{{article!==''?article:'空空如也'}}"></rich-text>
+
+</view>

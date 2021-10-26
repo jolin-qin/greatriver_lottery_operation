@@ -1,0 +1,73 @@
+<view style="padding:50rpx;display:flex;justify-content:space-between;min-height:300rpx;" class="bg-gradual-gold2" >
+  <view>
+  <view style="font-size:30rpx;padding:0 0rpx;">累计收益(元)</view>
+  <view class="numfont" style="font-size:120rpx;margin-top:20rpx;">{{history_sum_money}}</view>
+
+  
+ 
+</view>
+<view style="position:relative">
+  <view style="width:250rpx;position:absolute;bottom:20rpx;right:0rpx;">
+    <button  class="cu-btn bg-gradual-orange margin-tb-sm  round" bindtap="share"
+          style="">立即邀请</button>
+         
+          <view style="font-size:20rpx;line-height:20rpx;" class="text-white">邀请好友直接锁定为成员</view>
+
+  </view>
+  
+</view>
+
+</view>
+<view class="cu-modal {{modal?'show':''}}" style="padding:20rpx;">
+  <view class="cu-dialog" style="border-radius:30rpx;">
+    <view class="cu-bar bg-white justify-end">
+      <view class='content'>请选择邀请方式</view>
+      <view class='action' bindtap='hideModal'>
+        <text class='icon-close text-red'></text>
+      </view>
+    </view>
+    <view class='padding-xl' style="display:flex;justify-content:space-around;height:300rpx;align-items:center;">
+      <view><button  class="cu-btn bg-gradual-orange margin-tb-sm  round" open-type="share" style="">转发给好友或群</button></view>
+      <view><button  class="cu-btn bg-gradual-orange margin-tb-sm  round" bindtap="qrcode" style="">生成二维码海报</button></view>
+    </view>
+  </view>
+</view>
+<view style="width:100%;padding:20rpx;margin-top:-70rpx;">
+  <view style="width:100%;border-radius:30rpx;background:#ffffff;overflow:hidden;">
+    <view style="background:#f7f7f7;padding:20rpx;">我的分销团队</view>
+    <view style="padding:20rpx;display:flex;justify-content:space-around" bindtap="jump">
+      <view style="display:flex;">
+      <image src="/resource/images/td.png" mode="" style="width:75rpx;height:75rpx;margin-right:10rpx;"></image>
+      <view>
+        <view style="font-weight:bold">一级团队</view>
+        <view style="margin-top:5rpx;font-size:25rpx;color:#777">{{first_stage_num}}人</view>
+      </view>
+    </view>
+    <view style="display:flex;">
+      <image src="/resource/images/td.png" mode="" style="width:75rpx;height:75rpx;margin-right:10rpx;"></image>
+      <view>
+        <view style="font-weight:bold">二级团队</view>
+        <view style="margin-top:5rpx;font-size:25rpx;color:#777">{{second_stage_num}}人</view>
+      </view>
+    </view>
+    </view>
+  </view>
+</view>
+
+<view style="padding:20rpx;" >
+<view style="font-size:35rpx;margin-left:20rpx;font-weight:bold">收益记录</view>
+<view style="display:flex;justify-content:space-between;margin-top:20rpx;padding:20rpx;align-items:center;border-radius:20rpx;" class="bg-white"  wx:for="{{distribution_list}}" bindtap="showreasons" >
+  <view>
+    <view style="font-size:30rpx;font-weight:bold">{{item.content}}</view>
+    <view style="font-size:25rpx;margin-top:15rpx;" class="text-gray">{{item.time}}</view>
+  </view>
+  <view style="text-align:right">
+    <view style="font-size:45rpx;" class="numfont">+¥{{item.commission}}</view>
+   
+  </view>
+
+</view>
+<view style="{{distribution_list.length>0?'display:none;':'display:flex;'}}height:300rpx;width:100%;align-items:center;justify-content:center;">
+  暂无记录
+</view>
+</view>

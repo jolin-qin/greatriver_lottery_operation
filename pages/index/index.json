@@ -1,0 +1,7 @@
+{
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "bar":"/pages/component/bar/bar"
+  },
+  "enablePullDownRefresh":true
+}
