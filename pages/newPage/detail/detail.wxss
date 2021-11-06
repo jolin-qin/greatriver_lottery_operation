@@ -1,0 +1,107 @@
+/* pages/newPage/detail/detail.wxss */
+.index_swiper {
+    width: 100%;
+    height: 750rpx;
+}
+.introduce_wrapper {
+    width: 100%;
+    padding: 30rpx 60rpx;
+    border-bottom: 20rpx solid #EDF1F0;
+}
+.introduce_wrapper .present_price {
+    color: #E7463E;
+    font-weight: bold;
+    font-size: 52rpx;
+    margin-right: 20rpx;
+}
+.introduce_wrapper .original_price {
+    color: #ccc;
+    font-weight: bold;
+    /* font-size: 52rpx; */
+}
+.introduce_wrapper .goods_name {
+    color: #000;
+    font-weight: bold;
+    font-size: 36rpx;
+    margin-top: 16rpx;
+}
+.introduce_wrapper .goods_detail {
+    color: #9c9c9c;
+    font-weight: bold;
+    margin: 20rpx 0;
+}
+
+.introduce_wrapper .goods_label {
+    width: 180rpx;
+    line-height: 48rpx;
+    text-align: center;
+    border-radius: 24rpx;
+    color: #fff;
+    background: #1458C5;
+}
+.introduce_wrapper .integral_double {
+    margin-left: 30rpx;
+    background: #E62945;
+}
+.introduce_wrapper .sales {
+    color: #9c9c9c;
+    font-size: 32rpx;
+}
+/* 积分 */
+.section_wrapper {
+    width: 100%;
+    padding: 30rpx 60rpx;
+    border-bottom: 20rpx solid #EDF1F0;
+}
+.section_wrapper .title {
+    width: 170rpx;
+    flex: 0 0 170rpx;
+    font-size: 32rpx;
+    font-weight: 500;
+    color: #000;
+}
+.section_wrapper .check_btn {
+    width: 120rpx;
+    flex: 0 0 120rpx;
+    height: 68rpx;
+    border-radius: 34rpx;
+    border: 2rpx solid #8F8F90;
+    text-align: center;
+    line-height: 64rpx;
+    color: #9c9c9c;
+}
+.coupon_wrapper .content {
+    color: #E62945;
+}
+.zhanwei {
+    width: 100%;
+    height: 120rpx;
+}
+.footer_wrapper {
+    position: fixed;
+    width: 100%;
+    height: 120rpx;
+    left: 0;
+    bottom: 0;
+    background: #fff;
+    z-index: 2;
+}
+.footer_wrapper {
+    position: fixed;
+    width: 100%;
+    height: 120rpx;
+    left: 0;
+    bottom: 0;
+    background: #fff;
+    z-index: 2;
+}
+.footer_wrapper .btn {
+    width: 200rpx;
+    height: 60rpx;
+    line-height: 60rpx;
+    border-radius: 30rpx;
+    text-align: center;
+    color: #fff;
+    margin: 0 16rpx;
+    background: red;
+}

@@ -1,60 +1,63 @@
 {
-  "pages": [
-    "pages/index/index",
-    "pages/mystar/mystar",
-    "pages/warehouse/warehouse",
-    "pages/shop/shop",
-    "pages/my/my",
-    "pages/box/box",
-    "pages/auth/auth",
-    "pages/webview/webview",
-    "pages/my/address/address",
-    "pages/my/address/addaddress",
-    "pages/my/address/editaddress",
-    "pages/warehouse/applyfordelivery",
-    "pages/delivery/delivery",
-    "pages/mystar/steal_log",
-    "pages/my/dailyaccount/dailyaccount",
-    "pages/my/tixian/tixian",
-    "pages/my/article/article",
-    "pages/my/tixianziliao/tixianziliao",
-    "pages/my/fenxiao/fenxiao",
-    "pages/my/canvas/canvas"
-  ],
-  "window": {
-    "navigationBarTextStyle": "black",
-    "navigationBarTitleText": "",
-    "navigationBarBackgroundColor": "#f3f3f3",
-    "backgroundColor": "#f7f8fd"
-  },
-  "tabBar": {
-    "custom": true,
-    "color": "#aaa",
-    "selectedColor": "#39b54a",
-    "borderStyle": "black",
-    "backgroundColor": "#ffffff",
-    "list": [
-      {
-        "pagePath": "pages/index/index",
-        "text": ""
-      },
-      {
-        "pagePath": "pages/mystar/mystar",
-        "text": ""
-      },
-      {
-        "pagePath": "pages/warehouse/warehouse",
-        "text": ""
-      },
-      {
-        "pagePath": "pages/shop/shop",
-        "text": ""
-      },
-      {
-        "pagePath": "pages/my/my",
-        "text": ""
-      }
-    ]
-  },
-  "sitemapLocation": "sitemap.json"
+    "pages": [
+        "pages/newPage/detail/detail",
+        "pages/index/index",
+        "pages/mystar/mystar",
+        "pages/warehouse/warehouse",
+        "pages/shop/shop",
+        "pages/my/my",
+        "pages/box/box",
+        "pages/auth/auth",
+        "pages/webview/webview",
+        "pages/my/address/address",
+        "pages/my/address/addaddress",
+        "pages/my/address/editaddress",
+        "pages/warehouse/applyfordelivery",
+        "pages/delivery/delivery",
+        "pages/mystar/steal_log",
+        "pages/my/dailyaccount/dailyaccount",
+        "pages/my/tixian/tixian",
+        "pages/my/article/article",
+        "pages/my/tixianziliao/tixianziliao",
+        "pages/my/fenxiao/fenxiao",
+        "pages/my/canvas/canvas",
+        "pages/newPage/details/details",
+        "pages/newPage/JCshang/JCshang"
+    ],
+    "window": {
+        "navigationBarTextStyle": "black",
+        "navigationBarTitleText": "",
+        "navigationBarBackgroundColor": "#f3f3f3",
+        "backgroundColor": "#f7f8fd"
+    },
+    "tabBar": {
+        "custom": true,
+        "color": "#aaa",
+        "selectedColor": "#39b54a",
+        "borderStyle": "black",
+        "backgroundColor": "#ffffff",
+        "list": [
+            {
+                "pagePath": "pages/index/index",
+                "text": ""
+            },
+            {
+                "pagePath": "pages/mystar/mystar",
+                "text": ""
+            },
+            {
+                "pagePath": "pages/warehouse/warehouse",
+                "text": ""
+            },
+            {
+                "pagePath": "pages/shop/shop",
+                "text": ""
+            },
+            {
+                "pagePath": "pages/my/my",
+                "text": ""
+            }
+        ]
+    },
+    "sitemapLocation": "sitemap.json"
 }

@@ -1,0 +1,23 @@
+{
+  "name": "greatriver_lottery_operation",
+  "version": "1.0.0",
+  "description": "guangzhou",
+  "main": "app.js",
+  "dependencies": {
+    "@vant/weapp": "^1.9.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jolin-qin/greatriver_lottery_operation.git"
+  },
+  "author": "qinjiulin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jolin-qin/greatriver_lottery_operation/issues"
+  },
+  "homepage": "https://github.com/jolin-qin/greatriver_lottery_operation#readme"
+}

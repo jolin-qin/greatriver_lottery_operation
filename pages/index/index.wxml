@@ -1,5 +1,6 @@
 <import src="index.skeleton.wxml" />
 <template is="skeleton" wx:if="{{loading}}" />
+<!-- 首页最上面的图 -->
 <view class="topimg-area"
 	style="background:url('{{indexparameter.other_parameter.index_pic}}');background-size: 100% auto;overflow:hidden;">
 	<view class="danmu-list" wx:if="{{1===1}}">
@@ -17,65 +18,7 @@
 	</view>
 </view>
 
-<view wx:if="{{islogin}}" style="display:flex;padding:0 20rpx;margin-top:-100rpx;">
-	<view
-		style="min-width:260rpx;margin-right:5rpx;border-radius:20rpx;padding:20rpx 0 20rpx 20rpx;position:relative;overflow:hidden;">
-		<view style="display:flex;flex-direction:row;position:relative;z-index:1">
-			<image src="{{online_member_data.avatar}}" mode="aspectFill"
-				style="width:65rpx;min-width:65rpx;height:65rpx;min-height:65rpx;border-radius:50%;float:left;"></image>
-			<view style="display:flex;flex-direction:column;margin-left:10rpx;">
-				<view
-					style="max-width:180rpx;color:#fff;font-weight:700;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">
-					{{online_member_data.nickname}}
-				</view>
-				<view
-					style="width:60rpx;background:#000;padding:1rpx 10rpx;font-size:15rpx;color:#fff;border-radius:5rpx;">
-					<text>星球 {{online_member_data.star_lv}}</text>
-				</view>
-			</view>
-		</view>
-		<view
-			style="font-size:{{online_member_data.integral>100000?'50':'55'}}rpx;font-family:font22341;color:#fff;font-weight:500;margin-top:10rpx;position:relative;z-index:1">
-			{{online_member_data_integral}}</view>
-		<view style="font-size:20rpx;color:#fff;font-weight:700;position:relative;z-index:1">剩余矿石</view>
-		<image src="/resource/images/d8e5d87fc6df629d0856e0b53efbcfdee2a03d2b148f6-6W3pvE_fw1200.jpg" mode="aspectFill"
-			style="position:absolute;top:0;z-index:0;left:0;width:100%;"></image>
-
-
-	</view>
-
-	<view
-		style="background:#fff;width:100%;border-radius:20rpx;display:flex;flex-direction:row;justify-content:space-between;">
-		<view style="padding:20rpx 0 20rpx 20rpx;display:flex;flex-direction:column;justify-content:space-between;">
-			<view style="position:relative">
-				<view style="font-size:20rpx;font-weight:700">待领取</view>
-				<view
-					style="font-size:50rpx;font-weight:500;font-family:font22341;line-height:45rpx;display:flex;max-width:200rpx;">
-					{{jifens}}<view class="{{jifenanimation}}"
-						style="position:absolute;top:10rpx;left:80rpx;font-family:font22341;font-size:35rpx;color:#EA392C;margin:-20rpx 0 0 0rpx;">
-						+{{one_sec_productivity}}</view>
-				</view>
-			</view>
-			<view>
-				<view style="font-size:20rpx;font-weight:700">星球生产力</view>
-				<view style="line-height:30rpx;"><text
-						style="font-size:40rpx;font-weight:500;font-family:font22341;color:#EA392C">{{one_sec_productivity2}}</text><text
-						style="font-size:20rpx;font-weight:700">矿石/分钟</text></view>
-			</view>
-		</view>
-
-		<view style="display:flex;flex-direction:column;padding:20rpx;justify-content:space-between;">
-			<image id="lingqubutton" src="/resource/images/button2.jpg" class="{{getpoints_animation}}"
-				bindtap="getpoints" style="width:160rpx;height:70rpx;border-radius:10rpx;" mode="aspectFill"></image>
-			<image id="buyboxbutton" src="/resource/images/button.jpg" class="{{getboxes_animation}}" bindtap="getboxes"
-				style="width:160rpx;height:70rpx;border-radius:10rpx;margin-top:10rpx;" mode="aspectFill">
-			</image>
-		</view>
-	</view>
-</view>
-
-
-<block wx:for="{{ads}}" wx:key="index">
+<!-- <block wx:for="{{ads}}" wx:key="index">
 	<block wx:if="{{item.ad_id>0}}">
 		<view style="padding:20rpx 20rpx 0 20rpx;border-radius:20rpx;overflow:hidden;position:relative;"
 			bindtap="{{item.custom_parameter.type==0?'jumpminiapp':'jumpurl'}}"
@@ -107,14 +50,14 @@
 			<ad-custom unit-id="{{item.liuliangzhu_parameter}}"></ad-custom>
 		</view>
 	</block>
-</block>
-
-<view style="margin:20rpx 0 5rpx 30rpx;" id="mybox">
+</block> -->
+<!-- 我的盒柜(标题) -->
+<!-- <view style="margin:20rpx 0 5rpx 30rpx;" id="mybox">
 	<text class="titlefont" style="font-size:40rpx;font-weight:500;">{{!islogin?'热门推荐':'我的盒柜'}}</text> <text
 		style="font-size:20rpx;margin-left:20rpx;color:#919191">{{!islogin?'Hot':'My Boxes'}}</text>
-</view>
+</view> -->
 <!-- 热门推荐 -->
-<!-- <navigator wx:if="{{!islogin}}" hover-class="none" url="/pages/auth/auth" id="boxlist"
+<!-- <navigator wx:if="{{!islogin}}" hover-class="none" url="/pages/auth/auth" id=""
 	style="display:flex;justify-content:space-between;padding:0 20rpx 150rpx 20rpx;flex-wrap:wrap;">
 	<view
 		class=" {{click_box_index==index?'button-animation2':'button-animation-first'}}  {{select_box_index==index?'in-animation':''}}"
@@ -130,7 +73,7 @@
 	<view wx:for="{{3}}" style="width:230rpx;"></view>
 </navigator> -->
 <!-- 我的盒柜 -->
-<view wx:if="{{islogin}}" id="boxlist"
+<!-- <view wx:if="{{islogin}}" id="boxlist"
 	style="display:flex;justify-content:space-between;padding:0 20rpx 150rpx 20rpx;flex-wrap:wrap;">
 	<view bindtap="showbox"
 		class=" {{click_box_index==index?'button-animation2':'button-animation-first'}}  {{select_box_index==index?'in-animation':''}}"
@@ -157,9 +100,8 @@
 			style="{{item.box.box_pay_payment_integral==0?'display:none;':''}}position:absolute;top:160rpx;left:15rpx;background:rgba(255, 210, 70, 1);border-radius:0 10rpx 10rpx 0;font-size:25rpx;font-weight:700;padding:0 10rpx;color:#fff">
 			{{item.box.box_open_integral>0?'矿石'+item.box.box_open_integral:'免积分'}}</view>
 	</view>
-	<view wx:for="{{3}}" style="width:230rpx;">
-	</view>
-</view>
+	<view wx:for="{{3}}" style="width:230rpx;"></view>
+</view> -->
 <view class="cu-modal {{boxmodal==true?'show':''}}" catchtouchmove="return" bindtouchstart="" bindtouchend="">
 	<view class="cu-dialog"
 		style="width:98%;height:90%;border:5rpx solid #fff;border-radius:50rpx;overflow:hidden;transform:rotate(0deg);">
@@ -173,21 +115,14 @@
 		<view style="position:absolute;width:100%;z-index:0;">
 			<view
 				style="filter: blur(25rpx);height:850rpx;width:120%;background:url('{{openboxinfo.box_cover}}') no-repeat center center;background-size:120%;margin-left:-10%;margin-top:-10%">
-
 			</view>
-
 		</view>
 		<view
 			style="border-radius:50rpx;overflow:hidden;position:relative;z-index:800;-webkit-transform:rotate(0deg);padding:20rpx;">
 			<scroll-view showScrollbar="false" scroll-into-view="{{scrollintoviewid}}" scroll-with-animation="true"
 				scroll-top="{{topNum}}" bindscrolltoupper="ontop" scroll-y="true" bindscroll="scroll"
 				style="width:100%;height:100vh;overflow:hidden;margin-top:10rpx;">
-
-
 				<view class='' style="position:relative;padding:0rpx 0 80rpx 0;">
-
-
-
 					<view
 						style="display:flex;flex-direction:column;width:100%;align-items:center;-webkit-transform:rotate(0deg);">
 						<view class="{{openthebox_animation}}"
@@ -195,17 +130,12 @@
 							<image src="{{openboxinfo.box_cover}}" style="width:100%;height:100%;border-radius:20rpx;"
 								mode="aspectFill"></image>
 						</view>
-
 						<!--
           <view style="display:flex;justify-content:center;margin-top:20rpx;">
             <text style="color:#fff;font-size:40rpx;max-width:500rpx;font-weight:700;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">“{{openboxinfo.box_title}}”</text><view class="bg-gradual-gold" style="margin-left:10rpx;border-radius:10rpx;width:80rpx;text-align:center;height:40rpx;"><text style="font-size:20rpx;color:#000;line-height:25rpx;">传说</text></view>
           </view>
           -->
-
 					</view>
-
-
-
 					<view class="bg-white"
 						style="position:relative;margin:20rpx 0;padding:10rpx 30rpx 20rpx 30rpx;border-radius:30rpx;z-index:9">
 						<view wx:if="{{showprize}}" style="top:40rpx;left:0;right:0;margin:auto">
@@ -270,7 +200,7 @@
 										<view>{{openboxinfo.box_rank.rank_name}}</view>
 									</view>
 									<image
-										style="{{openboxinfo.membersbox_state==0?'display:none;':''}}position:absolute;top:0rpx;right:0rpx;width:120rpx;height:120rpx;"
+										style="{{openboxinfo.membersbox_state==0?'display:none;':''}}position:absolute;top:0;right:0;width:120rpx;height:120rpx;"
 										src="/resource/images/open.png"></image>
 								</view>
 								<view
@@ -297,15 +227,9 @@
 										</view>
 									</view>
 									<view>
-
 										<view class="cu-avatar-group">
 											<view class="cu-avatar round sm avatarmore"></view>
-											<view class="cu-avatar round sm"
-												style="border:3rpx solid #f1f1f1 !important;background-image:url({{item}});"
-												wx:for="{{openboxinfo.thisboxowner}}">
-											</view>
-
-
+											<view class="cu-avatar round sm" style="border:3rpx solid #f1f1f1 !important;background-image:url({{item}});" wx:for="{{openboxinfo.thisboxowner}}" wx:key="index"></view>
 										</view>
 									</view>
 								</view>
@@ -316,9 +240,6 @@
 					<view style="position:relative;z-index:8">
 						<!--
         <view style="text-align:left;margin-top:20rpx;">
-         
-          
-          
           <view style="display:flex;margin-top:10rpx;">
             <image src="http://192.168.1.2/test/img/5.png" wx:for="{{8}}"
               style="width:60rpx;height:60rpx;margin-right:10rpx;border-radius:50%;border:5rpx solid  #333"
@@ -361,7 +282,7 @@
 
 							<view style="display:flex;justify-content:space-between;align-items:center;">
 								<view wx:if="{{openboxinfo.box_pay_payment_integral==1}}" bindtap="payitemclick"
-									data-type="1" class=""
+									data-type="1"
 									style="border-radius:15rpx;padding:0rpx 15rpx;display:flex;height:80rpx;align-items:center;justify-content:center;min-width:33.3%;{{select_pay_type==1?'background:#f7f7f7':''}}">
 									<image src="/resource/images/kuangshi2.png" style="width:30rpx;height:30rpx;">
 									</image><text style="line-height:50rpx;margin-left:10rpx;">矿石支付</text><text
@@ -370,7 +291,7 @@
 
 								</view>
 								<view wx:if="{{openboxinfo.box_pay_payment_wechatpay==1}}" bindtap="payitemclick"
-									data-type="2" class=""
+									data-type="2"
 									style="border-radius:15rpx;padding:0rpx 15rpx;display:flex;height:80rpx;align-items:center;justify-content:center;min-width:33.3%;{{select_pay_type==2?'background:#f7f7f7':''}}">
 
 									<image src="/resource/images/wepay.png" style="width:30rpx;height:30rpx;"></image>
@@ -379,7 +300,7 @@
 										class="text-bold icon-check"></text>
 								</view>
 								<view wx:if="{{openboxinfo.box_pay_payment_balance==1}}" bindtap="payitemclick"
-									data-type="3" class=""
+									data-type="3"
 									style="border-radius:15rpx;padding:0rpx 15rpx;display:flex;height:80rpx;align-items:center;justify-content:center;min-width:33.3%;{{select_pay_type==3?'background:#f7f7f7':''}}">
 
 									<image src="/resource/images/xianjin.png" style="width:30rpx;height:30rpx;"></image>
@@ -389,8 +310,6 @@
 								</view>
 								<view style="width:33.3%;width:33.3%;"></view>
 							</view>
-
-
 						</view>
 						<view class="{{openthebox_animation4}}"
 							style="{{openboxinfo.membersbox_state==0?'':'display:none;'}}position:relative;background:#fff;padding:45rpx 30rpx 30rpx 30rpx;;margin-top:40rpx;border-radius:0 30rpx 30rpx 30rpx;">
@@ -407,29 +326,17 @@
 							</block>
 							<scroll-view wx:else scroll-x="true" style="width:100%;height:135rpx;">
 								<view style="display:flex;flex-direction:row;">
-									<view wx:for="{{openboxinfo.memberstools}}" bindtap="usetools" data-id="{{item.id}}"
-										data-index="{{index}}" data-type="{{item.tools.type}}"
-										style="margin-right:20rpx;">
-										<view class=""
-											style="border-radius:15rpx;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;width:220rpx;">
-
-											<view
-												style="background:#f7f7f7;height:85rpx;padding:30rpx 10rpx 10rpx 5rpx;font-size:25rpx;font-weight:700;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">
-												{{item.tools.tool_name}}</view>
-											<view class="bg-gradual-orange"
-												style="min-height:50rpx;padding:10rpx;font-size:20rpx;display:flex;align-items:center;justify-content:center">
+									<view wx:for="{{openboxinfo.memberstools}}"  wx:key="index" bindtap="usetools" data-id="{{item.id}}" data-index="{{index}}" data-type="{{item.tools.type}}" style="margin-right:20rpx;">
+										<view style="border-radius:15rpx;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;width:220rpx;">
+											<view style="background:#f7f7f7;height:85rpx;padding:30rpx 10rpx 10rpx 5rpx;font-size:25rpx;font-weight:700;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">{{item.tools.tool_name}}</view>
+											<view class="bg-gradual-orange" style="min-height:50rpx;padding:10rpx;font-size:20rpx;display:flex;align-items:center;justify-content:center">
 												{{item.tools.type==0?'+'+item.tools.add_winning_probability+'%中率':'可查看此盒奖品列表'}}
 											</view>
-
-
 										</view>
 									</view>
 								</view>
-
 							</scroll-view>
-
 						</view>
-
 						<view class="{{openthebox_animation4}}" wx:if="{{openboxinfo.box_pay_payment_question==1}}"
 							style="{{openboxinfo.membersbox_state==0?'':'display:none;'}}position:relative;background:#fff;padding:45rpx 30rpx 30rpx 30rpx;;margin-top:40rpx;border-radius:0 30rpx 30rpx 30rpx;min-height:200rpx;">
 							<view class="bg-gradual-gold"
@@ -438,23 +345,14 @@
 							</view>
 
 							<view style="display:flex;flex-direction:column;justify-content:flex-start">
-								<text
-									style="font-size:30rpx;font-weight:700;text-align:left;">Q:{{openboxinfo.box_pay_question}}</text>
-
+								<text style="font-size:30rpx;font-weight:700;text-align:left;">Q:{{openboxinfo.box_pay_question}}</text>
 								<view class="cu-form-group">
 									<view class='title'>输入答案</view>
 									<input style="background:#f7f7f7;height:55rpx;" placeholder="" value="{{answer}}"
 										bindinput="inputanswer" class='radius' name='input'></input>
 								</view>
 							</view>
-
-
 						</view>
-
-
-
-
-
 						<view class="{{openthebox_animation4}}"
 							style="{{openboxinfo.membersbox_state==0?'':'display:none;'}}position:relative;background:#fff;padding:45rpx 30rpx 30rpx 30rpx;;margin-top:40rpx;border-radius:0 30rpx 30rpx 30rpx;min-height:200rpx;"
 							id="content">
@@ -464,33 +362,13 @@
 							</view>
 
 							<view class='' style="padding:20rpx 5rpx;">
-								<image wx:if="{{openboxinfo.box_content==''}}" src="/resource/images/notext.png"
-									style="width:500rpx;height:400rpx;" mode="aspectFit"></image>
-
-
+								<image wx:if="{{openboxinfo.box_content==''}}" src="/resource/images/notext.png" style="width:500rpx;height:400rpx;" mode="aspectFit"></image>
 								<rich-text nodes="{{openboxinfo.box_content!==''?openboxinfo.box_content:'盒子介绍空空如也'}}">
 								</rich-text>
-
-
 							</view>
-
-
 						</view>
-
-
 						<view style="height:400rpx;"></view>
-
-
-
-
-
-
 					</view>
-
-
-
-
-
 					<!--
       <view style="position:absolute;bottom:0;width:100%;height:200rpx;">
        
@@ -635,15 +513,6 @@
 <view class="cu-modal {{getboxesmodal==true?'show':''}}" style="z-index:998 !important;" catchtouchmove="return"
 	bindtap='hidegetboxesmodal'>
 	<view class="cu-dialog" style="width: 700rpx;border-radius:30rpx;" catchtap>
-		<!--
-    <view class="cu-bar bg-white justify-end">
-      <view class='content'>Modal标题</view>
-      <view class='action' bindtap='hidegetboxesmodal'>
-        <text class='icon-close text-red'></text>
-      </view>
-    </view>
-    -->
-
 		<view class='bg-grey' style="padding:50rpx 30rpx 50rpx 30rpx;">
 			<view class='' style="position:absolute; right:20rpx;top:20rpx;z-index:30;" bindtap='hidegetboxesmodal'>
 				<button class='cu-btn icon' style="height:70rpx;width:70rpx;font-size:30rpx;">
@@ -665,10 +534,10 @@
 						<text
 							style="line-height:60rpx">{{getboxparameter.freebox.free_box_enable==1?(getboxparameter.freebox.remaining_quantity>0?'剩余'+getboxparameter.freebox.remaining_quantity+'个':'今日已领完'):'暂未开放'}}</text>
 					</view>
-					<view class="" style="margin-top:60rpx;height:70rpx;">
+					<view style="margin-top:60rpx;height:70rpx;">
 						<text style="line-height:70rpx;font-size:70rpx;font-weight:700;color:#000">免费</text>
 					</view>
-					<view class="" style="margin-top:50rpx;">
+					<view style="margin-top:50rpx;">
 						<text style="font-size:30rpx;font-weight:700">普通盒子 X1</text>
 					</view>
 					<button style="margin-top:20rpx;"
@@ -683,7 +552,7 @@
 					<scroll-view scroll-x="true" scroll-left='{{scrolltop}}'
 						style="width:{{newboxscrollwidth}};left:0;right:0;margin:auto;">
 						<view style="display:flex;flex-wrap:nowrap;">
-							<view bindtap="showbox" wx:for="{{newboxlist}}" data-id="{{item.membersbox_id}}"
+							<view bindtap="showbox" wx:for="{{newboxlist}}" wx:key="index" data-id="{{item.membersbox_id}}"
 								data-indexid="{{index}}"
 								style="position:relative;width:230rpx;border-radius:30rpx;background:#fff;padding:15rpx;margin-right:10rpx;">
 
@@ -715,12 +584,12 @@
 						style="height:60rpx;width:200rpx;border-radius:30rpx 0;margin-top:-30rpx;">
 						<text style="line-height:60rpx;font-weight:700">积分兑换</text>
 					</view>
-					<view class="" style="margin-top:60rpx;height:70rpx;color:#000">
+					<view style="margin-top:60rpx;height:70rpx;color:#000">
 						<text
 							style="font-size:70rpx;line-height:70rpx;font-weight:700">{{getboxparameter.integralbox.integral_box_price}}</text><text
 							style="line-height:70rpx;font-size:30rpx;font-weight:700">矿石</text>
 					</view>
-					<view class="" style="margin-top:50rpx;">
+					<view style="margin-top:50rpx;">
 						<text
 							style="font-size:30rpx;font-weight:700">随机盒子X{{getboxparameter.integralbox.integral_box_atimes_num}}</text>
 					</view>
@@ -778,7 +647,7 @@
 		</view>
 	</view>
 </view>
-<view class="cu-modal {{payloading==1 || payloading==2?'show':''}}" style="">
+<view class="cu-modal {{payloading==1 || payloading==2?'show':''}}">
 
 	<view
 		style="background:#fff;position:absolute;left:0;right:0;top:0;bottom:0;margin:auto;border-radius:30rpx;width:300rpx;height:300rpx;overflow:hidden;z-index:9999;text-align:center;padding:50rpx 0rpx 0rpx 0rpx;border:10rpx solid #f7f7f7;">
@@ -806,7 +675,7 @@
 	</view>
 </view>
 
-<view class="cu-modal {{tools_zhonglv?'show':''}}" style="" bindtap="hidetoolmodal" catchtouchmove="return">
+<view class="cu-modal {{tools_zhonglv?'show':''}}" bindtap="hidetoolmodal" catchtouchmove="return">
 
 	<view
 		style="background:#fff;position:absolute;left:0;right:0;top:0;bottom:0;margin:auto;border-radius:30rpx;width:700rpx;height:480rpx;overflow:hidden;z-index:9999;text-align:center;padding:50rpx 0rpx 0rpx 0rpx;border:10rpx solid #f7f7f7;"
@@ -820,7 +689,7 @@
 
 		<scroll-view class="{{openthebox_animation4}}" scroll-x="true" style="width:100%;margin-top:50rpx;">
 			<view style="display:flex;flex-direction:row;min-height:120rpx;align-items:flex-end">
-				<view wx:for="{{openboxinfo.prizes_list}}" wx:for-item="prizes_list_item"
+				<view wx:for="{{openboxinfo.prizes_list}}" wx:for-item="prizes_list_item" wx:for-index="itemIndex" wx:key="itemIndex"
 					style="margin-right:20rpx;width:180rpx;">
 					<view style="position:relative;height:180rpx;width:180rpx;padding:10rpx;border-radius:25rpx;"
 						class="{{choicezhonglvprize_index==index?'bg-gradual-orange':'bg-white'}}"
@@ -853,126 +722,40 @@
 	</view>
 </view>
 
-<view class="cu-modal {{tools_toushi?'show':''}}" style="" bindtap="hidetoolmodal" catchtouchmove="return">
-
-	<view
-		style="background:#fff;position:absolute;left:0;right:0;top:0;bottom:0;margin:auto;border-radius:30rpx;width:700rpx;height:400rpx;overflow:hidden;z-index:9999;text-align:center;padding:50rpx 0rpx 0rpx 0rpx;border:10rpx solid #f7f7f7;"
-		catchtap>
-		<view style="font-size:35rpx;font-weight:700;margin-top:50rpx;">确定使用一张透视卡吗?</view>
-		<view class='' style="position:absolute; right:10rpx;z-index:999;top:10rpx;" bindtap='hidetoolmodal'>
-			<button class='cu-btn icon' style="height:40rpx;width:40rpx;">
-				<text class='icon-close text-red'></text>
-			</button>
+<!-- 新的页面start -->
+<view class="new_pages">
+	<!-- swiper -->
+	<swiper class="index_swiper" indicator-dots="{{true}}" interval="2000" autoplay="{{false}}" duration="500" circular="true" easing-function="linear">
+        <swiper-item class="swiper_item">
+            <image class="img" src="/resource/images/box.jpg" mode="aspectFill"></image>
+        </swiper-item>
+		<swiper-item class="swiper_item">
+            <image class="img" src="/resource/images/box.jpg" mode="aspectFill"></image>
+        </swiper-item>
+    </swiper>
+	<!-- 商品列表 -->
+	<view class="goods_wrapper">
+		<!-- tab切换 -->
+		<view class="tab_wrapper flex-between">
+			<view class="tab_item flex-center {{tabIndex === index ? 'active':'' }}" wx:for="{{tabs}}" wx:key="index" data-index="{{index}}" bindtap="tabClick">
+				<block>
+					<image class="tab_img" wx:if="{{tabIndex === index}}" src="{{item.onImg}}" mode="scaleToFill"></image>
+					<image class="tab_img" wx:else src="{{item.img}}" mode="scaleToFill"></image>
+				</block>
+			</view>
 		</view>
-
-
-		<view style="display:flex;justify-content:space-around;margin-top:80rpx;">
-			<button class='cu-btn bg-gary margin-tb-sm xl round' bindtap="hidetoolmodal"
-				style="z-index:9999;width:200rpx;">取消</button>
-			<button class='cu-btn bg-gradual-orange margin-tb-sm xl round' bindtap="usetoushi"
-				style="z-index:9999;width:400rpx;">立即使用</button>
+		<!-- 标题 -->
+		<view class="biaoti flex-between">
+			<view class="left">
+				<view class="chinese">全部商品</view>
+				<text class="english" decode="{{true}}">ALL&ensp;TOYS</text>
+			</view>
+			<view class="right">
+				<view class="first_title">TIDE PLAY</view>
+				<view class="second_title">ABCDEDSSE</view>
+			</view>
 		</view>
-
-
 	</view>
 </view>
-
-<block wx:if="{{1==1}}">
-	<view class="shadow-lg bg-gradual-orange a-wobble "
-		style="{{guide[1]?'display:flex;':'display:none;'}}z-index:1000;width:250px;border-radius:20rpx;height:80px;position:absolute;top:{{yindao_a.top-85}}px;left:{{yindao_a.right-250}}px;align-items:center;">
-		<image style="position:absolute;height:80rpx;width:80rpx;top:-40rpx;left:-40rpx;"
-			src="/resource/images/025-money.png"></image>
-		<view class="triangle-down-right"></view>
-		<view style="padding:20rpx;">点击这里可以开始挖掘你的第一份矿石！</view>
-	</view>
-	<view class="shadow-lg bg-gradual-orange a-wobble "
-		style="{{guide[2]?'display:flex;':'display:none;'}}z-index:1000;width:250px;border-radius:20rpx;height:80px;position:absolute;top:{{yindao_b.top-85}}px;left:{{yindao_b.right-250}}px;align-items:center;">
-		<image style="position:absolute;height:80rpx;width:80rpx;top:-40rpx;left:-40rpx;"
-			src="/resource/images/049-birthday.png"></image>
-		<view class="triangle-down-right"></view>
-		<view style="padding:20rpx;">点击这里可以用矿石兑换更多盒子！</view>
-	</view>
-
-	<view class="shadow-lg bg-gradual-orange a-wobble "
-		style="{{guide[3]?'display:flex;':'display:none;'}}z-index:29;width:250px;border-radius:20rpx;height:80px;position:absolute;top:{{yindao_c.top-85}}px;left:{{10}}px;align-items:center;">
-		<image style="position:absolute;height:80rpx;width:80rpx;top:-40rpx;right:-40rpx;"
-			src="/resource/images/013-worker.png"></image>
-		<view class="triangle-down-left"></view>
-		<view style="padding:20rpx;">点击这里开始开一个盒子吧！</view>
-	</view>
-
-
-
-	<view class="cu-modal show" style="{{guide[0]?'':'display:none;'}}" bindtap="" catchtouchmove="return">
-
-		<view class="shadow-lg bg-gradual-orange a-wobble"
-			style="z-index:980;width:80%;border-radius:20rpx;height:280rpx;position:absolute;left:0;right:0;top:0;bottom:0;margin:auto;display:flex;align-items:center;flex-direction:column">
-			<image style="position:absolute;height:100rpx;width:100rpx;top:-40rpx;left:-40rpx;"
-				src="/resource/images/024-reading.png"></image>
-			<view class="triangle-down-left"></view>
-			<text
-				style="padding:20rpx;text-align:left;font-size:35rpx;font-weight:500">\n欢迎来到星球世界，跟随我一起体验抽奖盲盒新玩法吧！</text>
-			<view>
-				<view class='' style="text-align:right;margin-top:10rpx;">
-					<button class='cu-btn round text-white line-blue button-hover shadow' bindtap="guidenext"
-						data-do="no" data-step="{{0}}"
-						style="margin-right:20rpx;height:50rpx;padding:0 70rpx;">不要</button>
-					<button class='cu-btn round text-white line-blue button-hover shadow'
-						style="height:50rpx;padding:0 70rpx;" bindtap="guidenext" data-do="yes"
-						data-step="{{0}}">好的</button>
-				</view>
-			</view>
-		</view>
-	</view>
-	<view class="cu-modal show" style="{{guide[7]?'':'display:none;'}}" bindtap="" catchtouchmove="return">
-
-		<view class="shadow-lg bg-gradual-orange a-wobble"
-			style="z-index:1000;width:80%;border-radius:20rpx;height:320rpx;position:absolute;left:0;right:0;top:0;bottom:0;margin:auto;display:flex;align-items:center;flex-direction:column">
-			<image style="position:absolute;height:100rpx;width:100rpx;top:-40rpx;left:-40rpx;"
-				src="/resource/images/009-hello.png"></image>
-			<view class="triangle-down-left"></view>
-			<text
-				style="padding:20rpx;text-align:left;font-size:30rpx;font-weight:500">\n恭喜你已经出师了，奖品已经放入你的仓库，更多好玩需要你自己摸索咯，小怪兽退下了，相见会有时！再见！</text>
-			<view>
-				<view class='' style="text-align:right;margin-top:10rpx;">
-
-					<button class='cu-btn round text-white line-blue button-hover shadow'
-						style="height:50rpx;padding:0 70rpx;" bindtap="guidenext" data-do="yes"
-						data-step="{{6}}">好的再见</button>
-				</view>
-			</view>
-		</view>
-	</view>
-
-	<view class="cu-modal show" style="{{guide[0]?'':'display:none;'}}" bindtap="" catchtouchmove="return">
-
-		<view
-			style="z-index:1000;width:550rpx;height:720rpx;position:absolute;left:0;right:0;top:0;bottom:0;margin:auto;display:flex;align-items:center;flex-direction:column">
-
-			<view class="shadow-lg bg-white"
-				style="position:relative;width:100%;height:100%;border-radius:35rpx;overflow:hidden;">
-				<image style="width:100%;top:0rpx;left:0rpx;" mode="widthFix" src="/resource/images/head.jpg"></image>
-				<view style="padding:0 20rpx;">
-					<scroll-view style="width:100%;height:460rpx" scroll-y="true">
-						<rich-text nodes="{{indexparameter.instructions!==''?indexparameter.instructions:'空空如也'}}">
-						</rich-text>
-					</scroll-view>
-				</view>
-
-
-				<view
-					style="position:absolute;border-top:1rpx solid #eee;bottom:0;height:80rpx;width:100%;display:flex;align-items:center;justify-content:space-around;font-weight:700;background:#fff;border-radius:0 0 35rpx 35rpx;">
-					<view bindtap="guidenext" data-do="no" data-step="{{0}}">跳过引导</view>
-					<view bindtap="guidenext" data-do="yes" data-step="{{0}}">新手引导</view>
-				</view>
-			</view>
-
-			<view>
-
-			</view>
-		</view>
-	</view>
-</block>
-
-
+<!-- 底部tabBar -->
 <bar navtab="index" scrolltop="{{scrolltopenable}}" />

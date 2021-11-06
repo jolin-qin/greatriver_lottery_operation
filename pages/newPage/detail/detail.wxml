@@ -1,0 +1,60 @@
+<view>
+    <swiper class="index_swiper" indicator-dots="{{true}}" interval="2000" autoplay="{{false}}" duration="500" circular="true" easing-function="linear">
+        <swiper-item class="swiper_item">
+            <image class="height" src="/resource/images/box.jpg" mode="scaleToFill"></image>
+        </swiper-item>
+		<swiper-item class="swiper_item">
+            <image class="height" src="/resource/images/box.jpg" mode="scaleToFill"></image>
+        </swiper-item>
+    </swiper>
+    <!-- 商品介绍 -->
+    <view class="introduce_wrapper">
+        <view class="flex_start">
+            <view class="present_price">￥52.20</view>
+            <view class="original_price">原价￥52.20</view>
+        </view>
+        <view class="goods_name">玩偶玩偶玩偶</view>
+        <view class="goods_detail">商品介绍商品介绍商品介绍商品介绍商品介绍商品介绍商品介绍商品介绍</view>
+        <view class="flex_between">
+            <view class="flex_start">
+                <view class="goods_label hot_sell">热销</view>
+                <view class="goods_label integral_double">积分X2</view>
+            </view>
+            <view class="sales">销售3333件</view>
+        </view>
+    </view>
+    <!-- 积分 -->
+    <view class="section_wrapper integral_wrapper flex_between">
+        <view class="flex_start">
+            <text class="title">积分</text>
+            <text class="content">积分规则详情</text>
+        </view>
+        <view class="check_btn">查看</view>
+    </view>
+    <!-- 优惠 -->
+    <view class="section_wrapper coupon_wrapper flex_between">
+        <view class="flex_start">
+            <text class="title">优惠</text>
+            <text class="content">有4张可用优惠券</text>
+        </view>
+    </view>
+    <!-- 发货规则 -->
+    <view class="section_wrapper rules_wrapper flex_between">
+        <view class="flex_start">
+            <text class="title">发货规则</text>
+            <text class="content">需手动发货，若30天内未操作发货，系统将自动发出</text>
+        </view>
+        <view class="check_btn">查看</view>
+    </view>
+    <!-- 商品详情 -->
+    <view class="details_wrapper">
+        <text>商品详情</text>
+        <view></view>
+    </view>
+    <view class="zhanwei"></view>
+    <!-- 底部 -->
+    <view class="footer_wrapper flex_center">
+        <view class="jcshang btn">JC赏</view>
+        <view class="immediately_buy btn">立刻购买</view>
+    </view>
+</view>

@@ -98,8 +98,57 @@ page {
 	right: 40rpx;
 	bottom: -20rpx;
 }
-
+/* 我定义的公共class类 */
 .height {
 	width: 100%;
 	height: 100%;
+}
+.flex_start {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+}
+
+.flex_end {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+}
+
+.flex_center {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.flex_between {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.flex_around {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+.noMore {
+    font-size: 24rpx;
+    text-align: center;
+    line-height: 100rpx;
+	color: #999;
+	/* margin-bottom: 30rpx; */
+}
+.ellipsis_2 {
+	overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+.ellipsis_1 {
+	overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }

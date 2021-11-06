@@ -376,4 +376,87 @@ page{
   border:3rpx solid #f1f1f1 !important;
   background-image:url('data:image/png;base64,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');
 }
+/* 秦九林css */
+.new_pages {
+	width: 100%;
+	border-radius: 30rpx 30rpx 0 0;
+	margin-top: -470rpx;
+}
+.index_swiper {
+	width: 700rpx;
+	height: 500rpx;
+	margin: 0 auto;
+	border: 4rpx solid #fff;
+	border-radius: 50rpx;
+	overflow: hidden;
+}
+.index_swiper .swiper_item .img {
+	width: 100%;
+	border-radius: 46rpx;
+}
+.goods_wrapper {
+	width: 100%;
+	background: #fff;
+	border-radius: 30rpx;
+	margin-top: -46rpx;
+	position: relative;
+	z-index: 2;
+	overflow: hidden;
+}
+/* tab切换 */
+.tab_wrapper {
+	height: 100rpx;
+	border-radius: 30rpx 30rpx 0 0;
+}
 
+.tab_wrapper .tab_item {
+    width: 210rpx;
+    height: 62rpx;
+    color: #FFCEFD;
+    font-size: 30rpx;
+    background: #DD73D9;
+    border: 1px solid #FFA4FC;
+    border-radius: 16rpx 16rpx 0 0;
+    font-weight: bold;
+}
+.tab_wrapper .tab_item.active {
+    color: #DD73D9;
+    background: #fff;
+    height: 76rpx;
+    font-size: 34rpx;
+}
+.tab_item .tab_img {
+    width: 34rpx;
+    height: 34rpx;
+    margin-right: 10rpx;
+}
+.tab_item:nth-child(2) .tab_img {
+    width: 38rpx;
+    height: 38rpx;
+}
+.tab_item:nth-child(3) .tab_img {
+    width: 34rpx;
+    height: 28rpx;
+}
+/* end */
+.biaoti {
+	width: 700rpx;
+	margin: 0 auto;
+}
+.biaoti .left {
+	position: relative;
+}
+.biaoti .left .chinese {
+	font-size: 36rpx;
+	font-weight: bold;
+	color: #000;
+}
+.biaoti .left .english {
+	font-size: 20rpx;
+}
+.biaoti .right .first_title {
+	font-size: 20rpx;
+}
+.biaoti .right .second_title {
+	font-size: 16rpx;
+}

@@ -54,7 +54,12 @@ Page({
 		danmususpend: false,
 		isios: '',
 		box_class: [],
-		yindao: [] //新手引导
+		yindao: [], //新手引导
+		// 我的变量
+		tabIndex: 0,
+        tabs: [{name: '现货', img: 'https://robot.qingpukj.com/imageurl/gift_icon.png', onImg: 'https://robot.qingpukj.com/imageurl/gift_icon_on.png'},
+                {name: '预售', img: 'https://robot.qingpukj.com/imageurl/message_icon.png', onImg: 'https://robot.qingpukj.com/imageurl/message_icon_on.png'}
+        ],
 
 	},
 	onLoad: function (options) {
