@@ -139,6 +139,10 @@ page {
 	color: #999;
 	/* margin-bottom: 30rpx; */
 }
+.loading {
+	width: 100%;
+	text-align: center;
+}
 .ellipsis_2 {
 	overflow: hidden;
     text-overflow: ellipsis;

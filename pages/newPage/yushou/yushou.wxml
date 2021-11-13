@@ -1,0 +1,40 @@
+<!-- 新的页面start -->
+<view>
+	<!-- swiper -->
+	<swiper class="index_swiper" indicator-dots="{{true}}" interval="2000" autoplay="{{false}}" duration="500" circular="true" easing-function="linear">
+        <swiper-item class="swiper_item">
+            <image class="img" src="/resource/images/box.jpg" mode="aspectFill"></image>
+        </swiper-item>
+		<swiper-item class="swiper_item">
+            <image class="img" src="/resource/images/box.jpg" mode="aspectFill"></image>
+        </swiper-item>
+    </swiper>
+	<view class="title_img">
+		<image class="height" src="/resource/images/new_05.jpg" mode="aspectFill"></image>
+	</view>
+	<!-- 商品列表 -->
+	<view class="goods_wrapper">
+		<!-- 列表 -->
+		<view class="list_wrapper flex_between">
+			<view class="list_item">
+				<image class="good_img" src="/resource/images/box.jpg" mode="aspectFill"></image>
+				<view class="good_content">
+					<view class="good_name ellipsis_2">我是谁我是谁我睡我是谁我是谁我睡</view>
+					<view class="flex_between">
+						<view class="good_intro ellipsis_1">介绍介绍介绍介绍介绍</view>
+						<view class="good_price">￥78</view>
+					</view>
+				</view>
+				<!-- 角标 -->
+				<block>
+					<image class="corner_mark new" src="/resource/images/box.jpg" mode="aspectFill"></image>
+				</block>
+			</view>
+		</view>
+		<block>
+			<van-loading custom-class="loading" wx:if="{{false}}" type="spinner" />
+			<view class="noMore" wx:else>~暂无更多数据了~</view>
+		</block>
+	</view>
+</view>
+

@@ -1,4 +1,7 @@
-import { base64_encode, base64_decode } from 'base64';
+import {
+	base64_encode,
+	base64_decode
+} from 'base64';
 import md5 from 'md5';
 var util = {};
 
@@ -15,18 +18,18 @@ util.md5 = function (str) {
 };
 
 // 千分位分割
-util.numFormat=function(num) {
-  return num.toLocaleString();
+util.numFormat = function (num) {
+	return num.toLocaleString();
 };
 //
-util.islogin=function() {
-  try {
+util.islogin = function () {
+	try {
 		var value = wx.getStorageSync('memberinfo')
-		console.log('memberinfo',value);
+		console.log('memberinfo', value);
 		if (value.id) {
 			console.log('已经登陆');
 			return true;
-		}else{
+		} else {
 			console.log('没有登陆');
 			return false;
 		}
@@ -59,7 +62,7 @@ util.url = function (action, querystring) {
 	}
 	if (querystring && typeof querystring === 'object') {
 		for (let param in querystring) {
-            if (param && querystring.hasOwnProperty(param) && querystring[param]) {
+			if (param && querystring.hasOwnProperty(param) && querystring[param]) {
 				url += param + '=' + querystring[param] + '&';
 			}
 		}
@@ -84,14 +87,15 @@ function getQuery(url) {
 	return theRequest;
 }
 /*
-* 获取链接某个参数
-* url 链接地址
-* name 参数名称
-*/
+ * 获取链接某个参数
+ * url 链接地址
+ * name 参数名称
+ */
 function getUrlParam(url, name) {
 	var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象  
-	var r = url.split('?')[1].match(reg);  //匹配目标参数  
-	if (r != null) return unescape(r[2]); return null; //返回参数值  
+	var r = url.split('?')[1].match(reg); //匹配目标参数  
+	if (r != null) return unescape(r[2]);
+	return null; //返回参数值  
 }
 /**
  * 获取签名 将链接地址的所有参数按字母排序后拼接加上token进行md5
@@ -108,7 +112,7 @@ function getSign(url, data, token) {
 		return false;
 	} else {
 		if (url) {
-			querystring = getQuery(url);//返回值为数组[{'name':'xxx','value':'xxx'}]
+			querystring = getQuery(url); //返回值为数组[{'name':'xxx','value':'xxx'}]
 		}
 		if (data) {
 			var theRequest = [];
@@ -165,7 +169,7 @@ util.request = function (option) {
 	var app = getApp();
 	var option = option ? option : {};
 	option.cachetime = option.cachetime ? option.cachetime : 0;
-	option.showLoading = typeof option.showLoading != 'undefined' ? option.showLoading : true;//没传showLoading就是TRUE
+	option.showLoading = typeof option.showLoading != 'undefined' ? option.showLoading : true; //没传showLoading就是TRUE
 	var sessionid = wx.getStorageSync('userInfo').sessionid;
 	//请求地址格式为'wxapp/home/navs'
 	var url = option.url;
@@ -182,7 +186,7 @@ util.request = function (option) {
 		var nowPage = getCurrentPages();
 		if (nowPage.length) {
 			nowPage = nowPage[getCurrentPages().length - 1];
-      		if (nowPage && nowPage.__route__) {
+			if (nowPage && nowPage.__route__) {
 				url = url + '&m=' + nowPage.__route__.split('/')[0];
 			}
 		}
@@ -255,13 +259,16 @@ util.request = function (option) {
 					}
 					return;
 				}
-            } else {
+			} else {
 				if (option.success && typeof option.success == 'function') {
 					option.success(response);
 				}
 				//写入缓存，减少HTTP请求，并且如果网络异常可以读取缓存数据
 				if (option.cachetime) {
-					var cachedata = { 'data': response.data, 'expire': timestamp + option.cachetime * 1000 };
+					var cachedata = {
+						'data': response.data,
+						'expire': timestamp + option.cachetime * 1000
+					};
 					wx.setStorageSync(cachekey, cachedata);
 				}
 			}
@@ -269,7 +276,7 @@ util.request = function (option) {
 		'fail': function (response) {
 			wx.hideNavigationBarLoading();
 			wx.hideLoading();
-			
+
 			//如果请求失败，尝试从缓存中读取数据
 			var md5 = require('md5.js');
 			var cachekey = md5(url);
@@ -296,10 +303,10 @@ util.request = function (option) {
 	});
 }
 /*
-* 获取用户信息
-*/
+ * 获取用户信息
+ */
 util.getUserInfo = function (cb) {
-	var login = function() {
+	var login = function () {
 		console.log('start login');
 		var userInfo = {
 			'sessionid': '',
@@ -308,13 +315,15 @@ util.getUserInfo = function (cb) {
 		};
 		wx.login({
 			success: function (res) {
-				console.log('res',res);
+				console.log('res', res);
 				util.request({
 					url: 'auth/session/openid',
-					data: { code: res.code },
+					data: {
+						code: res.code
+					},
 					cachetime: 0,
 					success: function (session) {
-						console.log('session',session);
+						console.log('session', session);
 						if (!session.data.errno) {
 							userInfo.sessionid = session.data.data.sessionid
 							wx.setStorageSync('userInfo', userInfo);
@@ -347,8 +356,7 @@ util.getUserInfo = function (cb) {
 								fail: function () {
 									typeof cb == "function" && cb(userInfo);
 								},
-								complete: function () {
-								}
+								complete: function () {}
 							})
 						}
 					}
@@ -371,10 +379,10 @@ util.getUserInfo = function (cb) {
 	var app = wx.getStorageSync('userInfo');
 	if (app.sessionid) {
 		wx.checkSession({
-			success: function(){
+			success: function () {
 				typeof cb == "function" && cb(app);
 			},
-			fail: function(){
+			fail: function () {
 				app.sessionid = '';
 				console.log('relogin');
 				wx.removeStorageSync('userInfo');
@@ -433,8 +441,8 @@ util.footer = function ($this) {
  * redirect 为提示后的跳转地址, 跳转的时候可以加上 协议名称  
  * navigate:/we7/pages/detail/detail 以 navigateTo 的方法跳转，
  * redirect:/we7/pages/detail/detail 以 redirectTo 的方式跳转，默认为 redirect
-*/
-util.message = function(title, redirect, type) {
+ */
+util.message = function (title, redirect, type) {
 	if (!title) {
 		return true;
 	}
@@ -444,7 +452,9 @@ util.message = function(title, redirect, type) {
 		title = title.title;
 	}
 	if (redirect) {
-		var redirectType = redirect.substring(0, 9), url = '', redirectFunction = '';
+		var redirectType = redirect.substring(0, 9),
+			url = '',
+			redirectFunction = '';
 		if (redirectType == 'navigate:') {
 			redirectFunction = 'navigateTo';
 			url = redirect.substring(9);
@@ -466,24 +476,24 @@ util.message = function(title, redirect, type) {
 			title: title,
 			icon: 'success',
 			duration: 2000,
-			mask : url ? true : false,
-			complete : function() {
+			mask: url ? true : false,
+			complete: function () {
 				if (url) {
-					setTimeout(function(){
+					setTimeout(function () {
 						wx[redirectFunction]({
 							url: url,
 						});
 					}, 1800);
 				}
-				
+
 			}
 		});
 	} else if (type == 'error') {
 		wx.showModal({
 			title: '系统信息',
-			content : title,
-			showCancel : false,
-			complete : function() {
+			content: title,
+			showCancel: false,
+			complete: function () {
 				if (url) {
 					wx[redirectFunction]({
 						url: url,
@@ -497,7 +507,7 @@ util.message = function(title, redirect, type) {
 util.user = util.getUserInfo;
 
 //封装微信等待提示，防止ajax过多时，show多次
-util.showLoading = function() {
+util.showLoading = function () {
 	var isShowLoading = wx.getStorageSync('isShowLoading');
 	if (isShowLoading) {
 		wx.hideLoading();
@@ -505,17 +515,17 @@ util.showLoading = function() {
 	}
 
 	wx.showLoading({
-		title : '加载中',
-		complete : function() {
+		title: '加载中',
+		complete: function () {
 			wx.setStorageSync('isShowLoading', true);
 		},
-		fail : function() {
+		fail: function () {
 			wx.setStorageSync('isShowLoading', false);
 		}
 	});
 }
 
-util.showImage = function(event) {
+util.showImage = function (event) {
 	var url = event ? event.currentTarget.dataset.preview : '';
 	if (!url) {
 		return false;
@@ -527,17 +537,17 @@ util.showImage = function(event) {
 
 /**
  * 转换内容中的emoji表情为 unicode 码点，在Php中使用utf8_bytes来转换输出
-*/
-util.parseContent = function(string) {
+ */
+util.parseContent = function (string) {
 	if (!string) {
 		return string;
 	}
 
 	var ranges = [
-			'\ud83c[\udf00-\udfff]', // U+1F300 to U+1F3FF
-			'\ud83d[\udc00-\ude4f]', // U+1F400 to U+1F64F
-			'\ud83d[\ude80-\udeff]'  // U+1F680 to U+1F6FF
-		];
+		'\ud83c[\udf00-\udfff]', // U+1F300 to U+1F3FF
+		'\ud83d[\udc00-\ude4f]', // U+1F400 to U+1F64F
+		'\ud83d[\ude80-\udeff]' // U+1F680 to U+1F6FF
+	];
 	var emoji = string.match(
 		new RegExp(ranges.join('|'), 'g'));
 
@@ -549,16 +559,16 @@ util.parseContent = function(string) {
 	return string;
 }
 
-util.date = function(){
+util.date = function () {
 	/**
 	 * 判断闰年
 	 * @param date Date日期对象
 	 * @return boolean true 或false
 	 */
-	this.isLeapYear = function(date){
-		return (0==date.getYear()%4&&((date.getYear()%100!=0)||(date.getYear()%400==0))); 
+	this.isLeapYear = function (date) {
+		return (0 == date.getYear() % 4 && ((date.getYear() % 100 != 0) || (date.getYear() % 400 == 0)));
 	}
-	
+
 	/**
 	 * 日期对象转换为指定格式的字符串
 	 * @param f 日期格式,格式定义如下 yyyy-MM-dd HH:mm:ss
@@ -573,233 +583,258 @@ util.date = function(){
 	 * ss/SS/s/S 秒  
 	 * @return string 指定格式的时间字符串
 	 */
-	this.dateToStr = function(formatStr, date){
+	this.dateToStr = function (formatStr, date) {
 		formatStr = arguments[0] || "yyyy-MM-dd HH:mm:ss";
 		date = arguments[1] || new Date();
-		var str = formatStr;   
-		var Week = ['日','一','二','三','四','五','六'];  
-		str=str.replace(/yyyy|YYYY/,date.getFullYear());   
-		str=str.replace(/yy|YY/,(date.getYear() % 100)>9?(date.getYear() % 100).toString():'0' + (date.getYear() % 100));   
-		str=str.replace(/MM/,date.getMonth()>9?(date.getMonth() + 1):'0' + (date.getMonth() + 1));   
-		str=str.replace(/M/g,date.getMonth());   
-		str=str.replace(/w|W/g,Week[date.getDay()]);   
-	  
-		str=str.replace(/dd|DD/,date.getDate()>9?date.getDate().toString():'0' + date.getDate());   
-		str=str.replace(/d|D/g,date.getDate());   
-	  
-		str=str.replace(/hh|HH/,date.getHours()>9?date.getHours().toString():'0' + date.getHours());   
-		str=str.replace(/h|H/g,date.getHours());   
-		str=str.replace(/mm/,date.getMinutes()>9?date.getMinutes().toString():'0' + date.getMinutes());   
-		str=str.replace(/m/g,date.getMinutes());   
-	  
-		str=str.replace(/ss|SS/,date.getSeconds()>9?date.getSeconds().toString():'0' + date.getSeconds());   
-		str=str.replace(/s|S/g,date.getSeconds());   
-	  
-		return str;   
+		var str = formatStr;
+		var Week = ['日', '一', '二', '三', '四', '五', '六'];
+		str = str.replace(/yyyy|YYYY/, date.getFullYear());
+		str = str.replace(/yy|YY/, (date.getYear() % 100) > 9 ? (date.getYear() % 100).toString() : '0' + (date.getYear() % 100));
+		str = str.replace(/MM/, date.getMonth() > 9 ? (date.getMonth() + 1) : '0' + (date.getMonth() + 1));
+		str = str.replace(/M/g, date.getMonth());
+		str = str.replace(/w|W/g, Week[date.getDay()]);
+
+		str = str.replace(/dd|DD/, date.getDate() > 9 ? date.getDate().toString() : '0' + date.getDate());
+		str = str.replace(/d|D/g, date.getDate());
+
+		str = str.replace(/hh|HH/, date.getHours() > 9 ? date.getHours().toString() : '0' + date.getHours());
+		str = str.replace(/h|H/g, date.getHours());
+		str = str.replace(/mm/, date.getMinutes() > 9 ? date.getMinutes().toString() : '0' + date.getMinutes());
+		str = str.replace(/m/g, date.getMinutes());
+
+		str = str.replace(/ss|SS/, date.getSeconds() > 9 ? date.getSeconds().toString() : '0' + date.getSeconds());
+		str = str.replace(/s|S/g, date.getSeconds());
+
+		return str;
 	}
- 
-	
+
+
 	/**
-	* 日期计算  
-	* @param strInterval string  可选值 y 年 m月 d日 w星期 ww周 h时 n分 s秒  
-	* @param num int
-	* @param date Date 日期对象
-	* @return Date 返回日期对象
-	*/
-	this.dateAdd = function(strInterval, num, date){
-		date =  arguments[2] || new Date();
-		switch (strInterval) { 
-			case 's' :return new Date(date.getTime() + (1000 * num));  
-			case 'n' :return new Date(date.getTime() + (60000 * num));  
-			case 'h' :return new Date(date.getTime() + (3600000 * num));  
-			case 'd' :return new Date(date.getTime() + (86400000 * num));  
-			case 'w' :return new Date(date.getTime() + ((86400000 * 7) * num));  
-			case 'm' :return new Date(date.getFullYear(), (date.getMonth()) + num, date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds());  
-			case 'y' :return new Date((date.getFullYear() + num), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds());  
-		}  
-	}  
-	
-	/**
-	* 比较日期差 dtEnd 格式为日期型或者有效日期格式字符串
-	* @param strInterval string  可选值 y 年 m月 d日 w星期 ww周 h时 n分 s秒  
-	* @param dtStart Date  可选值 y 年 m月 d日 w星期 ww周 h时 n分 s秒
-	* @param dtEnd Date  可选值 y 年 m月 d日 w星期 ww周 h时 n分 s秒 
-	*/
-	this.dateDiff = function(strInterval, dtStart, dtEnd) {   
-		switch (strInterval) {   
-			case 's' :return parseInt((dtEnd - dtStart) / 1000);  
-			case 'n' :return parseInt((dtEnd - dtStart) / 60000);  
-			case 'h' :return parseInt((dtEnd - dtStart) / 3600000);  
-			case 'd' :return parseInt((dtEnd - dtStart) / 86400000);  
-			case 'w' :return parseInt((dtEnd - dtStart) / (86400000 * 7));  
-			case 'm' :return (dtEnd.getMonth()+1)+((dtEnd.getFullYear()-dtStart.getFullYear())*12) - (dtStart.getMonth()+1);  
-			case 'y' :return dtEnd.getFullYear() - dtStart.getFullYear();  
-		}  
+	 * 日期计算  
+	 * @param strInterval string  可选值 y 年 m月 d日 w星期 ww周 h时 n分 s秒  
+	 * @param num int
+	 * @param date Date 日期对象
+	 * @return Date 返回日期对象
+	 */
+	this.dateAdd = function (strInterval, num, date) {
+		date = arguments[2] || new Date();
+		switch (strInterval) {
+			case 's':
+				return new Date(date.getTime() + (1000 * num));
+			case 'n':
+				return new Date(date.getTime() + (60000 * num));
+			case 'h':
+				return new Date(date.getTime() + (3600000 * num));
+			case 'd':
+				return new Date(date.getTime() + (86400000 * num));
+			case 'w':
+				return new Date(date.getTime() + ((86400000 * 7) * num));
+			case 'm':
+				return new Date(date.getFullYear(), (date.getMonth()) + num, date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds());
+			case 'y':
+				return new Date((date.getFullYear() + num), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds());
+		}
 	}
- 
+
 	/**
-	* 字符串转换为日期对象 // eval 不可用
-	* @param date Date 格式为yyyy-MM-dd HH:mm:ss，必须按年月日时分秒的顺序，中间分隔符不限制
-	*/
-	this.strToDate = function(dateStr){
-		var data = dateStr;  
-		var reCat = /(\d{1,4})/gm;   
+	 * 比较日期差 dtEnd 格式为日期型或者有效日期格式字符串
+	 * @param strInterval string  可选值 y 年 m月 d日 w星期 ww周 h时 n分 s秒  
+	 * @param dtStart Date  可选值 y 年 m月 d日 w星期 ww周 h时 n分 s秒
+	 * @param dtEnd Date  可选值 y 年 m月 d日 w星期 ww周 h时 n分 s秒 
+	 */
+	this.dateDiff = function (strInterval, dtStart, dtEnd) {
+		switch (strInterval) {
+			case 's':
+				return parseInt((dtEnd - dtStart) / 1000);
+			case 'n':
+				return parseInt((dtEnd - dtStart) / 60000);
+			case 'h':
+				return parseInt((dtEnd - dtStart) / 3600000);
+			case 'd':
+				return parseInt((dtEnd - dtStart) / 86400000);
+			case 'w':
+				return parseInt((dtEnd - dtStart) / (86400000 * 7));
+			case 'm':
+				return (dtEnd.getMonth() + 1) + ((dtEnd.getFullYear() - dtStart.getFullYear()) * 12) - (dtStart.getMonth() + 1);
+			case 'y':
+				return dtEnd.getFullYear() - dtStart.getFullYear();
+		}
+	}
+
+	/**
+	 * 字符串转换为日期对象 // eval 不可用
+	 * @param date Date 格式为yyyy-MM-dd HH:mm:ss，必须按年月日时分秒的顺序，中间分隔符不限制
+	 */
+	this.strToDate = function (dateStr) {
+		var data = dateStr;
+		var reCat = /(\d{1,4})/gm;
 		var t = data.match(reCat);
 		t[1] = t[1] - 1;
-		eval('var d = new Date('+t.join(',')+');');
+		eval('var d = new Date(' + t.join(',') + ');');
 		return d;
 	}
- 
+
 	/**
-	* 把指定格式的字符串转换为日期对象yyyy-MM-dd HH:mm:ss
-	* 
-	*/
-	this.strFormatToDate = function(formatStr, dateStr){
+	 * 把指定格式的字符串转换为日期对象yyyy-MM-dd HH:mm:ss
+	 * 
+	 */
+	this.strFormatToDate = function (formatStr, dateStr) {
 		var year = 0;
 		var start = -1;
 		var len = dateStr.length;
-		if((start = formatStr.indexOf('yyyy')) > -1 && start < len){
+		if ((start = formatStr.indexOf('yyyy')) > -1 && start < len) {
 			year = dateStr.substr(start, 4);
 		}
 		var month = 0;
-		if((start = formatStr.indexOf('MM')) > -1  && start < len){
+		if ((start = formatStr.indexOf('MM')) > -1 && start < len) {
 			month = parseInt(dateStr.substr(start, 2)) - 1;
 		}
 		var day = 0;
-		if((start = formatStr.indexOf('dd')) > -1 && start < len){
+		if ((start = formatStr.indexOf('dd')) > -1 && start < len) {
 			day = parseInt(dateStr.substr(start, 2));
 		}
 		var hour = 0;
-		if( ((start = formatStr.indexOf('HH')) > -1 || (start = formatStr.indexOf('hh')) > 1) && start < len){
+		if (((start = formatStr.indexOf('HH')) > -1 || (start = formatStr.indexOf('hh')) > 1) && start < len) {
 			hour = parseInt(dateStr.substr(start, 2));
 		}
 		var minute = 0;
-		if((start = formatStr.indexOf('mm')) > -1  && start < len){
+		if ((start = formatStr.indexOf('mm')) > -1 && start < len) {
 			minute = dateStr.substr(start, 2);
 		}
 		var second = 0;
-		if((start = formatStr.indexOf('ss')) > -1  && start < len){
+		if ((start = formatStr.indexOf('ss')) > -1 && start < len) {
 			second = dateStr.substr(start, 2);
 		}
 		return new Date(year, month, day, hour, minute, second);
 	}
- 
- 
+
+
 	/**
-	* 日期对象转换为毫秒数
-	*/
-	this.dateToLong = function(date){
+	 * 日期对象转换为毫秒数
+	 */
+	this.dateToLong = function (date) {
 		return date.getTime();
 	}
- 
+
 	/**
-	* 毫秒转换为日期对象
-	* @param dateVal number 日期的毫秒数 
-	*/
-	this.longToDate = function(dateVal){
+	 * 毫秒转换为日期对象
+	 * @param dateVal number 日期的毫秒数 
+	 */
+	this.longToDate = function (dateVal) {
 		return new Date(dateVal);
 	}
- 
+
 	/**
-	* 判断字符串是否为日期格式
-	* @param str string 字符串
-	* @param formatStr string 日期格式， 如下 yyyy-MM-dd
-	*/
-	this.isDate = function(str, formatStr){
-		if (formatStr == null){
-			formatStr = "yyyyMMdd";	
+	 * 判断字符串是否为日期格式
+	 * @param str string 字符串
+	 * @param formatStr string 日期格式， 如下 yyyy-MM-dd
+	 */
+	this.isDate = function (str, formatStr) {
+		if (formatStr == null) {
+			formatStr = "yyyyMMdd";
 		}
-		var yIndex = formatStr.indexOf("yyyy");	 
-		if(yIndex==-1){
+		var yIndex = formatStr.indexOf("yyyy");
+		if (yIndex == -1) {
 			return false;
 		}
-		var year = str.substring(yIndex,yIndex+4);	 
-		var mIndex = formatStr.indexOf("MM");	 
-		if(mIndex==-1){
+		var year = str.substring(yIndex, yIndex + 4);
+		var mIndex = formatStr.indexOf("MM");
+		if (mIndex == -1) {
 			return false;
 		}
-		var month = str.substring(mIndex,mIndex+2);	 
-		var dIndex = formatStr.indexOf("dd");	 
-		if(dIndex==-1){
+		var month = str.substring(mIndex, mIndex + 2);
+		var dIndex = formatStr.indexOf("dd");
+		if (dIndex == -1) {
 			return false;
 		}
-		var day = str.substring(dIndex,dIndex+2);	 
-		if(!isNumber(year)||year>"2100" || year< "1900"){
+		var day = str.substring(dIndex, dIndex + 2);
+		if (!isNumber(year) || year > "2100" || year < "1900") {
 			return false;
 		}
-		if(!isNumber(month)||month>"12" || month< "01"){
+		if (!isNumber(month) || month > "12" || month < "01") {
 			return false;
 		}
-		if(day>getMaxDay(year,month) || day< "01"){
+		if (day > getMaxDay(year, month) || day < "01") {
 			return false;
 		}
-		return true;   
+		return true;
 	}
-	
-	this.getMaxDay = function(year,month) {	 
-		if(month==4||month==6||month==9||month==11)	 
-			return "30";	 
-		if(month==2)	 
-			if(year%4==0&&year%100!=0 || year%400==0)	 
-				return "29";	 
-			else	 
-				return "28";	 
-		return "31";	 
-	}	 
+
+	this.getMaxDay = function (year, month) {
+		if (month == 4 || month == 6 || month == 9 || month == 11)
+			return "30";
+		if (month == 2)
+			if (year % 4 == 0 && year % 100 != 0 || year % 400 == 0)
+				return "29";
+			else
+				return "28";
+		return "31";
+	}
 	/**
-	*	变量是否为数字
-	*/
-	this.isNumber = function(str)
-	{
+	 *	变量是否为数字
+	 */
+	this.isNumber = function (str) {
 		var regExp = /^\d+$/g;
 		return regExp.test(str);
 	}
-	
+
 	/**
-	* 把日期分割成数组 [年、月、日、时、分、秒]
-	*/
-	this.toArray = function(myDate)  
-	{   
+	 * 把日期分割成数组 [年、月、日、时、分、秒]
+	 */
+	this.toArray = function (myDate) {
 		myDate = arguments[0] || new Date();
-		var myArray = Array();  
-		myArray[0] = myDate.getFullYear();  
-		myArray[1] = myDate.getMonth();  
-		myArray[2] = myDate.getDate();  
-		myArray[3] = myDate.getHours();  
-		myArray[4] = myDate.getMinutes();  
-		myArray[5] = myDate.getSeconds();  
-		return myArray;  
-	}  
-	
+		var myArray = Array();
+		myArray[0] = myDate.getFullYear();
+		myArray[1] = myDate.getMonth();
+		myArray[2] = myDate.getDate();
+		myArray[3] = myDate.getHours();
+		myArray[4] = myDate.getMinutes();
+		myArray[5] = myDate.getSeconds();
+		return myArray;
+	}
+
 	/**
-	* 取得日期数据信息  
-	* 参数 interval 表示数据类型  
-	* y 年 M月 d日 w星期 ww周 h时 n分 s秒  
-	*/
-	this.datePart = function(interval, myDate)  
-	{   
+	 * 取得日期数据信息  
+	 * 参数 interval 表示数据类型  
+	 * y 年 M月 d日 w星期 ww周 h时 n分 s秒  
+	 */
+	this.datePart = function (interval, myDate) {
 		myDate = arguments[1] || new Date();
-		var partStr='';  
-		var Week = ['日','一','二','三','四','五','六'];  
-		switch (interval)  
-		{   
-			case 'y' :partStr = myDate.getFullYear();break;  
-			case 'M' :partStr = myDate.getMonth()+1;break;  
-			case 'd' :partStr = myDate.getDate();break;  
-			case 'w' :partStr = Week[myDate.getDay()];break;  
-			case 'ww' :partStr = myDate.WeekNumOfYear();break;  
-			case 'h' :partStr = myDate.getHours();break;  
-			case 'm' :partStr = myDate.getMinutes();break;  
-			case 's' :partStr = myDate.getSeconds();break;  
-		}  
-		return partStr;  
-	}  
-	
+		var partStr = '';
+		var Week = ['日', '一', '二', '三', '四', '五', '六'];
+		switch (interval) {
+			case 'y':
+				partStr = myDate.getFullYear();
+				break;
+			case 'M':
+				partStr = myDate.getMonth() + 1;
+				break;
+			case 'd':
+				partStr = myDate.getDate();
+				break;
+			case 'w':
+				partStr = Week[myDate.getDay()];
+				break;
+			case 'ww':
+				partStr = myDate.WeekNumOfYear();
+				break;
+			case 'h':
+				partStr = myDate.getHours();
+				break;
+			case 'm':
+				partStr = myDate.getMinutes();
+				break;
+			case 's':
+				partStr = myDate.getSeconds();
+				break;
+		}
+		return partStr;
+	}
+
 	/**
-	* 取得当前日期所在月的最大天数  
-	*/
-	this.maxDayOfDate = function(date)  
-	{   
+	 * 取得当前日期所在月的最大天数  
+	 */
+	this.maxDayOfDate = function (date) {
 		date = arguments[0] || new Date();
 		date.setDate(1);
 		date.setMonth(date.getMonth() + 1);

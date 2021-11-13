@@ -1,8 +1,13 @@
 {
     "pages": [
-        "pages/newPage/detail/detail",
-        "pages/index/index",
         "pages/mystar/mystar",
+        "pages/index/index",
+        "pages/newPage/JCshang/JCshang",
+        "pages/newPage/yushou/yushou",
+        "pages/newPage/xianhuo/xianhuo",
+        "pages/newPage/detail/detail",
+        
+        
         "pages/warehouse/warehouse",
         "pages/shop/shop",
         "pages/my/my",
@@ -21,8 +26,7 @@
         "pages/my/tixianziliao/tixianziliao",
         "pages/my/fenxiao/fenxiao",
         "pages/my/canvas/canvas",
-        "pages/newPage/details/details",
-        "pages/newPage/JCshang/JCshang"
+        "pages/newPage/details/details"
     ],
     "window": {
         "navigationBarTextStyle": "black",

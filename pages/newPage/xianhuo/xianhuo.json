@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "现货商品",
+  "usingComponents": {
+    "van-loading": "@vant/weapp/loading/index"
+  }
+}

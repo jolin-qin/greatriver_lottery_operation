@@ -1,1 +1,8 @@
-/* pages/newPage/JCshang/JCshang.wxss */
+.index_swiper {
+	width: 100%;
+	height: 534rpx;
+}
+
+.index_swiper .swiper_item .img {
+	width: 100%;
+}

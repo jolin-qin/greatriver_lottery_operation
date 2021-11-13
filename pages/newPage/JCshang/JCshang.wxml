@@ -1,2 +1,15 @@
-<!--pages/newPage/JCshang/JCshang.wxml-->
-<text>pages/newPage/JCshang/JCshang.wxml</text>
+<!-- 新的页面start -->
+<view>
+	<!-- swiper -->
+	<swiper class="index_swiper" indicator-dots="{{true}}" interval="2000" autoplay="{{false}}" duration="500" circular="true" easing-function="linear">
+        <swiper-item class="swiper_item">
+            <image class="img" src="/resource/images/box.jpg" mode="aspectFill"></image>
+        </swiper-item>
+		<swiper-item class="swiper_item">
+            <image class="img" src="/resource/images/box.jpg" mode="aspectFill"></image>
+        </swiper-item>
+    </swiper>
+
+	
+</view>
+
