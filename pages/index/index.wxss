@@ -593,9 +593,11 @@ page {}
 
 .index_swiper .swiper_item .img {
 	width: 100%;
-	border-radius: 46rpx;
+	/* border-radius: 46rpx; */
 }
-
+.index_swiper .wx-swiper-dots {
+	bottom: 70rpx;
+}
 .goods_wrapper {
 	width: 100%;
 	background: #f9f9f9;

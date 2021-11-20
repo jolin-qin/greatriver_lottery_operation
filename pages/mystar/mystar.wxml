@@ -249,7 +249,7 @@
 <view class="xiding_box">
 	<view class="tab_container flex-center {{isFixed ? 'Fixed' : ''}}">
 		<scroll-view scroll-x="true" class="tab_wrapper">
-			<view wx:for="{{tabs}}" wx:key="index" class="tab_item {{tabIndex === index ? 'active':'' }}" bindtap="tabClick">{{item.name}}</view>
+			<view wx:for="{{tabs}}" wx:key="index" class="tab_item {{tabIndex === index ? 'active':'' }}" data-index="{{index}}" bindtap="tabClick">{{item.name}}</view>
 		</scroll-view>
 	</view>
 	<view class="xiding_zhanwei"></view>
@@ -259,27 +259,27 @@
 	<image class="list_title_img" src="/resource/images/new_07.png" mode="aspectFill"></image>
 	<!-- 列表 -->
 	<view class="list_wrapper flex_start">
-		<view class="list_item">
+		<view class="list_item" bindtap="goJCshangPage">
 			<image class="series_img" src="/resource/images/box.jpg" mode="aspectFill"></image>
 			<view class="series_intro ellipsis_1">介绍介绍介绍介绍介绍</view>
 		</view>
-		<view class="list_item">
+		<view class="list_item" bindtap="goJCshangPage">
 			<image class="series_img" src="/resource/images/box.jpg" mode="aspectFill"></image>
 			<view class="series_intro ellipsis_1">介绍介绍介绍</view>
 		</view>
-		<view class="list_item">
+		<view class="list_item" bindtap="goJCshangPage">
 			<image class="series_img" src="/resource/images/box.jpg" mode="aspectFill"></image>
 			<view class="series_intro ellipsis_1">介绍介绍介绍介绍介绍</view>
 		</view>
-		<view class="list_item">
+		<view class="list_item" bindtap="goJCshangPage">
 			<image class="series_img" src="/resource/images/box.jpg" mode="aspectFill"></image>
 			<view class="series_intro ellipsis_1">介绍介绍介绍介绍介绍</view>
 		</view>
-		<view class="list_item">
+		<view class="list_item" bindtap="goJCshangPage">
 			<image class="series_img" src="/resource/images/box.jpg" mode="aspectFill"></image>
 			<view class="series_intro ellipsis_1">介绍介绍介绍介绍介绍</view>
 		</view>
-		<view class="list_item">
+		<view class="list_item" bindtap="goJCshangPage">
 			<image class="series_img" src="/resource/images/box.jpg" mode="aspectFill"></image>
 			<view class="series_intro ellipsis_1">介绍介绍介绍介绍介绍</view>
 		</view>

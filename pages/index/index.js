@@ -57,34 +57,59 @@ Page({
 		yindao: [], //新手引导
 		// 我的变量
 		tabIndex: 0,
-        tabs: [{name: '现货', img: 'https://robot.qingpukj.com/imageurl/gift_icon.png', onImg: 'https://robot.qingpukj.com/imageurl/gift_icon_on.png'},
-                {name: '预售', img: 'https://robot.qingpukj.com/imageurl/message_icon.png', onImg: 'https://robot.qingpukj.com/imageurl/message_icon_on.png'}
-        ],
-
+        // tabs: [{name: '现货', img: 'https://robot.qingpukj.com/imageurl/gift_icon.png', onImg: 'https://robot.qingpukj.com/imageurl/gift_icon_on.png'},
+        //         {name: '预售', img: 'https://robot.qingpukj.com/imageurl/message_icon.png', onImg: 'https://robot.qingpukj.com/imageurl/message_icon_on.png'}
+        // ],
+	},
+	onReady: function () {
+		// 页面渲染完成
+		var t = this;
+		setTimeout(() => {
+			try {
+				if (typeof (t.data.indexparameter.other_parameter.chapin_index) == 'undefined') {
+					return;
+				}
+			} catch (err) {
+				return;
+			}
+			if (t.data.indexparameter.other_parameter.chapin_index == 1) {
+				console.log('首页插屏打开');
+				// 在页面onLoad回调事件中创建插屏广告实例
+				if (wx.createInterstitialAd) {
+					interstitialAd = wx.createInterstitialAd({
+						adUnitId: t.data.indexparameter.liuliangzhu_parameter.chapin_adid
+					})
+					interstitialAd.onLoad(() => {})
+					interstitialAd.onError((err) => {})
+					interstitialAd.onClose(() => {})
+				}
+				// 在适合的场景显示插屏广告
+				if (interstitialAd) {
+					interstitialAd.show().catch((err) => {
+						console.error(err)
+					})
+				}
+			} else {
+				console.log('首页插屏关闭');
+			}
+		}, 5000)
 	},
 	onLoad: function (options) {
-
 		var t = this;
 		var myDate = new Date();
 		var time = myDate.toLocaleDateString();
 		try {
-
 			var res = wx.getSystemInfoSync()
 			t.data.isios = res.platform;
 			console.log(res.platform)
-
 		} catch (e) {
-
 			// Do something when catch error
-
 		}
-
 		t.checkUpdate(); //检查是否版本更新
 		if (options.scene) {
 			console.log('海报邀请', options.scene);
 			app.globalData.invite_uid = options.scene
 		}
-
 		switch (options.sharetype) {
 			case 'invite':
 				console.log('接受邀请', options.uid);
@@ -204,28 +229,20 @@ Page({
 						})
 					}
 				});
-
 				break;
 			default:
 				console.log('我是默认内容');
 		}
-
 		// 页面初始化 options为页面跳转所带来的参数
 		var t = this;
 		var MenuButton = wx.getMenuButtonBoundingClientRect();
 		t.setData({
-
 			MenuButton: MenuButton
 		})
 		console.log('MenuButton', t.data.MenuButton);
-
 		console.log(this);
 		//t.getmemberboxes(t.data.box_pageno);
-
-
-
 		var randomnum2 = 0;
-
 		setInterval(() => {
 			/*
 			      randomnum2 = Math.floor(Math.random() * 4);
@@ -272,8 +289,77 @@ Page({
 			t.setData({
 				islogin: false
 			})
-
 		}
+	},
+	onShow: function () {
+		var t = this;
+		wx.getStorage({
+			key: 'guide',
+			success(res) {
+				console.log(res.data)
+			},
+			fail() {
+				if (app.globalData.guide_step == 5) {
+					wx.createSelectorQuery().select('#buyboxbutton').boundingClientRect(function (res) {
+						console.log(res)
+						app.globalData.guide[2] = true;
+						t.setData({
+							yindao_b: res,
+							guide: app.globalData.guide
+						})
+					}).exec()
+				}
+			}
+		})
+		this.data.danmususpend = false;
+		if (app.util.islogin()) {
+			t.setData({
+				islogin: true
+			})
+			wx.getStorage({
+				key: 'guide',
+				success(res) {
+					console.log(res.data)
+				},
+				fail() {
+					if (app.globalData.guide_step == 0) {
+						wx.createSelectorQuery().select('#lingqubutton').boundingClientRect(function (res) {
+							console.log(res)
+							app.globalData.guide[0] = true;
+							t.setData({
+								yindao_a: res,
+								guide: app.globalData.guide
+							})
+						}).exec()
+					}
+				}
+			})
+		}
+		this.setData({
+			animation: 'animation'
+		})
+		this.getindexmemberinfo();
+		if (t.data.boxlist.length < 1) {
+			t.getmemberboxes(0);
+		}
+	},
+	//去现货列表页
+	goSpotPage() {
+		wx.navigateTo({
+			url: '/pages/newPage/xianhuo/xianhuo',
+		})
+	},
+	//去预售列表页
+	goPresellPage() {
+		wx.navigateTo({
+			url: '/pages/newPage/yushou/yushou',
+		})
+	},
+	//去商品详情页
+	goGoodsDetailPage() {
+		wx.navigateTo({
+			url: '/pages/newPage/detail/detail',
+		})
 	},
 	checkUpdate() {
 		//使用更新对象之前判断是否可用
@@ -332,7 +418,6 @@ Page({
 			success: function (response) {
 				console.log('接收盒子操作返回', response.data);
 				if (response.data.errno == 0) {
-
 					wx.showModal({
 						title: '提示',
 						showCancel: false,
@@ -415,7 +500,6 @@ Page({
 			success: function (response) {
 				console.log('接收奖品操作返回', response.data);
 				if (response.data.errno == 0) {
-
 					wx.showModal({
 						title: '提示',
 						showCancel: false,
@@ -427,8 +511,6 @@ Page({
 									reciveboxmodal: false,
 									reciveprizemodal: false
 								})
-
-
 							} else if (res.cancel) {
 								console.log('用户点击取消')
 							}
@@ -477,57 +559,8 @@ Page({
 				})
 			}
 		});
-
 	},
-	onReady: function () {
-		// 页面渲染完成
-		var t = this;
-
-		setTimeout(() => {
-			try {
-				if (typeof (t.data.indexparameter.other_parameter.chapin_index) == 'undefined') {
-					return;
-				}
-			} catch (err) {
-				return;
-			}
-
-			if (t.data.indexparameter.other_parameter.chapin_index == 1) {
-				console.log('首页插屏打开');
-				// 在页面onLoad回调事件中创建插屏广告实例
-				if (wx.createInterstitialAd) {
-					interstitialAd = wx.createInterstitialAd({
-						adUnitId: t.data.indexparameter.liuliangzhu_parameter.chapin_adid
-					})
-					interstitialAd.onLoad(() => {})
-					interstitialAd.onError((err) => {})
-					interstitialAd.onClose(() => {})
-				}
-
-				// 在适合的场景显示插屏广告
-				if (interstitialAd) {
-					interstitialAd.show().catch((err) => {
-						console.error(err)
-					})
-				}
-			} else {
-				console.log('首页插屏关闭');
-			}
-		}, 5000)
-
-
-
-
-
-
-
-
-
-
-
-
-
-	},
+	
 	clickgetfreebox() {
 		// 用户触发广告后，显示激励视频广告
 		if (videoAd) {
@@ -545,7 +578,6 @@ Page({
 		var t = this;
 		t.setData({
 			newboxlist: [],
-
 		})
 		if (app.util.islogin()) {
 			console.log('已经登陆 执行业务流程');
@@ -554,7 +586,6 @@ Page({
 				url: 'entry/wxapp/getfreebox',
 				data: {
 					m: app.globalData.module_name,
-
 				},
 				method: 'get',
 				success: function (response) {
@@ -570,18 +601,14 @@ Page({
 						t.setData({
 							leftcard_animation: 'slideleft-animation',
 							rightcard_animation: 'slideright-animation',
-
 						})
 						innerAudioContext.onEnded(() => {
-
 							setTimeout(() => {
 								t.setData({
-
 									newboxclass: 'newbox-animation',
 									newboxscrollwidth: t.newboxscrollwidth(t.data.newboxlist.length)
 								})
 							}, 100)
-
 							innerAudioContext2.src = '/resource/voice/5012.jpg'
 							innerAudioContext2.play();
 							innerAudioContext2.onError((e) => {
@@ -590,14 +617,11 @@ Page({
 							setTimeout(() => {
 								wx.vibrateLong();
 							}, 300)
-							// 
 						})
 						innerAudioContext.onError((e) => {
 							console.log(e);
 						})
 						t.getmemberboxes(0);
-
-
 					} else {
 						//失败
 						t.setData({
@@ -630,8 +654,6 @@ Page({
 				}
 			});
 			//抽取盒子数据结束
-
-
 		} else {
 			wx.navigateTo({
 				url: '/pages/auth/auth',
@@ -642,9 +664,7 @@ Page({
 		var t = this;
 		t.setData({
 			newboxlist: [],
-
 		})
-
 		if (app.util.islogin()) {
 			console.log('已经登陆 执行业务流程');
 			//开始随机抽取一个盒子
@@ -652,7 +672,6 @@ Page({
 				url: 'entry/wxapp/getpaybox',
 				data: {
 					m: app.globalData.module_name,
-
 				},
 				method: 'get',
 				success: function (response) {
@@ -667,19 +686,16 @@ Page({
 						t.setData({
 							leftcard_animation: 'slideleft-animation',
 							rightcard_animation: 'slideright-animation',
-
 						})
 						innerAudioContext.onEnded(() => {
 
 							setTimeout(() => {
 								t.setData({
-
 									newboxclass: 'newbox-animation',
 									newboxscrollwidth: t.newboxscrollwidth(t.data.newboxlist.length),
 									scrolltop: 0
 								})
 							}, 100)
-
 							innerAudioContext2.src = '/resource/voice/5012.jpg'
 							innerAudioContext2.play();
 							setTimeout(() => {
@@ -795,9 +811,6 @@ Page({
 
 			}
 		})
-
-
-
 		this.setData({
 			guide: app.globalData.guide,
 			scrolltop: 0,
@@ -907,8 +920,6 @@ Page({
 										if (res.confirm) {
 											console.log('用户点击确定')
 											t.setData({
-
-
 												['boxlist[' + t.data.select_box_index + '].state']: 2
 											})
 											t.hideModal();
@@ -917,53 +928,24 @@ Page({
 										}
 									}
 								})
-
 							}
-
 						},
 						fail: function (response) {
-
 							wx.showToast({
 								icon: 'none',
 								title: response.data.message,
 							})
-
 						}
-
 					})
-
 				} else if (res.cancel) {
 					console.log('用户点击取消')
 				}
 			}
 		})
 	},
-	/**
-	 * 用户点击右上角分享
-	 */
-	onShareAppMessage: function () {
-		var memberinfo = wx.getStorageSync('memberinfo');
-		var uid = 0;
-		console.log('uid', memberinfo.id);
-		memberinfo.id && (uid = memberinfo.id);
-		var t = this;
-		console.log(this.data.openboxinfo == false ? '礼品盒子无限抽！' : this.data.openboxinfo['box_title']);
-		console.log(this.data.openboxinfo == false ? '' : this.data.openboxinfo['box_cover']);
-		console.log(this.data.openboxinfo == false ? '/pages/index/index' : '/pages/index/index?sharetype=sendbox&senduid=' + uid + '&boxid=' + this.data.openboxinfo['membersbox_id']);
-
-		return {
-			title: t.data.openboxinfo == false ? '礼品盒子无限抽！' : t.data.openboxinfo['box_title'],
-			imageUrl: t.data.openboxinfo == false ? '' : t.data.openboxinfo['box_cover'],
-			path: t.data.openboxinfo == false ? '/pages/index/index?sharetype=invite&uid=' + uid : '/pages/index/index?sharetype=sendbox&senduid=' + uid + '&boxid=' + t.data.openboxinfo['membersbox_id'],
-		}
-
-
-
-	},
+	
 	sendbox(e) {
 		console.log('要赠送的盒子ID', e.currentTarget.dataset.id);
-
-
 		var t = this;
 		app.util.request({
 			url: 'entry/wxapp/sendbox',
@@ -983,19 +965,14 @@ Page({
 							if (res.confirm) {
 								console.log('用户点击确定')
 								t.setData({
-
-
 									//['boxlist[' + t.data.select_box_index + '].state']: 0
 								})
-
 							} else if (res.cancel) {
 								console.log('用户点击取消')
 							}
 						}
 					})
-
 				}
-
 			},
 			fail: function (response) {
 				wx.showModal({
@@ -1010,10 +987,7 @@ Page({
 						}
 					}
 				})
-
-
 			}
-
 		})
 	},
 	openboxcontentmodal(e) {
@@ -1082,9 +1056,7 @@ Page({
 			choicezhonglvprize_index: e.currentTarget.dataset.index,
 			zhonglvtitle: t.data.openboxinfo.memberstools[t.data.select_toolsindex].tools.add_winning_probability
 		})
-
 	},
-
 	usetoushi(e) {
 		var t = this;
 		var toolsid = this.data.select_toolsid;
@@ -1109,7 +1081,6 @@ Page({
 						icon: 'none',
 						title: response.data.message,
 					})
-
 				}
 			},
 			fail: function (response) {
@@ -1118,20 +1089,18 @@ Page({
 					icon: 'none',
 					title: response.data.message,
 				})
-
 				return;
 			},
 			complete: function (response) {
 				t.hidetoolmodal()
 			}
 		})
-
 	},
 	inputanswer(e) {
 		this.data.answer = e.detail.value;
 	},
+	//拆盒子
 	openthebox(e) {
-		//拆盒子
 		var t = this;
 		console.log(e);
 		if (t.data.openboxbuttonenable == false) {
@@ -1308,7 +1277,6 @@ Page({
 			payloading: 1,
 			paycheck_orderid: ''
 		})
-
 		app.util.request({
 			url: 'entry/wxapp/checkpayresult',
 			data: {
@@ -1325,7 +1293,6 @@ Page({
 						paycheck_orderid: ''
 					})
 				}
-
 			},
 			fail: function (response2) {
 				console.log('订单支付失败', response2);
@@ -1354,8 +1321,6 @@ Page({
 	},
 	showprize(response) {
 		var t = this;
-
-
 		t.setData({
 			openthebox_animation: 'openthebox_animation',
 		})
@@ -1364,9 +1329,7 @@ Page({
 				openthebox_animation2: 'slideleft-animation',
 				openthebox_animation3: 'openthebox_animation2',
 				openthebox_animation4: 'slideright-animation',
-
 			})
-
 		}, 1000)
 		setTimeout(() => {
 			innerAudioContext.src = '/resource/voice/5012.jpg'
@@ -1376,10 +1339,8 @@ Page({
 			})
 		}, 1700)
 		setTimeout(() => {
-
 			innerAudioContext.stop();
 		}, 3300)
-
 		setTimeout(() => {
 			t.setData({
 				showprize: true,
@@ -1389,14 +1350,12 @@ Page({
 				openboxbutton: false,
 				openboxbuttonenable: true
 			})
-
 			wx.vibrateLong();
 			setTimeout(() => {
 				wx.getStorage({
 					key: 'guide',
 					success(res) {
 						console.log(res.data)
-
 					},
 					fail() {
 						if (app.globalData.guide_step == 6) {
@@ -1405,14 +1364,11 @@ Page({
 								guide: app.globalData.guide
 							})
 						}
-
 					}
 				})
-
 			}, 2000)
 		}, 2000)
 		if (response.data.data) {
-
 			t.setData({
 				prize: response.data.data
 			})
@@ -1508,56 +1464,22 @@ Page({
 			getboxesmodal: false
 		})
 	},
-	onShow: function () {
+	/**
+	 * 用户点击右上角分享
+	 */
+	onShareAppMessage: function () {
+		var memberinfo = wx.getStorageSync('memberinfo');
+		var uid = 0;
+		console.log('uid', memberinfo.id);
+		memberinfo.id && (uid = memberinfo.id);
 		var t = this;
-		wx.getStorage({
-			key: 'guide',
-			success(res) {
-				console.log(res.data)
-			},
-			fail() {
-				if (app.globalData.guide_step == 5) {
-					wx.createSelectorQuery().select('#buyboxbutton').boundingClientRect(function (res) {
-						console.log(res)
-						app.globalData.guide[2] = true;
-						t.setData({
-							yindao_b: res,
-							guide: app.globalData.guide
-						})
-					}).exec()
-				}
-			}
-		})
-		this.data.danmususpend = false;
-		if (app.util.islogin()) {
-			t.setData({
-				islogin: true
-			})
-			wx.getStorage({
-				key: 'guide',
-				success(res) {
-					console.log(res.data)
-				},
-				fail() {
-					if (app.globalData.guide_step == 0) {
-						wx.createSelectorQuery().select('#lingqubutton').boundingClientRect(function (res) {
-							console.log(res)
-							app.globalData.guide[0] = true;
-							t.setData({
-								yindao_a: res,
-								guide: app.globalData.guide
-							})
-						}).exec()
-					}
-				}
-			})
-		}
-		this.setData({
-			animation: 'animation'
-		})
-		this.getindexmemberinfo();
-		if (t.data.boxlist.length < 1) {
-			t.getmemberboxes(0);
+		console.log(this.data.openboxinfo == false ? '礼品盒子无限抽！' : this.data.openboxinfo['box_title']);
+		console.log(this.data.openboxinfo == false ? '' : this.data.openboxinfo['box_cover']);
+		console.log(this.data.openboxinfo == false ? '/pages/index/index' : '/pages/index/index?sharetype=sendbox&senduid=' + uid + '&boxid=' + this.data.openboxinfo['membersbox_id']);
+		return {
+			title: t.data.openboxinfo == false ? '礼品盒子无限抽！' : t.data.openboxinfo['box_title'],
+			imageUrl: t.data.openboxinfo == false ? '' : t.data.openboxinfo['box_cover'],
+			path: t.data.openboxinfo == false ? '/pages/index/index?sharetype=invite&uid=' + uid : '/pages/index/index?sharetype=sendbox&senduid=' + uid + '&boxid=' + t.data.openboxinfo['membersbox_id'],
 		}
 	},
 	onHide: function () {

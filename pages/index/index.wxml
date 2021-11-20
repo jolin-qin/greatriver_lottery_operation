@@ -725,10 +725,10 @@
 <view class="new_pages">
 	<!-- swiper -->
 	<swiper class="index_swiper" indicator-dots="{{true}}" interval="2000" autoplay="{{false}}" duration="500" circular="true" easing-function="linear">
-        <swiper-item class="swiper_item">
+        <swiper-item class="swiper_item" bindtap="goGoodsDetailPage">
             <image class="img" src="/resource/images/box.jpg" mode="aspectFill"></image>
         </swiper-item>
-		<swiper-item class="swiper_item">
+		<swiper-item class="swiper_item" bindtap="goGoodsDetailPage">
             <image class="img" src="/resource/images/box.jpg" mode="aspectFill"></image>
         </swiper-item>
     </swiper>
@@ -744,8 +744,8 @@
 			</view>
 		</view> -->
 		<view class="biaoti_img">
-			<image class="img xianhuo" src="/resource/images/new_01.png" mode="aspectFill"></image>
-			<image class="img yushou" src="/resource/images/new_02.jpg" mode="aspectFill"></image>
+			<image class="img xianhuo" bindtap="goSpotPage" src="/resource/images/new_01.png" mode="aspectFill"></image>
+			<image class="img yushou" bindtap="goPresellPage" src="/resource/images/new_02.jpg" mode="aspectFill"></image>
 		</view>
 		<!-- 标题 -->
 		<view class="biaoti flex_between">
@@ -757,7 +757,7 @@
 		</view>
 		<!-- 列表 -->
 		<view class="list_wrapper flex_between">
-			<view class="list_item">
+			<view class="list_item" bindtap="goGoodsDetailPage">
 				<image class="good_img" src="/resource/images/box.jpg" mode="aspectFill"></image>
 				<view class="good_content">
 					<view class="good_name ellipsis_2">我是谁我是谁我睡我是谁我是谁我睡</view>

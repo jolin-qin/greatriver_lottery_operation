@@ -1,15 +1,32 @@
 <!-- 新的页面start -->
 <view>
-	<!-- swiper -->
-	<swiper class="index_swiper" indicator-dots="{{true}}" interval="2000" autoplay="{{false}}" duration="500" circular="true" easing-function="linear">
-        <swiper-item class="swiper_item">
-            <image class="img" src="/resource/images/box.jpg" mode="aspectFill"></image>
-        </swiper-item>
-		<swiper-item class="swiper_item">
-            <image class="img" src="/resource/images/box.jpg" mode="aspectFill"></image>
-        </swiper-item>
-    </swiper>
-
-	
+	<view class="show_wrapper">
+		<image class="img" src="{{imgUrl}}JCshang_01.png" mode="widthFix"></image>
+		<image class="left_img" src="{{imgUrl}}JCshang_03.png" mode="widthFix"></image>
+		<image class="right_img" src="{{imgUrl}}JCshang_04.png" mode="widthFix"></image>
+		<view class="middle_area">
+			<image class="title_img" src="{{imgUrl}}JCshang_05.png" mode="scaleToFill"></image>
+			<image class="series_img" src="/resource/images/button.jpg" mode="scaleToFill"></image>
+			<image class="big_img" src="{{imgUrl}}JCshang_02.png" mode="widthFix"></image>
+		</view>
+		<view class="residue_num">剩余盲盒：8</view>
+	</view>
+	<view class="operation_wrapper">
+		<view class="name_introduce">
+			<view class="name">盲盒名称</view>
+			<view class="introduce">盲盒介绍盲盒介绍盲盒介绍盲盒介绍</view>
+		</view>
+		<view class="buy_num flex_between">
+			<image class="one_img img" src="{{imgUrl}}JCshang_06.png" mode="scaleToFill"></image>
+			<image class="three_img img" src="{{imgUrl}}JCshang_07.png" mode="scaleToFill"></image>
+			<image class="five_img img" src="{{imgUrl}}JCshang_08.png" mode="scaleToFill"></image>
+			<image class="turnkey_img img" src="{{imgUrl}}JCshang_09.png" mode="scaleToFill"></image>
+			<image class="prop_img" src="{{imgUrl}}JCshang_10.png" mode="scaleToFill"></image>
+		</view>
+		<view class="biaoqian">
+			<image class="img" src="{{imgUrl}}JCshang_11.png" mode="scaleToFill"></image>
+			<image class="title_img img" src="{{imgUrl}}JCshang_12.png" mode="scaleToFill"></image>
+		</view>
+	</view>
 </view>
 

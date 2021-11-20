@@ -1,21 +1,23 @@
-page{
-  background:#eeeeee
+page {
+	background: #eeeeee
 }
 .cu-btn2 {
-  
-  align-items: center;
-  
-  
-  
-  
-  text-align: center;
-  text-decoration: none;
-  overflow: visible;
-  margin-left: initial;
-  transform: translate(0rpx, 0rpx);
-  margin-right: initial;
+	align-items: center;
+	text-align: center;
+	text-decoration: none;
+	overflow: visible;
+	margin-left: initial;
+	transform: translate(0rpx, 0rpx);
+	margin-right: initial;
 }
-
 .cu-btn2::after {
-  display: none;
+	display: none;
+}
+/* 新css */
+.title_img {
+	width: 100%;
+}
+.wallet_item {
+	width: 300rpx;
+	text-align: center;
 }

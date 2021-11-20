@@ -4,7 +4,8 @@ import {
 } from 'base64';
 import md5 from 'md5';
 var util = {};
-
+//项目图片域名
+util.imageUrl = "https://www.jiaochao.top/imageurl/";
 util.base64_encode = function (str) {
 	return base64_encode(str)
 };

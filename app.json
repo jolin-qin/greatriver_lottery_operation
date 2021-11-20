@@ -1,8 +1,10 @@
 {
     "pages": [
-        "pages/mystar/mystar",
         "pages/index/index",
         "pages/newPage/JCshang/JCshang",
+        "pages/mystar/mystar",
+        
+        
         "pages/newPage/yushou/yushou",
         "pages/newPage/xianhuo/xianhuo",
         "pages/newPage/detail/detail",

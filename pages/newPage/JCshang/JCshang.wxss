@@ -1,8 +1,118 @@
-.index_swiper {
-	width: 100%;
-	height: 534rpx;
+.show_wrapper {
+	position: relative;
 }
-
-.index_swiper .swiper_item .img {
+.show_wrapper .img {
+	display: block;
 	width: 100%;
+}
+.show_wrapper .left_img {
+	display: block;
+	position: absolute;
+	top: 60rpx;
+	left: 20rpx;
+	width: 44rpx;
+	z-index: 2;
+}
+.show_wrapper .right_img {
+	display: block;
+	position: absolute;
+	top: 60rpx;
+	right: 20rpx;
+	width: 44rpx;
+	z-index: 2;
+}
+.show_wrapper .middle_area {
+	width: 100%;
+	position: absolute;
+	top: 60rpx;
+	right: 0;
+	z-index: 1;
+}
+.show_wrapper .middle_area .title_img {
+	display: block;
+	width: 230rpx;
+	height: 66rpx;
+	position: absolute;
+	top: -40rpx;
+	left: 50%;
+	transform: translateX(-50%);
+	z-index: 2;
+}
+.show_wrapper .middle_area .series_img {
+	display: block;
+	width: 400rpx;
+	height: 170rpx;
+	position: absolute;
+	top: 64rpx;
+	left: 50%;
+	transform: translateX(-50%);
+	z-index: 2;
+}
+.show_wrapper .middle_area .big_img {
+	display: block;
+	width: 100%;
+	height: 784rpx;
+}
+.show_wrapper .residue_num {
+	font-style: italic;
+	width: 100%;
+	text-align: center;
+	position: absolute;
+	bottom: 74rpx;
+	left: 0;
+	z-index: 2;
+	color: #fff;
+	font-size: 40rpx;
+	font-weight: bold;
+}
+.operation_wrapper {
+	position: relative;
+	margin-top: 36rpx;
+	margin-bottom: 50rpx;
+}
+.operation_wrapper .name_introduce {
+	text-align: center;
+}
+.operation_wrapper .name_introduce .name {
+	font-style: italic;
+	font-size: 50rpx;
+	font-weight: bold;
+	color: #000;
+}
+.operation_wrapper .name_introduce .introduce {
+	color: #000;
+	margin: 12rpx 0 20rpx;
+}
+.operation_wrapper .buy_num {
+	width: 630rpx;
+	margin: 0 auto;
+	flex-wrap: wrap;
+}
+.operation_wrapper .buy_num .img {
+	display: block;
+	width: 190rpx;
+	height: 72rpx;
+}
+.operation_wrapper .buy_num .turnkey_img,
+.operation_wrapper .buy_num .prop_img
+{
+	margin-top: 20rpx;
+}
+.operation_wrapper .buy_num .prop_img {
+	display: block;
+	width: 412rpx;
+	height: 72rpx;
+}
+.operation_wrapper .biaoqian {
+	position: absolute;
+	top: -10rpx;
+	right: 20rpx;
+}
+.operation_wrapper .biaoqian .img {
+	display: block;
+	width: 118rpx;
+	height: 40rpx;
+}
+.operation_wrapper .biaoqian .title_img {
+	margin-top: 10rpx;
 }

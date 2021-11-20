@@ -54,7 +54,7 @@
     <view class="zhanwei"></view>
     <!-- 底部 -->
     <view class="footer_wrapper flex_center">
-        <view class="jcshang btn">JC赏</view>
+        <view class="jcshang btn" bindtap="goJCshangPage">JC赏</view>
         <view class="immediately_buy btn">立刻购买</view>
     </view>
 </view>

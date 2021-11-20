@@ -313,57 +313,28 @@ Page({
 		})
 		console.log('触发了onhide');
 	},
-	//监听滚动事件
-    onPageScroll(e) {
-        if (e.scrollTop >= this.data.baseNumber) {
-            this.setData({
-                isFixed: true
-            })
-        } else {
-            this.setData({
-                isFixed: false
-            })
-        }
-    },
+	
 	/**
 	 * 生命周期函数--监听页面卸载
 	 */
 	onUnload: function () {
 
 	},
-
-	/**
-	 * 页面相关事件处理函数--监听用户下拉动作
-	 */
-	onPullDownRefresh: function () {
-
+	//tab点击
+	tabClick(e) {
+		let index = e.currentTarget.dataset.index;
+		this.setData({
+			tabIndex: index
+		})
+	},
+	//去抽盲盒页
+	goJCshangPage() {
+		wx.navigateTo({
+			url: '/pages/newPage/JCshang/JCshang',
+		})
 	},
 
-	/**
-	 * 页面上拉触底事件的处理函数
-	 */
-	onReachBottom: function () {
-
-		var that = this;
-		that.data.pg = that.data.pg + 1;
-		console.log('触发加载更多' + that.data.pg);
-		this.getinviterlist(that.data.pg);
-	},
-
-	/**
-	 * 用户点击右上角分享
-	 */
-	onShareAppMessage: function () {
-		var uid = 0;
-		var memberinfo = wx.getStorageSync('memberinfo');
-		memberinfo.id && (uid = memberinfo.id);
-		console.log('uid', uid);
-		return {
-			title: '来我的星球抽好物吧',
-			imageUrl: '',
-			path: '/pages/index/index?sharetype=invite&uid=' + uid
-		}
-	},
+	
 	clickgetintegral() {
 		// 用户触发广告后，显示激励视频广告
 		this.data.show_jili_type = 0;
@@ -656,7 +627,48 @@ Page({
 				})
 			}
 		});
-	}
+	},
+	/**
+	 * 用户点击右上角分享
+	 */
+	onShareAppMessage: function () {
+		// var uid = 0;
+		// var memberinfo = wx.getStorageSync('memberinfo');
+		// memberinfo.id && (uid = memberinfo.id);
+		// console.log('uid', uid);
+		// return {
+		// 	title: '来我的星球抽好物吧',
+		// 	imageUrl: '',
+		// 	path: '/pages/index/index?sharetype=invite&uid=' + uid
+		// }
+	},
+	//监听滚动事件
+    onPageScroll(e) {
+        if (e.scrollTop >= this.data.baseNumber) {
+            this.setData({
+                isFixed: true
+            })
+        } else {
+            this.setData({
+                isFixed: false
+            })
+        }
+    },
+	/**
+	 * 页面相关事件处理函数--监听用户下拉动作
+	 */
+	onPullDownRefresh: function () {
 
+	},
 
+	/**
+	 * 页面上拉触底事件的处理函数
+	 */
+	onReachBottom: function () {
+
+		var that = this;
+		that.data.pg = that.data.pg + 1;
+		console.log('触发加载更多' + that.data.pg);
+		this.getinviterlist(that.data.pg);
+	},
 })

@@ -1,11 +1,12 @@
 // pages/newPage/JCshang/JCshang.js
+const app = getApp();
 Page({
 
     /**
      * 页面的初始数据
      */
     data: {
-
+		imgUrl: app.util.imageUrl,
     },
 
     /**

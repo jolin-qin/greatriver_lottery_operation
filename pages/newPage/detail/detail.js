@@ -1,4 +1,5 @@
 // pages/newPage/detail/detail.js
+const app = getApp()
 Page({
 
     /**
@@ -28,7 +29,12 @@ Page({
     onShow: function () {
 
     },
-
+    //去JC赏页面
+	goJCshangPage() {
+		wx.navigateTo({
+			url: '/pages/newPage/JCshang/JCshang',
+		})
+	},
     /**
      * 生命周期函数--监听页面隐藏
      */
