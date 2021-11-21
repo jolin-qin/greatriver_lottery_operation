@@ -1,0 +1,36 @@
+/* pages/newPage/chixuyouli/chixuyouli.wxss */
+.recycle_item {
+    width: 710rpx;
+    margin: 24rpx auto;
+    background: #fff;
+    border-radius: 30rpx;
+    padding: 20rpx 30rpx;
+}
+.recycle_item .head_portrait {
+    width: 90rpx;
+    height: 90rpx;
+    flex: 0 0 90rpx;
+    border-radius: 50%;
+    margin-right: 24rpx;
+}
+.recycle_item .user_infor {
+    flex: 1;
+}
+.recycle_item .user_infor .nick_name {
+    font-style: 32rpx;
+    font-weight: bold;
+    margin-bottom: 20rpx;
+}
+.recycle_item .user_infor .time {
+    font-style: 28rpx;
+    color: #999;
+}
+.recycle_item .goft_part {
+    width: 100rpx;
+    flex: 0 0 100rpx;
+    text-align: right;
+}
+.recycle_item .goft_part .number {
+    font-weight: bold;
+    margin-top: 20rpx;
+}

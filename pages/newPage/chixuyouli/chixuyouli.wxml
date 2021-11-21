@@ -1,0 +1,26 @@
+<view class="container">
+    <view class="recycle_list">
+        <view class="recycle_item flex_start">
+            <image class="head_portrait" src="/resource/images/box.jpg" mode="scaleToFill"></image>
+            <view class="user_infor">
+                <view class="nick_name">Xeon</view>
+                <view class="time">2021/11/21 15:30:00</view>
+            </view>
+            <view class="goft_part">
+                <text class="word">积分</text>
+                <view class="number">200</view>
+            </view>
+        </view>
+        <view class="recycle_item flex_start">
+            <image class="head_portrait" src="/resource/images/box.jpg" mode="scaleToFill"></image>
+            <view class="user_infor">
+                <view class="nick_name">Xeon</view>
+                <view class="time">2021/11/21 15:30:00</view>
+            </view>
+            <view class="goft_part">
+                <text class="word">优惠券</text>
+                <view class="number">一张</view>
+            </view>
+        </view>
+    </view>
+</view>

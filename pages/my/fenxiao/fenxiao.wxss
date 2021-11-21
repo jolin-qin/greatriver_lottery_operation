@@ -1,1 +1,21 @@
 /* pages/my/fenxiao/fenxiao.wxss */
+/* 新css */
+.bg-gradual-gold2 {
+    background: #652cd1 !important;
+}
+.cu-btn {
+    width: 300rpx !important;
+    background: #e72f4a !important;
+}
+.btn_wrapper .btn {
+    width: 300rpx;
+    height: 100rpx;
+    background: #e72f4a;
+    color: #fff;
+    border-radius: 12rpx;
+}
+.btn_wrapper .btn .txt {
+    font-size: 36rpx;
+    font-weight: bold;
+    font-style: italic;
+}

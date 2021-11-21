@@ -1,4 +1,7 @@
-/* pages/my/dailyaccount/dailyaccount.wxss */
+/* pages/newPage/integral/integral_detail.wxss */
+page {
+    background: #eff1f0;
+}
 .container {
     width: 710rpx;
     margin: 50rpx auto;

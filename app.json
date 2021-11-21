@@ -1,15 +1,15 @@
 {
     "pages": [
+        
         "pages/index/index",
+        "pages/newPage/fenxiangyouli/fenxiangyouli",
+        "pages/newPage/huishouguanli/huishouguanli",
+        "pages/newPage/integral_detail/integral_detail",
         "pages/newPage/JCshang/JCshang",
         "pages/mystar/mystar",
-        
-        
         "pages/newPage/yushou/yushou",
         "pages/newPage/xianhuo/xianhuo",
         "pages/newPage/detail/detail",
-        
-        
         "pages/warehouse/warehouse",
         "pages/shop/shop",
         "pages/my/my",
@@ -28,7 +28,9 @@
         "pages/my/tixianziliao/tixianziliao",
         "pages/my/fenxiao/fenxiao",
         "pages/my/canvas/canvas",
-        "pages/newPage/details/details"
+        "pages/newPage/details/details",
+        
+        "pages/newPage/chixuyouli/chixuyouli"
     ],
     "window": {
         "navigationBarTextStyle": "black",

@@ -135,11 +135,11 @@
 			<image src="/resource/icon/ziliao.png" style="width:40rpx;height:40rpx;"></image>
 			<view class="text-grey" style="font-size:25rpx;font-weight:300;margin-top:5rpx;">提现资料</view>
 		</navigator> -->
-		<navigator url="/pages/my/tixian/tixian" hover-class="none" style="text-align:center;margin-top:10rpx;">
+		<navigator url="/pages/newPage/huishouguanli/huishouguanli" hover-class="none" style="text-align:center;margin-top:10rpx;">
 			<image src="/resource/icon/tixian.png" style="width:40rpx;height:40rpx;"></image>
 			<view class="text-grey" style="font-size:25rpx;font-weight:300;margin-top:5rpx;">回收管理</view>
 		</navigator>
-		<navigator url="/pages/my/tixianziliao/tixianziliao" hover-class="none"
+		<navigator url="/pages/newPage/integral_detail/integral_detail" hover-class="none"
 			style="text-align:center;margin-top:10rpx;">
 			<image src="/resource/icon/ziliao.png" style="width:40rpx;height:40rpx;"></image>
 			<view class="text-grey" style="font-size:25rpx;font-weight:300;margin-top:5rpx;">积分明细</view>

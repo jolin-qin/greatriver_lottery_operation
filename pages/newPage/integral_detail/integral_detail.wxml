@@ -1,0 +1,22 @@
+<view class="container">
+    <view class="integral_item flex_between">
+        <view>
+            <view class="use">购买道具</view>
+            <view class="time">2021/11/21 15:30:00</view>
+        </view>
+        <view class="integral_num">
+            <view wx:if="{{1}}" class="spending">-200</view>
+            <view wx:else class="income">+200</view>
+        </view>
+    </view>
+    <view class="integral_item flex_between">
+        <view>
+            <view class="use">开盒</view>
+            <view class="time">2021/11/21 15:30:00</view>
+        </view>
+        <view class="integral_num">
+            <view wx:if="{{false}}" class="spending">-200</view>
+            <view wx:else class="income">+200</view>
+        </view>
+    </view>
+</view>

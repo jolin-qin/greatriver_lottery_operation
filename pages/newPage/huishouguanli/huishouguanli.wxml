@@ -1,0 +1,38 @@
+<view class="container">
+    <image class="title_img" src="{{imgUrl}}myimg_01.jpg" mode="widthFix"></image>
+    <view class="recycle_title">已回收金额（元）</view>
+    <view class="recycle_total_money">30.00</view>
+    <view class="recycle_record">回收记录</view>
+    <view class="recycle_list">
+        <view class="recycle_item flex_between">
+            <view>
+                <view class="title">申请回收</view>
+                <view class="time">2021/11/21 15:30:00</view>
+            </view>
+            <view class="status">
+                <view class="recycle_money">￥200</view>
+                <view class="status_code wait">待审核</view>
+            </view>
+        </view>
+        <view class="recycle_item flex_between">
+            <view>
+                <view class="title">申请回收</view>
+                <view class="time">2021/11/21 15:30:00</view>
+            </view>
+            <view class="status">
+                <view class="recycle_money">￥200</view>
+                <view class="status_code pass">已通过</view>
+            </view>
+        </view>
+        <view class="recycle_item flex_between">
+            <view>
+                <view class="title">申请回收</view>
+                <view class="time">2021/11/21 15:30:00</view>
+            </view>
+            <view class="status">
+                <view class="recycle_money">￥200</view>
+                <view class="status_code nopass">未通过</view>
+            </view>
+        </view>
+    </view>
+</view>

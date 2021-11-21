@@ -1,0 +1,61 @@
+/* pages/newPage/huishouguanli/huishouguanli.wxss */
+page {
+    background: #eff1f0;
+}
+.container {
+    position: relative;
+}
+.title_img {
+    width: 100%;
+}
+.recycle_title {
+    position: absolute;
+    top: 80rpx;
+    left: 30rpx;
+    color: #fff;
+}
+.recycle_total_money {
+    position: absolute;
+    top: 140rpx;
+    left: 30rpx;
+    color: #fff;
+    font-size: 72rpx;
+}
+.recycle_record {
+    padding-left: 24rpx;
+    font-size: 32rpx;
+    margin-top: 24rpx;
+    font-weight: bold;
+}
+.recycle_item {
+    width: 710rpx;
+    margin: 24rpx auto;
+    background: #fff;
+    border-radius: 30rpx;
+    padding: 20rpx 30rpx;
+}
+.recycle_item .title {
+    margin-bottom: 12rpx;
+    font-size: 32rpx;
+}
+.recycle_item .time {
+    font-size: 28rpx;
+    color: #999;
+}
+.recycle_item .status .recycle_money {
+    font-weight: bold;
+    font-size: 32rpx;
+    margin-bottom: 12rpx;
+}
+.recycle_item .status .status_code {
+    font-size: 28rpx;
+}
+.recycle_item .status .wait {
+    color: #efc116;
+}
+.recycle_item .status .pass {
+    color: #06bd5d;
+}
+.recycle_item .status .nopass {
+    color: red;
+}
