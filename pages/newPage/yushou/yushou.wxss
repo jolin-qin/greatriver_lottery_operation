@@ -6,6 +6,9 @@
 .index_swiper .swiper_item .img {
 	width: 100%;
 }
+.index_swiper .wx-swiper-dots {
+	bottom: 70rpx;
+}
 .title_img {
 	width: 728rpx;
 	height: 132rpx;
@@ -32,6 +35,10 @@
 .list_item .good_content {
 	background: #fff;
 	padding: 12rpx 20rpx 20rpx;
+}
+.list_item .good_content .good_name {
+	height: 76rpx;
+	line-height: 38rpx;
 }
 .list_item .good_intro {
 	font-size: 20rpx;

@@ -1,1 +1,15 @@
 /* pages/warehouse/applyfordelivery.wxss */
+.goods_introduce {
+    width: 710rpx;
+    margin: 0 auto;
+}
+.goods_introduce .title {
+    font-size: 32rpx;
+    font-weight: bold;
+    line-height: 100rpx;
+}
+/* 利用正则给img添加class,然后控制样式 */
+.rich_img {
+    display: block;
+    height: auto;
+}

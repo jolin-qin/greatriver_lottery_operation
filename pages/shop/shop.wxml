@@ -1,135 +1,129 @@
 <view class="cu-custom" style="height:{{CustomBar}}px;position:relative">
-  <view class="titlefont" style="position:absolute;bottom:0rpx;left:20rpx;font-size:45rpx;font-weight:500;color:#000">
-    道具商店</view>
+	<view class="titlefont" style="position:absolute;bottom:0rpx;left:20rpx;font-size:45rpx;font-weight:500;color:#000">
+		道具商店</view>
 </view>
 
 <view style="display:flex;flex-wrap:wrap;justify-content:space-between;padding:20rpx;">
-  <view bindtap="openmodal" class="{{clicktaskid==item.id?'button-animation':''}}" data-id="{{item.id}}"
-    wx:for="{{toolslist}}"
-    style="position:relative;width:350rpx;border-radius:30rpx;background:#fff;padding:15rpx;margin-top:12rpx;">
+	<view bindtap="openmodal" class="{{clicktaskid==item.id?'button-animation':''}}" data-id="{{item.id}}"
+		wx:for="{{toolslist}}" wx:key="index"
+		style="position:relative;width:350rpx;border-radius:30rpx;background:#fff;padding:15rpx;margin-top:12rpx;">
 
-    <view style="display:flex;align-items:center;background:#f7f7f7;padding:10rpx;border-radius:20rpx;">
-      <image src="{{item.pic}}" style="width:130rpx;height:130rpx;border-radius:20rpx;" mode="aspectFill"></image>
+		<view style="display:flex;align-items:center;background:#f7f7f7;padding:10rpx;border-radius:20rpx;">
+			<image src="{{item.pic}}" style="width:130rpx;height:130rpx;border-radius:20rpx;" mode="aspectFill"></image>
 
-      <view
-        style="height:120rpx;width:155rpx;margin-left:20rpx;display:flex;justify-content:space-between;flex-direction:column">
-        <view style="font-size:25rpx;font-weight:700">{{item.tool_name}}</view>
-<view class="numfont"
-      style="margin-top:0rpx;width:100%;padding:0rpx 0rpx;border-radius:20rpx;text-align:center;text-align:left;font-size:35rpx;">
-      <block wx:if="{{item.payment_integral==1}}"><image style="width:25rpx;height:25rpx" src="/resource/images/kuangshi2.png"></image>{{item.tool_integral}}<text style="font-size:20rpx;"></text></block>
-      <block wx:if="{{item.payment_integral==1 && (item.payment_balance==1 || item.payment_wechatpay==1) && isios!=='ios'}}"><text
-          class="numfont" style="font-size:20rpx;"> / </text></block>
-      <block wx:if="{{(item.payment_balance==1 || item.payment_wechatpay==1) &&  isios!=='ios' }}"><text
-          class="text-price ">{{item.tool_price}}</text></block>
-    </view>
-      </view>
-    </view>
-    
-    <view class="text-grey" style="margin-top:10rpx;font-size:20rpx;">{{item.tool_content}}</view>
+			<view
+				style="height:120rpx;width:155rpx;margin-left:20rpx;display:flex;justify-content:space-between;flex-direction:column">
+				<view style="font-size:25rpx;font-weight:700">{{item.tool_name}}</view>
+				<view class="numfont"
+					style="margin-top:0rpx;width:100%;padding:0rpx 0rpx;border-radius:20rpx;text-align:center;text-align:left;font-size:35rpx;">
+					<block wx:if="{{item.payment_integral==1}}">
+						<image style="width:25rpx;height:25rpx" src="/resource/images/kuangshi2.png"></image>
+						{{item.tool_integral}}<text style="font-size:20rpx;"></text>
+					</block>
+					<block
+						wx:if="{{item.payment_integral==1 && (item.payment_balance==1 || item.payment_wechatpay==1) && isios!=='ios'}}">
+						<text class="numfont" style="font-size:20rpx;"> / </text></block>
+					<block wx:if="{{(item.payment_balance==1 || item.payment_wechatpay==1) &&  isios!=='ios' }}"><text
+							class="text-price ">{{item.tool_price}}</text></block>
+				</view>
+			</view>
+		</view>
 
-  </view>
+		<view class="text-grey" style="margin-top:10rpx;font-size:20rpx;">{{item.tool_content}}</view>
+
+	</view>
 
 </view>
 
 <view class="cu-modal bottom-modal {{modal?'show':''}}" bindtap="closemodal">
-  <view class="cu-dialog" style="border-radius:50rpx;" catchtap>
+	<view class="cu-dialog" style="border-radius:50rpx;" catchtap>
 
-    <view class='padding-xl'>
-      -- 购买道具 --
-      <view style="padding:10rpx 0 10rpx 0">
-        <view style="display:flex;margin-top:30rpx;background:#fff;border-radius:20rpx;padding:20rpx;">
-          <image src="{{selecttool.pic}}" style="width:150rpx;min-width:150rpx;height:150rpx;border-radius:20rpx;">
-          </image>
-          <view style="margin-left:20rpx;text-align:left;">
-            <view style="font-weight:bold;font-size:30rpx;">{{selecttool.tool_name}}</view>
-        <!-- <view style="margin-top:20rpx;">+5%中率</view>-->   
-            <view style="text-align:left;margin-top:15rpx;">
-              {{selecttool.tool_content}}
-            </view>
-          </view>
-
-        </view>
-
-
-      </view>
-      <view style="padding:10rpx 0 50rpx 0">
-        <view style="display:flex;margin-top:30rpx;background:#fff;border-radius:20rpx;padding:20rpx;">
-          <radio-group class="block" bindchange="payradioChange" style="width:100%">
-            <view style="display:flex;flex-direction:column;">
-              <view wx:if="{{selecttool.payment_integral==1}}" bindtap="payradioclick" data-paytype="1"
-                style="display:flex;justify-content:space-between;align-items:center;border-bottom:1rpx solid #f7f7f7;padding:0 0 10rpx 0">
-                <view style="display:flex;">
-                  <image src="/resource/images/kuangshi2.png" style="width:50rpx;height:50rpx;"></image><text
-                    style="line-height:50rpx;margin-left:20rpx;">矿石兑换</text>
-                </view>
-                <radio class='red ' value="1" checked="{{select_pay_type==1?'true':''}}"></radio>
-              </view>
-              <view wx:if="{{selecttool.payment_wechatpay==1}}" bindtap="payradioclick" data-paytype="2"
-                style="display:flex;justify-content:space-between;align-items:center;margin-top:20rpx;border-bottom:1rpx solid #f7f7f7;padding:0 0 10rpx 0">
-                <view style="display:flex;">
-                  <image src="/resource/images/wepay.png" style="width:50rpx;height:50rpx;"></image><text
-                    style="line-height:50rpx;margin-left:20rpx;">微信支付</text>
-                </view>
-                <radio class='red ' value="2" checked="{{select_pay_type==2?'true':''}}"></radio>
-              </view>
-              <view wx:if="{{selecttool.payment_balance==1}}" bindtap="payradioclick" data-paytype="3"
-                style="display:flex;justify-content:space-between;align-items:center;margin-top:20rpx;">
-                <view style="display:flex;">
-                  <image src="/resource/images/xianjin.png" style="width:50rpx;height:50rpx;"></image><text
-                    style="line-height:50rpx;margin-left:20rpx;">余额支付</text>
-                </view>
-                <radio class='red ' value="3" checked="{{select_pay_type==3?'true':''}}"></radio>
-              </view>
-            </view>
-          </radio-group>
-
-        </view>
-
-
-      </view>
-      <view style="margin-bottom:30rpx;">
-        <button class='cu-btn bg-gradual-orange margin-tb-sm lg round' bindtap="toolpay" data-id="{{selecttool.id}}"
-          style="width:100%;">{{select_pay_type==1?'使用'+selecttool.tool_integral+'矿石兑换':'立即支付'+selecttool.tool_price+'元'}}</button>
-        <view class="text-grey" style="font-size:25rpx;margin-top:10rpx;" bindtap="closemodal">我再逛逛</view>
-      </view>
-
-    </view>
-  </view>
+		<view class='padding-xl'>
+			-- 购买道具 --
+			<view style="padding:10rpx 0 10rpx 0">
+				<view style="display:flex;margin-top:30rpx;background:#fff;border-radius:20rpx;padding:20rpx;">
+					<image src="{{selecttool.pic}}"
+						style="width:150rpx;min-width:150rpx;height:150rpx;border-radius:20rpx;">
+					</image>
+					<view style="margin-left:20rpx;text-align:left;">
+						<view style="font-weight:bold;font-size:30rpx;">{{selecttool.tool_name}}</view>
+						<!-- <view style="margin-top:20rpx;">+5%中率</view>-->
+						<view style="text-align:left;margin-top:15rpx;">
+							{{selecttool.tool_content}}
+						</view>
+					</view>
+				</view>
+			</view>
+			<view style="padding:10rpx 0 50rpx 0">
+				<view style="display:flex;margin-top:30rpx;background:#fff;border-radius:20rpx;padding:20rpx;">
+					<radio-group class="block" bindchange="payradioChange" style="width:100%">
+						<view style="display:flex;flex-direction:column;">
+							<view wx:if="{{selecttool.payment_integral==1}}" bindtap="payradioclick" data-paytype="1"
+								style="display:flex;justify-content:space-between;align-items:center;border-bottom:1rpx solid #f7f7f7;padding:0 0 10rpx 0">
+								<view style="display:flex;">
+									<image src="/resource/images/kuangshi2.png" style="width:50rpx;height:50rpx;">
+									</image><text style="line-height:50rpx;margin-left:20rpx;">矿石兑换</text>
+								</view>
+								<radio class='red ' value="1" checked="{{select_pay_type==1?'true':''}}"></radio>
+							</view>
+							<view wx:if="{{selecttool.payment_wechatpay==1}}" bindtap="payradioclick" data-paytype="2"
+								style="display:flex;justify-content:space-between;align-items:center;margin-top:20rpx;border-bottom:1rpx solid #f7f7f7;padding:0 0 10rpx 0">
+								<view style="display:flex;">
+									<image src="/resource/images/wepay.png" style="width:50rpx;height:50rpx;"></image>
+									<text style="line-height:50rpx;margin-left:20rpx;">微信支付</text>
+								</view>
+								<radio class='red ' value="2" checked="{{select_pay_type==2?'true':''}}"></radio>
+							</view>
+							<view wx:if="{{selecttool.payment_balance==1}}" bindtap="payradioclick" data-paytype="3"
+								style="display:flex;justify-content:space-between;align-items:center;margin-top:20rpx;">
+								<view style="display:flex;">
+									<image src="/resource/images/xianjin.png" style="width:50rpx;height:50rpx;"></image>
+									<text style="line-height:50rpx;margin-left:20rpx;">余额支付</text>
+								</view>
+								<radio class='red ' value="3" checked="{{select_pay_type==3?'true':''}}"></radio>
+							</view>
+						</view>
+					</radio-group>
+				</view>
+			</view>
+			<view style="margin-bottom:30rpx;">
+				<button class='cu-btn bg-gradual-orange margin-tb-sm lg round' bindtap="toolpay"
+					data-id="{{selecttool.id}}"
+					style="width:100%;">{{select_pay_type==1?'使用'+selecttool.tool_integral+'矿石兑换':'立即支付'+selecttool.tool_price+'元'}}</button>
+				<view class="text-grey" style="font-size:25rpx;margin-top:10rpx;" bindtap="closemodal">我再逛逛</view>
+			</view>
+		</view>
+	</view>
 </view>
-<view class="cu-modal {{payloading==1 || payloading==2 || payloading==3?'show':''}}" style="">
-
-  <view
-    style="background:#fff;position:absolute;left:0;right:0;top:0;bottom:0;margin:auto;border-radius:30rpx;width:300rpx;height:300rpx;overflow:hidden;z-index:9999;text-align:center;padding:50rpx 0rpx 0rpx 0rpx;border:10rpx solid #f7f7f7;">
-    <view class='' style="position:absolute; right:10rpx;z-index:999;top:10rpx;" bindtap='hidecheckpaymodal'>
-      <button class='cu-btn icon' style="height:40rpx;width:40rpx;">
-        <text class='icon-close text-red'></text>
-      </button>
-    </view>
-    <view wx:if="{{payloading==1}}">
-      <image src="/resource/images/loading.gif" style="width:170rpx;height:170rpx;"></image>
-      <view style="font-size:25rpx;">
-        正在校检支付结果
-      </view>
-    </view>
-    <view wx:if="{{payloading==2 || payloading==3}}">
-      <view style="height:150rpx;padding:{{payloading==3?'0':'50'}}rpx 0 0 0">
-        <view wx:if="{{payloading==3}}" style="text-align:center;">
-          <image src="/resource/images/paysuccess.png" style="width:100rpx;height:100rpx;"></image>
-          <view>支付成功</view>
-        </view>
-
-        <block wx:else>{{payresnotice}}</block>
-      </view>
-
-      <button class='cu-btn bg-gradual-orange margin-tb-sm sm round'
-        bindtap="{{payloading==3?'gotowearhouse':select_pay_type==2?'checkpayresultclick':'hidecheckpaymodal'}}"
-        style="z-index:9999;width:250rpx;"
-        data-orderid="{{paycheck_orderid}}">{{payloading==3?'去仓库查看':select_pay_type==2?'点击重试':'确定'}}</button>
-    </view>
-
-
-  </view>
+<!-- 进入了支付程序wxml -->
+<view class="cu-modal {{payloading==1 || payloading==2 || payloading==3?'show':''}}">
+	<view
+		style="background:#fff;position:absolute;left:0;right:0;top:0;bottom:0;margin:auto;border-radius:30rpx;width:300rpx;height:300rpx;overflow:hidden;z-index:9999;text-align:center;padding:50rpx 0rpx 0rpx 0rpx;border:10rpx solid #f7f7f7;">
+		<view class='' style="position:absolute; right:10rpx;z-index:999;top:10rpx;" bindtap='hidecheckpaymodal'>
+			<button class='cu-btn icon' style="height:40rpx;width:40rpx;">
+				<text class='icon-close text-red'></text>
+			</button>
+		</view>
+		<view wx:if="{{payloading==1}}">
+			<image src="/resource/images/loading.gif" style="width:170rpx;height:170rpx;"></image>
+			<view style="font-size:25rpx;">
+				正在校检支付结果
+			</view>
+		</view>
+		<view wx:if="{{payloading==2 || payloading==3}}">
+			<view style="height:150rpx;padding:{{payloading==3?'0':'50'}}rpx 0 0 0">
+				<view wx:if="{{payloading==3}}" style="text-align:center;">
+					<image src="/resource/images/paysuccess.png" style="width:100rpx;height:100rpx;"></image>
+					<view>支付成功</view>
+				</view>
+				<block wx:else>{{payresnotice}}</block>
+			</view>
+			<button class='cu-btn bg-gradual-orange margin-tb-sm sm round'
+				bindtap="{{payloading==3?'gotowearhouse':select_pay_type==2?'checkpayresultclick':'hidecheckpaymodal'}}"
+				style="z-index:9999;width:250rpx;"
+				data-orderid="{{paycheck_orderid}}">{{payloading==3?'去仓库查看':select_pay_type==2?'点击重试':'确定'}}</button>
+		</view>
+	</view>
 </view>
-
-
+<!-- 底部tabBar -->
 <bar navtab="shop" />

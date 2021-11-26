@@ -1,5 +1,5 @@
 <view class="container">
-    <image class="title_img" src="{{imgUrl}}myimg_01.jpg" mode="widthFix"></image>
+    <image class="title_img" src="{{imgUrl}}small_banner.png" mode="widthFix"></image>
     <view class="recycle_title">已回收金额（元）</view>
     <view class="recycle_total_money">30.00</view>
     <view class="recycle_record">回收记录</view>

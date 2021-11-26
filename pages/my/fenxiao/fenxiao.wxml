@@ -1,4 +1,4 @@
-<view style="padding:50rpx;display:flex;justify-content:space-between;min-height:300rpx;" class="bg-gradual-gold2">
+<view style="display:flex;justify-content:space-between;" class="bg-gradual-gold2 top_bei">
 	<view>
 		<view style="font-size:30rpx;padding:0 0rpx;color: #fff;">累计收益(元)</view>
 		<view class="numfont" style="font-size:120rpx;margin-top:20rpx;color: #fff;">{{history_sum_money}}</view>
@@ -9,7 +9,7 @@
 			<view style="font-size:20rpx;line-height:20rpx;" class="text-white">邀请好友直接锁定为成员</view>
 		</view> -->
 		<view>
-			<button class="cu-btn bg-gradual-orange margin-tb-sm  round" bindtap="share">立即邀请</button>
+			<button class="cu-btn bg-gradual-orange margin-tb-sm round" bindtap="share">立即邀请</button>
 			<view style="font-size:24rpx;line-height:20rpx;text-align:center;" class="text-white">邀请好友直接锁定为成员</view>
 		</view>
 	</view>
@@ -29,7 +29,7 @@
 		</view>
 	</view>
 </view>
-<view style="width:100%;padding:20rpx;margin-top:-70rpx;">
+<view style="width:100%;padding:20rpx;margin-top:-60rpx;">
 	<view style="width:100%;border-radius:30rpx;background:#ffffff;overflow:hidden;">
 		<view style="background:#f7f7f7;padding:20rpx;">我的票卷</view>
 		<view class="btn_wrapper" style="padding:20rpx;display:flex;justify-content:space-around">
@@ -49,14 +49,8 @@
 					<view style="margin-top:5rpx;font-size:25rpx;color:#777">{{second_stage_num}}人</view>
 				</view>
 			</view> -->
-			<view class="first btn flex_center" bindtap="goSharePolitePage">
-				<view></view>
-				<text class="txt">分享有礼</text>
-			</view>
-			<view class="second btn flex_center" bindtap="goContinuePage">
-				<view></view>
-				<text class="txt">持续有礼</text>
-			</view>
+			<view class="first btn flex_center" bindtap="goSharePolitePage"></view>
+			<view class="second btn flex_center" bindtap="goContinuePage"></view>
 		</view>
 	</view>
 </view>
@@ -65,7 +59,7 @@
 	<view style="font-size:35rpx;margin-left:20rpx;font-weight:bold">收益记录</view>
 	<view
 		style="display:flex;justify-content:space-between;margin-top:20rpx;padding:20rpx;align-items:center;border-radius:20rpx;"
-		class="bg-white" wx:for="{{distribution_list}}" bindtap="showreasons">
+		class="bg-white" wx:for="{{distribution_list}}" wx:key="index" bindtap="showreasons">
 		<view>
 			<view style="font-size:30rpx;font-weight:bold">{{item.content}}</view>
 			<view style="font-size:25rpx;margin-top:15rpx;" class="text-gray">{{item.time}}</view>

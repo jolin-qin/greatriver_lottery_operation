@@ -1,26 +1,26 @@
 <view>
-    <swiper class="index_swiper" indicator-dots="{{true}}" interval="2000" autoplay="{{false}}" duration="500" circular="true" easing-function="linear">
+    <!-- <swiper class="index_swiper" indicator-dots="{{true}}" interval="2000" autoplay="{{false}}" duration="500" circular="true" easing-function="linear">
         <swiper-item class="swiper_item">
             <image class="height" src="/resource/images/box.jpg" mode="scaleToFill"></image>
         </swiper-item>
-		<swiper-item class="swiper_item">
-            <image class="height" src="/resource/images/box.jpg" mode="scaleToFill"></image>
-        </swiper-item>
-    </swiper>
+    </swiper> -->
+    <image wx:if="{{goodsObj.prize_pic}}" class="good_img" src="{{projecturl + goodsObj.prize_pic}}" mode="widthFix"></image>
     <!-- 商品介绍 -->
     <view class="introduce_wrapper">
         <view class="flex_start">
-            <view class="present_price">￥52.20</view>
-            <view class="original_price">原价￥52.20</view>
+            <view class="present_price">￥{{goodsObj.prize_market_price}}</view>
+            <view class="original_price">原价￥{{goodsObj.prize_original_price}}</view>
         </view>
-        <view class="goods_name">玩偶玩偶玩偶</view>
-        <view class="goods_detail">商品介绍商品介绍商品介绍商品介绍商品介绍商品介绍商品介绍商品介绍</view>
+        <view class="goods_name">{{goodsObj.prize_title}}</view>
+        <view class="goods_detail">{{goodsObj.prize_remark}}</view>
         <view class="flex_between">
-            <view class="flex_start">
-                <view class="goods_label hot_sell">热销</view>
-                <view class="goods_label integral_double">积分X2</view>
+            <view wx:if="{{goodsObj.label}}" class="flex_start">
+                <block wx:for="{{goodsObj.label}}" wx:key="index">
+                    <view wx:if="{{item.id === '1'}}" class="goods_label hot_sell">{{item.title}}</view>
+                    <view wx:elif="{{item.id === '2'}}" class="goods_label integral_double">{{item.title}}</view>
+                </block>
             </view>
-            <view class="sales">销售3333件</view>
+            <!-- <view class="sales">销售3333件</view> -->
         </view>
     </view>
     <!-- 积分 -->
@@ -29,13 +29,14 @@
             <text class="title">积分</text>
             <text class="content">积分规则详情</text>
         </view>
-        <view class="check_btn">查看</view>
+        <view class="check_btn" data-type="{{0}}" bindtap="openPopup">查看</view>
     </view>
     <!-- 优惠 -->
     <view class="section_wrapper coupon_wrapper flex_between">
-        <view class="flex_start">
+        <view class="flex_between">
             <text class="title">优惠</text>
-            <text class="content">有4张可用优惠券</text>
+            <text wx:if="{{!couponList.length}}" class="content">抽盲盒送优惠券哦</text>
+            <text wx:else class="content">有{{couponList.length}}张优惠券</text>
         </view>
     </view>
     <!-- 发货规则 -->
@@ -44,17 +45,112 @@
             <text class="title">发货规则</text>
             <text class="content">需手动发货，若30天内未操作发货，系统将自动发出</text>
         </view>
-        <view class="check_btn">查看</view>
+        <view class="check_btn" data-type="{{1}}" bindtap="openPopup">查看</view>
     </view>
     <!-- 商品详情 -->
     <view class="details_wrapper">
-        <text>商品详情</text>
-        <view></view>
+        <text class="title_text">商品详情</text>
+        <rich-text nodes="{{strings}}"></rich-text>
     </view>
     <view class="zhanwei"></view>
     <!-- 底部 -->
     <view class="footer_wrapper flex_center">
-        <view class="jcshang btn" bindtap="goJCshangPage">JC赏</view>
-        <view class="immediately_buy btn">立刻购买</view>
+        <view class="jcshang btn" bindtap="goJCshangPage"></view>
+        <view class="immediately_buy btn" bindtap="openBuyPopup"></view>
     </view>
+    <!-- 查看弹窗 -->
+    <van-popup show="{{ show }}" bind:close="onClose" closeable close-icon="cross" round custom-class="viewPopup">
+        <view wx:if="{{popupType === 0}}" class="content">
+            <view class="title">积分规则详情</view>
+            <view>1.积分规则详情积分规则详情积分规则详情积分规则详情</view>
+            <view>2.积分规则详情积分规则详情积分规则详情积分规则详情</view>
+            <view>3.积分规则详情积分规则详情积分规则详情积分规则详情</view>
+            <view>4.积分规则详情积分规则详情积分规则详情积分规则详情</view>
+        </view>
+        <view wx:elif="{{popupType === 1}}" class="content">
+            <view class="title">发货规则详情</view>
+            <view>1.发货规则详情发货规则详情发货规则详情发货规则详情</view>
+            <view>2.发货规则详情发货规则详情发货规则详情发货规则详情</view>
+            <view>3.发货规则详情发货规则详情发货规则详情发货规则详情</view>
+            <view>4.发货规则详情发货规则详情发货规则详情发货规则详情</view>
+        </view>
+    </van-popup>
+    
+	<!-- 购买弹窗 -->
+	<van-popup show="{{ buyPopupShow }}" position="bottom" custom-style="height: 100%;background: #f7f8fd;" bind:close="closeBuyPopup">
+		<view class="closeBuyPopupImg" bindtap="closeBuyPopup">
+            <image class="img" src="/resource/icon/close02.png" mode="scaleToFill"></image>
+        </view>
+        <!--添加收货地址-->
+		<view class="submitOrderAddAddress" bindtap="goAddress">
+			<!--无地址时显示-->
+			<view class="noAddress flex_center" wx:if="{{!useraddress.id}}">
+				<image class="add_symbol" src="/resource/icon/add_01.png" mode="scaleToFill"></image>
+				<text class="txt">添加收货地址</text>
+			</view>
+			<!--有地址时-->
+			<view class="selectedAddressTotal flex_between" wx:else>
+				<view class="specificInformation">
+					<view class="selectedAddressName">{{useraddress.name + ' ' + useraddress.phone}}</view>
+					<view class="selectedAddress ellipsis_2">{{useraddress.province + useraddress.city + useraddress.district + useraddress.address}}</view>
+				</view>
+				<image class="right_arrow" src="/resource/icon/right_arrow.png" mode="scaleToFill"></image>
+			</view>
+		</view>
+		<view class="productList-wrap">
+			<!--商品列表-->
+			<view class="orderProductList flex_start">
+				<view class="cartProducePic">
+					<image wx:if="{{goodsObj.prize_pic}}" class="img100" src="{{projecturl + goodsObj.prize_pic}}" mode="scaleToFill"></image>
+				</view>
+				<view class="orderIntroContent">
+					<view class="cartProduceTitle ellipsis_2">{{goodsObj.prize_title}}</view>
+					<view class="requireIntegral flex_between">
+						<view class="cartProducePrice">{{goodsObj.prize_market_price}}元</view>
+						<view class="orderNumbers"><text class="txt">x</text>{{1}}</view>
+					</view>
+				</view>
+			</view>
+			<!--实付款-->
+			<view class="orderPayment">
+				<view class="freight flex_between">
+					<text class="title">运费</text>
+                    <block>
+                        <text wx:if="{{goodsObj.prize_postage_type === '0'}}">包邮</text>
+                        <text wx:elif="{{goodsObj.prize_postage_type === '1'}}">{{goodsObj.prize_postage}}</text>
+                        <text wx:elif="{{goodsObj.prize_postage_type === '2'}}">到付</text>
+                        <text wx:else>0</text>
+                    </block>
+				</view>
+				<view class="goodsAmount flex_between" bindtap="openCouponPopup">
+					<text class="title">优惠券</text>
+					<text class="tips" bindtap="">{{discountAmount}}</text>
+				</view>
+			</view>
+		</view>
+		<!--footer star-->
+		<view class="submit-order-footer flex_between">
+		    <view class="submit-order-footer-lf">合计：{{totalPrice}}元</view>
+		    <view class="submit-order-footer-rt" bindtap="confirmPayFun">确认支付</view>
+		</view>
+	</van-popup>
+    <!-- 优惠券弹出框 -->
+    <van-popup show="{{couponPopupShow}}" position="bottom" custom-style="height:650rpx;background:#DB4A25;padding-bottom:0;" round custom-class="coupon_popup" z-index="{{101}}">
+        <view class="coupon_content">
+            <view class="title_01">你有{{couponList.length}}张优惠券</view>
+            <scroll-view class="scrollView" scroll-y="true" style="height: 500rpx;">
+                <view class="coupom_item flex_between" wx:for="{{couponList}}" wx:key="index" data-item="{{item}}" data-index="{{index}}" bindtap="choiceCouponFun">
+                    <view class="coupon_left">
+                        <text class="symbol">￥</text>
+                        <text class="face_value">{{item.price}}</text>
+                    </view>
+                    <view class="coupon_middle">
+                        <view class="condition">{{item.title}}</view>
+                    </view>
+                    <view class="coupon_right {{index === activeIndex ? 'active' : ''}}">使用</view>
+                </view>
+            </scroll-view>
+            <image class="close_img" src="/resource/icon/close01.png" mode="scaleToFill" bindtap="closeCouponPupop"></image>
+        </view>
+    </van-popup>
 </view>

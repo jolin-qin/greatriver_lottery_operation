@@ -6,6 +6,7 @@ import md5 from 'md5';
 var util = {};
 //项目图片域名
 util.imageUrl = "https://www.jiaochao.top/imageurl/";
+util.projectUrl = "https://www.jiaochao.top/attachment/";
 util.base64_encode = function (str) {
 	return base64_encode(str)
 };
@@ -226,7 +227,7 @@ util.request = function (option) {
 			}
 		}
 	}
-	console.log("url:", url.split('?')[1])
+	// console.log("url:", url.split('?')[1])
 	wx.request({
 		'url': url,
 		'data': option.data ? option.data : {},
@@ -316,7 +317,7 @@ util.getUserInfo = function (cb) {
 		};
 		wx.login({
 			success: function (res) {
-				console.log('res', res);
+				// console.log('res', res);
 				util.request({
 					url: 'auth/session/openid',
 					data: {
@@ -347,6 +348,7 @@ util.getUserInfo = function (cb) {
 										cachetime: 0,
 										success: function (res) {
 											if (!res.data.errno) {
+												console.log("登录成功返回的信息：", res.data.data)
 												userInfo.memberInfo = res.data.data;
 												wx.setStorageSync('userInfo', userInfo);
 											}

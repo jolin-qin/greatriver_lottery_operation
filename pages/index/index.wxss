@@ -739,6 +739,10 @@ page {}
 	background: #fff;
 	padding: 12rpx 20rpx 20rpx;
 }
+.list_item .good_content .good_name {
+	height: 76rpx;
+	line-height: 38rpx;
+}
 .list_item .good_intro {
 	font-size: 20rpx;
 	color: #999;

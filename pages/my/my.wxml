@@ -51,30 +51,7 @@
 	</view>
 </view>
 
-<view style="display:none;margin:0rpx 20rpx 20rpx 20rpx;padding:30rpx 20rpx;background:#fff;border-radius:20rpx;">
-	<view style="display:flex;flex-wrap:wrap;justify-content:space-between;">
-		<view style="text-align:center;width:150rpx;margin-top:10rpx;">
-			<image src="/resource/icon/order.png" style="width:70rpx;height:70rpx;"></image>
-			<view style="font-size:30rpx;font-weight:bold;color:#000;margin-top:10rpx;">订单</view>
-			<view style="font-size:20rpx;" class="text-gray">订单管理</view>
-		</view>
-		<view style="text-align:center;width:150rpx;margin-top:10rpx;">
-			<image src="/resource/icon/qianbao.png" style="width:70rpx;height:70rpx;"></image>
-			<view style="font-size:30rpx;font-weight:bold;color:#000;margin-top:10rpx;">钱包</view>
-			<view style="font-size:20rpx;" class="text-gray">提现和流水</view>
-		</view>
-		<button bindtap="addaddress" class=" cu-btn2 bg-white"
-			style="display:flex;flex-direction:column;width:150rpx;margin-top:10rpx;" open-type="contact">
-			<image src="/resource/icon/kefu.png" style="width:70rpx;height:70rpx;"></image>
-			<view style="font-size:30rpx;font-weight:bold;line-height: 48rpx;color:#000;margin-top:10rpx;">客服</view>
-		</button>
-		<view style="text-align:center;width:150rpx;margin-top:10rpx;">
-			<image src="/resource/icon/shezhi.png" style="width:70rpx;height:70rpx;"></image>
-			<view style="font-size:30rpx;font-weight:bold;color:#000;margin-top:10rpx;">设置</view>
-		</view>
-	</view>
-</view>
-
+<!-- 我的钱包 -->
 <view class="bg-white" style="position:relative;margin:20rpx;padding:30rpx;border-radius:20rpx;">
 	<view class="titlefont" style="font-size:40rpx;font-weight:500;margin-left:0rpx;">我的钱包</view>
 	<view style="display:flex;justify-content:space-between;align-items:center;padding:50rpx 20rpx 20rpx 20rpx;">
@@ -101,7 +78,7 @@
 		<view class="wallet_item">
 			<view class="numfont"
 				style="font-size:{{memberinfo.integral>9999?'45':'55'}}rpx;line-height:50rpx;font-weight:500;color:#652CD2;">
-				{{memberinfo.money}}
+				{{memberinfo_integral}}
 			</view>
 			<view class="text-grey" style="font-size:30rpx;font-weight:400;margin-top:10rpx;">剩余积分</view>
 		</view>
@@ -136,16 +113,17 @@
 			<view class="text-grey" style="font-size:25rpx;font-weight:300;margin-top:5rpx;">提现资料</view>
 		</navigator> -->
 		<navigator url="/pages/newPage/huishouguanli/huishouguanli" hover-class="none" style="text-align:center;margin-top:10rpx;">
-			<image src="/resource/icon/tixian.png" style="width:40rpx;height:40rpx;"></image>
+			<image src="/resource/icon/huishou.png" style="width:40rpx;height:40rpx;"></image>
 			<view class="text-grey" style="font-size:25rpx;font-weight:300;margin-top:5rpx;">回收管理</view>
 		</navigator>
 		<navigator url="/pages/newPage/integral_detail/integral_detail" hover-class="none"
 			style="text-align:center;margin-top:10rpx;">
-			<image src="/resource/icon/ziliao.png" style="width:40rpx;height:40rpx;"></image>
+			<image src="/resource/icon/jifen.png" style="width:40rpx;height:40rpx;"></image>
 			<view class="text-grey" style="font-size:25rpx;font-weight:300;margin-top:5rpx;">积分明细</view>
 		</navigator>
 	</view>
 </view>
+<!-- 常用工具 -->
 <view class="shadow" style="margin:20rpx;padding:20rpx 30rpx 50rpx 30rpx;background:#fff;border-radius:20rpx;">
 	<view class="titlefont" style="font-size:40rpx;font-weight:500;margin-left:0rpx;">常用工具</view>
 	<block wx:if="{{memberinfo.distribution_enabled=='1'}}">
@@ -153,8 +131,8 @@
 			style="display:flex;flex-wrap:wrap;justify-content:space-between;margin:50rpx 0;">
 
 			<view style="display:flex;align-items:center;">
-				<image src="/resource/icon/fx.png" style="width:40rpx;height:40rpx;"></image>
-				<text style="margin-left:20rpx;font-size:30rpx;font-weight:bold">分享有礼</text>
+				<image src="/resource/icon/fx.png" style="width:44rpx;height:44rpx;"></image>
+				<text style="margin-left:16rpx;font-size:30rpx;font-weight:bold">分享有礼</text>
 			</view>
 			<view>
 				<text style="margin-left:20rpx;font-size:30rpx;" class="text-gray"></text>
@@ -195,7 +173,7 @@
 			style="padding:0 !important;display:flex;flex-wrap:wrap;justify-content:space-between;margin:50rpx 0;">
 
 			<view style="display:flex;align-items:center;">
-				<image src="/resource/icon/message.png" style="width:40rpx;height:40rpx;"></image>
+				<image src="/resource/icon/kefu_icon.png" style="width:40rpx;height:40rpx;"></image>
 				<text style="margin-left:20rpx;font-size:30rpx;font-weight:bold;color:#000">客服中心</text>
 			</view>
 			<view>

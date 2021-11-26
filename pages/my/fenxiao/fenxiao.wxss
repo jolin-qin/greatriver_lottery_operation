@@ -1,18 +1,29 @@
 /* pages/my/fenxiao/fenxiao.wxss */
 /* 新css */
-.bg-gradual-gold2 {
-    background: #652cd1 !important;
+.top_bei {
+    width: 100%;
+    height:300rpx;
+    padding: 50rpx;
+    background: url('https://www.jiaochao.top/imageurl/small_banner.png') no-repeat;
+    background-size: cover;
 }
 .cu-btn {
-    width: 300rpx !important;
-    background: #e72f4a !important;
+    width: 312rpx !important;
+    height: 76rpx !important;
+    background: url('https://www.jiaochao.top/imageurl/yaoqing.png') no-repeat;
+    background-size: cover;
 }
 .btn_wrapper .btn {
-    width: 300rpx;
-    height: 100rpx;
-    background: #e72f4a;
-    color: #fff;
-    border-radius: 12rpx;
+    width: 306rpx;
+    height: 122rpx;
+}
+.btn_wrapper .first {
+    background: url('https://www.jiaochao.top/imageurl/youli.png') no-repeat;
+    background-size: cover;
+}
+.btn_wrapper .second {
+    background: url('https://www.jiaochao.top/imageurl/chixuyouli.png') no-repeat;
+    background-size: cover;
 }
 .btn_wrapper .btn .txt {
     font-size: 36rpx;

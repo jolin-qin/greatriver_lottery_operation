@@ -23,7 +23,7 @@ Page({
 		newboxclass: 'newbox-none',
 		newboxlist: [],
 		indexparameter: [],
-		box_pageno: 0,
+		box_pageno: 0,//分页pageNum
 		boxlist: [],
 		loading: true,
 		answer: '',
@@ -56,10 +56,14 @@ Page({
 		box_class: [],
 		yindao: [], //新手引导
 		// 我的变量
+		projecturl: app.util.projectUrl,
 		tabIndex: 0,
         // tabs: [{name: '现货', img: 'https://robot.qingpukj.com/imageurl/gift_icon.png', onImg: 'https://robot.qingpukj.com/imageurl/gift_icon_on.png'},
         //         {name: '预售', img: 'https://robot.qingpukj.com/imageurl/message_icon.png', onImg: 'https://robot.qingpukj.com/imageurl/message_icon_on.png'}
-        // ],
+		// ],
+		bannerList: [],//banner数据
+		goodsList: [],//商品列表
+		pageNumber: 0,//商品列表分页
 	},
 	onReady: function () {
 		// 页面渲染完成
@@ -75,26 +79,27 @@ Page({
 			if (t.data.indexparameter.other_parameter.chapin_index == 1) {
 				console.log('首页插屏打开');
 				// 在页面onLoad回调事件中创建插屏广告实例
-				if (wx.createInterstitialAd) {
-					interstitialAd = wx.createInterstitialAd({
-						adUnitId: t.data.indexparameter.liuliangzhu_parameter.chapin_adid
-					})
-					interstitialAd.onLoad(() => {})
-					interstitialAd.onError((err) => {})
-					interstitialAd.onClose(() => {})
-				}
+				// if (wx.createInterstitialAd) {
+				// 	interstitialAd = wx.createInterstitialAd({
+				// 		adUnitId: t.data.indexparameter.liuliangzhu_parameter.chapin_adid
+				// 	})
+				// 	interstitialAd.onLoad(() => {})
+				// 	interstitialAd.onError((err) => {})
+				// 	interstitialAd.onClose(() => {})
+				// }
 				// 在适合的场景显示插屏广告
-				if (interstitialAd) {
-					interstitialAd.show().catch((err) => {
-						console.error(err)
-					})
-				}
+				// if (interstitialAd) {
+				// 	interstitialAd.show().catch((err) => {
+				// 		console.error(err)
+				// 	})
+				// }
 			} else {
 				console.log('首页插屏关闭');
 			}
 		}, 5000)
 	},
 	onLoad: function (options) {
+		
 		var t = this;
 		var myDate = new Date();
 		var time = myDate.toLocaleDateString();
@@ -197,7 +202,6 @@ Page({
 							})
 						} else {
 							//失败
-
 							wx.showModal({
 								title: '提示',
 								showCancel: false,
@@ -210,11 +214,9 @@ Page({
 									}
 								}
 							})
-
 						}
 					},
 					fail: function (response) {
-
 						wx.showModal({
 							title: '提示',
 							showCancel: false,
@@ -242,48 +244,8 @@ Page({
 		console.log('MenuButton', t.data.MenuButton);
 		console.log(this);
 		//t.getmemberboxes(t.data.box_pageno);
-		var randomnum2 = 0;
-		setInterval(() => {
-			/*
-			      randomnum2 = Math.floor(Math.random() * 4);
-			      if (randomnum2 == t.data.randomnum) {
-			      } else {
-			        if (t.data.danmulist.length > 10) {
-			          setTimeout(() => {
-			            t.data.danmulist = []
-			          }, 2800)
-			        } else {
-			          t.data.danmulist.push(['', randomnum2])
-			          t.setData({
-			            danmulist: t.data.danmulist,
-			          })
-			        }
-			        t.data.randomnum = randomnum2;
-			      }
-			      */
-			t.data.jifen = parseFloat(t.data.jifen + t.data.one_sec_productivity).toFixed(3)
-			t.data.jifen = parseFloat(t.data.jifen);
-			if (t.data.jifen > 999999) {
-				t.setData({
-					jifenfontsize: '35rpx'
-				})
-			} else {
-				t.setData({
-					jifenfontsize: '40rpx'
-				})
-			}
-			t.setData({
-				jifenanimation: 'jifen-animation'
-			})
-			setTimeout(() => {
-				t.setData({
-					jifenanimation: ''
-				})
-			}, 500)
-			t.setData({
-				jifens: t.data.jifen.toLocaleString(),
-			})
-		}, 1000)
+		t.getBanner(); //banner图
+		t.getGoodsListFun(t.data.pageNumber);//商品列表
 		this.getindexparameter();
 		if (!app.util.islogin()) {
 			t.setData({
@@ -338,9 +300,13 @@ Page({
 		this.setData({
 			animation: 'animation'
 		})
+		//获取用户信息
 		this.getindexmemberinfo();
-		if (t.data.boxlist.length < 1) {
-			t.getmemberboxes(0);
+		// if (t.data.boxlist.length < 1) {
+		// 	t.getmemberboxes(0);
+		// }
+		if (t.data.goodsList.length < 1) {
+			t.getGoodsListFun(0);//商品列表
 		}
 	},
 	//去现货列表页
@@ -356,9 +322,11 @@ Page({
 		})
 	},
 	//去商品详情页
-	goGoodsDetailPage() {
+	goGoodsDetailPage(e) {
+		let type = e.currentTarget.dataset.type, id = '';
+		id = type ? e.currentTarget.dataset.prizeid : e.currentTarget.dataset.id;
 		wx.navigateTo({
-			url: '/pages/newPage/detail/detail',
+			url: '/pages/newPage/detail/detail?id=' + id,
 		})
 	},
 	checkUpdate() {
@@ -1383,11 +1351,7 @@ Page({
 			['boxlist[' + t.data.select_box_index + '].state']: 1
 		})
 	},
-	onPullDownRefresh: function (res) {
-		console.log('下拉刷新');
-		this.getmemberboxes(0);
-		this.getindexmemberinfo();
-	},
+	
 	viewprizesimg(e) {
 		console.log(e.currentTarget.dataset.pic);
 		console.log(this.data.openboxinfo.prizes_list);
@@ -1610,6 +1574,7 @@ Page({
 			})
 		}
 	},
+	//获取用户信息
 	getindexmemberinfo() {
 		var t = this;
 		if (!app.util.islogin()) {
@@ -1665,6 +1630,7 @@ Page({
 			}
 		});
 	},
+	//这个函数不能注释，会出现不可预估的错误
 	getindexparameter() {
 		var t = this;
 		app.util.request({
@@ -1684,7 +1650,6 @@ Page({
 						ads: response.data.data.ad,
 					})
 					var randomnum2 = 0;
-					// t.data.danmulist=response.data.data.winning_list
 					setInterval(() => {
 						if (t.data.danmususpend == true) {
 							return;
@@ -1711,24 +1676,24 @@ Page({
 					if (response.data.data.liuliangzhu_parameter.jili_adid !== '' && response.data.data.other_parameter.free_box_jiliad_enable == 1) {
 
 						// 在页面onLoad回调事件中创建激励视频广告实例
-						if (wx.createRewardedVideoAd) {
-							videoAd = wx.createRewardedVideoAd({
-								adUnitId: response.data.data.liuliangzhu_parameter.jili_adid
-							})
-							videoAd.onLoad(() => {})
-							videoAd.onError((err) => {})
-							videoAd.onClose((res) => {
-								console.log(res);
-								if (res.isEnded) {
-									t.getfreebox();
-								} else {
-									wx.showToast({
-										icon: 'none',
-										title: '完整看完视频才能领取哦',
-									})
-								}
-							})
-						}
+						// if (wx.createRewardedVideoAd) {
+						// 	videoAd = wx.createRewardedVideoAd({
+						// 		adUnitId: response.data.data.liuliangzhu_parameter.jili_adid
+						// 	})
+						// 	videoAd.onLoad(() => {})
+						// 	videoAd.onError((err) => {})
+						// 	videoAd.onClose((res) => {
+						// 		console.log(res);
+						// 		if (res.isEnded) {
+						// 			t.getfreebox();
+						// 		} else {
+						// 			wx.showToast({
+						// 				icon: 'none',
+						// 				title: '完整看完视频才能领取哦',
+						// 			})
+						// 		}
+						// 	})
+						// }
 					}
 				} else {
 					//失败
@@ -1754,10 +1719,7 @@ Page({
 			}
 		});
 	},
-	onReachBottom: function () {
-		var that = this;
-		this.getmemberboxes(that.data.box_pageno);
-	},
+	
 	jumpminiapp(e) {
 		console.log(e.currentTarget.dataset);
 		if (e.currentTarget.dataset.appid == '') {
@@ -1790,34 +1752,115 @@ Page({
 	},
 	// 获取盲盒函数
 	getmemberboxes(box_pageno) {
+		// var t = this;
+		// if (box_pageno == 0) {
+		// 	t.data.box_pageno = 0;
+		// }
+		// app.util.request({
+		// 	url: 'entry/wxapp/getmemberboxes',
+		// 	data: {
+		// 		m: app.globalData.module_name,
+		// 		page: box_pageno
+		// 	},
+		// 	method: 'get',
+		// 	success: function (response) {
+		// 		console.log('getmemberboxes', response.data);
+		// 		if (response.data.errno == 0) {
+		// 			if (response.data.data.length == 0 && box_pageno == 0) {
+		// 				wx.showToast({
+		// 					icon: 'none',
+		// 					title: '没有更多了',
+		// 				})
+		// 				t.setData({
+		// 					boxlist: response.data.data,
+		// 				})
+		// 			} else {
+		// 				t.setData({
+		// 					boxlist: box_pageno > 0 ? t.data.boxlist.concat(response.data.data) : response.data.data,
+		// 					box_pageno: t.data.box_pageno + 1,
+		// 				})
+		// 			}
+		// 		} else {
+		// 			//失败
+		// 			wx.showToast({
+		// 				icon: 'none',
+		// 				title: response.data.message,
+		// 			})
+		// 		}
+		// 	},
+		// 	fail: function (response) {
+		// 		wx.showToast({
+		// 			icon: 'none',
+		// 			title: response.data.message,
+		// 		})
+		// 	},
+		// 	complete: function () {
+		// 		wx.stopPullDownRefresh();
+		// 	}
+		// });
+	},
+	// 获取商品列表函数
+	getGoodsListFun(pageNumber) {
 		var t = this;
-		if (box_pageno == 0) {
-			t.data.box_pageno = 0;
+		if (pageNumber == 0) {
+			t.data.pageNumber = 0;
 		}
 		app.util.request({
-			url: 'entry/wxapp/getmemberboxes',
+			url: 'entry/wxapp/get_prizes_list',
 			data: {
 				m: app.globalData.module_name,
-				page: box_pageno
+				sale_type: '',
+				page: pageNumber
 			},
 			method: 'get',
 			success: function (response) {
-				console.log('getmemberboxes', response.data);
+				console.log('获取商品列表函数', response);
 				if (response.data.errno == 0) {
-					if (response.data.data.length == 0 && box_pageno == 0) {
+					if (response.data.data.length == 0 && pageNumber == 0) {
 						wx.showToast({
 							icon: 'none',
 							title: '没有更多了',
 						})
-						t.setData({
-							boxlist: response.data.data,
-						})
 					} else {
 						t.setData({
-							boxlist: box_pageno > 0 ? t.data.boxlist.concat(response.data.data) : response.data.data,
-							box_pageno: t.data.box_pageno + 1,
+							goodsList: pageNumber > 0 ? t.data.goodsList.concat(response.data.data.list) : response.data.data.list,
+							pageNumber: t.data.pageNumber + 1,
 						})
 					}
+				} else {
+					//失败
+					wx.showToast({
+						icon: 'none',
+						title: response.data.message,
+					})
+				}
+			},
+			fail: function (response) {
+				wx.showToast({
+					icon: 'none',
+					title: response.data.message,
+				})
+			},
+			complete: function () {
+				wx.stopPullDownRefresh();
+			}
+		});
+	},
+	// 获取banner数据
+	getBanner() {
+		var t = this;
+		app.util.request({
+			url: 'entry/wxapp/get_banner_list',
+			data: {
+				m: app.globalData.module_name
+			},
+			method: 'get',
+			success: function (response) {
+				console.log('首页banner图', response);
+				if (response.data.errno == 0) {
+					t.setData({
+						bannerList: response.data.data.list || []
+					})
 				} else {
 					//失败
 					wx.showToast({
@@ -1867,6 +1910,18 @@ Page({
 				})
 			}
 		});
+	},
+	//下拉刷新
+	onPullDownRefresh: function (res) {
+		console.log('下拉刷新');
+		this.getmemberboxes(0);
+		this.getindexmemberinfo();
+	},
+	//上拉加载
+	onReachBottom: function () {
+		var that = this;
+		this.getmemberboxes(that.data.box_pageno);
+		this.getGoodsListFun(that.data.pageNumber);//商品列表
 	},
 	onShareTimeline() {
 		var memberinfo = wx.getStorageSync('memberinfo');

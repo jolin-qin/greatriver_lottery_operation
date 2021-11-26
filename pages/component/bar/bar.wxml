@@ -2,21 +2,21 @@
 <view class="cu-bar tabbar bg-white" style="position:fixed;bottom:0;width:100%;z-index: 9;">
 	<view class="action   {{navtab=='index'?'text-bold  text-black ':'text-grey'}}" bindtap="nav" data-tabs="index">
 		<view style='padding:10rpx;' class="{{animation1}}">
-			<image src="{{indextitle=='返回顶部'?'/resource/icon/rocket.png':'/resource/icon/icon1b.png'}}"
+			<image src="{{indextitle=='返回顶部'?'/resource/icon/rocket.png':'/resource/icon/icon2.png'}}"
 				style="width:60rpx;height:60rpx;"></image>
 		</view> {{indextitle=='返回顶部'?'返回顶部':'JC商城'}}
 	</view>
 	<view class="action  {{navtab=='warehouse'?'text-bold text-black ':'text-grey'}}" bindtap="nav"
 		data-tabs="warehouse">
 		<view style='padding:10rpx;' class="{{animation2}}">
-			<image src="/resource/icon/icon2.png" style="width:60rpx;height:60rpx;"></image>
+			<image src="/resource/icon/icon1b.png" style="width:60rpx;height:60rpx;"></image>
 		</view> 胶库
 	</view>
 	<view class="action  {{navtab=='mystar'?'text-bold text-black ':'text-grey'}} add-action" bindtap="nav"
 		data-tabs="mystar">
 		<view class="{{animation3}}"
 			style="margin-top:-20rpx;z-index:9999;position:absolute;top:-60rpx;left: 0;right: 0;margin: auto;">
-			<image src="/resource/icon/icon7.png" style="width:120rpx;height:120rpx;"></image>
+			<image src="/resource/icon/JCshang.png" style="width:104rpx;height:120rpx;"></image>
 		</view>
 		<view style="height:35rpx;"></view>
 		<text>JC赏</text>
@@ -29,7 +29,7 @@
 	</view>
 	<view class="action  {{navtab=='my'?'text-bold text-black ':'text-grey'}}" bindtap="nav" data-tabs="my">
 		<view style='padding:10rpx;' class="{{animation5}}">
-			<image src="/resource/icon/icon4.png" mode="aspectFill" style="width:60rpx;height:60rpx;"></image>
+			<image src="/resource/icon/mine.png" mode="aspectFill" style="width:60rpx;height:60rpx;"></image>
 		</view>
 		我的
 	</view>

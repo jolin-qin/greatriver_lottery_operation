@@ -3,6 +3,11 @@
     width: 100%;
     height: 750rpx;
 }
+.good_img {
+    display: block;
+    width: 100%;
+}
+
 .introduce_wrapper {
     width: 100%;
     padding: 30rpx 60rpx;
@@ -73,6 +78,17 @@
 .coupon_wrapper .content {
     color: #E62945;
 }
+/* 商品详情 */
+.details_wrapper {
+    width: 710rpx;
+    margin: 0 auto;
+}
+.details_wrapper .title_text {
+    display: block;
+    font-size: 32rpx;
+    font-weight: 500;
+    line-height: 100rpx;
+}
 .zhanwei {
     width: 100%;
     height: 120rpx;
@@ -96,12 +112,240 @@
     z-index: 2;
 }
 .footer_wrapper .btn {
-    width: 200rpx;
-    height: 60rpx;
-    line-height: 60rpx;
-    border-radius: 30rpx;
+    width: 284rpx;
+    height: 76rpx;
+    line-height: 76rpx;
+    border-radius: 38rpx;
     text-align: center;
     color: #fff;
     margin: 0 16rpx;
     background: red;
+}
+.footer_wrapper .immediately_buy {
+    background: url('https://www.jiaochao.top/imageurl/buy_btn.png') no-repeat center;
+	background-size: 284rpx 76rpx;
+}
+.footer_wrapper .jcshang {
+    background: url('https://www.jiaochao.top/imageurl/JCshang_btn.png') no-repeat center;
+	background-size: 284rpx 76rpx;
+}
+/* 查看弹窗 */
+.viewPopup .content {
+    width: 600rpx;
+    height: auto;
+    padding: 30rpx
+}
+.viewPopup .content .title {
+    margin-top: 20rpx;
+    margin-bottom: 20rpx;
+    text-align: center;
+    font-size: 36rpx;
+    font-weight: bold;
+}
+/* 优惠券弹出框 */
+.coupon_popup .coupon_content {
+    width: 100%;
+    height: 600rpx;
+    background: #DB4A25;
+    border-radius: 20rpx;
+    position: relative;
+}
+.coupon_popup .title_01 {
+    text-align: center;
+    color: #fff;
+    line-height: 80rpx;
+    font-weight: bold;
+}
+.coupon_popup .scrollView {
+    overflow: hidden;
+}
+.coupon_popup .title_02 {
+    text-align: center;
+    color: #fff;
+    line-height: 80rpx;
+    font-weight: bold;
+    font-size: 28rpx;
+}
+.coupon_popup .coupom_item {
+    width: 600rpx;
+    height: 144rpx;
+    padding: 0 36rpx 0 30rpx;
+    background: url('https://www.jiaochao.top/imageurl//challenge_17.png') no-repeat;
+    background-size: cover;
+    margin: 0 auto;
+}
+.coupon_popup .coupom_item .coupon_left {
+    flex: 0 0 100rpx;
+}
+.coupon_popup .coupom_item .symbol {
+    color: #FE2900;
+}
+.coupon_popup .coupom_item .face_value {
+    color: #FE2900;
+    font-size: 42rpx;
+    font-weight: bold;
+}
+.coupom_item .coupon_middle {
+    flex: 1;
+}
+.coupom_item .condition {
+    font-weight: bold;
+    margin-bottom: 6rpx;
+}
+.coupom_item .useful_life {
+    font-size: 26rpx;
+    color: #FE340C;
+}
+.coupom_item .coupon_right {
+    line-height: 44rpx;
+    padding: 0 10rpx;
+    background: #FE9C01;
+    color: #fff;
+    border-radius: 6rpx;
+    white-space: nowrap;
+}
+.coupom_item .coupon_right.active {
+    background: #B5B6B5;
+}
+.coupon_popup .coupon_content .close_img {
+    width: 40rpx;
+    height: 40rpx;
+    position: absolute;
+    top: 20rpx;
+    left: 20rpx;
+}
+/* end */
+/* 利用正则给img添加class,然后控制样式 */
+.rich_img {
+    display: block;
+    height: auto;
+}
+/* 购买弹窗css */
+.closeBuyPopupImg {
+    padding-left: 50rpx;
+    padding-top: 30rpx;
+    margin-bottom: 50rpx;
+}
+.closeBuyPopupImg .img {
+    display: inline-block;
+    width: 50rpx;
+    height: 50rpx;
+}
+.submitOrderAddAddress {
+	width: 700rpx;
+	margin: 0 auto;
+    background-color: #fff;
+    padding: 36rpx 20rpx;
+	border-radius: 10rpx;
+    position: relative;
+}
+.noAddress {
+    margin: 0 auto;
+    width: 600rpx;
+    height: 72rpx;
+    border: 2rpx solid #333;
+    color: #333;
+    border-radius: 6rpx;
+	box-sizing: border-box;
+}
+.noAddress .add_symbol {
+    width: 40rpx;
+    height: 40rpx;
+}
+
+.noAddress .txt {
+    margin-left: 6rpx;
+}
+.specificInformation {
+	flex: 0 0 600rpx;
+	width: 600rpx;
+}
+.selectedAddressName {
+    font-weight: bold;
+    color: #333;
+	margin-bottom: 20rpx;
+}
+.selectedAddress {
+    font-size: 28rpx;
+    color: #333;
+    line-height: 36rpx;
+}
+.selectedAddressTotal .right_arrow {
+    width: 30rpx;
+    height: 30rpx;
+}
+.productList-wrap {
+	width: 700rpx;
+	margin: 20rpx auto;
+	border-radius: 10rpx;
+	padding: 24rpx;
+	background-color: #fff;
+}
+.orderProductList {
+	padding-bottom: 20rpx;
+}
+.cartProducePic {
+	flex: 0 0 186rpx;
+	width: 186rpx;
+    height: 186rpx;
+	border-radius: 10rpx;
+	overflow: hidden;
+    margin-right: 30rpx;
+}
+.cartProducePic .img100 {
+	width: 100%;
+	height: 100%;
+}
+.orderIntroContent {
+	flex: 1;
+}
+.cartProduceTitle {
+    margin: 0 0 50rpx 0;
+	line-height: 48rpx;
+	height: 96rpx;
+	text-align: justify;
+}
+.cartProducePrice {
+	font-size: 28rpx;
+}
+.orderNumbers {
+	font-size: 28rpx;
+}
+.orderNumbers .txt {
+	font-size: 24rpx;
+}
+.orderPayment {
+	font-size: 28rpx;
+}
+.goodsAmount, .freight {
+    line-height: 72rpx;
+	border-top: 2rpx solid #f4f4f4;
+}
+.goodsAmount .tips {
+    color: red;
+}
+.submit-order-footer {
+	width: 100%;
+    height: 100rpx;
+    position: fixed;
+	bottom: 0;
+	left: 50%;
+	transform: translateX(-50%);
+	background-color: #fff;
+	padding: 0 30rpx;
+}
+.submit-order-footer-lf {
+    font-weight: bold;
+}	
+.submit-order-footer-rt {
+    width: 370rpx;
+	/* background: linear-gradient(to right, #BC9966, #AB8957, #9C7B4A); */
+	height: 80rpx;
+	line-height: 76rpx;
+	text-align: center;
+	background: #FE2900;
+	box-sizing: border-box;
+	border-radius: 40rpx;
+    font-size: 36rpx;
+    color: #fff;
 }
