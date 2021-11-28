@@ -28,10 +28,15 @@ Page({
 		inviterlist: [],
 		show_jili_type: 0, //触发激励视频的原因0挖掘矿石 1激励任务
 		// 新数据
+		projecturl: app.util.projectUrl,
 		tabs: [{id:0, name:'万代'},{id:1, name:'酸雨战争'},{id:2, name:'合金成品'},{id:3, name:'HOTTOYS'},{id:4, name:'潮流盲盒'}],
+		bannerList: [],//banner数组
 		tabIndex: 0,
 		baseNumber: 0,//px与rpx转换基数
 		isFixed: false,
+		pageNumber: 1,
+		seriesId: '',//系列Id
+		classList: [],//系列下的盒子
 	},
 
 	/**
@@ -61,6 +66,8 @@ Page({
 		// 		available_integral2: t.data.available_integral.toLocaleString(),
 		// 	})
 		// }, 1000)
+		this.getBanner() //获取banner
+		this.getSeriesListFun() //获取系列
 		//获取px与rpx的转换基数
         let Height = wx.getSystemInfoSync().windowWidth // 屏幕的宽度
         this.setData({
@@ -73,26 +80,207 @@ Page({
 	 */
 	onReady: function () {
 		// 在页面onLoad回调事件中创建激励视频广告实例
+		// var t = this;
+		// wx.getStorage({
+		// 	key: 'guide',
+		// 	success(res) {
+		// 		console.log(res.data)
+		// 	},
+		// 	fail() {
+		// 		wx.createSelectorQuery().select('#wjbutton').boundingClientRect(function (res) {
+		// 			console.log('wjbutton', res)
+		// 			t.setData({
+		// 				yindao_d: res
+		// 			})
+		// 		}).exec()
+		// 		app.globalData.guide[4] = true;
+		// 		t.setData({
+		// 			guide: app.globalData.guide
+		// 		})
+		// 	}
+		// })
+	},
+	/**
+	 * 生命周期函数--监听页面显示
+	 */
+	onShow: function () {
+		var t = this
+		if (!app.util.islogin()) {
+			this.setData({
+				islogin: false
+			})
+			return;
+		} else {
+			this.setData({
+				islogin: true
+			})
+		}
+		// t.getinviterlist(0);
+		// if (t.data.isgzhtask !== 0) {
+		// 	t.up_taskinfo(t.data.isgzhtask, '');
+		// 	t.data.isgzhtask = 0;
+		// }
+		// if (t.data.isminiapptask !== 0) {
+		// 	clearInterval(t.data.intervalID);
+		// 	if (t.data.miniapp_runtime < t.data.miniapp_min_runtime) {
+		// 		wx.showModal({
+		// 			title: '提示',
+		// 			showCancel: false,
+		// 			content: '试用时间不足' + t.data.miniapp_min_runtime + '秒，无法领取奖励',
+		// 			success(res) {
+		// 				if (res.confirm) {
+		// 					console.log('用户点击确定')
+		// 				} else if (res.cancel) {
+		// 					console.log('用户点击取消')
+		// 				}
+		// 			}
+		// 		})
+		// 		t.data.isminiapptask = 0;
+		// 		t.data.miniapp_runtime = 0;
+		// 		t.data.miniapp_min_runtime = 0;
+		// 		return;
+		// 	}
+		// 	t.up_taskinfo(t.data.isminiapptask, '');
+		// 	t.data.isminiapptask = 0;
+		// 	t.data.miniapp_runtime = 0;
+		// 	t.data.miniapp_min_runtime = 0;
+		// }
+		// this.getindexparameter();
+	},
+	// 获取banner数据
+	getBanner() {
 		var t = this;
-		wx.getStorage({
-			key: 'guide',
-			success(res) {
-				console.log(res.data)
+		app.util.request({
+			url: 'entry/wxapp/get_banner_list',
+			data: {
+				m: app.globalData.module_name
 			},
-			fail() {
-				wx.createSelectorQuery().select('#wjbutton').boundingClientRect(function (res) {
-					console.log('wjbutton', res)
+			method: 'get',
+			success: function (response) {
+				console.log('banner图', response);
+				if (response.data.errno == 0) {
 					t.setData({
-						yindao_d: res
+						bannerList: response.data.data.list || []
 					})
-				}).exec()
-				app.globalData.guide[4] = true;
-				t.setData({
-					guide: app.globalData.guide
+				} else {
+					//失败
+					wx.showToast({
+						icon: 'none',
+						title: response.data.message,
+					})
+				}
+			},
+			fail: function (response) {
+				wx.showToast({
+					icon: 'none',
+					title: response.data.message
 				})
 			}
+		});
+	},
+	//获取系列函数
+	getSeriesListFun() {
+		let t = this;
+		app.util.request({
+			url: 'entry/wxapp/get_series_ist',
+			data: {
+				m: app.globalData.module_name
+			},
+			method: 'get',
+			success: function (response) {
+				console.log('获取系列列表函数', response);
+				if (response.data.errno == 0) {
+					let result = response.data.data.list
+					t.setData({
+						tabs: result,
+						seriesId: result[0].box_class_id
+					})
+					//根据seriesId请求盒子列表
+					t.getClassListFun(result[0].box_class_id, 1)
+				} else {
+					//失败
+					wx.showToast({
+						icon: 'none',
+						title: response.data.message,
+					})
+				}
+			},
+			fail: function (response) {
+				wx.showToast({
+					icon: 'none',
+					title: response.data.message,
+				})
+			}
+		});
+	},
+	// 获取盒子列表函数
+	getClassListFun(id, pageNumber) {
+		var t = this;
+		if (pageNumber == 1) {
+			t.data.pageNumber = 1;
+		}
+		app.util.request({
+			url: 'entry/wxapp/getclassbox',
+			data: {
+				m: app.globalData.module_name,
+				classid: id
+				// page: pageNumber
+			},
+			method: 'get',
+			success: function (response) {
+				console.log('获取盒子列表函数', response);
+				if (response.data.errno == 0) {
+					if (response.data.data.length == 0 && pageNumber == 1) {
+						wx.showToast({
+							icon: 'none',
+							title: '没有更多了',
+						})
+					} else {
+						t.setData({
+							classList: pageNumber > 1 ? t.data.classList.concat(response.data.data) : response.data.data,
+							pageNumber: t.data.pageNumber + 1,
+						})
+					}
+				} else {
+					wx.showToast({
+						icon: 'none',
+						title: response.data.message,
+					})
+				}
+			},
+			fail: function (response) {
+				wx.showToast({
+					icon: 'none',
+					title: response.data.message,
+				})
+			}
+		});
+	},
+	//tab点击
+	tabClick(e) {
+		let index = e.currentTarget.dataset.index;
+		let id = e.currentTarget.dataset.id;
+		if (index === this.data.tabIndex) {
+			return
+		}
+		this.setData({
+			tabIndex: index,
+			pageNumber: 1,
+			seriesId: id,
+			classList: []
+		})
+		//请求系列下的盒子列表
+		this.getClassListFun(id, this.data.pageNumber)
+	},
+	//去抽盲盒页
+	goJCshangPage(e) {
+		let type = e.currentTarget.dataset.type, id = '';
+		id = type ? e.currentTarget.dataset.prizeid : e.currentTarget.dataset.id;
+		wx.navigateTo({
+			url: '/pages/newPage/JCshang/JCshang?id=' + id,
 		})
 	},
+	
 	//点击‘做任务’
 	dotask(e) {
 		var t = this;
@@ -180,7 +368,6 @@ Page({
 				m: app.globalData.module_name,
 				id: taskid,
 				answer: answer
-
 			},
 			method: 'post',
 			success: function (response) {
@@ -217,12 +404,10 @@ Page({
 							}
 						}
 					})
-
 				}
-				t.getindexparameter();
+				// t.getindexparameter();
 			},
 			fail: function (response) {
-
 				wx.showModal({
 					title: '提示',
 					showCancel: false,
@@ -249,94 +434,9 @@ Page({
 			})
 		}, 500)
 	},
-
-	/**
-	 * 生命周期函数--监听页面显示
-	 */
-	onShow: function () {
-		var t = this
-		if (!app.util.islogin()) {
-			this.setData({
-				islogin: false
-			})
-			return;
-		} else {
-			this.setData({
-				islogin: true
-			})
-		}
-		t.getinviterlist(0);
-
-		if (t.data.isgzhtask !== 0) {
-			t.up_taskinfo(t.data.isgzhtask, '');
-			t.data.isgzhtask = 0;
-		}
-		if (t.data.isminiapptask !== 0) {
-			clearInterval(t.data.intervalID);
-			if (t.data.miniapp_runtime < t.data.miniapp_min_runtime) {
-				wx.showModal({
-					title: '提示',
-					showCancel: false,
-					content: '试用时间不足' + t.data.miniapp_min_runtime + '秒，无法领取奖励',
-					success(res) {
-						if (res.confirm) {
-							console.log('用户点击确定')
-						} else if (res.cancel) {
-							console.log('用户点击取消')
-						}
-					}
-				})
-				t.data.isminiapptask = 0;
-				t.data.miniapp_runtime = 0;
-				t.data.miniapp_min_runtime = 0;
-				return;
-			}
-			t.up_taskinfo(t.data.isminiapptask, '');
-			t.data.isminiapptask = 0;
-			t.data.miniapp_runtime = 0;
-			t.data.miniapp_min_runtime = 0;
-		}
-		this.getindexparameter();
-	},
-
-	/**
-	 * 生命周期函数--监听页面隐藏
-	 */
-	onHide: function () {
-		app.globalData.guide[5] = false;
-		if (app.globalData.guide_step < 5) {
-			app.globalData.guide_step = 5;
-
-		}
-		this.setData({
-			guide: app.globalData.guide
-		})
-		console.log('触发了onhide');
-	},
 	
-	/**
-	 * 生命周期函数--监听页面卸载
-	 */
-	onUnload: function () {
-
-	},
-	//tab点击
-	tabClick(e) {
-		let index = e.currentTarget.dataset.index;
-		this.setData({
-			tabIndex: index
-		})
-	},
-	//去抽盲盒页
-	goJCshangPage() {
-		wx.navigateTo({
-			url: '/pages/newPage/JCshang/JCshang',
-		})
-	},
-
-	
+	// 用户触发广告后，显示激励视频广告
 	clickgetintegral() {
-		// 用户触发广告后，显示激励视频广告
 		this.data.show_jili_type = 0;
 		console.log('触发激励视频');
 		if (videoAd) {
@@ -350,6 +450,7 @@ Page({
 			})
 		}
 	},
+	//领取矿石
 	getintegral(e) {
 		var t = this;
 		app.globalData.guide[4] = false;
@@ -380,10 +481,8 @@ Page({
 								}
 							}
 						})
-						t.getindexparameter();
+						// t.getindexparameter();
 					} else {
-						//失败
-
 						wx.showModal({
 							title: '提示',
 							showCancel: false,
@@ -396,11 +495,9 @@ Page({
 								}
 							}
 						})
-
 					}
 				},
 				fail: function (response) {
-
 					wx.showToast({
 						icon: 'none',
 						title: response.data.message,
@@ -445,14 +542,12 @@ Page({
 							}
 						}
 					})
-					t.getindexparameter();
-
+					// t.getindexparameter();
 				} else {
 					//失败
 				}
 			},
 			fail: function (response) {
-
 				wx.showModal({
 					title: '提示',
 					showCancel: false,
@@ -480,7 +575,6 @@ Page({
 			this.setData({
 				successmodalenable: true,
 				successmodal: {
-
 					'title': title,
 					'content': content
 				}
@@ -491,7 +585,7 @@ Page({
 	getinviterlist(pg) {
 		var t = this;
 		app.util.request({
-			url: 'entry/wxapp/getinviterlist',
+			url: 'entry/wxapp/',
 			data: {
 				m: app.globalData.module_name,
 				page: t.data.pg
@@ -620,13 +714,31 @@ Page({
 				}
 			},
 			fail: function (response) {
-
 				wx.showToast({
 					icon: 'none',
 					title: '获取参数失败',
 				})
 			}
 		});
+	},
+	/**
+	 * 生命周期函数--监听页面隐藏
+	 */
+	onHide: function () {
+		app.globalData.guide[5] = false;
+		if (app.globalData.guide_step < 5) {
+			app.globalData.guide_step = 5;
+		}
+		this.setData({
+			guide: app.globalData.guide
+		})
+		console.log('触发了onhide');
+	},
+	/**
+	 * 生命周期函数--监听页面卸载
+	 */
+	onUnload: function () {
+
 	},
 	/**
 	 * 用户点击右上角分享
@@ -665,10 +777,9 @@ Page({
 	 * 页面上拉触底事件的处理函数
 	 */
 	onReachBottom: function () {
-
 		var that = this;
-		that.data.pg = that.data.pg + 1;
-		console.log('触发加载更多' + that.data.pg);
-		this.getinviterlist(that.data.pg);
+		// that.data.pg = that.data.pg + 1;
+		// console.log('触发加载更多' + that.data.pg);
+		// this.getinviterlist(that.data.pg);
 	},
 })

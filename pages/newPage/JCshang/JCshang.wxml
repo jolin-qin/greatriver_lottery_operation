@@ -6,15 +6,23 @@
 		<image class="right_img" src="{{imgUrl}}JCshang_04.png" mode="widthFix"></image>
 		<view class="middle_area">
 			<image class="title_img" src="{{imgUrl}}JCshang_05.png" mode="scaleToFill"></image>
-			<image class="series_img" src="/resource/images/button.jpg" mode="scaleToFill"></image>
+			<image class="series_img" src="{{boxObj.box_cover}}" mode="aspectFill"></image>
 			<image class="big_img" src="{{imgUrl}}JCshang_02.png" mode="widthFix"></image>
+			<!-- 九宫格 -->
+			<view class="sudoku">
+				<view class="sudoku_item" wx:for="{{goodsList}}" wx:key="index">
+					<image class="goods_img" src="{{item.prize_pic}}" mode="scaleToFill"></image>
+				</view>
+			</view>
 		</view>
-		<view class="residue_num">剩余盲盒：8</view>
+		<!-- 投影 -->
+		<image class="touying" src="{{imgUrl}}JCshang_14.jpg" mode="scaleToFill"></image>
+		<view class="residue_num">剩余盲盒：{{remainNum}}</view>
 	</view>
 	<view class="operation_wrapper">
 		<view class="name_introduce">
-			<view class="name">盲盒名称</view>
-			<view class="introduce">盲盒介绍盲盒介绍盲盒介绍盲盒介绍</view>
+			<view class="name">{{boxObj.box_title}}</view>
+			<view class="introduce">{{boxObj.box_content}}</view>
 		</view>
 		<view class="buy_num flex_between">
 			<image class="one_img img" src="{{imgUrl}}JCshang_06.png" mode="scaleToFill"></image>
