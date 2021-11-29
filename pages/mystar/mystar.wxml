@@ -263,46 +263,7 @@
 			<image class="series_img" src="/resource/images/box.jpg" mode="aspectFill"></image>
 			<view class="series_intro ellipsis_1">介绍介绍介绍介绍介绍</view>
 		</view>
-		<view class="list_item" bindtap="goJCshangPage">
-			<image class="series_img" src="/resource/images/box.jpg" mode="aspectFill"></image>
-			<view class="series_intro ellipsis_1">介绍介绍介绍</view>
-		</view>
-		<view class="list_item" bindtap="goJCshangPage">
-			<image class="series_img" src="/resource/images/box.jpg" mode="aspectFill"></image>
-			<view class="series_intro ellipsis_1">介绍介绍介绍介绍介绍</view>
-		</view>
-		<view class="list_item" bindtap="goJCshangPage">
-			<image class="series_img" src="/resource/images/box.jpg" mode="aspectFill"></image>
-			<view class="series_intro ellipsis_1">介绍介绍介绍介绍介绍</view>
-		</view>
-		<view class="list_item" bindtap="goJCshangPage">
-			<image class="series_img" src="/resource/images/box.jpg" mode="aspectFill"></image>
-			<view class="series_intro ellipsis_1">介绍介绍介绍介绍介绍</view>
-		</view>
-		<view class="list_item" bindtap="goJCshangPage">
-			<image class="series_img" src="/resource/images/box.jpg" mode="aspectFill"></image>
-			<view class="series_intro ellipsis_1">介绍介绍介绍介绍介绍</view>
-		</view>
-		<view class="list_item">
-			<image class="series_img" src="/resource/images/box.jpg" mode="aspectFill"></image>
-			<view class="series_intro ellipsis_1">介绍介绍介绍介绍介绍</view>
-		</view>
-		<view class="list_item">
-			<image class="series_img" src="/resource/images/box.jpg" mode="aspectFill"></image>
-			<view class="series_intro ellipsis_1">介绍介绍介绍介绍介绍</view>
-		</view>
-		<view class="list_item">
-			<image class="series_img" src="/resource/images/box.jpg" mode="aspectFill"></image>
-			<view class="series_intro ellipsis_1">介绍介绍介绍介绍介绍</view>
-		</view>
-		<view class="list_item">
-			<image class="series_img" src="/resource/images/box.jpg" mode="aspectFill"></image>
-			<view class="series_intro ellipsis_1">介绍介绍介绍介绍介绍</view>
-		</view>
-		<view class="list_item">
-			<image class="series_img" src="/resource/images/box.jpg" mode="aspectFill"></image>
-			<view class="series_intro ellipsis_1">介绍介绍介绍介绍介绍</view>
-		</view>
+		
 	</view>
 </view>
 <loginmodal wx:if="{{!islogin}}" />
