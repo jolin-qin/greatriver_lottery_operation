@@ -39,7 +39,7 @@
 	<view class="cu-dialog" style="border-radius:50rpx;" catchtap>
 
 		<view class='padding-xl'>
-			-- 购买道具 --
+			<!--购买道具 -->
 			<view style="padding:10rpx 0 10rpx 0">
 				<view style="display:flex;margin-top:30rpx;background:#fff;border-radius:20rpx;padding:20rpx;">
 					<image src="{{selecttool.pic}}"

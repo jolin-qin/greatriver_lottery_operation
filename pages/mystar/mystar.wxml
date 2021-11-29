@@ -239,8 +239,8 @@
 <!-- swiper -->
 <swiper class="index_swiper" indicator-dots="{{true}}" interval="2000" autoplay="{{true}}" duration="500" circular="true" easing-function="linear">
 	<swiper-item wx:for="{{bannerList}}" wx:key="index" class="swiper_item" data-type="{{1}}" data-prizeid="{{item.prize_id}}" bindtap="goJCshangPage">
-            <image class="img" src="{{projecturl + item.img}}" mode="aspectFill"></image>
-        </swiper-item>
+		<image class="img" src="{{projecturl + item.img}}" mode="aspectFill"></image>
+	</swiper-item>
 </swiper>
 <!-- tab切换 -->
 <view class="xiding_box">

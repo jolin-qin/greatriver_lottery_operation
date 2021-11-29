@@ -175,7 +175,8 @@
     margin: 0 auto;
 }
 .coupon_popup .coupom_item .coupon_left {
-    flex: 0 0 100rpx;
+    width: 150rpx;
+    flex: 0 0 150rpx;
 }
 .coupon_popup .coupom_item .symbol {
     color: #FE2900;
@@ -208,8 +209,8 @@
     background: #B5B6B5;
 }
 .coupon_popup .coupon_content .close_img {
-    width: 40rpx;
-    height: 40rpx;
+    width: 50rpx;
+    height: 50rpx;
     position: absolute;
     top: 20rpx;
     left: 20rpx;

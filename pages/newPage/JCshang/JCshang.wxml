@@ -24,17 +24,98 @@
 			<view class="name">{{boxObj.box_title}}</view>
 			<view class="introduce">{{boxObj.box_content}}</view>
 		</view>
-		<view class="buy_num flex_between">
+		<view class="buy_num flex_center">
 			<image class="one_img img" src="{{imgUrl}}JCshang_06.png" mode="scaleToFill"></image>
 			<image class="three_img img" src="{{imgUrl}}JCshang_07.png" mode="scaleToFill"></image>
 			<image class="five_img img" src="{{imgUrl}}JCshang_08.png" mode="scaleToFill"></image>
 			<image class="turnkey_img img" src="{{imgUrl}}JCshang_09.png" mode="scaleToFill"></image>
-			<image class="prop_img" src="{{imgUrl}}JCshang_10.png" mode="scaleToFill"></image>
+			<!-- <image class="prop_img" src="{{imgUrl}}JCshang_10.png" mode="scaleToFill"></image> -->
 		</view>
 		<view class="biaoqian">
 			<image class="img" src="{{imgUrl}}JCshang_11.png" mode="scaleToFill"></image>
 			<image class="title_img img" src="{{imgUrl}}JCshang_12.png" mode="scaleToFill"></image>
 		</view>
 	</view>
-</view>
+	<!-- 购买弹窗 -->
+	<van-popup show="{{ buyPopupShow }}" position="bottom" custom-style="height: 100%;background: #f7f8fd;"
+		bind:close="closeBuyPopup">
+		<view class="closeBuyPopupImg" bindtap="closeBuyPopup">
+			<image class="img" src="/resource/icon/close02.png" mode="scaleToFill"></image>
+		</view>
+		<!--盒子信息-->
+		<view class="wrapper box_infor">
+			<!-- <view class="cartProducePic">
+				<image wx:if="{{goodsObj.prize_pic}}" class="img100" src="{{projecturl + goodsObj.prize_pic}}" mode="scaleToFill"></image>
+			</view>
+			<view class="cartProduceTitle ellipsis_2">{{goodsObj.prize_title}}</view> -->
+			<image class="boxPic" src="/resource/images/box.jpg" mode="scaleToFill"></image>
+			<view class="box_title">介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍</view>
+		</view>
+		<!-- 道具 -->
+		<view class="wrapper tool_wrapper">
+			<view class="title">我的道具</view>
+			<block>
+				<view class="flex_between">
+					<view bindtap="openmodal" class="tool_item">
+						<view class="flex_start tool_content">
+							<image class="tool_img" src="/resource/images/box.jpg" mode="aspectFill"></image>
+							<view class="tool_name">奖品透视卡</view>
+						</view>
+						<view class="text_grey">使用本卡可以查看不可见奖品盒子里的内容</view>
+					</view>
+					<view bindtap="openmodal" class="tool_item">
+						<view class="flex_start tool_content">
+							<image class="tool_img" src="/resource/images/box.jpg" mode="aspectFill"></image>
+							<view class="tool_name">奖品透视卡</view>
+						</view>
+						<view class="text_grey">使用本卡可以查看不可见奖品盒子里的内容</view>
+					</view>
+				</view>
+				<!-- <view wx:else>还没有道具哦</view> -->
+			</block>
+		</view>
+		<!-- 抽几次 -->
+		<view></view>
+		<!-- 支付方式选择 -->
 
+		<!--优惠券-->
+		<view class="orderPayment">
+			<view class="goodsAmount flex_between" bindtap="openCouponPopup">
+				<text class="title">优惠券</text>
+				<text class="tips" bindtap="">{{discountAmount}}</text>
+			</view>
+		</view>
+		<!--footer star-->
+		<view class="submit-order-footer flex_between">
+			<view class="submit-order-footer-lf">合计：{{totalPrice}}元</view>
+			<view class="submit-order-footer-rt" bindtap="confirmPayFun">确认支付</view>
+		</view>
+	</van-popup>
+	<!-- 优惠券弹出框 -->
+	<van-popup show="{{couponPopupShow}}" position="bottom"
+		custom-style="height:650rpx;background:#DB4A25;padding-bottom:0;" round custom-class="coupon_popup"
+		z-index="{{101}}">
+		<view class="coupon_content">
+			<view class="title_01">你有{{couponList.length}}张优惠券</view>
+			<scroll-view class="scrollView" scroll-y="true" style="height: 500rpx;">
+				<view class="coupom_item flex_between" wx:for="{{couponList}}" wx:key="index" data-item="{{item}}"
+					data-index="{{index}}" bindtap="choiceCouponFun">
+					<view class="coupon_left">
+						<text class="symbol">￥</text>
+						<text class="face_value">{{item.price}}</text>
+					</view>
+					<view class="coupon_middle">
+						<block>
+							<view class="condition" wx:if="{{item.type === '1'}}">无门槛券</view>
+							<view class="condition" wx:if="{{item.type === '2'}}">满减券</view>
+						</block>
+						<view class="useful_life">{{item.title}}</view>
+					</view>
+					<view class="coupon_right {{index === activeIndex ? 'active' : ''}}">使用</view>
+				</view>
+			</scroll-view>
+			<image class="close_img" src="/resource/icon/close05.png" mode="scaleToFill" bindtap="closeCouponPupop">
+			</image>
+		</view>
+	</van-popup>
+</view>

@@ -1,11 +1,11 @@
 {
     "pages": [
-        
+        "pages/newPage/JCshang/JCshang",
         "pages/index/index",
         "pages/newPage/fenxiangyouli/fenxiangyouli",
         "pages/newPage/huishouguanli/huishouguanli",
         "pages/newPage/integral_detail/integral_detail",
-        "pages/newPage/JCshang/JCshang",
+        
         "pages/mystar/mystar",
         "pages/newPage/yushou/yushou",
         "pages/newPage/xianhuo/xianhuo",

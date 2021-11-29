@@ -145,12 +145,16 @@
                         <text class="face_value">{{item.price}}</text>
                     </view>
                     <view class="coupon_middle">
-                        <view class="condition">{{item.title}}</view>
+                        <block>
+                            <view class="condition" wx:if="{{item.type === '1'}}">无门槛券</view>
+                            <view class="condition" wx:if="{{item.type === '2'}}">满减券</view>
+                        </block>
+                        <view class="useful_life">{{item.title}}</view>
                     </view>
                     <view class="coupon_right {{index === activeIndex ? 'active' : ''}}">使用</view>
                 </view>
             </scroll-view>
-            <image class="close_img" src="/resource/icon/close01.png" mode="scaleToFill" bindtap="closeCouponPupop"></image>
+            <image class="close_img" src="/resource/icon/close05.png" mode="scaleToFill" bindtap="closeCouponPupop"></image>
         </view>
     </van-popup>
 </view>

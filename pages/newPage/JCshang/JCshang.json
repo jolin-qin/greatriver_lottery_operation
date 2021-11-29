@@ -1,4 +1,7 @@
 {
 	"navigationBarTitleText": "抽盲盒",
-	"usingComponents": {}
+	"usingComponents": {
+		"van-icon": "@vant/weapp/icon/index",
+		"van-popup": "@vant/weapp/popup/index"
+	}
 }

@@ -15,7 +15,7 @@ Page({
         couponPopupShow: false,//优惠券弹窗
 		buyPopupShow: false,//购买弹窗
         couponList: [],//可用优惠券
-        activeIndex: 99999,//默认选中第一条优惠券
+        activeIndex: 99999,//默认选择优惠券下标
         useraddress: {},
         couponId: 0,//优惠券id
         totalPrice: 0,//合计
@@ -268,7 +268,7 @@ Page({
             buyPopupShow: false,
         });
     },
-    //立即购买弹窗
+    //打开购买弹窗
     openBuyPopup() {
         //运费
         let yunfei = 0;
@@ -283,7 +283,7 @@ Page({
             discountAmount: this.data.couponList.length ? '请选择优惠券' : '无可用优惠券'
         });
     },
-    //优惠券弹窗
+    //打开优惠券弹窗
     openCouponPopup() {
         if (this.data.couponList.length > 0) {
             this.setData({

@@ -83,7 +83,7 @@
 	height: 114rpx;
 	margin-top: 12rpx;
 	margin-left: 14rpx;
-	border-radius: 12rpx;
+	border-radius: 20rpx;
 }
 .show_wrapper .touying {
 	display: block;
@@ -133,12 +133,10 @@
 	display: block;
 	width: 190rpx;
 	height: 72rpx;
+	margin-left: 50rpx;
+	margin-right: 50rpx;
 }
-.operation_wrapper .buy_num .turnkey_img,
-.operation_wrapper .buy_num .prop_img
-{
-	margin-top: 20rpx;
-}
+
 .operation_wrapper .buy_num .prop_img {
 	display: block;
 	width: 412rpx;
@@ -156,4 +154,194 @@
 }
 .operation_wrapper .biaoqian .title_img {
 	margin-top: 10rpx;
+}
+/* 优惠券弹出框 */
+.coupon_popup .coupon_content {
+    width: 100%;
+    height: 600rpx;
+    background: #DB4A25;
+    border-radius: 20rpx;
+    position: relative;
+}
+.coupon_popup .title_01 {
+    text-align: center;
+    color: #fff;
+    line-height: 80rpx;
+    font-weight: bold;
+}
+.coupon_popup .scrollView {
+    overflow: hidden;
+}
+.coupon_popup .title_02 {
+    text-align: center;
+    color: #fff;
+    line-height: 80rpx;
+    font-weight: bold;
+    font-size: 28rpx;
+}
+.coupon_popup .coupom_item {
+    width: 600rpx;
+    height: 144rpx;
+    padding: 0 36rpx 0 30rpx;
+    background: url('https://www.jiaochao.top/imageurl//challenge_17.png') no-repeat;
+    background-size: cover;
+    margin: 0 auto;
+}
+.coupon_popup .coupom_item .coupon_left {
+    width: 150rpx;
+    flex: 0 0 150rpx;
+}
+.coupon_popup .coupom_item .symbol {
+    color: #FE2900;
+}
+.coupon_popup .coupom_item .face_value {
+    color: #FE2900;
+    font-size: 42rpx;
+    font-weight: bold;
+}
+.coupom_item .coupon_middle {
+    flex: 1;
+}
+.coupom_item .condition {
+    font-weight: bold;
+    margin-bottom: 6rpx;
+}
+.coupom_item .useful_life {
+    font-size: 26rpx;
+    color: #FE340C;
+}
+.coupom_item .coupon_right {
+    line-height: 44rpx;
+    padding: 0 10rpx;
+    background: #FE9C01;
+    color: #fff;
+    border-radius: 6rpx;
+    white-space: nowrap;
+}
+.coupom_item .coupon_right.active {
+    background: #B5B6B5;
+}
+.coupon_popup .coupon_content .close_img {
+    width: 50rpx;
+    height: 50rpx;
+    position: absolute;
+    top: 20rpx;
+    left: 20rpx;
+}
+/* end */
+/* 购买弹窗css */
+.closeBuyPopupImg {
+    padding-left: 50rpx;
+    padding-top: 30rpx;
+    margin-bottom: 30rpx;
+}
+.closeBuyPopupImg .img {
+    display: inline-block;
+    width: 50rpx;
+    height: 50rpx;
+}
+.wrapper {
+	width: 700rpx;
+	margin: 20rpx auto 30rpx;
+	border-radius: 10rpx;
+	padding: 24rpx;
+	background-color: #fff;
+}
+.box_infor {
+	padding-bottom: 0;
+}
+.tool_wrapper {
+	padding: 0;
+	background-color: #f7f8fd;
+}
+.box_infor .boxPic {
+	display: block;
+	width: 200rpx;
+	height: 200rpx;
+	margin: 0 auto;
+	border-radius: 20rpx;
+}
+.box_infor .box_title {
+	line-height: 68rpx;
+	text-align: center;
+}
+/* 可使用道具 */
+.wrapper .title {
+	font-size: 32rpx;
+	font-weight: bold;
+	line-height: 60rpx;
+}
+.tool_wrapper .tool_item {
+	width: 336rpx;
+	background: #fff;
+	border-radius: 20rpx;
+	padding: 16rpx;
+}
+.tool_wrapper .tool_item .tool_img {
+	display: block;
+	width: 110rpx;
+	height: 110rpx;
+	flex: 0 0 110rpx;
+	border-radius:20rpx;
+	margin-right: 20rpx;
+}
+.tool_wrapper .tool_item .tool_content {
+	width: 100%;
+	padding: 10rpx;
+	background: #F7F7F7;
+	border-radius: 10rpx;
+}
+.tool_wrapper .tool_item .tool_name {
+	font-weight: bold;
+	font-size: 28rpx;
+}
+.tool_wrapper .tool_item .text_grey {
+	font-size: 20rpx;
+	color: #999;
+	margin-top: 10rpx;
+}
+
+
+
+
+
+
+
+
+
+
+.orderPayment {
+	font-size: 28rpx;
+}
+.goodsAmount, .freight {
+    line-height: 72rpx;
+	border-top: 2rpx solid #f4f4f4;
+}
+.goodsAmount .tips {
+    color: red;
+}
+.submit-order-footer {
+	width: 100%;
+    height: 100rpx;
+    position: fixed;
+	bottom: 0;
+	left: 50%;
+	transform: translateX(-50%);
+	background-color: #fff;
+	padding: 0 30rpx;
+}
+.submit-order-footer-lf {
+    font-weight: bold;
+}	
+.submit-order-footer-rt {
+    width: 370rpx;
+	/* background: linear-gradient(to right, #BC9966, #AB8957, #9C7B4A); */
+	height: 80rpx;
+	line-height: 76rpx;
+	text-align: center;
+	background: #FE2900;
+	box-sizing: border-box;
+	border-radius: 40rpx;
+    font-size: 36rpx;
+    color: #fff;
 }
