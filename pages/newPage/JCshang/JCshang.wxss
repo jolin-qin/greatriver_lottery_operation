@@ -40,18 +40,59 @@
 }
 .show_wrapper .middle_area .series_img {
 	display: block;
-	width: 400rpx;
-	height: 170rpx;
+	width: 390rpx;
+	height: 160rpx;
 	position: absolute;
-	top: 64rpx;
+	top: 66rpx;
 	left: 50%;
-	transform: translateX(-50%);
+	transform: translateX(-51%);
 	z-index: 2;
+	border-radius: 24rpx;
 }
 .show_wrapper .middle_area .big_img {
-	display: block;
+	display: block !important;
 	width: 100%;
 	height: 784rpx;
+}
+.show_wrapper .middle_area .sudoku {
+	width: 450rpx;
+	/* height: 450rpx; */
+	position: absolute;
+	top: 318rpx;
+	left: 50%;
+	transform: translateX(-51%);
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	flex-wrap: wrap;
+	z-index: 2;
+}
+.middle_area .sudoku .sudoku_item {
+	width: 142rpx;
+	height: 142rpx;
+	background: url('https://www.jiaochao.top/imageurl/JCshang_13.png') no-repeat;
+	background-size: cover;
+	margin-right: 12rpx;
+	margin-bottom: 12rpx;
+}
+.middle_area .sudoku .sudoku_item:nth-child(3n) {
+	margin-right: 0;
+}
+.middle_area .sudoku_item .goods_img {
+	width: 114rpx;
+	height: 114rpx;
+	margin-top: 12rpx;
+	margin-left: 14rpx;
+	border-radius: 12rpx;
+}
+.show_wrapper .touying {
+	display: block;
+	width: 502rpx;
+	height: 44rpx;
+	position: absolute;
+	bottom: 174rpx;
+	left: 50%;
+	transform: translateX(-50%);
 }
 .show_wrapper .residue_num {
 	font-style: italic;

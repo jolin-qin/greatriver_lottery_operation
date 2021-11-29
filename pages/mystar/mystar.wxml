@@ -237,19 +237,16 @@
 	<view style="padding:20rpx;">挖好矿啦，你是个富豪了，去首页用矿石兑换礼物盒子吧！</view>
 </view> -->
 <!-- swiper -->
-<swiper class="index_swiper" indicator-dots="{{true}}" interval="2000" autoplay="{{false}}" duration="500" circular="true" easing-function="linear">
-	<swiper-item class="swiper_item">
-		<image class="img" src="/resource/images/box.jpg" mode="aspectFill"></image>
-	</swiper-item>
-	<swiper-item class="swiper_item">
-		<image class="img" src="/resource/images/box.jpg" mode="aspectFill"></image>
-	</swiper-item>
+<swiper class="index_swiper" indicator-dots="{{true}}" interval="2000" autoplay="{{true}}" duration="500" circular="true" easing-function="linear">
+	<swiper-item wx:for="{{bannerList}}" wx:key="index" class="swiper_item" data-type="{{1}}" data-prizeid="{{item.prize_id}}" bindtap="goJCshangPage">
+            <image class="img" src="{{projecturl + item.img}}" mode="aspectFill"></image>
+        </swiper-item>
 </swiper>
 <!-- tab切换 -->
 <view class="xiding_box">
 	<view class="tab_container flex-center {{isFixed ? 'Fixed' : ''}}">
 		<scroll-view scroll-x="true" class="tab_wrapper">
-			<view wx:for="{{tabs}}" wx:key="index" class="tab_item {{tabIndex === index ? 'active':'' }}" data-index="{{index}}" bindtap="tabClick">{{item.name}}</view>
+			<view wx:for="{{tabs}}" wx:key="index" class="tab_item {{tabIndex === index ? 'active':'' }}" data-index="{{index}}" data-id="{{item.box_class_id}}" bindtap="tabClick">{{item.box_class_name}}</view>
 		</scroll-view>
 	</view>
 	<view class="xiding_zhanwei"></view>
@@ -259,11 +256,10 @@
 	<image class="list_title_img" src="/resource/images/new_07.png" mode="aspectFill"></image>
 	<!-- 列表 -->
 	<view class="list_wrapper flex_start">
-		<view class="list_item" bindtap="goJCshangPage">
-			<image class="series_img" src="/resource/images/box.jpg" mode="aspectFill"></image>
-			<view class="series_intro ellipsis_1">介绍介绍介绍介绍介绍</view>
+		<view class="list_item" wx:for="{{classList}}" wx:key="index" data-id="{{item.id}}" data-type="{{0}}" bindtap="goJCshangPage">
+			<image class="series_img" src="{{item.box_cover}}" mode="aspectFill"></image>
+			<view class="series_intro ellipsis_1">{{item.box_title}}</view>
 		</view>
-		
 	</view>
 </view>
 <loginmodal wx:if="{{!islogin}}" />

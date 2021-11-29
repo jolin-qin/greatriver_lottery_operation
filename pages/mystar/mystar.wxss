@@ -1,9 +1,7 @@
 page {
 	background: #f7f7f7;
 }
-	
 .container {
-
 	display: flex;
 	flex-direction: column;
 	align-items: left;
@@ -12,7 +10,6 @@ page {
 	box-sizing: border-box;
 	margin-top: 0rpx;
 }
-
 .textStyle {
 	display: flex;
 	flex-direction: column;
@@ -20,33 +17,24 @@ page {
 	margin-left: 20rpx;
 	font-size: 35rpx;
 	font-weight: 700;
-
 }
-
 .textStyle2 {
 	display: flex;
 	flex-direction: column;
 	align-items: left;
 	margin-left: 20rpx;
 	font-size: 35rpx;
-
-
 }
-
 .textContainer {
 	margin-top: 100rx;
 }
-
 .jifen-animation {
 	animation-name: bounceIn;
 	animation-duration: 1s;
 	animation-fill-mode: both;
 	animation-timing-function: linear;
-
 }
-
 @-webkit-keyframes bounceIn {
-
 	0%,
 	20%,
 	40%,
@@ -56,43 +44,35 @@ page {
 		-webkit-transition-timing-function: cubic-bezier(0.215, .610, .355, 1.000);
 		transition-timing-function: cubic-bezier(0.215, .610, .355, 1.000)
 	}
-
 	0% {
 		opacity: 0;
 		-webkit-transform: scale3d(.3, .3, .3);
 		transform: scale3d(.3, .3, .3)
 	}
-
 	20% {
 		-webkit-transform: scale3d(1.1, 1.1, 1.1);
 		transform: scale3d(1.1, 1.1, 1.1)
 	}
-
 	40% {
 		-webkit-transform: scale3d(.9, .9, .9);
 		transform: scale3d(.9, .9, .9)
 	}
-
 	60% {
 		opacity: 1;
 		-webkit-transform: scale3d(1.03, 1.03, 1.03);
 		transform: scale3d(1.03, 1.03, 1.03)
 	}
-
 	80% {
 		-webkit-transform: scale3d(.97, .97, .97);
 		transform: scale3d(.97, .97, .97)
 	}
-
 	100% {
 		opacity: 1;
 		-webkit-transform: scale3d(1, 1, 1);
 		transform: scale3d(1, 1, 1)
 	}
 }
-
 @keyframes bounceIn {
-
 	0%,
 	20%,
 	40%,
@@ -102,49 +82,40 @@ page {
 		-webkit-transition-timing-function: cubic-bezier(0.215, .610, .355, 1.000);
 		transition-timing-function: cubic-bezier(0.215, .610, .355, 1.000)
 	}
-
 	0% {
 		opacity: 0;
 		-webkit-transform: scale3d(.3, .3, .3);
 		transform: scale3d(.3, .3, .3)
 	}
-
 	20% {
 		-webkit-transform: scale3d(1.1, 1.1, 1.1);
 		transform: scale3d(1.1, 1.1, 1.1)
 	}
-
 	40% {
 		-webkit-transform: scale3d(.9, .9, .9);
 		transform: scale3d(.9, .9, .9)
 	}
-
 	60% {
 		opacity: 1;
 		-webkit-transform: scale3d(1.03, 1.03, 1.03);
 		transform: scale3d(1.03, 1.03, 1.03)
 	}
-
 	80% {
 		-webkit-transform: scale3d(.97, .97, .97);
 		transform: scale3d(.97, .97, .97)
 	}
-
 	100% {
 		opacity: 1;
 		-webkit-transform: scale3d(1, 1, 1);
 		transform: scale3d(1, 1, 1)
 	}
 }
-
 .button-animation {
 	animation-name: scale-down;
 	animation-duration: 0.2s;
 	animation-fill-mode: both;
 	animation-timing-function: linear;
-
 }
-
 .sun-animation {
 	width: 600rpx;
 	position: absolute;
@@ -155,10 +126,7 @@ page {
 	animation-duration: 40s;
 	animation-fill-mode: both;
 	animation-timing-function: linear;
-
-
 }
-
 .sun-animation2 {
 	width: 500rpx;
 	position: absolute;
@@ -169,34 +137,25 @@ page {
 	animation-duration: 40s;
 	animation-fill-mode: both;
 	animation-timing-function: linear;
-
-
 }
-
 @keyframes scale-down {
 	0% {
 		opacity: 1;
 		transform: scale(1)
 	}
-
 	30% {
 		opacity: 1;
 		transform: scale(0.8)
 	}
-
 	100% {
 		opacity: 1;
 		transform: scale(1)
 	}
 }
-
-
-
 @keyframes spin {
 	from {
 		transform: rotate(0deg);
 	}
-
 	to {
 		transform: rotate(360deg);
 	}
@@ -206,16 +165,13 @@ page {
 	from {
 		transform: rotate(360deg);
 	}
-
 	to {
 		transform: rotate(0deg);
 	}
 }
-
-button::after {
+/* button::after {
 	border: 0;
-}
-
+} */
 /* 新css */
 .index_swiper {
 	width: 100%;
