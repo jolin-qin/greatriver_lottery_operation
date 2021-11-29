@@ -17,10 +17,13 @@ Page({
 		couponPopupShow: false,//优惠券弹窗
 		buyPopupShow: true,//购买弹窗
 		couponList: [],//可用优惠券
-		toolList: [], //道具列表
+        toolList: [], //道具列表
+        times: 0,//默认抽一次
+        timeList: ['抽一次', '抽三次', '抽五次', '全包'],
         activeIndex: 99999,//默认选择优惠券下标
         totalPrice: 0,//合计
         discountAmount: '无可用优惠券',
+        select_pay_type: 2,//支付方式  2微信支付   1积分支付
         isShake: true,//防抖
     },
 
@@ -191,6 +194,19 @@ Page({
             })
         }
     },
+    //radio-group改变
+	payradioChange(e) {
+		console.log(e);
+		this.setData({
+			select_pay_type: e.detail.value
+		})
+	},
+	//点击了radio
+	payradioclick(e) {
+		this.setData({
+			select_pay_type: e.currentTarget.dataset.paytype
+		})
+	},
     /**
      * 生命周期函数--监听页面隐藏
      */

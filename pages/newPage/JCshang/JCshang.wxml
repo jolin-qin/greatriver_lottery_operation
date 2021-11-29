@@ -75,9 +75,34 @@
 			</block>
 		</view>
 		<!-- 抽几次 -->
-		<view></view>
+		<view class="wrapper time_wrapper">
+			<!-- <view class="title">抽奖次数</view> -->
+			<view class="flex_center time_container">
+				<view class="time_item {{times === index ? 'active' : ''}}" wx:for="{{timeList}}" wx:key="index">{{item}}</view>
+			</view>
+		</view>
 		<!-- 支付方式选择 -->
-
+		<view class="wrapper payment_wrapper">
+			<radio-group class="block" bindchange="payradioChange" style="width:100%">
+				<view style="display:flex;flex-direction:column;">
+					<view bindtap="payradioclick" data-paytype="1" class="flex_between payment_item">
+						<view class="flex_start">
+							<image src="/resource/images/jifen.png" style="width:50rpx;height:50rpx;">
+							</image>
+							<text style="line-height:50rpx;margin-left:20rpx;">积分支付</text>
+						</view>
+						<radio class='red' value="1" checked="{{select_pay_type==1?'true':''}}"></radio>
+					</view>
+					<view bindtap="payradioclick" data-paytype="2" class="flex_between payment_item">
+						<view class="flex_start">
+							<image src="/resource/images/wepay.png" style="width:50rpx;height:50rpx;"></image>
+							<text style="line-height:50rpx;margin-left:20rpx;">微信支付</text>
+						</view>
+						<radio class='red' value="2" checked="{{select_pay_type==2?'true':''}}"></radio>
+					</view>
+				</view>
+			</radio-group>
+		</view>
 		<!--优惠券-->
 		<view class="orderPayment">
 			<view class="goodsAmount flex_between" bindtap="openCouponPopup">
