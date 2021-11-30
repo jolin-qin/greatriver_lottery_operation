@@ -16,7 +16,7 @@
 			</view>
 		</view>
 		<!-- 投影 -->
-		<image class="touying" src="{{imgUrl}}JCshang_14.jpg" mode="scaleToFill"></image>
+		<image class="touying" src="{{imgUrl}}JCshang_14.png" mode="scaleToFill"></image>
 		<view class="residue_num">剩余盲盒：{{remainNum}}</view>
 	</view>
 	<view class="operation_wrapper">
@@ -25,10 +25,10 @@
 			<view class="introduce">{{boxObj.box_content}}</view>
 		</view>
 		<view class="buy_num flex_center">
-			<image class="one_img img" src="{{imgUrl}}JCshang_06.png" mode="scaleToFill"></image>
-			<image class="three_img img" src="{{imgUrl}}JCshang_07.png" mode="scaleToFill"></image>
-			<image class="five_img img" src="{{imgUrl}}JCshang_08.png" mode="scaleToFill"></image>
-			<image class="turnkey_img img" src="{{imgUrl}}JCshang_09.png" mode="scaleToFill"></image>
+			<image class="one_img img" src="{{imgUrl}}JCshang_06.png" mode="scaleToFill" bindtap="openBuyPopup" data-num="{{1}}"></image>
+			<image class="three_img img" src="{{imgUrl}}JCshang_07.png" mode="scaleToFill" bindtap="openBuyPopup" data-num="{{3}}"></image>
+			<image class="five_img img" src="{{imgUrl}}JCshang_08.png" mode="scaleToFill" bindtap="openBuyPopup" data-num="{{5}}"></image>
+			<image class="turnkey_img img" src="{{imgUrl}}JCshang_09.png" mode="scaleToFill" bindtap="openBuyPopup" data-num="{{remainNum}}"></image>
 			<!-- <image class="prop_img" src="{{imgUrl}}JCshang_10.png" mode="scaleToFill"></image> -->
 		</view>
 		<view class="biaoqian">
@@ -48,8 +48,8 @@
 				<image wx:if="{{goodsObj.prize_pic}}" class="img100" src="{{projecturl + goodsObj.prize_pic}}" mode="scaleToFill"></image>
 			</view>
 			<view class="cartProduceTitle ellipsis_2">{{goodsObj.prize_title}}</view> -->
-			<image class="boxPic" src="/resource/images/box.jpg" mode="scaleToFill"></image>
-			<view class="box_title">介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍</view>
+			<image class="boxPic" src="{{boxObj.box_cover}}" mode="scaleToFill"></image>
+			<view class="box_title">{{boxObj.box_title}}</view>
 		</view>
 		<!-- 道具 -->
 		<view class="wrapper tool_wrapper">
@@ -62,43 +62,40 @@
 							<view class="tool_name">奖品透视卡</view>
 						</view>
 						<view class="text_grey">使用本卡可以查看不可见奖品盒子里的内容</view>
+						<image class="select_icon" src="/resource/icon/select_icon.png" mode="scaleToFill"></image>
 					</view>
-					<view bindtap="openmodal" class="tool_item">
-						<view class="flex_start tool_content">
-							<image class="tool_img" src="/resource/images/box.jpg" mode="aspectFill"></image>
-							<view class="tool_name">奖品透视卡</view>
-						</view>
-						<view class="text_grey">使用本卡可以查看不可见奖品盒子里的内容</view>
-					</view>
+					
 				</view>
 				<!-- <view wx:else>还没有道具哦</view> -->
 			</block>
 		</view>
 		<!-- 抽几次 -->
 		<view class="wrapper time_wrapper">
-			<!-- <view class="title">抽奖次数</view> -->
 			<view class="flex_center time_container">
-				<view class="time_item {{times === index ? 'active' : ''}}" wx:for="{{timeList}}" wx:key="index">{{item}}</view>
+				<view class="time_item {{times === 1 ? 'active' : ''}}">抽一次</view>
+				<view class="time_item {{times === 3 ? 'active' : ''}}">抽三次</view>
+				<view class="time_item {{times === 5 ? 'active' : ''}}">抽五次</view>
+				<view class="time_item {{times === remainNum ? 'active' : ''}}">全包</view>
 			</view>
 		</view>
 		<!-- 支付方式选择 -->
 		<view class="wrapper payment_wrapper">
 			<radio-group class="block" bindchange="payradioChange" style="width:100%">
 				<view style="display:flex;flex-direction:column;">
-					<view bindtap="payradioclick" data-paytype="1" class="flex_between payment_item">
+					<view data-paytype="1" class="flex_between payment_item">
 						<view class="flex_start">
 							<image src="/resource/images/jifen.png" style="width:50rpx;height:50rpx;">
 							</image>
-							<text style="line-height:50rpx;margin-left:20rpx;">积分支付</text>
+							<text style="line-height:50rpx;margin-left:20rpx;" disabled>积分支付</text>
 						</view>
-						<radio class='red' value="1" checked="{{select_pay_type==1?'true':''}}"></radio>
+						<radio class="red" value="1" checked="{{select_pay_type==1?'true':''}}" disabled="{{integralRadio}}"></radio>
 					</view>
-					<view bindtap="payradioclick" data-paytype="2" class="flex_between payment_item">
+					<view data-paytype="2" class="flex_between payment_item">
 						<view class="flex_start">
 							<image src="/resource/images/wepay.png" style="width:50rpx;height:50rpx;"></image>
 							<text style="line-height:50rpx;margin-left:20rpx;">微信支付</text>
 						</view>
-						<radio class='red' value="2" checked="{{select_pay_type==2?'true':''}}"></radio>
+						<radio class="red" value="2" checked="{{select_pay_type==2?'true':''}}"></radio>
 					</view>
 				</view>
 			</radio-group>
@@ -112,7 +109,7 @@
 		</view>
 		<!--footer star-->
 		<view class="submit-order-footer flex_between">
-			<view class="submit-order-footer-lf">合计：{{totalPrice}}元</view>
+			<view class="submit-order-footer-lf">实际支付：<text style="color: #E54D42;">{{showPrice}}</text>元</view>
 			<view class="submit-order-footer-rt" bindtap="confirmPayFun">确认支付</view>
 		</view>
 	</van-popup>

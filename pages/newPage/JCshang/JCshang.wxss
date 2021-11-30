@@ -279,7 +279,19 @@
 	background: #fff;
 	border-radius: 20rpx;
 	padding: 16rpx;
+	position: relative;
 }
+.tool_wrapper .tool_item .select_icon {
+	width: 50rpx;
+	height: 50rpx;
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+
+
+
+
 .tool_wrapper .tool_item .tool_img {
 	display: block;
 	width: 110rpx;
@@ -322,8 +334,8 @@
 	border-radius: 10rpx;
 }
 .time_wrapper .time_item.active {
-	color: #FE2900;
-	border: 2rpx solid #FE2900;
+	color: #E54D42;
+	border: 2rpx solid #E54D42;
 }
 /* 支付方式 */
 .payment_wrapper .payment_item {
@@ -337,7 +349,9 @@
 	padding-bottom: 0;
 	border-bottom: none;
 }
-
+.payment_wrapper .payment_item .red {
+	padding-left: 200rpx;
+}
 .goodsAmount {
 	width: 700rpx;
 	margin: 0 auto;
@@ -351,7 +365,7 @@
 	font-weight: bold;
 }
 .goodsAmount .tips {
-    color: red;
+    color: #E54D42;
 }
 .submit-order-footer {
 	width: 100%;
@@ -372,7 +386,7 @@
 	height: 80rpx;
 	line-height: 76rpx;
 	text-align: center;
-	background: #FE2900;
+	background: #E54D42;
 	box-sizing: border-box;
 	border-radius: 40rpx;
     font-size: 36rpx;

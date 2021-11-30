@@ -11,18 +11,20 @@ Page({
 		boxObj: {},
 		goodsList: [],//盒子里商品种类数
 		remainNum: 0,//剩余数量
-		openNum: 0,//打开数量
 		payType: '',//支付方式
 		couponId: '',//优惠券
 		couponPopupShow: false,//优惠券弹窗
-		buyPopupShow: true,//购买弹窗
+		buyPopupShow: false,//购买弹窗
 		couponList: [],//可用优惠券
         toolList: [], //道具列表
         times: 0,//默认抽一次
-        timeList: ['抽一次', '抽三次', '抽五次', '全包'],
         activeIndex: 99999,//默认选择优惠券下标
-        totalPrice: 0,//合计
+        totalPrice: 0,//用户选择抽几次，没减任何优惠的价格，用于各种计算
+        showPrice: 0,//选了优惠券的后展示给用户看的价格
         discountAmount: '无可用优惠券',
+        memberinfo_integral: 0,//用户可用积分
+        requireIntegral: 0,//开盒需要积分
+        integralRadio: true,//是否禁用积分支付
         select_pay_type: 2,//支付方式  2微信支付   1积分支付
         isShake: true,//防抖
     },
@@ -34,7 +36,8 @@ Page({
 		this.setData({
 			boxId: options.id
 		})
-		this.getBoxDetailFun()
+        this.getBoxDetailFun()
+        this.geCouponFun() //获取优惠券
     },
 
     /**
@@ -48,7 +51,33 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
+        //获取用户可用积分
+        app.util.request({
+			url: 'entry/wxapp/getuserinfo',
+			data: {
+				m: app.globalData.module_name,
+				title: '',
+			},
+			method: 'post',
+			success: function (response) {
+				console.log(response.data);
+				if (response.data.errno == 9999) {
+					//未授权头像
 
+				} else {
+					t.setData({
+						memberinfo_integral: Number(response.data.data.integral)
+					})
+				}
+			},
+			fail: function (response) {
+				wx.showToast({
+					icon: 'none',
+					title: '网络错误',
+				})
+
+			}
+		})
     },
 	//请求盒子详情
 	getBoxDetailFun() {
@@ -133,10 +162,10 @@ Page({
         console.log(e)
         let result = e.currentTarget.dataset.item,index = e.currentTarget.dataset.index;
         //判断是否达到用满减券要求
-        if (result.type === '2' && result.full_minus > this.goodsObj.prize_market_price) {
+        if (result.type === '2' && result.full_minus > this.data.totalPrice) {
             wx.showToast({
                 icon: 'none',
-                title: '商品价格低于满减额',
+                title: '实付金额低于满减额',
             })
             return false
         }
@@ -150,7 +179,7 @@ Page({
             couponId: result.id,
             couponPopupShow: false,
             activeIndex: index,
-            totalPrice: newPrice
+            showPrice: newPrice
         })
     },
 	//关闭优惠券弹窗
@@ -163,21 +192,22 @@ Page({
     closeBuyPopup() {
         this.setData({ 
             buyPopupShow: false,
+            couponId: '',
+            activeIndex: 99999
         });
     },
     //打开购买弹窗
-    openBuyPopup() {
-		this.geCouponFun() //获取优惠券
-        //运费
-        let yunfei = 0;
-        if (this.data.goodsObj.prize_postage_type === '1') {
-            yunfei = Number(this.data.goodsObj.prize_postage)
-        }
-        let heji = (Number(this.data.goodsObj.prize_market_price) + yunfei).toFixed(2)
-        
+    openBuyPopup(e) {
+        let buyNumber = e.currentTarget.dataset.num
+        let totalAmount = buyNumber * Number(this.data.boxObj.box_open_price)
+        let totalIntegral = buyNumber * Number(this.data.boxObj.box_pay_payment_integral)
         this.setData({ 
+            times: buyNumber,
             buyPopupShow: true,
-            totalPrice: heji,
+            totalPrice: totalAmount,
+            showPrice: totalAmount,
+            requireIntegral: totalIntegral,
+            integralRadio: this.data.memberinfo_integral >= totalIntegral ? false : true,
             discountAmount: this.data.couponList.length ? '请选择优惠券' : '无可用优惠券'
         });
     },
@@ -203,6 +233,7 @@ Page({
 	},
 	//点击了radio
 	payradioclick(e) {
+        console.log("我被执行了")
 		this.setData({
 			select_pay_type: e.currentTarget.dataset.paytype
 		})

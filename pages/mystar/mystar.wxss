@@ -232,7 +232,7 @@ page {
 .list_view {
 	width: 710rpx;
 	background: #fff;
-	margin: 50rpx auto 50rpx;
+	margin: 24rpx auto 50rpx;
 	border-radius: 30rpx;
 	padding: 34rpx 0;
 }
