@@ -72,10 +72,10 @@
 		<!-- 抽几次 -->
 		<view class="wrapper time_wrapper">
 			<view class="flex_center time_container">
-				<view class="time_item {{times === 1 ? 'active' : ''}}">抽一次</view>
-				<view class="time_item {{times === 3 ? 'active' : ''}}">抽三次</view>
-				<view class="time_item {{times === 5 ? 'active' : ''}}">抽五次</view>
-				<view class="time_item {{times === remainNum ? 'active' : ''}}">全包</view>
+				<view class="time_item {{times === 1 ? 'active' : ''}}" bindtap="changeTimes" data-num="{{1}}">抽一次</view>
+				<view class="time_item {{times === 3 ? 'active' : ''}}" bindtap="changeTimes" data-num="{{3}}">抽三次</view>
+				<view class="time_item {{times === 5 ? 'active' : ''}}" bindtap="changeTimes" data-num="{{5}}">抽五次</view>
+				<view class="time_item {{times === remainNum ? 'active' : ''}}" bindtap="changeTimes" data-num="{{remainNum}}">全包</view>
 			</view>
 		</view>
 		<!-- 支付方式选择 -->
@@ -88,14 +88,14 @@
 							</image>
 							<text style="line-height:50rpx;margin-left:20rpx;" disabled>积分支付</text>
 						</view>
-						<radio class="red" value="1" checked="{{select_pay_type==1?'true':''}}" disabled="{{integralRadio}}"></radio>
+						<radio class="red" value="1" checked="{{select_pay_type == 1 ? 'true':''}}" disabled="{{integralRadio}}"></radio>
 					</view>
 					<view data-paytype="2" class="flex_between payment_item">
 						<view class="flex_start">
 							<image src="/resource/images/wepay.png" style="width:50rpx;height:50rpx;"></image>
 							<text style="line-height:50rpx;margin-left:20rpx;">微信支付</text>
 						</view>
-						<radio class="red" value="2" checked="{{select_pay_type==2?'true':''}}"></radio>
+						<radio class="red" value="2" checked="{{select_pay_type == 2 ? 'true':''}}"></radio>
 					</view>
 				</view>
 			</radio-group>
@@ -109,7 +109,8 @@
 		</view>
 		<!--footer star-->
 		<view class="submit-order-footer flex_between">
-			<view class="submit-order-footer-lf">实际支付：<text style="color: #E54D42;">{{showPrice}}</text>元</view>
+			<view wx:if="{{select_pay_type == '2'}}" class="submit-order-footer-lf">实际支付：<text style="color: #E54D42;">{{showPrice}}</text>元</view>
+			<view wx:if="{{select_pay_type == '1'}}" class="submit-order-footer-lf">实际支付：<text style="color: #E54D42;">{{requireIntegral}}</text>积分</view>
 			<view class="submit-order-footer-rt" bindtap="confirmPayFun">确认支付</view>
 		</view>
 	</van-popup>

@@ -11,7 +11,6 @@ Page({
 		boxObj: {},
 		goodsList: [],//盒子里商品种类数
 		remainNum: 0,//剩余数量
-		payType: '',//支付方式
 		couponId: '',//优惠券
 		couponPopupShow: false,//优惠券弹窗
 		buyPopupShow: false,//购买弹窗
@@ -25,7 +24,7 @@ Page({
         memberinfo_integral: 0,//用户可用积分
         requireIntegral: 0,//开盒需要积分
         integralRadio: true,//是否禁用积分支付
-        select_pay_type: 2,//支付方式  2微信支付   1积分支付
+        select_pay_type: '2',//支付方式  2微信支付   1积分支付
         isShake: true,//防抖
     },
 
@@ -51,6 +50,7 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
+        let t = this;
         //获取用户可用积分
         app.util.request({
 			url: 'entry/wxapp/getuserinfo',
@@ -75,7 +75,6 @@ Page({
 					icon: 'none',
 					title: '网络错误',
 				})
-
 			}
 		})
     },
@@ -200,7 +199,7 @@ Page({
     openBuyPopup(e) {
         let buyNumber = e.currentTarget.dataset.num
         let totalAmount = buyNumber * Number(this.data.boxObj.box_open_price)
-        let totalIntegral = buyNumber * Number(this.data.boxObj.box_pay_payment_integral)
+        let totalIntegral = buyNumber * Number(this.data.boxObj.box_open_integral)
         this.setData({ 
             times: buyNumber,
             buyPopupShow: true,
@@ -211,9 +210,16 @@ Page({
             discountAmount: this.data.couponList.length ? '请选择优惠券' : '无可用优惠券'
         });
     },
+    //弹窗里选择抽几次
+    changeTimes(e) {
+        let buyNumber = e.currentTarget.dataset.num
+        let totalAmount = buyNumber * Number(this.data.boxObj.box_open_price)
+        let totalIntegral = buyNumber * Number(this.data.boxObj.box_open_integral)
+        
+    },
     //打开优惠券弹窗
     openCouponPopup() {
-        if (this.data.couponList.length > 0) {
+        if (this.data.couponList.length > 0 && this.data.select_pay_type != '1') {
             this.setData({
                 couponPopupShow: true
             })
@@ -226,9 +232,26 @@ Page({
     },
     //radio-group改变
 	payradioChange(e) {
-		console.log(e);
+        console.log(e);
+        //如果选择积分支付，不能用优惠券了
+        let radioValue = e.detail.value
+        if (radioValue == '1') {
+            this.setData({
+                discountAmount: '无可用优惠券',
+                couponId: '',
+                activeIndex: 99999,
+                
+            })
+        } else {
+            if (this.data.couponList.length > 0) {
+                this.setData({
+                    discountAmount: '请选择优惠券'
+                })
+            }
+        }
 		this.setData({
-			select_pay_type: e.detail.value
+            select_pay_type: radioValue,
+            showPrice: this.data.totalPrice
 		})
 	},
 	//点击了radio
