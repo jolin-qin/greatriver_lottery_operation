@@ -223,7 +223,7 @@ Page({
 			url: 'entry/wxapp/getclassbox',
 			data: {
 				m: app.globalData.module_name,
-				classid: id
+				classid: id,
 				// page: pageNumber
 			},
 			method: 'get',
@@ -779,5 +779,6 @@ Page({
 		// that.data.pg = that.data.pg + 1;
 		// console.log('触发加载更多' + that.data.pg);
 		// this.getinviterlist(that.data.pg);
+		this.getGoodsListFun(this.data.seriesId, this.data.pageNumber);//商品列表
 	},
 })

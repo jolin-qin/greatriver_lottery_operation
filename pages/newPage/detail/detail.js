@@ -18,8 +18,13 @@ Page({
         activeIndex: 99999,//默认选择优惠券下标
         useraddress: {},
         couponId: 0,//优惠券id
-        totalPrice: 0,//合计
+        totalPrice: 0,//没用任何优惠的价格
+        showPrice: 0,//实际支付价格
         discountAmount: '无可用优惠券',
+        memberinfo_integral: 0,
+        requireIntegral: 0,//开盒需要积分
+        integralRadio: true,//是否禁用积分支付
+        select_pay_type: '',//支付方式  2微信支付   1积分支付
         isShake: true,//防抖
     },
 
@@ -80,7 +85,33 @@ Page({
 					})
 				}
 			})
-		}
+        }
+        //获取用户可用积分
+        app.util.request({
+			url: 'entry/wxapp/getuserinfo',
+			data: {
+				m: app.globalData.module_name,
+				title: '',
+			},
+			method: 'post',
+			success: function (response) {
+				console.log(response.data);
+				if (response.data.errno == 9999) {
+					//未授权头像
+
+				} else {
+					t.setData({
+						memberinfo_integral: Number(response.data.data.integral)
+					})
+				}
+			},
+			fail: function (response) {
+				wx.showToast({
+					icon: 'none',
+					title: '网络错误',
+				})
+			}
+		})
     },
     // 获取详情函数
 	geDetailFun() {
@@ -93,14 +124,24 @@ Page({
 			},
 			method: 'get',
 			success: function (response) {
-				console.log('获取商品详情', response);
+                console.log('获取商品详情', response)
+                let result = response.data.data
 				if (response.data.errno == 0) {
-                    let richText = t.escape2Html(response.data.data.prize_content);
-					t.setData({
-                        goodsObj: response.data.data,
-                        strings: richText
+                    let richText = t.escape2Html(result.prize_content);
+					
+                    //判断支付方式
+                    let type = ''
+                    if (result.prizes_pay_payment_integral == '1') {
+                        type = '1'
+                    }
+                    if (result.prizes_pay_payment_wechatpay == '1') {
+                        type = '2'
+                    }
+                    t.setData({
+                        goodsObj: result,
+                        strings: richText,
+                        select_pay_type: type
                     })
-                    
 				} else {
 					//失败
 					wx.showToast({
@@ -168,8 +209,7 @@ Page({
 		app.util.request({
 			url: 'entry/wxapp/get_user_coupon',
 			data: {
-				m: app.globalData.module_name,
-				debug: 67
+				m: app.globalData.module_name
 			},
 			method: 'get',
 			success: function (response) {
@@ -229,7 +269,7 @@ Page({
         console.log(e)
         let result = e.currentTarget.dataset.item,index = e.currentTarget.dataset.index;
         //判断是否达到用满减券要求
-        if (result.type === '2' && result.full_minus > this.goodsObj.prize_market_price) {
+        if (result.type === '2' && result.full_minus > this.data.goodsObj.prize_market_price) {
             wx.showToast({
                 icon: 'none',
                 title: '商品价格低于满减额',
@@ -348,14 +388,23 @@ Page({
 							wx.showToast({
 								icon: 'none',
 								title: '订单支付失败',
-							})
+                            })
+                            setTimeout(() => {
+                                wx.switchTab({
+                                    url: '/pages/index/index',
+                                })
+                            }, 1200)
 						}
 					})
 				},
 				fail: function (response) {
-					console.log('gettoolswepaypara', response.data);
-				},
-
+                    console.log("response:", response)
+                    wx.showToast({
+                        icon: 'none',
+                        title: '支付参数错误',
+                    })
+                    
+				}
 			})
         }
     },

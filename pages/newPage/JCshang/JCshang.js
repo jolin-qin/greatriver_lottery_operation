@@ -215,7 +215,33 @@ Page({
         let buyNumber = e.currentTarget.dataset.num
         let totalAmount = buyNumber * Number(this.data.boxObj.box_open_price)
         let totalIntegral = buyNumber * Number(this.data.boxObj.box_open_integral)
-        
+        //微信支付
+        if (this.data.select_pay_type == '2') {
+            this.setData({ 
+                times: buyNumber,
+                totalPrice: totalAmount,
+                showPrice: totalAmount,
+                requireIntegral: totalIntegral,
+                integralRadio: this.data.memberinfo_integral >= totalIntegral ? false : true,
+                discountAmount: this.data.couponList.length ? '请选择优惠券' : '无可用优惠券',
+                couponId: '',
+                activeIndex: 99999
+            });
+        //积分支付
+        } else {
+            if (this.data.memberinfo_integral >= totalIntegral) {
+                this.setData({ 
+                    times: buyNumber,
+                    totalPrice: totalAmount,
+                    showPrice: totalAmount,
+                });
+            } else {
+                wx.showToast({
+                    icon: 'none',
+                    title: '~可用积分不够哦~',
+                })
+            }
+        }
     },
     //打开优惠券弹窗
     openCouponPopup() {
