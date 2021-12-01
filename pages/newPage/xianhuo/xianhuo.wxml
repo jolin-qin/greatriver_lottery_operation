@@ -9,8 +9,17 @@
             <image class="img" src="/resource/images/box.jpg" mode="aspectFill"></image>
         </swiper-item> -->
     </swiper>
-	<view class="title_img">
+	<!-- <view class="title_img">
 		<image class="height" src="/resource/images/new_04.png" mode="aspectFill"></image>
+	</view> -->
+	<!-- tab切换 -->
+	<view class="xiding_box">
+		<view class="tab_container flex-center {{isFixed ? 'Fixed' : ''}}">
+			<scroll-view scroll-x="true" class="tab_wrapper">
+				<view wx:for="{{tabs}}" wx:key="index" class="tab_item {{tabIndex === index ? 'active':'' }}" data-index="{{index}}" data-id="{{item.box_class_id}}" bindtap="tabClick">{{item.box_class_name}}</view>
+			</scroll-view>
+		</view>
+		<view class="xiding_zhanwei"></view>
 	</view>
 	<!-- 商品列表 -->
 	<view class="goods_wrapper">
