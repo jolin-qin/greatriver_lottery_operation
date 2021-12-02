@@ -62,17 +62,20 @@
     <van-popup show="{{ show }}" bind:close="onClose" closeable close-icon="cross" round custom-class="viewPopup">
         <view wx:if="{{popupType === 0}}" class="content">
             <view class="title">积分规则详情</view>
-            <view>1.积分规则详情积分规则详情积分规则详情积分规则详情</view>
-            <view>2.积分规则详情积分规则详情积分规则详情积分规则详情</view>
-            <view>3.积分规则详情积分规则详情积分规则详情积分规则详情</view>
-            <view>4.积分规则详情积分规则详情积分规则详情积分规则详情</view>
+            <view class="point">1.玩家在购买过程中，购买任何商品均将获得JC积分，积分数量将根据jc赏类型与现货/预售的商品种类以
+                及售价综合决定;
+            </view>
+            <view class="point">2.积分将可用于在现货/预售页面以及jc赏页面兑换及参与特殊性质的jc赏</view>
         </view>
         <view wx:elif="{{popupType === 1}}" class="content">
             <view class="title">发货规则详情</view>
-            <view>1.发货规则详情发货规则详情发货规则详情发货规则详情</view>
-            <view>2.发货规则详情发货规则详情发货规则详情发货规则详情</view>
-            <view>3.发货规则详情发货规则详情发货规则详情发货规则详情</view>
-            <view>4.发货规则详情发货规则详情发货规则详情发货规则详情</view>
+            <view class="point">1.胶潮商城（jc商城）分预售和非预售（即现货）两种状态产品;</view>
+            <view class="point">2.预售产品：仅可在系统提示正式开售日 （含开售日当天）之后申请发货;</view>
+            <view class="point">3.非预售（即现货）产品：可随时申请发货;</view>
+            <view class="point">4.发货时间：申请发货后，赏品将在10-15个工作日
+内发货（如遇节假日则顺延），另：如遇特殊情
+况，则以实际发货界面公告或发货须知为准;</view>
+            <view class="point">5.状态查询：发货后,快递信息将显示在“已发货”界面,可自行查询物流信息。</view>
         </view>
     </van-popup>
     
@@ -136,15 +139,15 @@
 						<view class="flex_start">
 							<image src="/resource/images/jifen.png" style="width:50rpx;height:50rpx;">
 							</image>
-							<text style="line-height:50rpx;margin-left:20rpx;">积分支付</text>
-							<text style="line-height:50rpx;">(可用：{{memberinfo_integral}})</text>
+							<text style="line-height:50rpx;margin-left:12rpx;">积分支付</text>
+							<text style="line-height:50rpx;margin-left:20rpx;">(可用:{{memberinfo_integral}})</text>
 						</view>
 						<radio class="red" value="1" checked="{{select_pay_type == 1 ? 'true':''}}" disabled="{{integralRadio}}"></radio>
 					</view>
 					<view wx:if="{{goodsObj.prizes_pay_payment_wechatpay == '1'}}" class="flex_between payment_item">
 						<view class="flex_start">
 							<image src="/resource/images/wepay.png" style="width:50rpx;height:50rpx;"></image>
-							<text style="line-height:50rpx;margin-left:20rpx;">微信支付</text>
+							<text style="line-height:50rpx;margin-left:12rpx;">微信支付</text>
 						</view>
 						<radio class="red" value="2" checked="{{select_pay_type == 2 ? 'true':''}}"></radio>
 					</view>
@@ -153,8 +156,14 @@
 		</view>
 		<!--footer star-->
 		<view class="submit-order-footer flex_between">
-		    <view wx:if="{{select_pay_type == '2'}}" class="submit-order-footer-lf">实际支付：<text style="color: #E54D42;font-size: 36rpx;">{{totalPrice}}</text>元</view>
-            <view wx:if="{{select_pay_type == '1'}}" class="submit-order-footer-lf">实际支付：<text style="color: #E54D42;font-size: 36rpx;">{{requireIntegral}}</text>积分</view>
+		    <view wx:if="{{select_pay_type == '2'}}" class="submit-order-footer-lf">
+                <view class="shiji">实际支付：<text style="color: #E54D42;">{{totalPrice}}</text>元</view>
+                <view class="particulars">
+                    <text>商品价格：{{showPrice}}</text>
+                    <text class="yunfei">运费：{{goodsObj.prize_postage}}</text>
+                </view>
+            </view>
+            <view wx:if="{{select_pay_type == '1'}}" class="actual_payment_integral">实际支付：<text style="color: #E54D42;font-size: 36rpx;">{{requireIntegral}}</text>积分</view>
             <view class="submit-order-footer-rt" bindtap="confirmPayFun">确认支付</view>
 		</view>
 	</van-popup>

@@ -24,7 +24,7 @@ Page({
         memberinfo_integral: 0,//用户可用积分
         requireIntegral: 0,//开盒需要积分
         integralRadio: true,//是否禁用积分支付
-        select_pay_type: '2',//支付方式  2微信支付   1积分支付
+        select_pay_type: '',//支付方式  2微信支付   1积分支付
         isShake: true,//防抖
     },
 
@@ -91,7 +91,7 @@ Page({
 			success: function (response) {
 				console.log('盒子详情函数', response);
 				if (response.data.errno == 0) {
-					let arr = [], shengyu = 0, result = response.data.data;
+					let arr = [], shengyu = 0, type = '', result = response.data.data;
 					if (result.prizes_list.length > 9) {
 						arr = result.prizes_list.slice(0, 9)
 					} else {
@@ -102,10 +102,19 @@ Page({
 						if (item.num) {
 							shengyu = shengyu + Number(item.num)
 						}
-					})
+                    })
+                    //判断支付方式
+                    
+                    if (result.box_pay_payment_integral == '1') {
+                        type = '1'
+                    }
+                    if (result.box_pay_payment_wechatpay == '1') {
+                        type = '2'
+                    }
 					t.setData({
 						boxObj: result || {},
-						goodsList: arr,
+                        goodsList: arr,
+                        select_pay_type: type,
 						remainNum: shengyu
 					})
 				} else {
@@ -131,7 +140,6 @@ Page({
 			url: 'entry/wxapp/get_user_coupon',
 			data: {
 				m: app.globalData.module_name,
-				debug: 67
 			},
 			method: 'get',
 			success: function (response) {
@@ -161,7 +169,7 @@ Page({
         console.log(e)
         let result = e.currentTarget.dataset.item,index = e.currentTarget.dataset.index;
         //判断是否达到用满减券要求
-        if (result.type === '2' && result.full_minus > this.data.totalPrice) {
+        if (result.type === '2' && (Number(result.full_minus) > Number(this.data.totalPrice))) {
             wx.showToast({
                 icon: 'none',
                 title: '实付金额低于满减额',
@@ -245,7 +253,7 @@ Page({
     },
     //打开优惠券弹窗
     openCouponPopup() {
-        if (this.data.couponList.length > 0 && this.data.select_pay_type != '1') {
+        if ((this.data.couponList.length > 0) && (this.data.select_pay_type == '2')) {
             this.setData({
                 couponPopupShow: true
             })
@@ -286,7 +294,101 @@ Page({
 		this.setData({
 			select_pay_type: e.currentTarget.dataset.paytype
 		})
-	},
+    },
+    //支付
+    confirmPayFun() {
+        let t = this
+        if (!this.data.useraddress.id) {
+            wx.showToast({
+                icon: 'none',
+                title: '请选择收获地址',
+            })
+            setTimeout(() => {
+                wx.navigateTo({
+                    url: '/pages/my/address/address',
+                })
+            }, 1200)
+        } else {
+            if (this.data.isShake) {
+                this.setData({ isShake: false })
+                app.util.request({
+                    url: 'entry/wxapp/buy_prizes',
+                    data: {
+                        m: app.globalData.module_name,
+                        prizes_id: t.data.goodsId,
+                        address_id: t.data.useraddress.id,
+                        coupon_id: t.data.couponId,
+                        paytype: t.data.select_pay_type
+                    },
+                    method: 'get',
+                    success: function (response) {
+                        console.log('立即购买返回值：', response.data);
+                        //根据返回结果是否调用微信支付
+                        if (response.data.data.order_id) {
+                            wx.showLoading({
+                                title: '支付中',
+                            })
+                            setTimeout(() => {
+                                wx.showToast({
+                                    icon: 'none',
+                                    title: response.data.message,
+                                    duration: 1000
+                                })
+                            }, 1000)
+                            setTimeout(() => {
+                                wx.hideLoading()
+                                wx.switchTab({
+                                    url: '/pages/index/index',
+                                })
+                            }, 2000)
+                        } else {
+                            wx.requestPayment({
+                                'timeStamp': response.data.data.timeStamp,
+                                'nonceStr': response.data.data.nonceStr,
+                                'package': response.data.data.package,
+                                'signType': 'MD5',
+                                'paySign': response.data.data.paySign,
+                                'success': function (res) {
+                                    console.log("支付成功！")
+                                    // t.setData({
+                                    // 	payloading: 1
+                                    // })
+                                    // setTimeout(() => {
+                                    // 	//检查订单号是否支付成功开始
+                                    // 	t.checkpayresult(response.data.data.local_order_data.order_id);
+                                    // 	//检查订单号是否支付成功结束
+                                    // }, 3000)
+                                    wx.reLaunch({
+                                        url: '/pages/index/index',
+                                    })
+        
+                                },
+                                'fail': function (res) {
+                                    wx.showToast({
+                                        icon: 'none',
+                                        title: '订单支付失败',
+                                    })
+                                    setTimeout(() => {
+                                        wx.switchTab({
+                                            url: '/pages/index/index',
+                                        })
+                                    }, 1200)
+                                }
+                            })
+                        }
+                    },
+                    fail: function (response) {
+                        console.log("response:", response)
+                        wx.showToast({
+                            icon: 'none',
+                            title: '支付参数错误',
+                        })
+                        t.setData({ isShake: true })
+                    }
+                })
+            }
+        }
+    },
     /**
      * 生命周期函数--监听页面隐藏
      */

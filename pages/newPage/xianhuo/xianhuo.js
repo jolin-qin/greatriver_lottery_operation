@@ -23,7 +23,7 @@ Page({
      */
     onLoad: function (options) {
 		this.getBanner();
-		this.getGoodsListFun(this.data.pageNumber);
+		
 		this.getSeriesListFun();
 		//获取px与rpx的转换基数
         let Height = wx.getSystemInfoSync().windowWidth // 屏幕的宽度
@@ -62,8 +62,8 @@ Page({
 						tabs: result,
 						seriesId: result[0].box_class_id
 					})
-					//根据seriesId请求盒子列表
-					// t.getClassListFun(result[0].box_class_id, 1)
+					//根据seriesId请求商品列表
+					t.getGoodsListFun(result[0].box_class_id, 1)
 				} else {
 					//失败
 					wx.showToast({
@@ -81,17 +81,15 @@ Page({
 		});
 	},
 	// 获取商品列表函数
-	getGoodsListFun(pageNumber) {
+	getGoodsListFun(id, pageNumber) {
 		var t = this;
-		if (pageNumber == 1) {
-			t.data.pageNumber = 1;
-		}
 		app.util.request({
 			url: 'entry/wxapp/get_prizes_list',
 			data: {
 				m: app.globalData.module_name,
 				sale_type: '1',
-				page: pageNumber
+				class_id: id,
+				page: pageNumber,
 			},
 			method: 'get',
 			success: function (response) {
@@ -177,10 +175,10 @@ Page({
 			tabIndex: index,
 			pageNumber: 1,
 			seriesId: id,
-			classList: []
+			goodsList: []
 		})
 		//请求系列下的盒子列表
-		this.getClassListFun(id, this.data.pageNumber)
+		this.getGoodsListFun(id, this.data.pageNumber)
 	},
     /**
      * 生命周期函数--监听页面隐藏
@@ -218,7 +216,7 @@ Page({
      * 页面上拉触底事件的处理函数
      */
     onReachBottom() {
-		this.getGoodsListFun(this.data.pageNumber);//商品列表
+		this.getGoodsListFun(this.data.seriesId, this.data.pageNumber);//商品列表
     },
 
     /**

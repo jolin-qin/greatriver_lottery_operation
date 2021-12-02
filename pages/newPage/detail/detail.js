@@ -18,8 +18,9 @@ Page({
         activeIndex: 99999,//默认选择优惠券下标
         useraddress: {},
         couponId: 0,//优惠券id
-        totalPrice: 0,//没用任何优惠的价格
-        showPrice: 0,//实际支付价格
+        totalPrice: 0,//总支付价格
+        originPrice: 0,//商品的后台返回价
+        showPrice: 0,//商品实际支付价格
         discountAmount: '无可用优惠券',
         memberinfo_integral: 0,
         requireIntegral: 0,//开盒需要积分
@@ -140,8 +141,12 @@ Page({
                     t.setData({
                         goodsObj: result,
                         strings: richText,
-                        select_pay_type: type
+                        select_pay_type: type,
+                        originPrice: result.prize_market_price,
+                        showPrice: result.prize_market_price,
+                        requireIntegral: Number(result.prize_integral)
                     })
+                    
 				} else {
 					//失败
 					wx.showToast({
@@ -269,7 +274,7 @@ Page({
         console.log(e)
         let result = e.currentTarget.dataset.item,index = e.currentTarget.dataset.index;
         //判断是否达到用满减券要求
-        if (result.type === '2' && result.full_minus > this.data.goodsObj.prize_market_price) {
+        if (result.type == '2' && (Number(result.full_minus) > Number(this.data.originPrice))) {
             wx.showToast({
                 icon: 'none',
                 title: '商品价格低于满减额',
@@ -277,7 +282,7 @@ Page({
             return false
         }
 
-        let newPrice = (this.data.totalPrice - Number(result.price)).toFixed(2)
+        let newPrice = (this.data.originPrice - Number(result.price)).toFixed(2)
         if (0 >= newPrice) {
             newPrice = 0
         }
@@ -286,7 +291,16 @@ Page({
             couponId: result.id,
             couponPopupShow: false,
             activeIndex: index,
-            totalPrice: newPrice
+            showPrice: newPrice
+        })
+        //计算总实付价格
+        this.countTotalPeiceFun()
+    },
+    // 计算总实际支付价
+    countTotalPeiceFun() {
+        let zongjia = (Number(this.data.showPrice) + Number(this.data.goodsObj.prize_postage)).toFixed(2)
+        this.setData({
+            totalPrice: zongjia
         })
     },
     //关闭查看弹窗
@@ -306,26 +320,31 @@ Page({
     closeBuyPopup() {
         this.setData({ 
             buyPopupShow: false,
+            couponId: '',
+            activeIndex: 99999
         });
     },
     //打开购买弹窗
     openBuyPopup() {
         //运费
-        let yunfei = 0;
-        if (this.data.goodsObj.prize_postage_type === '1') {
-            yunfei = Number(this.data.goodsObj.prize_postage)
-        }
-        let heji = (Number(this.data.goodsObj.prize_market_price) + yunfei).toFixed(2)
-        
+        // let yunfei = 0;
+        // if (this.data.goodsObj.prize_postage_type === '1') {
+        //     yunfei = Number(this.data.goodsObj.prize_postage)
+        // }
+        // let heji = (Number(this.data.goodsObj.prize_market_price) + yunfei).toFixed(2)
+        //判断积分支付是否可点击
+
+        //计算总实付价格
+        this.countTotalPeiceFun()
         this.setData({ 
             buyPopupShow: true,
-            totalPrice: heji,
+            integralRadio: this.data.memberinfo_integral >= this.data.requireIntegral ? false : true,
             discountAmount: this.data.couponList.length ? '请选择优惠券' : '无可用优惠券'
         });
     },
     //打开优惠券弹窗
     openCouponPopup() {
-        if (this.data.couponList.length > 0) {
+        if ((this.data.couponList.length > 0) && (this.data.select_pay_type == '2')) {
             this.setData({
                 couponPopupShow: true
             })
@@ -336,6 +355,31 @@ Page({
             })
         }
     },
+    //radio-group改变
+	payradioChange(e) {
+        console.log(e);
+        //如果选择积分支付，不能用优惠券了
+        let radioValue = e.detail.value
+        if (radioValue == '1') {
+            this.setData({
+                discountAmount: '无可用优惠券',
+                couponId: '',
+                activeIndex: 99999,
+            })
+        } else {
+            if (this.data.couponList.length > 0) {
+                this.setData({
+                    discountAmount: '请选择优惠券',
+                })
+            }
+        }
+		this.setData({
+            select_pay_type: radioValue,
+            showPrice: this.data.originPrice
+        })
+        //计算总实付价格
+        this.countTotalPeiceFun()
+	},
     //支付
     confirmPayFun() {
         let t = this
@@ -349,63 +393,85 @@ Page({
                     url: '/pages/my/address/address',
                 })
             }, 1200)
-        }
-        if (this.data.isShake) {
-            this.setData({ isShake: false })
-            app.util.request({
-				url: 'entry/wxapp/buy_prizes',
-				data: {
-					m: app.globalData.module_name,
-                    prizes_id: t.data.goodsId,
-                    address_id: t.data.useraddress.id,
-                    coupon_id: t.data.couponId
-				},
-				method: 'get',
-				success: function (response) {
-					console.log('立即购买返回值：', response.data);
-					wx.requestPayment({
-						'timeStamp': response.data.data.timeStamp,
-						'nonceStr': response.data.data.nonceStr,
-						'package': response.data.data.package,
-						'signType': 'MD5',
-						'paySign': response.data.data.paySign,
-						'success': function (res) {
-							console.log("支付成功！")
-							// t.setData({
-							// 	payloading: 1
-							// })
-							// setTimeout(() => {
-							// 	//检查订单号是否支付成功开始
-							// 	t.checkpayresult(response.data.data.local_order_data.order_id);
-							// 	//检查订单号是否支付成功结束
-							// }, 3000)
-                            wx.reLaunch({
-                                url: '/pages/index/index',
-                            })
-
-						},
-						'fail': function (res) {
-							wx.showToast({
-								icon: 'none',
-								title: '订单支付失败',
+        } else {
+            if (this.data.isShake) {
+                this.setData({ isShake: false })
+                app.util.request({
+                    url: 'entry/wxapp/buy_prizes',
+                    data: {
+                        m: app.globalData.module_name,
+                        prizes_id: t.data.goodsId,
+                        address_id: t.data.useraddress.id,
+                        coupon_id: t.data.couponId,
+                        paytype: t.data.select_pay_type
+                    },
+                    method: 'get',
+                    success: function (response) {
+                        console.log('立即购买返回值：', response.data);
+                        //根据返回结果是否调用微信支付
+                        if (response.data.data.order_id) {
+                            wx.showLoading({
+                                title: '支付中',
                             })
                             setTimeout(() => {
+                                wx.showToast({
+                                    icon: 'none',
+                                    title: response.data.message,
+                                    duration: 1000
+                                })
+                            }, 1000)
+                            setTimeout(() => {
+                                wx.hideLoading()
                                 wx.switchTab({
                                     url: '/pages/index/index',
                                 })
-                            }, 1200)
-						}
-					})
-				},
-				fail: function (response) {
-                    console.log("response:", response)
-                    wx.showToast({
-                        icon: 'none',
-                        title: '支付参数错误',
-                    })
-                    
-				}
-			})
+                            }, 2000)
+                        } else {
+                            wx.requestPayment({
+                                'timeStamp': response.data.data.timeStamp,
+                                'nonceStr': response.data.data.nonceStr,
+                                'package': response.data.data.package,
+                                'signType': 'MD5',
+                                'paySign': response.data.data.paySign,
+                                'success': function (res) {
+                                    console.log("支付成功！")
+                                    // t.setData({
+                                    // 	payloading: 1
+                                    // })
+                                    // setTimeout(() => {
+                                    // 	//检查订单号是否支付成功开始
+                                    // 	t.checkpayresult(response.data.data.local_order_data.order_id);
+                                    // 	//检查订单号是否支付成功结束
+                                    // }, 3000)
+                                    wx.reLaunch({
+                                        url: '/pages/index/index',
+                                    })
+        
+                                },
+                                'fail': function (res) {
+                                    wx.showToast({
+                                        icon: 'none',
+                                        title: '订单支付失败',
+                                    })
+                                    setTimeout(() => {
+                                        wx.switchTab({
+                                            url: '/pages/index/index',
+                                        })
+                                    }, 1200)
+                                }
+                            })
+                        }
+                    },
+                    fail: function (response) {
+                        console.log("response:", response)
+                        wx.showToast({
+                            icon: 'none',
+                            title: '支付参数错误',
+                        })
+                        t.setData({ isShake: true })
+                    }
+                })
+            }
         }
     },
 

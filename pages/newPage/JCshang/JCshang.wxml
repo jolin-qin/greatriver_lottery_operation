@@ -89,14 +89,14 @@
 							<text style="line-height:50rpx;margin-left:20rpx;">积分支付</text>
 							<text style="line-height:50rpx;">(可用：{{memberinfo_integral}})</text>
 						</view>
-						<radio class="red" value="1" checked="{{select_pay_type == 1 ? 'true':''}}" disabled="{{integralRadio}}"></radio>
+						<radio class="red" value="1" checked="{{select_pay_type == '1' ? 'true':''}}" disabled="{{integralRadio}}"></radio>
 					</view>
 					<view wx:if="{{boxObj.box_pay_payment_wechatpay == '1'}}" class="flex_between payment_item">
 						<view class="flex_start">
 							<image src="/resource/images/wepay.png" style="width:50rpx;height:50rpx;"></image>
 							<text style="line-height:50rpx;margin-left:20rpx;">微信支付</text>
 						</view>
-						<radio class="red" value="2" checked="{{select_pay_type == 2 ? 'true':''}}"></radio>
+						<radio class="red" value="2" checked="{{select_pay_type == '2' ? 'true':''}}"></radio>
 					</view>
 				</view>
 			</radio-group>

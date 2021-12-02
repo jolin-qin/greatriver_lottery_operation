@@ -58,12 +58,9 @@ Page({
 		// 我的变量
 		projecturl: app.util.projectUrl,
 		tabIndex: 0,
-        // tabs: [{name: '现货', img: 'https://robot.qingpukj.com/imageurl/gift_icon.png', onImg: 'https://robot.qingpukj.com/imageurl/gift_icon_on.png'},
-        //         {name: '预售', img: 'https://robot.qingpukj.com/imageurl/message_icon.png', onImg: 'https://robot.qingpukj.com/imageurl/message_icon_on.png'}
-		// ],
 		bannerList: [],//banner数据
 		goodsList: [],//商品列表
-		pageNumber: 0,//商品列表分页
+		pageNumber: 1,//商品列表分页
 	},
 	onReady: function () {
 		// 页面渲染完成
@@ -305,9 +302,7 @@ Page({
 		// if (t.data.boxlist.length < 1) {
 		// 	t.getmemberboxes(0);
 		// }
-		if (t.data.goodsList.length < 1) {
-			t.getGoodsListFun(0);//商品列表
-		}
+		
 	},
 	//去现货列表页
 	goSpotPage() {
@@ -1802,9 +1797,6 @@ Page({
 	// 获取商品列表函数
 	getGoodsListFun(pageNumber) {
 		var t = this;
-		if (pageNumber == 0) {
-			t.data.pageNumber = 0;
-		}
 		app.util.request({
 			url: 'entry/wxapp/get_prizes_list',
 			data: {
@@ -1816,14 +1808,14 @@ Page({
 			success: function (response) {
 				console.log('获取商品列表函数', response);
 				if (response.data.errno == 0) {
-					if (response.data.data.length == 0 && pageNumber == 0) {
+					if (response.data.data.length == 0 && pageNumber == 1) {
 						wx.showToast({
 							icon: 'none',
 							title: '没有更多了',
 						})
 					} else {
 						t.setData({
-							goodsList: pageNumber > 0 ? t.data.goodsList.concat(response.data.data.list) : response.data.data.list,
+							goodsList: pageNumber > 1 ? t.data.goodsList.concat(response.data.data.list) : response.data.data.list,
 							pageNumber: t.data.pageNumber + 1,
 						})
 					}

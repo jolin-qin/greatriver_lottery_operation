@@ -779,6 +779,6 @@ Page({
 		// that.data.pg = that.data.pg + 1;
 		// console.log('触发加载更多' + that.data.pg);
 		// this.getinviterlist(that.data.pg);
-		this.getGoodsListFun(this.data.seriesId, this.data.pageNumber);//商品列表
+		this.getClassListFun(this.data.seriesId, this.data.pageNumber);//商品列表
 	},
 })
