@@ -14,6 +14,53 @@
 	height: 132rpx;
 	margin: -60rpx auto 40rpx;
 }
+/* tab切换 */
+.xiding_box {
+    width: 100%; 
+    position: relative;
+}
+.xiding_zhanwei {
+    width: 100%;
+    height: 106rpx;
+}
+.tab_container {
+	position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+	height: 106rpx;
+	padding-top: 23rpx;
+	background: #f7f7f7;
+	z-index: 8;
+}
+.xiding_box .tab_container.Fixed {
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 0;
+}
+.tab_wrapper {
+	width: 710rpx;
+	white-space: nowrap;
+	margin: 0 auto;
+}
+.tab_wrapper .tab_item {
+	display: inline-block;
+	width: 180rpx;
+	height: 60rpx;
+	line-height: 60rpx;
+	text-align: center;
+	font-size: 28rpx;
+}
+
+.tab_wrapper .tab_item.active {
+	color: #fff;
+	font-weight: bold;
+	font-size: 30rpx;
+	background: url('https://www.jiaochao.top/imageurl/new_06.png') no-repeat center;
+	background-size: 180rpx 60rpx;
+}
+/* end */
 /* 商品列表css */
 .list_wrapper {
 	padding: 0 20rpx;

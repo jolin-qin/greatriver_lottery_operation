@@ -63,7 +63,7 @@ Page({
 						seriesId: result[0].box_class_id
 					})
 					//根据seriesId请求盒子列表
-					// t.getClassListFun(result[0].box_class_id, 1)
+					
 				} else {
 					//失败
 					wx.showToast({
@@ -173,6 +173,7 @@ Page({
 		if (index === this.data.tabIndex) {
 			return
 		}
+
 		this.setData({
 			tabIndex: index,
 			pageNumber: 1,
@@ -180,7 +181,7 @@ Page({
 			classList: []
 		})
 		//请求系列下的盒子列表
-		this.getClassListFun(id, this.data.pageNumber)
+		// this.getClassListFun(id, this.data.pageNumber)
 	},
     /**
      * 生命周期函数--监听页面隐藏

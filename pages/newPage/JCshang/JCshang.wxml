@@ -89,14 +89,14 @@
 							<text style="line-height:50rpx;margin-left:20rpx;">积分支付</text>
 							<text style="line-height:50rpx;">(可用：{{memberinfo_integral}})</text>
 						</view>
-						<radio class="red" value="1" checked="{{select_pay_type == 1 ? 'true':''}}" disabled="{{integralRadio}}"></radio>
+						<radio class="red" value="1" checked="{{select_pay_type == '1' ? 'true':''}}" disabled="{{integralRadio}}"></radio>
 					</view>
 					<view wx:if="{{boxObj.box_pay_payment_wechatpay == '1'}}" class="flex_between payment_item">
 						<view class="flex_start">
 							<image src="/resource/images/wepay.png" style="width:50rpx;height:50rpx;"></image>
 							<text style="line-height:50rpx;margin-left:20rpx;">微信支付</text>
 						</view>
-						<radio class="red" value="2" checked="{{select_pay_type == 2 ? 'true':''}}"></radio>
+						<radio class="red" value="2" checked="{{select_pay_type == '2' ? 'true':''}}"></radio>
 					</view>
 				</view>
 			</radio-group>
@@ -142,6 +142,39 @@
 			</scroll-view>
 			<image class="close_img" src="/resource/icon/close05.png" mode="scaleToFill" bindtap="closeCouponPupop">
 			</image>
+		</view>
+	</van-popup>
+	<!-- 中奖弹窗 -->
+	<van-popup show="{{winningPopupShow}}"
+		custom-style="width:630rpx;height:900rpx;background:transparent;padding-bottom:0;" round custom-class="winning_popup"
+		z-index="{{101}}">
+		<view class="coupon_content">
+			<view class="prize_box flex_center">
+				<view class="prize_item" wx:for="{{winningList}}" wx:key="index">{{item.prize.complete_prize_title}}</view>
+			</view>
+			<block>
+				<view wx:if="{{times > 5}}" class="view_more" bindtap="checkAll">查看全部</view>
+				<view wx:else class="view_more"></view>
+			</block>
+			<view class="jump_btn" bindtap="goWarehousePage">去胶库申请发货</view>
+			<view class="jump_btn" bindtap="againFun">继续抽盲盒</view>
+		</view>
+	</van-popup>
+	<!-- 全部中奖奖品 -->
+	<van-popup show="{{allPrizePopupShow}}"
+		custom-style="width:630rpx;height:900rpx;background:transparent;padding-bottom:0;" round custom-class="allprize_popup"
+		z-index="{{102}}">
+		<view class="coupon_content">
+			<view class="title">本次全部中奖奖品</view>
+			<view class="prize_wrapper">
+				<view class="prize_box">
+					<view class="prize_item" wx:for="{{winningAllList}}" wx:key="index">{{item.prize.complete_prize_title}}</view>
+				</view>
+			</view>
+			<view class="close_btn">
+				<image class="close_img" src="/resource/icon/close05.png" mode="scaleToFill" bindtap="closeAllPrizePupop">
+				</image>
+			</view>
 		</view>
 	</van-popup>
 </view>
