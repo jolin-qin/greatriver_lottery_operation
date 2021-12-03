@@ -396,3 +396,86 @@
     font-size: 36rpx;
     color: #fff;
 }
+/* 中奖弹窗 */
+.winning_popup .coupon_content {
+	width: 100%;
+	height: 100%;
+	padding-top: 300rpx;
+	background: url('https://www.jiaochao.top/imageurl/zhongjian.png') no-repeat;
+	background-size: 100% 100%;
+	position: relative;
+}
+.winning_popup .coupon_content .prize_box {
+	width: 100%;
+	height: 240rpx;
+	flex-direction: column;
+}
+.winning_popup .coupon_content .prize_item {
+	text-align: center;
+	color: #fff;
+	/* font-size: 28rpx; */
+	margin-top: 12rpx;
+}
+.winning_popup .coupon_content .view_more {
+	width: 160rpx;
+	height: 48rpx;
+	border-radius: 24rpx;
+	border: 2rpx solid #fff;
+	line-height: 44rpx;
+	text-align: center;
+	color: #fff;
+	font-size: 24rpx;
+	margin: 30rpx auto 50rpx;
+}
+.winning_popup .coupon_content .jump_btn {
+	width: 312rpx;
+	height: 76rpx;
+	line-height: 76rpx;
+	text-align: center;
+	color: #fff;
+	font-size: 32rpx;
+	font-weight: bold;
+	font-style: italic;
+	margin: 30rpx auto 0;
+	background: url('https://www.jiaochao.top/imageurl/yaoqing.png') no-repeat;
+    background-size: cover;
+}
+/* 全部中奖弹窗 */
+.allprize_popup .coupon_content {
+	width: 100%;
+	height: 100%;
+	
+	color: #fff;
+	position: relative;
+}
+.allprize_popup .coupon_content .title {
+	line-height: 100rpx;
+	font-size: 32rpx;
+	font-weight: bold;
+	text-align: center;
+	background: #763EE1;
+}
+.allprize_popup .coupon_content .prize_wrapper {
+	width: 100%;
+	height: 700rpx;
+	padding: 0 24rpx 24rpx;
+	background: linear-gradient(#763EE1, #652CD2, #622BD2);
+	border-radius: 0 0 20rpx 20rpx;
+}
+.allprize_popup .coupon_content .prize_box {
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+}
+.allprize_popup .coupon_content .prize_item {
+	line-height: 48rpx;
+	text-align: center;
+	font-size: 30rpx;
+}
+.allprize_popup .coupon_content .close_btn {
+	width: 60rpx;
+	height: 60rpx;
+	border-radius: 50%;
+	border: 2rpx solid #fff;
+	margin: 30rpx auto 0;
+}

@@ -21,14 +21,13 @@
 <!-- 新的页面start -->
 <view class="new_pages">
 	<!-- swiper -->
-	<swiper class="index_swiper" indicator-dots="{{true}}" interval="2000" autoplay="{{true}}" duration="500" circular="true" easing-function="linear">
-        <swiper-item wx:for="{{bannerList}}" wx:key="index" class="swiper_item" data-type="{{1}}" data-prizeid="{{item.prize_id}}" bindtap="goGoodsDetailPage">
-            <image class="img" src="{{projecturl + item.img}}" mode="aspectFill"></image>
-        </swiper-item>
-		<!-- <swiper-item class="swiper_item" bindtap="goGoodsDetailPage">
-            <image class="img" src="/resource/images/box.jpg" mode="aspectFill"></image>
-        </swiper-item> -->
-    </swiper>
+	<view class="swiper_section">
+		<swiper class="index_swiper" indicator-dots="{{true}}" interval="2000" autoplay="{{false}}" duration="500" circular="true" easing-function="linear">
+			<swiper-item wx:for="{{bannerList}}" wx:key="index" class="swiper_item" data-type="{{1}}" data-prizeid="{{item.prize_id}}" bindtap="goGoodsDetailPage">
+				<image class="img" src="{{projecturl + item.img}}" mode="aspectFill"></image>
+			</swiper-item>
+		</swiper>
+	</view>
 	<!-- 商品列表 -->
 	<view class="goods_wrapper">
 		<!-- tab切换 -->

@@ -11,11 +11,17 @@ Page({
 		boxObj: {},
 		goodsList: [],//盒子里商品种类数
 		remainNum: 0,//剩余数量
-		couponId: '',//优惠券
+        couponId: '',//优惠券
+        toolId: '',//使用道具Id
+        toolPrizeId: '',//使用道具的商品ID
 		couponPopupShow: false,//优惠券弹窗
-		buyPopupShow: false,//购买弹窗
+        buyPopupShow: false,//购买弹窗
+        winningPopupShow: false,//购买弹窗
+        allPrizePopupShow: false,//全部奖品弹窗弹窗
 		couponList: [],//可用优惠券
         toolList: [], //道具列表
+        winningList: [],//中奖一、三、五个奖品数组
+        winningAllList: [],//全部奖品数组（全包中奖数组）
         times: 0,//默认抽一次
         activeIndex: 99999,//默认选择优惠券下标
         totalPrice: 0,//用户选择抽几次，没减任何优惠的价格，用于各种计算
@@ -50,33 +56,7 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-        let t = this;
-        //获取用户可用积分
-        app.util.request({
-			url: 'entry/wxapp/getuserinfo',
-			data: {
-				m: app.globalData.module_name,
-				title: '',
-			},
-			method: 'post',
-			success: function (response) {
-				console.log(response.data);
-				if (response.data.errno == 9999) {
-					//未授权头像
-
-				} else {
-					t.setData({
-						memberinfo_integral: Number(response.data.data.integral)
-					})
-				}
-			},
-			fail: function (response) {
-				wx.showToast({
-					icon: 'none',
-					title: '网络错误',
-				})
-			}
-		})
+        this.getAvailableIntegral() //获取可用积分
     },
 	//请求盒子详情
 	getBoxDetailFun() {
@@ -132,7 +112,36 @@ Page({
 				})
 			}
 		});
-	},
+    },
+    //获取可用积分
+    getAvailableIntegral() {
+        let t = this;
+        app.util.request({
+			url: 'entry/wxapp/getuserinfo',
+			data: {
+				m: app.globalData.module_name,
+				title: ''
+			},
+			method: 'post',
+			success: function (response) {
+				console.log(response.data);
+				if (response.data.errno == 9999) {
+					//未授权头像
+
+				} else {
+					t.setData({
+						memberinfo_integral: Number(response.data.data.integral)
+					})
+				}
+			},
+			fail: function (response) {
+				wx.showToast({
+					icon: 'none',
+					title: '网络错误',
+				})
+			}
+		})
+    },
 	// 获取可用优惠券
 	geCouponFun() {
 		var t = this;
@@ -264,6 +273,18 @@ Page({
             })
         }
     },
+    //查看全部中奖商品
+    checkAll() {
+        this.setData({ 
+            allPrizePopupShow: true
+        });
+    },
+    //关闭全部弹窗
+    closeAllPrizePupop() {
+        this.setData({ 
+            allPrizePopupShow: false
+        });
+    },
     //radio-group改变
 	payradioChange(e) {
         console.log(e);
@@ -295,100 +316,138 @@ Page({
 			select_pay_type: e.currentTarget.dataset.paytype
 		})
     },
+    //去胶库页
+    goWarehousePage() {
+        wx.switchTab({
+            url: '/pages/warehouse/warehouse'
+        })
+    },
+    //继续抽盲盒
+    againFun() {
+        this.getBoxDetailFun() //盒子详情
+        this.geCouponFun() //获取优惠券
+        this.getAvailableIntegral() //获取可用积分
+    },
     //支付
     confirmPayFun() {
         let t = this
-        if (!this.data.useraddress.id) {
-            wx.showToast({
-                icon: 'none',
-                title: '请选择收获地址',
-            })
-            setTimeout(() => {
-                wx.navigateTo({
-                    url: '/pages/my/address/address',
-                })
-            }, 1200)
-        } else {
-            if (this.data.isShake) {
-                this.setData({ isShake: false })
-                app.util.request({
-                    url: 'entry/wxapp/buy_prizes',
-                    data: {
-                        m: app.globalData.module_name,
-                        prizes_id: t.data.goodsId,
-                        address_id: t.data.useraddress.id,
-                        coupon_id: t.data.couponId,
-                        paytype: t.data.select_pay_type
-                    },
-                    method: 'get',
-                    success: function (response) {
-                        console.log('立即购买返回值：', response.data);
-                        //根据返回结果是否调用微信支付
-                        if (response.data.data.order_id) {
-                            wx.showLoading({
-                                title: '支付中',
+        if (this.data.isShake && this.data.select_pay_type) {
+            this.setData({ isShake: false })
+            app.util.request({
+                url: 'entry/wxapp/openthebox',
+                data: {
+                    m: app.globalData.module_name,
+                    box_id: t.data.boxId,
+                    open_num: t.data.times,
+                    coupon_id: t.data.couponId,
+                    tool_id: t.data.toolId,
+                    tool_prize_id: t.data.toolPrizeId,
+                    paytype: t.data.select_pay_type
+                },
+                method: 'get',
+                success: function (response) {
+                    console.log('抽盲盒返回值：', response.data);
+                    //根据返回结果是否调用微信支付
+                    if (response.data.data.order_id) {
+                        wx.showLoading({
+                            title: '支付中',
+                        })
+                        setTimeout(() => {
+                            wx.showToast({
+                                icon: 'none',
+                                title: response.data.message,
+                                duration: 1000
                             })
-                            setTimeout(() => {
+                        }, 1000)
+                        setTimeout(() => {
+                            wx.hideLoading()
+                            t.setData({
+                                
+                            })
+                        }, 2000)
+                    } else {
+                        wx.requestPayment({
+                            'timeStamp': response.data.data.timeStamp,
+                            'nonceStr': response.data.data.nonceStr,
+                            'package': response.data.data.package,
+                            'signType': 'MD5',
+                            'paySign': response.data.data.paySign,
+                            success: function (res) {
+                                console.log("支付成功：", res)
+                                setTimeout(() => {
+                                    t.checkpayresult(response.data.data.local_order_data.order_id)
+                                }, 1000)
+                            },
+                            fail: function (res) {
                                 wx.showToast({
                                     icon: 'none',
-                                    title: response.data.message,
-                                    duration: 1000
+                                    title: '订单支付失败',
                                 })
-                            }, 1000)
-                            setTimeout(() => {
-                                wx.hideLoading()
-                                wx.switchTab({
-                                    url: '/pages/index/index',
-                                })
-                            }, 2000)
-                        } else {
-                            wx.requestPayment({
-                                'timeStamp': response.data.data.timeStamp,
-                                'nonceStr': response.data.data.nonceStr,
-                                'package': response.data.data.package,
-                                'signType': 'MD5',
-                                'paySign': response.data.data.paySign,
-                                'success': function (res) {
-                                    console.log("支付成功！")
-                                    // t.setData({
-                                    // 	payloading: 1
-                                    // })
-                                    // setTimeout(() => {
-                                    // 	//检查订单号是否支付成功开始
-                                    // 	t.checkpayresult(response.data.data.local_order_data.order_id);
-                                    // 	//检查订单号是否支付成功结束
-                                    // }, 3000)
-                                    wx.reLaunch({
-                                        url: '/pages/index/index',
+                                setTimeout(() => {
+                                    wx.switchTab({
+                                        url: '/pages/mystar/mystar',
                                     })
-        
-                                },
-                                'fail': function (res) {
-                                    wx.showToast({
-                                        icon: 'none',
-                                        title: '订单支付失败',
-                                    })
-                                    setTimeout(() => {
-                                        wx.switchTab({
-                                            url: '/pages/index/index',
-                                        })
-                                    }, 1200)
-                                }
-                            })
-                        }
-                    },
-                    fail: function (response) {
-                        console.log("response:", response)
-                        wx.showToast({
-                            icon: 'none',
-                            title: '支付参数错误',
+                                }, 1500)
+                            }
                         })
-                        t.setData({ isShake: true })
                     }
-                })
-            }
+                },
+                fail: function (response) {
+                    console.log("response:", response)
+                    wx.showToast({
+                        icon: 'none',
+                        title: '支付参数错误',
+                    })
+                    t.setData({ isShake: true })
+                }
+            })
         }
     },
+    // 检查支付结果
+	checkpayresult(order_id) {
+		console.log('check order_id=', order_id);
+		let t = this;
+		app.util.request({
+			url: 'entry/wxapp/checkpayresult',
+			data: {
+				m: app.globalData.module_name,
+				orderid: order_id
+			},
+			method: 'get',
+			success: function (response2) {
+				console.log('中奖结果：', response2);
+				if (response2.data.errno == 0) {
+                    //根据times判断为哪个数组赋值
+                    if (5 >= t.data.times) {
+                        t.setData({
+                            winningPopupShow: true,
+                            buyPopupShow: false,
+                            couponId: '',
+                            activeIndex: 99999,
+                            winningList: response2.data.data
+                        })
+                    } else {
+                        t.setData({
+                            winningPopupShow: true,
+                            buyPopupShow: false,
+                            couponId: '',
+                            activeIndex: 99999,
+                            winningList: response2.data.data.slice(0, 5),
+                            winningAllList: response2.data.data
+                        })
+                    }
+				}
+			},
+			fail: function (response2) {
+				console.log('订单支付失败', response2);
+				wx.showToast({
+					icon: 'none',
+					title: response2.data.message,
+				})
+				return;
+			}
+		})
+	},
     /**
      * 生命周期函数--监听页面隐藏
      */

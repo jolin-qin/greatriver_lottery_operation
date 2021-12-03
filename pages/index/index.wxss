@@ -581,8 +581,7 @@ page {}
 	border-radius: 30rpx 30rpx 0 0;
 	margin-top: -470rpx;
 }
-
-.index_swiper {
+.swiper_section {
 	width: 700rpx;
 	height: 500rpx;
 	margin: 0 auto;
@@ -590,10 +589,13 @@ page {}
 	border-radius: 50rpx;
 	overflow: hidden;
 }
+.index_swiper {
+	width: 700rpx;
+	height: 500rpx;
+}
 
 .index_swiper .swiper_item .img {
 	width: 100%;
-	/* border-radius: 46rpx; */
 }
 .index_swiper .wx-swiper-dots {
 	bottom: 70rpx;
