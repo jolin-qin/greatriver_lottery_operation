@@ -1,5 +1,5 @@
 <view class="container">
-    <view class="recycle_list">
+    <!-- <view class="recycle_list">
         <view class="recycle_item flex_start">
             <image class="head_portrait" src="/resource/images/box.jpg" mode="scaleToFill"></image>
             <view class="user_infor">
@@ -22,5 +22,18 @@
                 <view class="number">一张</view>
             </view>
         </view>
-    </view>
+    </view> -->
+    <view class="bg-white new_item flex_between" wx:for="{{distribution_list}}" wx:key="index">
+		<view>
+			<view style="font-size:30rpx;font-weight:bold">{{item.title}}</view>
+			<view style="font-size:25rpx;margin-top:15rpx;" class="text-gray">{{item.create_time}}</view>
+		</view>
+		<view style="text-align:right">
+			<view style="font-size:45rpx;" class="numfont">+¥{{item.price}}</view>
+		</view>
+	</view>
+	<view
+		style="{{distribution_list.length>0?'display:none;':'display:flex;'}}height:300rpx;width:100%;align-items:center;justify-content:center;">
+		暂无记录
+	</view>
 </view>

@@ -258,15 +258,56 @@
 	background-color: #f7f8fd;
 }
 .box_infor .boxPic {
+	width: 220rpx;
+	height: 220rpx;
+	margin: 0 auto;
+	background: #e62743;
+	border-radius: 20rpx;
+	overflow: hidden;
+}
+.box_infor .boxPic .img {
 	display: block;
 	width: 200rpx;
 	height: 200rpx;
-	margin: 0 auto;
-	border-radius: 20rpx;
+	border-radius: 14rpx;
+	margin: 10rpx 0 0 10rpx;
 }
 .box_infor .box_title {
 	line-height: 68rpx;
 	text-align: center;
+}
+/* 弹窗  盒子商品 */
+.goods_wrapper .title {
+	padding-left: 25rpx;
+	font-size: 32rpx;
+    font-weight: bold;
+    line-height: 60rpx;
+}
+.popup_goods_list {
+	width: 690rpx;
+	margin: 0 auto;
+	border-radius: 20rpx;
+	background: url('https://www.jiaochao.top/imageurl/beijing.png') no-repeat top center;
+	background-size: auto;
+	padding: 24rpx 0 1px 30rpx;
+	flex-wrap: wrap;
+}
+.popup_goods_list .goods_list_item {
+	min-width: 182rpx;
+	height: 60rpx;
+	line-height: 60rpx;
+	border-radius: 8rpx;
+	background: #fff;
+	background-size: cover;
+	text-align: center;
+	font-size: 28rpx;
+	margin: 0 24rpx 24rpx 0;
+	padding: 0 14rpx;
+}
+.popup_goods_list .goods_list_item.active {
+	background: url('https://www.jiaochao.top/imageurl/new_08.png') no-repeat;
+	background-size: cover;
+	color: #fff;
 }
 /* 我的道具 */
 .wrapper .title {
@@ -280,6 +321,14 @@
 	border-radius: 20rpx;
 	padding: 16rpx;
 	position: relative;
+	border: 2rpx solid #fff;
+}
+.tool_wrapper .tool_item.active {
+	border: 2rpx solid #e62743;
+}
+.useNumber {
+	color: #e62743;
+	margin: 0 10rpx;
 }
 .tool_wrapper .tool_item .select_icon {
 	width: 50rpx;
@@ -317,26 +366,24 @@
 }
 /* 抽奖次数 */
 .time_wrapper .time_item {
-	width: 190rpx;
-	height: 72rpx;
-	line-height: 68rpx;
+	width: 148rpx;
+	height: 56rpx;
+	line-height: 56rpx;
 	text-align: center;
-	margin-left: 50rpx;
-	margin-right: 50rpx;
-	margin-top: 24rpx;
-	border: 2rpx solid #333;
-	border-radius: 12rpx;
-}
-.time_wrapper .time_container {
-	flex-wrap: wrap;
-	background: #fff;
-	padding: 2px 24rpx 24rpx;
-	border-radius: 10rpx;
+	background: #f7f8fd;
+	font-size: 28rpx;
 }
 .time_wrapper .time_item.active {
-	color: #E54D42;
-	border: 2rpx solid #E54D42;
+	background: url('https://www.jiaochao.top/imageurl/new_09.png') no-repeat;
+	background-size: cover;
+	color: #fff;
 }
+.time_wrapper .time_container {
+	background: #fff;
+	padding: 20rpx 0;
+	border-radius: 10rpx;
+}
+
 /* 支付方式 */
 .payment_wrapper .payment_item {
 	border-bottom: 2rpx solid #f7f7f7;
@@ -425,6 +472,11 @@
 	text-align: center;
 	color: #fff;
 	font-size: 24rpx;
+	margin: 30rpx auto 50rpx;
+}
+.winning_popup .coupon_content .view_more2 {
+	width: 160rpx;
+	height: 48rpx;
 	margin: 30rpx auto 50rpx;
 }
 .winning_popup .coupon_content .jump_btn {

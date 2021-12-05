@@ -433,7 +433,7 @@ Page({
                                 'package': response.data.data.package,
                                 'signType': 'MD5',
                                 'paySign': response.data.data.paySign,
-                                'success': function (res) {
+                                success: function (res) {
                                     console.log("支付成功！")
                                     // t.setData({
                                     // 	payloading: 1
@@ -448,7 +448,7 @@ Page({
                                     })
         
                                 },
-                                'fail': function (res) {
+                                fail: function (res) {
                                     wx.showToast({
                                         icon: 'none',
                                         title: '订单支付失败',

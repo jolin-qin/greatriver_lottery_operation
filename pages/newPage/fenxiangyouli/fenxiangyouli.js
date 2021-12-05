@@ -1,18 +1,24 @@
 // pages/newPage/fenxiangyouli/fenxiangyouli.js
+const app = getApp()
 Page({
 
     /**
      * 页面的初始数据
      */
     data: {
-
+        page: 1,
+        distribution_list: [{
+            title: "满减券",
+			create_time: "2021/12/5",
+			price: "555"
+        }]
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-
+        this.getinfo();
     },
 
     /**
@@ -28,7 +34,34 @@ Page({
     onShow: function () {
 
     },
-
+    //所有收益记录
+	getinfo() {
+		var t = this;
+		app.util.request({
+			url: 'entry/wxapp/my_share_list',
+			data: {
+				m: app.globalData.module_name,
+				type: '1',
+				page: t.data.page
+			},
+			method: 'get',
+			success: function (response) {
+				console.log("分享收益：", response.data);
+				if (response.data.errno == 0) {
+					t.setData({
+						distribution_list: t.data.page > 1 ? t.data.distribution_list.concat(response.data.data.list) : response.data.data.list,
+						page: t.data.page + 1,
+					})
+				}
+			},
+			fail: function (response) {
+				wx.showToast({
+					icon: 'none',
+					title: '网络错误一级请求',
+				})
+			}
+		});
+	},
     /**
      * 生命周期函数--监听页面隐藏
      */
@@ -54,7 +87,7 @@ Page({
      * 页面上拉触底事件的处理函数
      */
     onReachBottom: function () {
-
+        this.getinfo();
     },
 
     /**

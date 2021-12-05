@@ -61,8 +61,8 @@
 							<view wx:if="{{selecttool.payment_integral==1}}" bindtap="payradioclick" data-paytype="1"
 								style="display:flex;justify-content:space-between;align-items:center;border-bottom:1rpx solid #f7f7f7;padding:0 0 10rpx 0">
 								<view style="display:flex;">
-									<image src="/resource/images/kuangshi2.png" style="width:50rpx;height:50rpx;">
-									</image><text style="line-height:50rpx;margin-left:20rpx;">矿石兑换</text>
+									<image src="/resource/images/jifen.png" style="width:50rpx;height:50rpx;">
+									</image><text style="line-height:50rpx;margin-left:20rpx;">积分支付</text>
 								</view>
 								<radio class='red ' value="1" checked="{{select_pay_type==1?'true':''}}"></radio>
 							</view>
@@ -74,14 +74,14 @@
 								</view>
 								<radio class='red ' value="2" checked="{{select_pay_type==2?'true':''}}"></radio>
 							</view>
-							<view wx:if="{{selecttool.payment_balance==1}}" bindtap="payradioclick" data-paytype="3"
+							<!-- <view wx:if="{{selecttool.payment_balance==1}}" bindtap="payradioclick" data-paytype="3"
 								style="display:flex;justify-content:space-between;align-items:center;margin-top:20rpx;">
 								<view style="display:flex;">
 									<image src="/resource/images/xianjin.png" style="width:50rpx;height:50rpx;"></image>
 									<text style="line-height:50rpx;margin-left:20rpx;">余额支付</text>
 								</view>
 								<radio class='red ' value="3" checked="{{select_pay_type==3?'true':''}}"></radio>
-							</view>
+							</view> -->
 						</view>
 					</radio-group>
 				</view>

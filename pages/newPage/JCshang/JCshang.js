@@ -13,7 +13,9 @@ Page({
 		remainNum: 0,//剩余数量
         couponId: '',//优惠券
         toolId: '',//使用道具Id
+        useToolNumber: 0,//使用道具数量
         toolPrizeId: '',//使用道具的商品ID
+        toolPrizeIndex: '',//选中使用道具的商品index
 		couponPopupShow: false,//优惠券弹窗
         buyPopupShow: false,//购买弹窗
         winningPopupShow: false,//购买弹窗
@@ -43,6 +45,7 @@ Page({
 		})
         this.getBoxDetailFun()
         this.geCouponFun() //获取优惠券
+        
     },
 
     /**
@@ -142,6 +145,40 @@ Page({
 			}
 		})
     },
+    // 获取道具列表
+	getToolsFun() {
+		var t = this;
+		app.util.request({
+			url: 'entry/wxapp/getmembertools',
+			data: {
+				m: app.globalData.module_name,
+			},
+			method: 'get',
+			success: function (response) {
+				console.log('获取道具', response);
+				if (response.data.errno == 0) {
+                    response.data.data.forEach(item => {
+                        item.isSelect = false
+                    })
+                    t.setData({
+                        toolList: response.data.data
+                    })
+				} else {
+					//失败
+					wx.showToast({
+						icon: 'none',
+						title: response.data.message,
+					})
+				}
+			},
+			fail: function (response) {
+				wx.showToast({
+					icon: 'none',
+					title: response.data.message,
+				})
+			}
+		});
+	},
 	// 获取可用优惠券
 	geCouponFun() {
 		var t = this;
@@ -209,7 +246,11 @@ Page({
         this.setData({ 
             buyPopupShow: false,
             couponId: '',
-            activeIndex: 99999
+            activeIndex: 99999,
+            toolPrizeIndex: '',
+            toolPrizeId: '',
+            toolId: '',
+            useToolNumber: 0
         });
     },
     //打开购买弹窗
@@ -226,6 +267,7 @@ Page({
             integralRadio: this.data.memberinfo_integral >= totalIntegral ? false : true,
             discountAmount: this.data.couponList.length ? '请选择优惠券' : '无可用优惠券'
         });
+        this.getToolsFun()//道具列表
     },
     //弹窗里选择抽几次
     changeTimes(e) {
@@ -251,6 +293,7 @@ Page({
                     times: buyNumber,
                     totalPrice: totalAmount,
                     showPrice: totalAmount,
+                    requireIntegral: totalIntegral
                 });
             } else {
                 wx.showToast({
@@ -258,6 +301,52 @@ Page({
                     title: '~可用积分不够哦~',
                 })
             }
+        }
+    },
+    //选择使用道具的商品
+    choiceGoodFun(e) {
+        let index = e.currentTarget.dataset.index, id = e.currentTarget.dataset.id;
+        this.setData({
+            toolPrizeId: id,
+            toolPrizeIndex: index,
+        })
+    },
+    //选中道具
+    openmodal(e) {
+        if (!this.data.toolPrizeId) {
+            wx.showToast({
+                icon: 'none',
+                title: '请先选择商品',
+            })
+            return
+        }
+        let isSelect = e.currentTarget.dataset.select, id = e.currentTarget.dataset.id, index1 = e.currentTarget.dataset.index;
+        this.data.toolList.forEach((item, index) => {
+            let emp = 'toolList[' +  index + '].isSelect'
+            this.setData({
+                [emp]: false
+            })
+        })
+        //判断是否点击同一个
+        if (isSelect) {
+            this.setData({
+                toolId: '',
+                useToolNumber: 0
+            })
+            let emp = 'toolList[' +  index1 + '].isSelect'
+            this.setData({
+                [emp]: false
+            })
+            
+        } else {
+            this.setData({
+                toolId: id,
+                useToolNumber: 1
+            })
+            let emp = 'toolList[' +  index1 + '].isSelect'
+            this.setData({
+                [emp]: true
+            })
         }
     },
     //打开优惠券弹窗
@@ -327,6 +416,10 @@ Page({
         this.getBoxDetailFun() //盒子详情
         this.geCouponFun() //获取优惠券
         this.getAvailableIntegral() //获取可用积分
+        this.getToolsFun() //获取道具
+        this.setData({
+            winningPopupShow: false
+        })
     },
     //支付
     confirmPayFun() {
@@ -348,7 +441,8 @@ Page({
                 success: function (response) {
                     console.log('抽盲盒返回值：', response.data);
                     //根据返回结果是否调用微信支付
-                    if (response.data.data.order_id) {
+                    if (Array.isArray(response.data.data) && !response.data.data.local_order_data) {
+                        console.log("走积分支付")
                         wx.showLoading({
                             title: '支付中',
                         })
@@ -361,11 +455,24 @@ Page({
                         }, 1000)
                         setTimeout(() => {
                             wx.hideLoading()
-                            t.setData({
-                                
-                            })
+                            //根据times判断为哪个数组赋值
+                            if (5 >= t.data.times) {
+                                t.setData({
+                                    winningPopupShow: true,
+                                    buyPopupShow: false,
+                                    winningList: response.data.data
+                                })
+                            } else {
+                                t.setData({
+                                    winningPopupShow: true,
+                                    buyPopupShow: false,
+                                    winningList: response.data.data.slice(0, 5),
+                                    winningAllList: response.data.data
+                                })
+                            }
                         }, 2000)
                     } else {
+                        console.log("走微信支付")
                         wx.requestPayment({
                             'timeStamp': response.data.data.timeStamp,
                             'nonceStr': response.data.data.nonceStr,
@@ -424,6 +531,10 @@ Page({
                             buyPopupShow: false,
                             couponId: '',
                             activeIndex: 99999,
+                            toolPrizeIndex: '',
+                            toolPrizeId: '',
+                            toolId: '',
+                            useToolNumber: 0,
                             winningList: response2.data.data
                         })
                     } else {
@@ -432,6 +543,10 @@ Page({
                             buyPopupShow: false,
                             couponId: '',
                             activeIndex: 99999,
+                            toolPrizeIndex: '',
+                            toolPrizeId: '',
+                            toolId: '',
+                            useToolNumber: 0,
                             winningList: response2.data.data.slice(0, 5),
                             winningAllList: response2.data.data
                         })

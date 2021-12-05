@@ -34,3 +34,10 @@
     font-weight: bold;
     margin-top: 20rpx;
 }
+/* 新版css */
+.new_item {
+    width: 710rpx;
+    margin: 20rpx auto 0;
+    padding: 20rpx;
+    border-radius: 20rpx;
+}

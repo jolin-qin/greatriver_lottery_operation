@@ -54,10 +54,11 @@
 		</view>
 	</view>
 </view>
-
+<!-- 收益记录 -->
 <view style="padding:20rpx;">
 	<view style="font-size:35rpx;margin-left:20rpx;font-weight:bold">收益记录</view>
-	<view
+	<!-- 老版本 -->
+	<!-- <view
 		style="display:flex;justify-content:space-between;margin-top:20rpx;padding:20rpx;align-items:center;border-radius:20rpx;"
 		class="bg-white" wx:for="{{distribution_list}}" wx:key="index" bindtap="showreasons">
 		<view>
@@ -66,6 +67,18 @@
 		</view>
 		<view style="text-align:right">
 			<view style="font-size:45rpx;" class="numfont">+¥{{item.commission}}</view>
+		</view>
+	</view> -->
+	<!-- 新版本 -->
+	<view
+		style="display:flex;justify-content:space-between;margin-top:20rpx;padding:20rpx;align-items:center;border-radius:20rpx;"
+		class="bg-white" wx:for="{{distribution_list}}" wx:key="index">
+		<view>
+			<view style="font-size:30rpx;font-weight:bold">{{item.title}}</view>
+			<view style="font-size:25rpx;margin-top:15rpx;" class="text-gray">{{item.create_time}}</view>
+		</view>
+		<view style="text-align:right">
+			<view style="font-size:45rpx;" class="numfont">+¥{{item.price}}</view>
 		</view>
 	</view>
 	<view

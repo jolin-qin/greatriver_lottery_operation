@@ -44,34 +44,39 @@
 		</view>
 		<!--盒子信息-->
 		<view class="wrapper box_infor">
-			<!-- <view class="cartProducePic">
-				<image wx:if="{{goodsObj.prize_pic}}" class="img100" src="{{projecturl + goodsObj.prize_pic}}" mode="scaleToFill"></image>
+			<view class="boxPic">
+				<image class="img" src="{{boxObj.box_cover}}" mode="scaleToFill"></image>
 			</view>
-			<view class="cartProduceTitle ellipsis_2">{{goodsObj.prize_title}}</view> -->
-			<image class="boxPic" src="{{boxObj.box_cover}}" mode="scaleToFill"></image>
+			
 			<view class="box_title">{{boxObj.box_title}}</view>
 		</view>
+		<!-- 盒子包含的商品 -->
+		<view class="goods_wrapper">
+			<view class="title">盒子内商品</view>
+			<view class="popup_goods_list flex_start">
+				<view class="goods_list_item {{toolPrizeIndex === index ? 'active' : ''}}" wx:for="{{goodsList}}" wx:key="index" bindtap="choiceGoodFun" data-index="{{index}}" data-id="{{item.prize_fragment_id}}">{{item.prizes_fragment_title}}</view>
+			</view>
+		</view>
 		<!-- 道具 -->
-		<view class="wrapper tool_wrapper">
+		<view class="wrapper tool_wrapper" wx:if="{{toolList.length}}">
 			<view class="title">我的道具</view>
-			<block>
-				<view class="flex_between">
-					<view bindtap="openmodal" class="tool_item">
-						<view class="flex_start tool_content">
-							<image class="tool_img" src="/resource/images/box.jpg" mode="aspectFill"></image>
-							<view class="tool_name">奖品透视卡</view>
-						</view>
-						<view class="text_grey">使用本卡可以查看不可见奖品盒子里的内容</view>
-						<image class="select_icon" src="/resource/icon/select_icon.png" mode="scaleToFill"></image>
+			<view class="flex_between">
+				<view bindtap="openmodal" class="tool_item {{item.isSelect ? 'active' : ''}}" wx:for="{{toolList}}" wx:key="index" data-index="{{index}}" data-select="{{item.isSelect}}" data-id="{{item.tool_id}}">
+					<view class="flex_start tool_content">
+						<image class="tool_img" src="{{item.tool.pic}}" mode="aspectFill"></image>
+						<view class="tool_name">{{item.tool.tool_name}}</view>
 					</view>
-					
+					<view class="text_grey">{{item.tool.tool_content}}</view>
 				</view>
-				<!-- <view wx:else>还没有道具哦</view> -->
-			</block>
+			</view>
+		</view>
+		<!-- 使用道具数量 -->
+		<view class="wrapper">
+			<view>使用道具<text class="useNumber">{{useToolNumber}}</text>张</view>
 		</view>
 		<!-- 抽几次 -->
 		<view class="wrapper time_wrapper">
-			<view class="flex_center time_container">
+			<view class="flex_around time_container">
 				<view class="time_item {{times === 1 ? 'active' : ''}}" bindtap="changeTimes" data-num="{{1}}">抽一次</view>
 				<view class="time_item {{times === 3 ? 'active' : ''}}" bindtap="changeTimes" data-num="{{3}}">抽三次</view>
 				<view class="time_item {{times === 5 ? 'active' : ''}}" bindtap="changeTimes" data-num="{{5}}">抽五次</view>
@@ -154,7 +159,7 @@
 			</view>
 			<block>
 				<view wx:if="{{times > 5}}" class="view_more" bindtap="checkAll">查看全部</view>
-				<view wx:else class="view_more"></view>
+				<view wx:else class="view_more2"></view>
 			</block>
 			<view class="jump_btn" bindtap="goWarehousePage">去胶库申请发货</view>
 			<view class="jump_btn" bindtap="againFun">继续抽盲盒</view>
