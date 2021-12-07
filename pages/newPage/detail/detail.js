@@ -239,11 +239,11 @@ Page({
 			}
 		});
 	},
-    //去JC赏页面
+    //去JC赏列表页
 	goJCshangPage() {
-		wx.navigateTo({
-			url: '/pages/newPage/JCshang/JCshang',
-		})
+		wx.switchTab({
+            url: '/pages/mystar/mystar',
+        })
     },
     //打开查看弹窗
     openPopup(e) {

@@ -1,22 +1,12 @@
 <view class="container">
-    <view class="integral_item flex_between">
+    <view class="integral_item flex_between" wx:for="{{dailylist}}" wx:key="index">
         <view>
-            <view class="use">购买道具</view>
-            <view class="time">2021/11/21 15:30:00</view>
+            <view class="use">{{item.title}}</view>
+            <view class="time">{{item.time}}</view>
         </view>
         <view class="integral_num">
-            <view wx:if="{{1}}" class="spending">-200</view>
-            <view wx:else class="income">+200</view>
+            <view class="{{item.integral>=0?'income':'spending'}}">{{item.integral > 0 ? '+'+item.integral:item.integral}}</view>
         </view>
     </view>
-    <view class="integral_item flex_between">
-        <view>
-            <view class="use">开盒</view>
-            <view class="time">2021/11/21 15:30:00</view>
-        </view>
-        <view class="integral_num">
-            <view wx:if="{{false}}" class="spending">-200</view>
-            <view wx:else class="income">+200</view>
-        </view>
-    </view>
+    <view class="no_record flex_center" wx:if="{{!dailylist.length}}">暂无积分记录</view>
 </view>

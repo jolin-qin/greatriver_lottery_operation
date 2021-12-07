@@ -6,12 +6,13 @@
 		<image class="right_img" src="{{imgUrl}}JCshang_04.png" mode="widthFix"></image>
 		<view class="middle_area">
 			<image class="title_img" src="{{imgUrl}}JCshang_05.png" mode="scaleToFill"></image>
-			<image class="series_img" src="{{boxObj.box_cover}}" mode="aspectFill"></image>
+			<image wx:if="{{boxObj.last_prize_cover}}" class="series_img" src="{{projecturl + boxObj.last_prize_cover}}" mode="aspectFill"></image>
 			<image class="big_img" src="{{imgUrl}}JCshang_02.png" mode="widthFix"></image>
 			<!-- 九宫格 -->
 			<view class="sudoku">
-				<view class="sudoku_item" wx:for="{{goodsList}}" wx:key="index">
-					<image class="goods_img" src="{{item.prize_pic}}" mode="scaleToFill"></image>
+				<view class="sudoku_item" wx:for="{{goodsList}}" wx:key="index" data-all="{{goodsList}}" data-index="{{index}}" bindtap="viewBigPic">
+					<image wx:if="{{item.prize_pic}}" class="goods_img {{item.num == '0' ? 'gray' : ''}}" src="{{item.prize_pic}}" mode="scaleToFill"></image>
+					<image wx:if="{{item.num == '0'}}" class="sold_out" src="/resource/icon/soldout.png" mode="scaleToFill"></image>
 				</view>
 			</view>
 		</view>
@@ -22,19 +23,21 @@
 	<view class="operation_wrapper">
 		<view class="name_introduce">
 			<view class="name">{{boxObj.box_title}}</view>
-			<view class="introduce">{{boxObj.box_content}}</view>
+			<rich-text nodes="{{boxObj.box_content ? boxObj.box_content : '盒子介绍空空如也'}}"></rich-text>
 		</view>
-		<view class="buy_num flex_center">
-			<image class="one_img img" src="{{imgUrl}}JCshang_06.png" mode="scaleToFill" bindtap="openBuyPopup" data-num="{{1}}"></image>
-			<image class="three_img img" src="{{imgUrl}}JCshang_07.png" mode="scaleToFill" bindtap="openBuyPopup" data-num="{{3}}"></image>
-			<image class="five_img img" src="{{imgUrl}}JCshang_08.png" mode="scaleToFill" bindtap="openBuyPopup" data-num="{{5}}"></image>
-			<image class="turnkey_img img" src="{{imgUrl}}JCshang_09.png" mode="scaleToFill" bindtap="openBuyPopup" data-num="{{remainNum}}"></image>
-			<!-- <image class="prop_img" src="{{imgUrl}}JCshang_10.png" mode="scaleToFill"></image> -->
-		</view>
+		
 		<view class="biaoqian">
 			<image class="img" src="{{imgUrl}}JCshang_11.png" mode="scaleToFill"></image>
 			<image class="title_img img" src="{{imgUrl}}JCshang_12.png" mode="scaleToFill"></image>
 		</view>
+	</view>
+	<view class="zhanwei"></view>
+	<!-- 抽盲盒按钮 -->
+	<view class="buy_num flex_center">
+		<image class="one_img img" src="{{imgUrl}}JCshang_06.png" mode="scaleToFill" bindtap="openBuyPopup" data-num="{{1}}"></image>
+		<image class="three_img img" src="{{imgUrl}}JCshang_07.png" mode="scaleToFill" bindtap="openBuyPopup" data-num="{{3}}"></image>
+		<image class="five_img img" src="{{imgUrl}}JCshang_08.png" mode="scaleToFill" bindtap="openBuyPopup" data-num="{{5}}"></image>
+		<image class="turnkey_img img" src="{{imgUrl}}JCshang_09.png" mode="scaleToFill" bindtap="openBuyPopup" data-num="{{remainNum}}"></image>
 	</view>
 	<!-- 购买弹窗 -->
 	<van-popup show="{{ buyPopupShow }}" position="bottom" custom-style="height: 100%;background: #f7f8fd;"
@@ -60,7 +63,7 @@
 		<!-- 道具 -->
 		<view class="wrapper tool_wrapper" wx:if="{{toolList.length}}">
 			<view class="title">我的道具</view>
-			<view class="flex_between">
+			<view class="flex_between tool_ul">
 				<view bindtap="openmodal" class="tool_item {{item.isSelect ? 'active' : ''}}" wx:for="{{toolList}}" wx:key="index" data-index="{{index}}" data-select="{{item.isSelect}}" data-id="{{item.tool_id}}">
 					<view class="flex_start tool_content">
 						<image class="tool_img" src="{{item.tool.pic}}" mode="aspectFill"></image>
@@ -71,7 +74,7 @@
 			</view>
 		</view>
 		<!-- 使用道具数量 -->
-		<view class="wrapper">
+		<view class="wrapper" wx:if="{{toolList.length}}">
 			<view>使用道具<text class="useNumber">{{useToolNumber}}</text>张</view>
 		</view>
 		<!-- 抽几次 -->

@@ -587,15 +587,18 @@ page {}
 	margin: 0 auto;
 	border: 4rpx solid #fff;
 	border-radius: 50rpx;
+	-webkit-backface-visibility: hidden;
+    -webkit-transform: translate3d(0, 0, 0);
 	overflow: hidden;
 }
 .index_swiper {
-	width: 700rpx;
-	height: 500rpx;
+	width: 692rpx;
+	height: 492rpx;
 }
 
 .index_swiper .swiper_item .img {
 	width: 100%;
+	position: static !important;
 }
 .index_swiper .wx-swiper-dots {
 	bottom: 70rpx;

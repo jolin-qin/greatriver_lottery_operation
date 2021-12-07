@@ -1,20 +1,24 @@
 <view class="container">
     <image class="title_img" src="{{imgUrl}}small_banner.png" mode="widthFix"></image>
     <view class="recycle_title">已回收金额（元）</view>
-    <view class="recycle_total_money">30.00</view>
+    <view class="recycle_total_money">{{recycleAmount}}</view>
     <view class="recycle_record">回收记录</view>
     <view class="recycle_list">
-        <view class="recycle_item flex_between">
+        <view class="recycle_item flex_between" wx:for="{{dailylist}}" wx:key="index">
             <view>
-                <view class="title">申请回收</view>
-                <view class="time">2021/11/21 15:30:00</view>
+                <view class="title">{{item.prize_title}}</view>
+                <view class="time">{{item.time}}</view>
             </view>
             <view class="status">
-                <view class="recycle_money">￥200</view>
-                <view class="status_code wait">待审核</view>
+                <view class="recycle_money">￥{{item.prizes_recovery_price}}</view>
+                <block>
+                    <view wx:if="{{item.state === 0}}" class="status_code wait">待审核</view>
+                    <view wx:elif="{{item.state === 1}}" class="status_code pass">已通过</view>
+                    <view wx:elif="{{item.state === 2}}" class="status_code nopass">未通过</view>
+                </block>
             </view>
         </view>
-        <view class="recycle_item flex_between">
+        <!-- <view class="recycle_item flex_between">
             <view>
                 <view class="title">申请回收</view>
                 <view class="time">2021/11/21 15:30:00</view>
@@ -33,6 +37,7 @@
                 <view class="recycle_money">￥200</view>
                 <view class="status_code nopass">未通过</view>
             </view>
-        </view>
+        </view> -->
     </view>
+    <view class="no_record flex_center" wx:if="{{!dailylist.length}}">暂无回收记录</view>
 </view>

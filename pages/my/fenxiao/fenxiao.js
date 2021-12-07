@@ -6,11 +6,7 @@ Page({
 	 */
 	data: {
 		page: 1,
-		distribution_list: [{
-			title: "满减券",
-			create_time: "2021/12/5",
-			price: "555"
-		}],//收益记录数组
+		distribution_list: [],//收益记录数组
 		modal: false,
 		first_stage_num: 0,//一级下级数
 		second_stage_num: 0,//二级下级数
@@ -101,12 +97,18 @@ Page({
 						distribution_list: t.data.page > 1 ? t.data.distribution_list.concat(response.data.data.list) : response.data.data.list,
 						page: t.data.page + 1,
 					})
+				} else {
+					wx.showToast({
+						icon: 'none',
+						title: response.data.message,
+					})
 				}
 			},
 			fail: function (response) {
+				
 				wx.showToast({
 					icon: 'none',
-					title: '网络错误一级请求',
+					title: response.data.message,
 				})
 			}
 		});

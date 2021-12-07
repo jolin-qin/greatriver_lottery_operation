@@ -31,17 +31,16 @@
 	<view style="{{dailylist.length>0?'display:none;':'display:flex;'}}height:300rpx;width:100%;align-items:center;justify-content:center;">暂无流水记录</view> -->
 
 	<!-- 新页面 -->
-	<view class="integral_item flex_between">
+	<view class="integral_item flex_between" wx:for="{{dailylist}}" wx:key="index">
         <view>
-            <view class="use">购买xxxx商品</view>
-            <view class="time">2021/11/21 15:30:00</view>
+            <view class="use">{{item.title}}</view>
+            <view class="time">{{item.time}}</view>
         </view>
         <view class="integral_num">
-            <view wx:if="{{1}}" class="spending">-200</view>
-            <view wx:else class="income">+200</view>
+            <view class="{{item.money>=0?'income':'spending'}}">{{item.money > 0 ? '+'+item.money:item.money}}</view>
         </view>
     </view>
-    <view class="integral_item flex_between">
+    <!-- <view class="integral_item flex_between">
         <view>
             <view class="use">抽xxx盲盒</view>
             <view class="time">2021/11/21 15:30:00</view>
@@ -50,5 +49,6 @@
             <view wx:if="{{false}}" class="spending">-200</view>
             <view wx:else class="income">+200</view>
         </view>
-    </view>
+    </view> -->
+	<view class="no_record flex_center" wx:if="{{!dailylist.length}}">暂无流水记录</view>
 </view>

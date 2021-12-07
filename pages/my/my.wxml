@@ -89,7 +89,7 @@
 				style="font-size:{{memberinfo.integral>9999?'45':'55'}}rpx;line-height:50rpx;font-weight:500;color:#652CD2;">
 				{{memberinfo.star_lv}}
 			</view>
-			<view class="text-grey" style="font-size:30rpx;font-weight:400;margin-top:10rpx;">星球等级</view>
+			<view class="text-grey" style="font-size:30rpx;font-weight:400;margin-top:10rpx;">VIP等级</view>
 		</view>
 	</view>
 	<view
@@ -97,6 +97,10 @@
 		<navigator url="/pages/my/address/address" hover-class="none" style="text-align:center;margin-top:10rpx;">
 			<image src="/resource/icon/add.png" style="width:40rpx;height:40rpx;"></image>
 			<view class="text-grey" style="font-size:25rpx;font-weight:300;margin-top:5rpx;">地址管理</view>
+		</navigator>
+		<navigator url="/pages/newPage/huishouguanli/huishouguanli" hover-class="none" style="text-align:center;margin-top:10rpx;">
+			<image src="/resource/icon/huishou.png" style="width:40rpx;height:40rpx;"></image>
+			<view class="text-grey" style="font-size:25rpx;font-weight:300;margin-top:5rpx;">回收管理</view>
 		</navigator>
 		<navigator url="/pages/my/dailyaccount/dailyaccount" hover-class="none"
 			style="text-align:center;margin-top:10rpx;">
@@ -112,10 +116,7 @@
 			<image src="/resource/icon/ziliao.png" style="width:40rpx;height:40rpx;"></image>
 			<view class="text-grey" style="font-size:25rpx;font-weight:300;margin-top:5rpx;">提现资料</view>
 		</navigator> -->
-		<navigator url="/pages/newPage/huishouguanli/huishouguanli" hover-class="none" style="text-align:center;margin-top:10rpx;">
-			<image src="/resource/icon/huishou.png" style="width:40rpx;height:40rpx;"></image>
-			<view class="text-grey" style="font-size:25rpx;font-weight:300;margin-top:5rpx;">回收管理</view>
-		</navigator>
+		
 		<navigator url="/pages/newPage/integral_detail/integral_detail" hover-class="none"
 			style="text-align:center;margin-top:10rpx;">
 			<image src="/resource/icon/jifen.png" style="width:40rpx;height:40rpx;"></image>

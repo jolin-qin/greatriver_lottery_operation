@@ -6,7 +6,8 @@ Page({
      * 页面的初始数据
      */
     data: {
-		imgUrl: app.util.imageUrl,
+        imgUrl: app.util.imageUrl,
+        projecturl: app.util.projectUrl,
 		boxId: '',//盒子Id
 		boxObj: {},
 		goodsList: [],//盒子里商品种类数
@@ -74,7 +75,10 @@ Page({
 			success: function (response) {
 				console.log('盒子详情函数', response);
 				if (response.data.errno == 0) {
-					let arr = [], shengyu = 0, type = '', result = response.data.data;
+                    let arr = [], shengyu = 0, type = '', result = response.data.data;
+                    if (result.box_content) {
+					    result.box_content = result.box_content.replace(/\<img/gi, '<img class="rich_img"')
+                    }
 					if (result.prizes_list.length > 9) {
 						arr = result.prizes_list.slice(0, 9)
 					} else {
@@ -127,7 +131,7 @@ Page({
 			},
 			method: 'post',
 			success: function (response) {
-				console.log(response.data);
+				console.log("个人信息：",response.data);
 				if (response.data.errno == 9999) {
 					//未授权头像
 
@@ -255,6 +259,13 @@ Page({
     },
     //打开购买弹窗
     openBuyPopup(e) {
+        if (!this.data.remainNum) {
+            wx.showToast({
+                icon: 'none',
+                title: '盲盒被抽完啦',
+            })
+            return
+        }
         let buyNumber = e.currentTarget.dataset.num
         let totalAmount = buyNumber * Number(this.data.boxObj.box_open_price)
         let totalIntegral = buyNumber * Number(this.data.boxObj.box_open_integral)
@@ -562,7 +573,19 @@ Page({
 				return;
 			}
 		})
-	},
+    },
+    //显示大图
+    viewBigPic(e) {
+        console.log("e:", e)
+        let all = e.currentTarget.dataset.all, arr = [], index = e.currentTarget.dataset.index;
+        all.forEach(item => {
+            arr.push(item.prize_pic)
+        })
+        wx.previewImage({
+			current: all[index].prize_pic, // 当前显示图片的http链接
+			urls: arr // 需要预览的图片http链接列表
+		})
+    },
     /**
      * 生命周期函数--监听页面隐藏
      */

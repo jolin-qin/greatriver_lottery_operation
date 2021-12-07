@@ -32,8 +32,5 @@
 			<view style="font-size:45rpx;" class="numfont">+¥{{item.price}}</view>
 		</view>
 	</view>
-	<view
-		style="{{distribution_list.length>0?'display:none;':'display:flex;'}}height:300rpx;width:100%;align-items:center;justify-content:center;">
-		暂无记录
-	</view>
+	<view wx:if="{{!distribution_list.length}}" class="no_record flex_center">暂无记录</view>
 </view>

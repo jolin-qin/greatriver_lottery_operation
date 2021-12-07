@@ -244,11 +244,11 @@ Page({
 		t.getBanner(); //banner图
 		t.getGoodsListFun(t.data.pageNumber);//商品列表
 		this.getindexparameter();
-		if (!app.util.islogin()) {
-			t.setData({
-				islogin: false
-			})
-		}
+		// if (!app.util.islogin()) {
+		// 	t.setData({
+		// 		islogin: false
+		// 	})
+		// }
 	},
 	onShow: function () {
 		var t = this;
@@ -306,18 +306,48 @@ Page({
 	},
 	//去现货列表页
 	goSpotPage() {
+		if (!app.util.islogin()) {
+			this.setData({
+				islogin: false
+			})
+			return;
+		} else {
+			this.setData({
+				islogin: true
+			})
+		}
 		wx.navigateTo({
 			url: '/pages/newPage/xianhuo/xianhuo',
 		})
 	},
 	//去预售列表页
 	goPresellPage() {
+		if (!app.util.islogin()) {
+			this.setData({
+				islogin: false
+			})
+			return;
+		} else {
+			this.setData({
+				islogin: true
+			})
+		}
 		wx.navigateTo({
 			url: '/pages/newPage/yushou/yushou',
 		})
 	},
 	//去商品详情页
 	goGoodsDetailPage(e) {
+		if (!app.util.islogin()) {
+			this.setData({
+				islogin: false
+			})
+			return;
+		} else {
+			this.setData({
+				islogin: true
+			})
+		}
 		let type = e.currentTarget.dataset.type, id = '';
 		id = type ? e.currentTarget.dataset.prizeid : e.currentTarget.dataset.id;
 		wx.navigateTo({

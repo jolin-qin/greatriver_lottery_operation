@@ -7,11 +7,7 @@ Page({
      */
     data: {
         page: 1,
-        distribution_list: [{
-            title: "满减券",
-			create_time: "2021/12/5",
-			price: "555"
-        }]
+        distribution_list: []
     },
 
     /**
@@ -57,7 +53,7 @@ Page({
 			fail: function (response) {
 				wx.showToast({
 					icon: 'none',
-					title: '网络错误一级请求',
+					title: response.data.message,
 				})
 			}
 		});

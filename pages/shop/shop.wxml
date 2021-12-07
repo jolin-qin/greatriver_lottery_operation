@@ -89,7 +89,7 @@
 			<view style="margin-bottom:30rpx;">
 				<button class='cu-btn bg-gradual-orange margin-tb-sm lg round' bindtap="toolpay"
 					data-id="{{selecttool.id}}"
-					style="width:100%;">{{select_pay_type==1?'使用'+selecttool.tool_integral+'矿石兑换':'立即支付'+selecttool.tool_price+'元'}}</button>
+					style="width:100%;">{{select_pay_type==1?'使用'+selecttool.tool_integral+'积分支付':'立即支付'+selecttool.tool_price+'元'}}</button>
 				<view class="text-grey" style="font-size:25rpx;margin-top:10rpx;" bindtap="closemodal">我再逛逛</view>
 			</view>
 		</view>

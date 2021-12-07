@@ -74,6 +74,7 @@
 	background-size: cover;
 	margin-right: 12rpx;
 	margin-bottom: 12rpx;
+	position: relative;
 }
 .middle_area .sudoku .sudoku_item:nth-child(3n) {
 	margin-right: 0;
@@ -84,6 +85,18 @@
 	margin-top: 12rpx;
 	margin-left: 14rpx;
 	border-radius: 20rpx;
+}
+.middle_area .sudoku_item .goods_img.gray {
+	-webkit-filter: grayscale(100%);
+	filter: grayscale(100%);
+}
+.middle_area .sudoku_item .sold_out {
+	width: 92rpx;
+	height: 26rpx;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
 }
 .show_wrapper .touying {
 	display: block;
@@ -108,41 +121,34 @@
 }
 .operation_wrapper {
 	position: relative;
-	margin-top: 36rpx;
-	margin-bottom: 50rpx;
+	/* padding-top: 36rpx; */
+	background: #f7f7f7;
 }
 .operation_wrapper .name_introduce {
 	text-align: center;
+	width: 700rpx;
+	margin: 0 auto;
+	background: #fff;
+	border-radius: 10rpx;
 }
 .operation_wrapper .name_introduce .name {
 	font-style: italic;
 	font-size: 50rpx;
 	font-weight: bold;
 	color: #000;
+	padding: 30rpx 0;
+	background: #f7f7f7;
 }
 .operation_wrapper .name_introduce .introduce {
 	color: #000;
 	margin: 12rpx 0 20rpx;
 }
-.operation_wrapper .buy_num {
-	width: 630rpx;
-	margin: 0 auto;
-	flex-wrap: wrap;
-}
-.operation_wrapper .buy_num .img {
-	display: block;
-	width: 190rpx;
-	height: 72rpx;
-	margin-left: 50rpx;
-	margin-right: 50rpx;
-	margin-top: 24rpx;
+/* 利用正则给img添加class,然后控制样式 */
+.rich_img {
+    display: block;
+    height: auto;
 }
 
-.operation_wrapper .buy_num .prop_img {
-	display: block;
-	width: 412rpx;
-	height: 72rpx;
-}
 .operation_wrapper .biaoqian {
 	position: absolute;
 	top: -10rpx;
@@ -155,6 +161,33 @@
 }
 .operation_wrapper .biaoqian .title_img {
 	margin-top: 10rpx;
+}
+/* 购买按钮 */
+.zhanwei {
+	width: 100%;
+	height: 200rpx;
+}
+.buy_num {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 180rpx;
+	padding: 0 60rpx;
+	flex-wrap: wrap;
+	background: #f7f7f7;
+	z-index: 2;
+}
+.buy_num .img {
+	display: block;
+	width: 190rpx;
+	height: 72rpx;
+	margin: 0 40rpx;
+}
+.buy_num .prop_img {
+	display: block;
+	width: 412rpx;
+	height: 72rpx;
 }
 /* 优惠券弹出框 */
 .coupon_popup .coupon_content {
@@ -315,6 +348,15 @@
 	font-weight: bold;
 	line-height: 60rpx;
 }
+.tool_wrapper .title {
+	font-size: 32rpx;
+	font-weight: bold;
+	line-height: 40rpx;
+	margin-top: 30rpx;
+}
+.tool_wrapper .tool_ul {
+	flex-wrap: wrap;
+}
 .tool_wrapper .tool_item {
 	width: 336rpx;
 	background: #fff;
@@ -322,6 +364,7 @@
 	padding: 16rpx;
 	position: relative;
 	border: 2rpx solid #fff;
+	margin-top: 20rpx;
 }
 .tool_wrapper .tool_item.active {
 	border: 2rpx solid #e62743;

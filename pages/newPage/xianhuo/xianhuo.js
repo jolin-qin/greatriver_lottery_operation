@@ -45,7 +45,7 @@ Page({
     onShow: function () {
 
 	},
-	//获取分类函数
+	//获取系列
 	getSeriesListFun() {
 		let t = this;
 		app.util.request({
@@ -108,6 +108,7 @@ Page({
 					}
 				} else {
 					//失败
+					console.log("我只是没有数据")
 					wx.showToast({
 						icon: 'none',
 						title: response.data.message,
@@ -115,6 +116,7 @@ Page({
 				}
 			},
 			fail: function (response) {
+				console.log("我走了fail")
 				wx.showToast({
 					icon: 'none',
 					title: response.data.message,
