@@ -6,7 +6,7 @@
 		<image class="right_img" src="{{imgUrl}}JCshang_04.png" mode="widthFix"></image>
 		<view class="middle_area">
 			<image class="title_img" src="{{imgUrl}}JCshang_05.png" mode="scaleToFill"></image>
-			<image wx:if="{{boxObj.last_prize_cover}}" class="series_img" src="{{projecturl + boxObj.last_prize_cover}}" mode="aspectFill"></image>
+			<image wx:if="{{boxObj.last_prize_cover}}" class="series_img" src="{{projecturl + boxObj.last_prize_cover}}" data-url="{{projecturl + boxObj.last_prize_cover}}" bindtap="viewBigPic_1" mode="aspectFill"></image>
 			<image class="big_img" src="{{imgUrl}}JCshang_02.png" mode="widthFix"></image>
 			<!-- 九宫格 -->
 			<view class="sudoku">
@@ -18,6 +18,7 @@
 		</view>
 		<!-- 投影 -->
 		<image class="touying" src="{{imgUrl}}JCshang_14.png" mode="scaleToFill"></image>
+		<view class="prompt">尊敬的用户：您所购买的JC明信片将随机附赠上列赠品</view>
 		<view class="residue_num">剩余盲盒：{{remainNum}}</view>
 	</view>
 	<view class="operation_wrapper">

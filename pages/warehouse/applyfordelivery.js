@@ -6,12 +6,17 @@ Page({
 	 */
 	data: {
 		prize: [],
-		useraddress: [],
+		useraddress: {},
 		member_prize_id: 0,
 		modal: false,
 		payloading: 0
 	},
+	/**
+	 * 生命周期函数--监听页面初次渲染完成
+	 */
+	onReady: function () {
 
+	},
 	/**
 	 * 生命周期函数--监听页面加载
 	 */
@@ -22,6 +27,60 @@ Page({
 		// app.globalData.selectaddressid == null
 		app.globalData.selectaddressid = null;
 
+	},
+	/**
+	 * 生命周期函数--监听页面显示
+	 */
+	onShow: function () {
+		if (!app.util.islogin()) {
+			this.setData({
+				islogin: false
+			})
+			return;
+		} else {
+			this.setData({
+				islogin: true
+			})
+		}
+		console.log(app.globalData.selectaddressid);
+		console.log(typeof app.globalData.selectaddressid);
+		var t = this;
+		t.getprize();
+		// 获取地址
+		if (typeof app.globalData.selectaddressid == "string") {
+			app.util.request({
+				url: 'entry/wxapp/getaddress',
+				data: {
+					m: app.globalData.module_name,
+					op: 'one',
+					id: app.globalData.selectaddressid
+				},
+				method: 'get',
+				success: function (response) {
+					console.log('', response.data);
+					if (response.data.errno == 0) {
+						t.setData({
+							useraddress: response.data.data
+						})
+					} else {
+						//失败
+						t.setData({
+							useraddress: {}
+						})
+						wx.showToast({
+							icon: 'none',
+							title: response.data.message,
+						})
+					}
+				},
+				fail: function (response) {
+					wx.showToast({
+						icon: 'none',
+						title: '网络连接失败',
+					})
+				}
+			});
+		}
 	},
 	//获取订单详情
 	getprize() {
@@ -35,12 +94,13 @@ Page({
 			},
 			method: 'get',
 			success: function (response) {
-				console.log('applydelivery', response.data);
+				console.log('订单详情：', response.data);
 				if (response.data.errno == 0) {
-					response.data.data.prize.prize_content = response.data.data.prize.prize_content.replace(/\<img/gi, '<img class="rich_img"')
+					let result = response.data.data
+					result.prize.prize_content = result.prize.prize_content.replace(/\<img/gi, '<img class="rich_img"')
 					t.setData({
-						prize: response.data.data,
-						useraddress: response.data.data.user_address
+						prize: result,
+						useraddress: result.user_address
 					})
 				} else {
 					//失败
@@ -52,10 +112,10 @@ Page({
 				}
 			},
 			fail: function (response) {
-				t.setData({
-					prize: response.data.data,
-					useraddress: response.data.data.user_address
-				})
+				// t.setData({
+				// 	prize: response.data.data,
+				// 	useraddress: response.data.data.user_address
+				// })
 				wx.showModal({
 					title: '提示',
 					showCancel: false,
@@ -84,12 +144,7 @@ Page({
 			}
 		})
 	},
-	/**
-	 * 生命周期函数--监听页面初次渲染完成
-	 */
-	onReady: function () {
-
-	},
+	
 	getPhoneNumber(e) {
 		console.log()
 		console.log(e.detail.iv)
@@ -167,60 +222,7 @@ Page({
 			}
 		})
 	},
-	/**
-	 * 生命周期函数--监听页面显示
-	 */
-	onShow: function () {
-		if (!app.util.islogin()) {
-			this.setData({
-				islogin: false
-			})
-			return;
-		} else {
-			this.setData({
-				islogin: true
-			})
-		}
-		console.log(app.globalData.selectaddressid);
-		console.log(typeof app.globalData.selectaddressid);
-		var t = this;
-		t.getprize();
-		// 获取地址
-		if (typeof app.globalData.selectaddressid == "string") {
-			app.util.request({
-				url: 'entry/wxapp/getaddress',
-				data: {
-					m: app.globalData.module_name,
-					op: 'one',
-					id: app.globalData.selectaddressid
-				},
-				method: 'get',
-				success: function (response) {
-					console.log('', response.data);
-					if (response.data.errno == 0) {
-						t.setData({
-							useraddress: response.data.data
-						})
-					} else {
-						//失败
-						t.setData({
-							useraddress: []
-						})
-						wx.showToast({
-							icon: 'none',
-							title: response.data.message,
-						})
-					}
-				},
-				fail: function (response) {
-					wx.showToast({
-						icon: 'none',
-						title: '网络连接失败',
-					})
-				}
-			});
-		}
-	},
+	
 	// 抽盲盒订单，点击‘申请发货’
 	clickdelivery(e) {
 		console.log(e);
@@ -247,9 +249,9 @@ Page({
 		}
 		if (t.data.prize.prize_first_state == 0 || t.data.prize.prize_first_state == -2) {
 			var tmpls = []
-			t.data.prize.tmplids['fahuo_notice_tmplid'] !== '' && (tmpls.push(t.data.prize.tmplids['fahuo_notice_tmplid']));
-			t.data.prize.tmplids['guoqi_notice_tmplid'] !== '' && (tmpls.push(t.data.prize.tmplids['guoqi_notice_tmplid']));
-			t.data.prize.tmplids['shenhe_notice_tmplid'] !== '' && (tmpls.push(t.data.prize.tmplids['shenhe_notice_tmplid']));
+			t.data.prize.tmplids['fahuo_notice_tmplid'] && (tmpls.push(t.data.prize.tmplids['fahuo_notice_tmplid']));
+			t.data.prize.tmplids['guoqi_notice_tmplid'] && (tmpls.push(t.data.prize.tmplids['guoqi_notice_tmplid']));
+			t.data.prize.tmplids['shenhe_notice_tmplid'] && (tmpls.push(t.data.prize.tmplids['shenhe_notice_tmplid']));
 
 			wx.requestSubscribeMessage({
 				tmplIds: tmpls,

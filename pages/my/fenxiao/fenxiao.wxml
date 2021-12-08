@@ -16,8 +16,8 @@
 </view>
 <!-- 分享弹窗 -->
 <view class="cu-modal {{modal?'show':''}}" style="padding:20rpx;">
-	<view class="cu-dialog" style="border-radius:30rpx;">
-		<view class="cu-bar bg-white justify-end">
+	<view class="cu-dialog sharePopup" style="border-radius:30rpx;">
+		<!-- <view class="cu-bar bg-white justify-end">
 			<view class='content'>请选择邀请方式</view>
 			<view class='action' bindtap='hideModal'>
 				<text class='icon-close text-red'></text>
@@ -26,7 +26,10 @@
 		<view class='padding-xl' style="display:flex;justify-content:space-around;height:300rpx;align-items:center;">
 			<view><button class="cu-btn bg-gradual-orange margin-tb-sm  round" open-type="share">转发给好友或群</button></view>
 			<view><button class="cu-btn bg-gradual-orange margin-tb-sm  round" bindtap="qrcode">生成二维码海报</button></view>
-		</view>
+		</view> -->
+		<view class="btns"><button class="function_btn" open-type="share"></button></view>
+		<view class="btns"><button class="function_btn" bindtap="qrcode"></button></view>
+		<view class="close_img" bindtap="hideModal"></view>
 	</view>
 </view>
 <view style="width:100%;padding:20rpx;margin-top:-60rpx;">

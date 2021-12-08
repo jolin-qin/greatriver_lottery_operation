@@ -126,10 +126,12 @@ Page({
 			method: 'get',
 			success: function (response) {
                 console.log('获取商品详情', response)
-                let result = response.data.data
+                
 				if (response.data.errno == 0) {
-                    let richText = t.escape2Html(result.prize_content);
-					
+                    let result = response.data.data, richText = '';
+                    if (result.prize_content) {
+                        richText = t.escape2Html(result.prize_content);
+                    }
                     //判断支付方式
                     let type = ''
                     if (result.prizes_pay_payment_integral == '1') {
@@ -232,10 +234,10 @@ Page({
 				}
 			},
 			fail: function (response) {
-				wx.showToast({
-					icon: 'none',
-					title: response.data.message,
-				})
+				// wx.showToast({
+				// 	icon: 'none',
+				// 	title: response.data.message,
+				// })
 			}
 		});
 	},
@@ -333,7 +335,13 @@ Page({
         // }
         // let heji = (Number(this.data.goodsObj.prize_market_price) + yunfei).toFixed(2)
         //判断积分支付是否可点击
-
+        if (!this.data.originPrice) {
+            wx.showToast({
+                icon: 'none',
+                title: '后台参数配置错误',
+            })
+            return 
+        }
         //计算总实付价格
         this.countTotalPeiceFun()
         this.setData({ 

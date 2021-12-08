@@ -30,3 +30,31 @@
     font-weight: bold;
     font-style: italic;
 }
+.sharePopup {
+    width: 600rpx;
+    height: 576rpx;
+    background: url('https://www.jiaochao.top/imageurl/share.png') no-repeat;
+    background-size: 100% 100%;
+    padding-top: 200rpx;
+}
+.sharePopup .btns {
+    width: 386rpx;
+    height: 76rpx;
+    margin: 0 auto 40rpx;
+    /* background: yellow; */
+}
+.sharePopup .function_btn {
+    width: 386rpx;
+    height: 76rpx;
+    background: transparent;
+    /* background: yellow; */
+}
+.sharePopup .function_btn::after {
+    border: none;
+}
+.sharePopup .close_img {
+    width: 80rpx;
+    height: 70rpx;
+    margin: 112rpx auto 0;
+    /* background: yellow; */
+}

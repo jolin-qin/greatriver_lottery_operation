@@ -207,10 +207,10 @@ Page({
 				}
 			},
 			fail: function (response) {
-				wx.showToast({
-					icon: 'none',
-					title: response.data.message,
-				})
+				// wx.showToast({
+				// 	icon: 'none',
+				// 	title: '',
+				// })
 			}
 		});
 	},
@@ -471,14 +471,16 @@ Page({
                                 t.setData({
                                     winningPopupShow: true,
                                     buyPopupShow: false,
-                                    winningList: response.data.data
+                                    winningList: response.data.data,
+                                    isShake: true
                                 })
                             } else {
                                 t.setData({
                                     winningPopupShow: true,
                                     buyPopupShow: false,
                                     winningList: response.data.data.slice(0, 5),
-                                    winningAllList: response.data.data
+                                    winningAllList: response.data.data,
+                                    isShake: true
                                 })
                             }
                         }, 2000)
@@ -546,7 +548,8 @@ Page({
                             toolPrizeId: '',
                             toolId: '',
                             useToolNumber: 0,
-                            winningList: response2.data.data
+                            winningList: response2.data.data,
+                            isShake: true
                         })
                     } else {
                         t.setData({
@@ -559,7 +562,8 @@ Page({
                             toolId: '',
                             useToolNumber: 0,
                             winningList: response2.data.data.slice(0, 5),
-                            winningAllList: response2.data.data
+                            winningAllList: response2.data.data,
+                            isShake: true
                         })
                     }
 				}
@@ -569,12 +573,25 @@ Page({
 				wx.showToast({
 					icon: 'none',
 					title: response2.data.message,
-				})
+                })
+                t.setData({
+                    isShake: true
+                })
 				return;
 			}
 		})
     },
-    //显示大图
+    //显示大图(最终赏)
+    viewBigPic_1(e) {
+        console.log("e:", e)
+        let url = e.currentTarget.dataset.url, arr = [];
+        arr.push(url)
+        wx.previewImage({
+			current: url, // 当前显示图片的http链接
+			urls: arr // 需要预览的图片http链接列表
+		})
+    },
+    //显示大图(九宫格)
     viewBigPic(e) {
         console.log("e:", e)
         let all = e.currentTarget.dataset.all, arr = [], index = e.currentTarget.dataset.index;

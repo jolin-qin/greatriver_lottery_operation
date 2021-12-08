@@ -25,7 +25,7 @@
 		<view style='padding:10rpx;' class="{{animation4}}">
 			<image src="/resource/icon/shop.png" style="width:60rpx;height:60rpx;"></image>
 		</view>
-		JC商店
+		道具商店
 	</view>
 	<view class="action  {{navtab=='my'?'text-bold text-black ':'text-grey'}}" bindtap="nav" data-tabs="my">
 		<view style='padding:10rpx;' class="{{animation5}}">
