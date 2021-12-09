@@ -113,6 +113,7 @@ Page({
 			app.globalData.invite_uid = options.scene
 		}
 		switch (options.sharetype) {
+			//分享有礼页发出的邀请
 			case 'invite':
 				console.log('接受邀请', options.uid);
 				app.globalData.invite_uid = options.uid
@@ -175,6 +176,7 @@ Page({
 				});
 
 				break;
+			//接受朋友送得盒子
 			case 'sendprize':
 				console.log('接收分享的奖品');
 				console.log(options)
@@ -189,14 +191,12 @@ Page({
 					success: function (response) {
 						console.log('receiveprize', response.data);
 						if (response.data.errno == 0) {
-
-
 							t.setData({
 								reciveprize: response.data.data,
 								reciveprize_prizeid: options.prizeid,
 								reciveprize_senduid: options.senduid,
 								reciveprizemodal: true
-							})
+							})                                                                                                                                                                                                       
 						} else {
 							//失败
 							wx.showModal({
@@ -1874,7 +1874,8 @@ Page({
 		app.util.request({
 			url: 'entry/wxapp/get_banner_list',
 			data: {
-				m: app.globalData.module_name
+				m: app.globalData.module_name,
+				type: '1'
 			},
 			method: 'get',
 			success: function (response) {

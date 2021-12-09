@@ -3,7 +3,7 @@
 	<image class="title_img" src="{{imgUrl}}myimg_01.jpg" mode="widthFix"></image>
 </view>
 <view style="padding:140rpx 40rpx 20rpx 40rpx;">
-	<view style="display:flex;border-radius:30rpx;padding:20rpx 0;position:relative">
+	<view style="border-radius:30rpx;padding:20rpx 0;position:relative" class="flex_start">
 		<image src="{{memberinfo.avatar}}"
 			style="border-radius:50%;width:150rpx;min-width:150rpx;height:150rpx;border:4rpx solid #ebecee" />
 		<view

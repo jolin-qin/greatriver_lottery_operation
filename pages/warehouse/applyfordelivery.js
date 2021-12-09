@@ -21,12 +21,10 @@ Page({
 	 * 生命周期函数--监听页面加载
 	 */
 	onLoad: function (options) {
-
 		var t = this;
 		t.data.member_prize_id = options.id;//订单id
 		// app.globalData.selectaddressid == null
 		app.globalData.selectaddressid = null;
-
 	},
 	/**
 	 * 生命周期函数--监听页面显示
@@ -42,45 +40,9 @@ Page({
 				islogin: true
 			})
 		}
-		console.log(app.globalData.selectaddressid);
-		console.log(typeof app.globalData.selectaddressid);
-		var t = this;
-		t.getprize();
-		// 获取地址
-		if (typeof app.globalData.selectaddressid == "string") {
-			app.util.request({
-				url: 'entry/wxapp/getaddress',
-				data: {
-					m: app.globalData.module_name,
-					op: 'one',
-					id: app.globalData.selectaddressid
-				},
-				method: 'get',
-				success: function (response) {
-					console.log('', response.data);
-					if (response.data.errno == 0) {
-						t.setData({
-							useraddress: response.data.data
-						})
-					} else {
-						//失败
-						t.setData({
-							useraddress: {}
-						})
-						wx.showToast({
-							icon: 'none',
-							title: response.data.message,
-						})
-					}
-				},
-				fail: function (response) {
-					wx.showToast({
-						icon: 'none',
-						title: '网络连接失败',
-					})
-				}
-			});
-		}
+		// console.log(app.globalData.selectaddressid);
+		// console.log(typeof app.globalData.selectaddressid);
+		this.getprize();
 	},
 	//获取订单详情
 	getprize() {
@@ -99,9 +61,16 @@ Page({
 					let result = response.data.data
 					result.prize.prize_content = result.prize.prize_content.replace(/\<img/gi, '<img class="rich_img"')
 					t.setData({
-						prize: result,
-						useraddress: result.user_address
+						prize: result
 					})
+					//判断一下看用订单详情返回的收获地址，还是用户在地址列表页选择了某个地址
+					if (app.globalData.selectaddressid) {
+						t.getChooseAddress()
+					} else {
+						t.setData({
+							useraddress: result.user_address || {}
+						})
+					}
 				} else {
 					//失败
 					wx.showToast({
@@ -112,10 +81,7 @@ Page({
 				}
 			},
 			fail: function (response) {
-				// t.setData({
-				// 	prize: response.data.data,
-				// 	useraddress: response.data.data.user_address
-				// })
+				
 				wx.showModal({
 					title: '提示',
 					showCancel: false,
@@ -136,6 +102,43 @@ Page({
 			}
 		});
 	},
+	//根据用户在地址列表选择收获地址的id，请求数据
+	getChooseAddress() {
+		let t = this;
+		app.util.request({
+			url: 'entry/wxapp/getaddress',
+			data: {
+				m: app.globalData.module_name,
+				op: 'one',
+				id: app.globalData.selectaddressid
+			},
+			method: 'get',
+			success: function (response) {
+				console.log('选的地址：', response.data);
+				if (response.data.errno == 0) {
+					t.setData({
+						useraddress: response.data.data
+					})
+				} else {
+					//失败
+					t.setData({
+						useraddress: {}
+					})
+					wx.showToast({
+						icon: 'none',
+						title: response.data.message,
+					})
+				}
+			},
+			fail: function (response) {
+				wx.showToast({
+					icon: 'none',
+					title: '网络连接失败',
+				})
+			}
+		})
+	},
+	//复制快递单号
 	copyexpress() {
 		wx.setClipboardData({
 			data: this.data.prize.poster.express_sn,
@@ -144,7 +147,7 @@ Page({
 			}
 		})
 	},
-	
+	//获取手机号
 	getPhoneNumber(e) {
 		console.log()
 		console.log(e.detail.iv)
@@ -518,8 +521,6 @@ Page({
 	// 送给朋友
 	sendprize(e) {
 		console.log('要赠送的盒子ID', e.currentTarget.dataset.id);
-
-
 		var t = this;
 		app.util.request({
 			url: 'entry/wxapp/sendprize',

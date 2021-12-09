@@ -181,7 +181,9 @@ page {
 .index_swiper .swiper_item .img {
 	width: 100%;
 }
-
+.index_swiper .wx-swiper-dots {
+	bottom: 70rpx;
+}
 /* tab切换 */
 .xiding_box {
     width: 100%; 

@@ -8,7 +8,9 @@ Page({
     data: {
         imgUrl: app.util.imageUrl,
         projecturl: app.util.projectUrl,
-		boxId: '',//盒子Id
+        boxId: '',//盒子Id
+        myLevel: '',//我的等级
+        
 		boxObj: {},
 		goodsList: [],//盒子里商品种类数
 		remainNum: 0,//剩余数量
@@ -132,13 +134,11 @@ Page({
 			method: 'post',
 			success: function (response) {
 				console.log("个人信息：",response.data);
-				if (response.data.errno == 9999) {
-					//未授权头像
-
-				} else {
+				if (response.data.errno == 0) {
 					t.setData({
-						memberinfo_integral: Number(response.data.data.integral)
-					})
+						memberinfo_integral: Number(response.data.data.integral),
+                        myLevel: response.data.data.star_lv
+                    })
 				}
 			},
 			fail: function (response) {
@@ -259,10 +259,19 @@ Page({
     },
     //打开购买弹窗
     openBuyPopup(e) {
+        //盲盒被抽完
         if (!this.data.remainNum) {
             wx.showToast({
                 icon: 'none',
                 title: '盲盒被抽完啦',
+            })
+            return
+        }
+        //VIP等级少于开盒等级
+        if (Number(this.data.boxObj.star_lv) > Number(this.data.myLevel)) {
+            wx.showToast({
+                icon: 'none',
+                title: '需VIP等级达到'+this.data.boxObj.star_lv+'级哦',
             })
             return
         }

@@ -153,7 +153,8 @@ Page({
 		app.util.request({
 			url: 'entry/wxapp/get_banner_list',
 			data: {
-				m: app.globalData.module_name
+				m: app.globalData.module_name,
+				type: '2'
 			},
 			method: 'get',
 			success: function (response) {
@@ -275,7 +276,7 @@ Page({
 	//去抽盲盒页
 	goJCshangPage(e) {
 		let type = e.currentTarget.dataset.type, id = '';
-		id = type ? e.currentTarget.dataset.prizeid : e.currentTarget.dataset.id;
+		id = type ? e.currentTarget.dataset.boxid : e.currentTarget.dataset.id;
 		wx.navigateTo({
 			url: '/pages/newPage/JCshang/JCshang?id=' + id,
 		})

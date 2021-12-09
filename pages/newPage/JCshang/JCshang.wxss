@@ -486,7 +486,7 @@
     font-weight: bold;
 }	
 .submit-order-footer-rt {
-    width: 370rpx;
+    width: 350rpx;
 	/* background: linear-gradient(to right, #BC9966, #AB8957, #9C7B4A); */
 	height: 80rpx;
 	line-height: 76rpx;

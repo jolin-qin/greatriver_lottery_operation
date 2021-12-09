@@ -1,1 +1,16 @@
 /* pages/my/address/addaddress.wxss */
+.input_phone_number {
+    height: 60rpx;
+}
+.get_phone_number {
+    flex: 1;
+    height: 60rpx;
+    line-height: 60rpx;
+    font-size: 30rpx;
+    color: #555;
+    padding: 0 20rpx 0 0;
+    background: transparent;
+}
+.get_phone_number::after {
+    border: none;
+}

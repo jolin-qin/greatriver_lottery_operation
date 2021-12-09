@@ -16,13 +16,44 @@
 		</view>
 	</view> -->
 </view>
+<!-- 接受朋友送得盲盒 -->
+<view class="cu-modal {{reciveboxmodal==true ||reciveprizemodal==true?'show':''}}" style="z-index:1001 !important;"
+	catchtouchmove="return" bindtap='hidegetboxesmodal'>
+	<view class="cu-dialog" style="background:transparent !important;width: 750rpx;border-radius:30rpx;" catchtap>
+		<view
+			style="position:absolute;z-index:1;display:flex;justify-content:center;top:320rpx;left:0;right:0;margin:0 auto;">
+			<view bindtap="showbox"
+				style="position:relative;width:230rpx;border-radius:30rpx;background:#fff;padding:15rpx;margin-right:10rpx;">
 
+				<image src="{{recivebox.box_cover?recivebox.box_cover:reciveprize.prize_pic}}"
+					style="width:200rpx;height:200rpx;border-radius:20rpx;" mode="aspectFill">
+				</image>
+				<view style="font-size:20rpx;color:#000;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">
+					{{recivebox.box_title?recivebox.box_title:reciveprize.prize_title}}</view>
+			</view>
+		</view>
+		<view
+			style="position:absolute;z-index:1;display:flex;width: 320rpx;align-items:center;top:60rpx;left:0rpx;right:0;margin:0 auto;">
+			<image src="{{recivebox.box_sender.avatar?recivebox.box_sender.avatar:reciveprize.prize_sender.avatar}}"
+				style="border:3rpx solid #fff4d5;min-width:70rpx;width:70rpx;height:70rpx;border-radius:50%;margin-right:20rpx;">
+			</image>
+			<view
+				style="color:#fff4d5;font-size:30rpx;font-weight:bold;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">
+				{{recivebox.box_sender.nickname?recivebox.box_sender.nickname:reciveprize.prize_sender.nickname}}</view>
+		</view>
+		<view bindtap="{{reciveboxmodal==true?'receivebox':''}}{{reciveprizemodal==true?'receiveprize':''}}"
+			style="position:absolute;z-index:1;display:flex;width: 320rpx;height:100rpx;align-items:center;top:660rpx;left:0rpx;right:0;margin:0 auto;">
+		</view>
+		<image style="position:relative;width:100%;left:0rpx;top:0rpx;z-index:0;" mode="widthFix"
+			src="/resource/images/sendboxmodal.gif"></image>
+	</view>
+</view>
 
 <!-- 新的页面start -->
 <view class="new_pages">
 	<!-- swiper -->
 	<view class="swiper_section">
-		<swiper class="index_swiper" indicator-dots="{{true}}" interval="2000" autoplay="{{true}}" duration="500" circular="true" easing-function="linear">
+		<swiper class="index_swiper" indicator-dots="{{true}}" indicator-active-color="#ffffff" interval="2000" autoplay="{{true}}" duration="500" circular="true" easing-function="linear">
 			<swiper-item wx:for="{{bannerList}}" wx:key="index" class="swiper_item" data-type="{{1}}" data-prizeid="{{item.prize_id}}" bindtap="goGoodsDetailPage">
 				<image class="img" src="{{projecturl + item.img}}" mode="aspectFill"></image>
 			</swiper-item>

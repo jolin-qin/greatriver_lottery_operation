@@ -44,7 +44,7 @@
 	<van-popup show="{{ buyPopupShow }}" position="bottom" custom-style="height: 100%;background: #f7f8fd;"
 		bind:close="closeBuyPopup">
 		<view class="closeBuyPopupImg" bindtap="closeBuyPopup">
-			<image class="img" src="/resource/icon/close02.png" mode="scaleToFill"></image>
+			<image class="img" src="/resource/icon/close04.png" mode="scaleToFill"></image>
 		</view>
 		<!--盒子信息-->
 		<view class="wrapper box_infor">
@@ -121,8 +121,8 @@
 		<view class="popup_zhanwei"></view>
 		<!--footer star-->
 		<view class="submit-order-footer flex_between">
-			<view wx:if="{{select_pay_type == '2'}}" class="submit-order-footer-lf">实际支付：<text style="color: #E54D42;">{{showPrice}}</text>元</view>
-			<view wx:if="{{select_pay_type == '1'}}" class="submit-order-footer-lf">实际支付：<text style="color: #E54D42;">{{requireIntegral}}</text>积分</view>
+			<view wx:if="{{select_pay_type == '2'}}" class="submit-order-footer-lf">实际支付：<text style="color: #E54D42;font-size: 36rpx;">{{showPrice}}</text>元</view>
+			<view wx:if="{{select_pay_type == '1'}}" class="submit-order-footer-lf">实际支付：<text style="color: #E54D42;font-size: 36rpx;">{{requireIntegral}}</text>积分</view>
 			<view class="submit-order-footer-rt" bindtap="confirmPayFun">确认支付</view>
 		</view>
 	</van-popup>

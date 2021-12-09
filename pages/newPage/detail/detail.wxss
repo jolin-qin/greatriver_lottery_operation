@@ -253,8 +253,8 @@
 	box-sizing: border-box;
 }
 .noAddress .add_symbol {
-    width: 40rpx;
-    height: 40rpx;
+    width: 30rpx;
+    height: 30rpx;
 }
 
 .noAddress .txt {
@@ -370,7 +370,7 @@
     font-weight: bold;
 }
 .submit-order-footer-rt {
-    width: 370rpx;
+    width: 350rpx;
 	/* background: linear-gradient(to right, #BC9966, #AB8957, #9C7B4A); */
 	height: 80rpx;
 	line-height: 76rpx;

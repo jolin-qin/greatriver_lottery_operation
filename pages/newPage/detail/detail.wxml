@@ -59,7 +59,7 @@
         <view class="immediately_buy btn" bindtap="openBuyPopup"></view>
     </view>
     <!-- 查看弹窗 -->
-    <van-popup show="{{ show }}" bind:close="onClose" closeable close-icon="cross" round custom-class="viewPopup">
+    <van-popup show="{{ show }}" bind:close="onClose" closeable close-icon="{{imgUrl}}close02.png" round custom-class="viewPopup">
         <view wx:if="{{popupType === 0}}" class="content">
             <view class="title">积分规则详情</view>
             <view class="point">1.玩家在购买过程中，购买任何商品均将获得JC积分，积分数量将根据jc赏类型与现货/预售的商品种类以
@@ -82,7 +82,7 @@
 	<!-- 购买弹窗 -->
 	<van-popup show="{{ buyPopupShow }}" position="bottom" custom-style="height: 100%;background: #f7f8fd;" bind:close="closeBuyPopup">
 		<view class="closeBuyPopupImg" bindtap="closeBuyPopup">
-            <image class="img" src="/resource/icon/close02.png" mode="scaleToFill"></image>
+            <image class="img" src="/resource/icon/close04.png" mode="scaleToFill"></image>
         </view>
         <!--添加收货地址-->
 		<view class="submitOrderAddAddress" bindtap="goAddress">
@@ -157,7 +157,7 @@
 		<!--footer star-->
 		<view class="submit-order-footer flex_between">
 		    <view wx:if="{{select_pay_type == '2'}}" class="submit-order-footer-lf">
-                <view class="shiji">实际支付：<text style="color: #E54D42;">{{totalPrice}}</text>元</view>
+                <view class="shiji">实际支付：<text style="color: #E54D42;font-size: 36rpx;">{{totalPrice}}</text>元</view>
                 <view class="particulars">
                     <text>商品价格：{{showPrice}}</text>
                     <text class="yunfei">运费：{{goodsObj.prize_postage}}</text>

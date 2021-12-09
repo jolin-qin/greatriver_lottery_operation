@@ -62,6 +62,9 @@
 }
 /* end */
 /* 商品列表css */
+.goods_wrapper {
+	margin-top: 20rpx;
+}
 .list_wrapper {
 	padding: 0 20rpx;
 	flex-wrap: wrap;

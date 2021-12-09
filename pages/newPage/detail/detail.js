@@ -8,6 +8,7 @@ Page({
     data: {
         goodsId: '',
         goodsObj: {},
+        imgUrl: app.util.imageUrl,//宝塔图片域名
         projecturl: app.util.projectUrl,
         show: false,//查看弹窗
         popupType: '',//代表打开哪个弹窗

@@ -1,7 +1,7 @@
 <!-- 新的页面start -->
 <view>
 	<!-- swiper -->
-	<swiper class="index_swiper" indicator-dots="{{true}}" interval="2000" autoplay="{{true}}" duration="500" circular="true" easing-function="linear">
+	<swiper class="index_swiper" indicator-dots="{{true}}" indicator-active-color="#ffffff" interval="2000" autoplay="{{true}}" duration="500" circular="true" easing-function="linear">
         <swiper-item wx:for="{{bannerList}}" wx:key="index" class="swiper_item" data-type="{{1}}" data-prizeid="{{item.prize_id}}" bindtap="goGoodsDetailPage">
             <image class="img" src="{{projecturl + item.img}}" mode="aspectFill"></image>
         </swiper-item>

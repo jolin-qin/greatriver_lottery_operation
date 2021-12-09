@@ -221,13 +221,11 @@
 		</view>
 	</view>
 	<view style="display:flex;justify-content:space-between;position:relative;border-radius:20rpx;overflow:hidden">
-		<block wx:if="{{JSON.stringify(useraddress) != '{}'}}">
-			<view style="padding:25rpx 30rpx;width:100%">
-
+		<block>
+			<!-- 有地址 -->
+			<view style="padding:25rpx 30rpx;width:90%" wx:if="{{useraddress.address}}">
 				<view style="font-size:28rpx;font-weight:bold;display:flex;align-items:center;">
-					<view wx:if="{{useraddress.isdefault==1}}" class='cu-tag radius bg-red sm'
-						style="margin-right:10rpx;">默认
-					</view>
+					<view wx:if="{{useraddress.isdefault==1}}" class='cu-tag radius bg-red sm' style="margin-right:10rpx;">默认</view>
 					{{useraddress.province+useraddress.city+useraddress.district}}
 				</view>
 				<view style="font-size:30rpx;font-weight:bold;margin-top:20rpx;">{{useraddress.address}}</view>
@@ -239,9 +237,8 @@
 							bindtap="copyexpress">{{prize.poster.express_sn}}</text></view>
 				</block>
 			</view>
-		</block>
-		<block wx:else>
-			<navigator url="/pages/my/address/address" hover-class="none">
+			<!-- 无地址 -->
+			<navigator wx:else url="/pages/my/address/address" hover-class="none" style="width: 90%;">
 				<view style="padding:40rpx 30rpx;">
 					<text>没有默认收货地址,请点击添加</text>
 				</view>
@@ -249,7 +246,7 @@
 		</block>
 		<block wx:if="{{prize.prize_first_state==0}}">
 			<navigator url="/pages/my/address/address" hover-class="none"
-				style="display:flex;align-items:center;margin-right:20rpx;" class="icon-right text-grey"></navigator>
+				style="display:flex;align-items:center;width:10%;" class="icon-right text-grey"></navigator>
 		</block>
 		<image src="/resource/images/line.jpg" style="width:100%;height:7rpx;position:absolute;bottom:0rpx;"></image>
 	</view>
