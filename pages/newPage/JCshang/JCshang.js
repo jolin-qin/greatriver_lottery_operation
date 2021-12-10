@@ -104,7 +104,7 @@ Page({
 						boxObj: result || {},
                         goodsList: arr,
                         select_pay_type: type,
-						remainNum: shengyu
+						remainNum: shengyu > 0 ? shengyu : 0
 					})
 				} else {
 					//失败

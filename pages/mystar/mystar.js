@@ -225,16 +225,16 @@ Page({
 			data: {
 				m: app.globalData.module_name,
 				classid: id,
-				// page: pageNumber
+				page: pageNumber
 			},
 			method: 'get',
 			success: function (response) {
 				console.log('获取盒子列表函数', response);
 				if (response.data.errno == 0) {
-					if (response.data.data.length == 0 && pageNumber == 1) {
+					if (response.data.data.length == 0) {
 						wx.showToast({
 							icon: 'none',
-							title: '没有更多了',
+							title: '暂无数据',
 						})
 					} else {
 						t.setData({

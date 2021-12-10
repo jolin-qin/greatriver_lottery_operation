@@ -1,12 +1,12 @@
 <form bindsubmit="formbsumit">
 	<view class="cu-form-group">
 		<view class='title' style="margin-right:30rpx;">收货人</view>
-		<input placeholder="请输入收货人名字" class='radius' name='name'></input>
+		<input placeholder="请输入收货人名字" class='radius' name='name' maxlength="15"></input>
 	</view>
 	<view class="cu-form-group">
 		<view class='title'>手机号码</view>
 		<block>
-			<input wx:if="{{phone_number}}" placeholder="请输入收货人手机号" value="{{phone_number}}" type="number" class='radius input_phone_number' name='phone'></input>
+			<input wx:if="{{phone_number}}" placeholder="请输入收货人手机号" value="{{phone_number}}" type="number" class='radius input_phone_number' name='phone' maxlength="11"></input>
 			<button wx:else open-type="getPhoneNumber"
 					bindgetphonenumber="getPhoneNumber" class="button-hover get_phone_number">请输入收货人手机号</button>
 		</block>
@@ -30,7 +30,7 @@
 	</view>
 	<view class="cu-form-group">
 		<view class='title'>详细地址</view>
-		<input placeholder="请输入详细地址" class='radius' name='address'></input>
+		<input placeholder="请输入详细地址" class='radius' name='address' maxlength="20"></input>
 	</view>
 
 

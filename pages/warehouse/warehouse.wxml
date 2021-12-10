@@ -8,11 +8,9 @@
 			道具仓库</view>
 	</view>
 </view>
-
-
 <swiper style="height:100vh;" current="{{activeTab}}" bindchange="pageChange">
+	<!-- 物品仓库 -->
 	<swiper-item>
-
 		<scroll-view scroll-y="true" refresher-enabled="true" refresher-threshold="50" refresher-default-style="black"
 			bindrefresherrefresh="onRefresh" refresher-triggered="{{loading}}" bindscrolltolower="loadmore"
 			bindscrolltoupper="scrolltoupper" enable-back-to-top="true" class="tab-content" style="height:100vh;"
@@ -23,13 +21,11 @@
 					仓库只显示没有申请发货的物品，已申请发货后请到个人中心查看
 				</view>
 			</view>
-
 			<view wx:for="{{prize_list}}" wx:key="index" style="margin-top:20rpx;padding:0 20rpx;">
 				<view bindtap="fahuo" data-id="{{item.id}}"
 					style="width:100%;background:#fff;display:flex;justify-content:space-between;padding:20rpx 20rpx;border-radius:20rpx;">
-
 					<view style="display:flex;align-items:center;">
-						<view style="margin-right:20rpx;font-weight:bold;" class="text-grey">#{{index
+						<view style="margin-right:20rpx;font-weight:bold;">#{{index
 							<9?'0'+(index+1):index+1}}</view>
 								<view
 									style="border-radius:10rpx;width:130rpx;min-width:130rpx;height:130rpx;overflow:hidden;background:#f7f7f7;padding:10rpx;">
@@ -40,28 +36,25 @@
 									<view
 										style="display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 2;overflow: hidden;font-weight:500;font-size:26rpx;">
 										{{item.prize.complete_prize_title}}</view>
-									<view style="margin-top:10rpx;">
-										<view class='cu-tag radius sm'>获得时间</view><text
-											style="font-size:20rpx;">{{item.time}}</text>
+									<view style="margin-top:10rpx;margin-bottom: 4rpx;">
+										<view class='cu-tag radius sm get_time'>获得时间</view>
+										<text style="font-size:20rpx;">{{item.time}}</text>
 									</view>
 									<view>
-										<view class='cu-tag radius sm'>物品来源</view><text
-											style="font-size:20rpx;">{{item.prize_source!=='盒子'?item.prize_source:'已下架的盒子'}}</text>
+										<view class='cu-tag radius sm get_time'>物品来源</view>
+										<text style="font-size:20rpx;">{{item.prize_source!=='盒子'?item.prize_source:'已下架的盒子'}}</text>
 									</view>
 								</view>
 						</view>
 						<view style="display:flex;align-items:center;">
 							<text class="icon-right"></text>
 						</view>
-
-
 					</view>
 				</view>
-				<view style="height:400rpx;margin-top:30rpx;text-align:center;font-weight:20rpx;">没有更多了</view>
-
-
+				<view style="height:400rpx;margin-top:30rpx;text-align:center;font-size:24rpx;">没有更多了</view>
 		</scroll-view>
 	</swiper-item>
+	<!-- 道具仓库 -->
 	<swiper-item>
 		<scroll-view scroll-y="true" refresher-enabled="true" refresher-threshold="50" refresher-default-style="black"
 			bindrefresherrefresh="toolonRefresh" refresher-triggered="{{loading}}" class="tab-content"
@@ -93,7 +86,7 @@
 
 
 			</view>
-			<view style="height:400rpx;margin-top:30rpx;text-align:center;font-weight:20rpx;">没有更多了</view>
+			<view style="height:400rpx;margin-top:30rpx;text-align:center;font-size:24rpx;">没有更多了</view>
 		</scroll-view>
 	</swiper-item>
 
@@ -123,7 +116,7 @@
 </view>
 
 
-<view class="cu-modal {{fahuosuccessmodal==true?'show':''}}" style="">
+<view class="cu-modal {{fahuosuccessmodal==true?'show':''}}">
 
 	<view
 		style="background:#fff;position:absolute;left:0;right:0;top:0;bottom:0;margin:auto;border-radius:30rpx;width:400rpx;height:400rpx;overflow:hidden;z-index:9999;text-align:center;padding:50rpx 0rpx 0rpx 0rpx;border:10rpx solid #f7f7f7;">

@@ -17,7 +17,7 @@
 				<view class="numfont"
 					style="margin-top:0rpx;width:100%;padding:0rpx 0rpx;border-radius:20rpx;text-align:center;text-align:left;font-size:35rpx;">
 					<block wx:if="{{item.payment_integral==1}}">
-						<image style="width:25rpx;height:25rpx" src="/resource/images/kuangshi2.png"></image>
+						<image style="width:25rpx;height:25rpx" src="/resource/images/jifen.png"></image>
 						{{item.tool_integral}}<text style="font-size:20rpx;"></text>
 					</block>
 					<block

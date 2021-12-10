@@ -241,7 +241,7 @@ Page({
 							wx.navigateTo({
 								url: '/pages/my/address/address',
 							})
-							t.getprize();
+							// t.getprize();
 						} else if (res.cancel) {
 							console.log('用户点击取消')
 						}

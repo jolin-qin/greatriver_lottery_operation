@@ -45,35 +45,35 @@
 
 		</view>
 		<!-- 奖品信息 -->
-		<view style="padding:25rpx 0rpx;width:100%">
+		<view style="width:100%">
 			<view style="background:#fff;">
-				<view style="display:flex;justify-content:space-between;">
+				<view style="display:flex;justify-content:space-between;padding: 16rpx 0;">
 					<view>物品ID</view>
 					<view>{{prize.prize.id}}</view>
 				</view>
-				<view style="display:flex;justify-content:space-between;">
+				<view style="display:flex;justify-content:space-between;padding: 16rpx 0;">
 					<view>类型</view>
 					<view>
 						{{prize.prize.prize_type==1?'实物':''}}{{prize.prize.prize_type==2?'虚拟物品':''}}{{prize.prize.prize_type==3?'卡密':''}}{{prize.prize.prize_type==4?'现金红包':''}}{{prize.prize.prize_type==5?'跳转领取':''}}
 					</view>
 				</view>
-				<view wx:if="{{!(prize.order && prize.order.type === '4')}}" style="display:flex;justify-content:space-between;">
+				<view wx:if="{{!(prize.order && prize.order.type === '4')}}" style="display:flex;justify-content:space-between;padding: 16rpx 0;">
 					<view>物品来源</view>
 					<view>{{prize.prize_source}}</view>
 				</view>
-				<view wx:if="{{!(prize.order && prize.order.type === '4')}}" style="display:flex;justify-content:space-between;">
+				<view wx:if="{{!(prize.order && prize.order.type === '4')}}" style="display:flex;justify-content:space-between;padding: 16rpx 0;">
 					<view>抽中者</view>
 					<view>{{prize.prize_first_owner.nickname}}</view>
 				</view>
-				<view wx:if="{{!(prize.order && prize.order.type === '4')}}" style="display:flex;justify-content:space-between;">
+				<view wx:if="{{!(prize.order && prize.order.type === '4')}}" style="display:flex;justify-content:space-between;padding: 16rpx 0;">
 					<view>抽中时间</view>
 					<view>{{prize.prize_first_time}}</view>
 				</view>
-				<view wx:if="{{!(prize.order && prize.order.type === '4')}}" style="display:flex;justify-content:space-between;">
+				<view wx:if="{{!(prize.order && prize.order.type === '4')}}" style="display:flex;justify-content:space-between;padding: 16rpx 0;">
 					<view>回收价格</view>
 					<view class="text-price">{{prize.prize.prize_fragment.prizes_fragments_recovery_price}}</view>
 				</view>
-				<view style="display:flex;justify-content:space-between;">
+				<view style="display:flex;justify-content:space-between;padding: 16rpx 0;">
 					<view>物品状态</view>
 					<view class="text-bold" wx:if="{{prize.prize.prize_state!=='0'}}">已失效</view>
 					<view class="text-bold" wx:else>

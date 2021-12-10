@@ -1,1 +1,7 @@
 /* pages/delivery/delivery.wxss */
+/* 新增css */
+.get_time {
+	background-color: #F294A2 !important;
+	color: #fff !important;
+	margin-right: 10rpx !important;
+}

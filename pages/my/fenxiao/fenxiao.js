@@ -96,6 +96,7 @@ Page({
 					t.setData({
 						distribution_list: t.data.page > 1 ? t.data.distribution_list.concat(response.data.data.list) : response.data.data.list,
 						page: t.data.page + 1,
+						history_sum_money: response.data.data.count_price
 					})
 				} else {
 					wx.showToast({

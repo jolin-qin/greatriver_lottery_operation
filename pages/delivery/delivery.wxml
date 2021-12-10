@@ -13,7 +13,7 @@
 			style="width:100%;background:#fff;display:flex;justify-content:space-between;padding:20rpx 20rpx;border-radius:20rpx;">
 
 			<view style="display:flex;align-items:center;">
-				<view style="margin-right:20rpx;font-weight:bold;" class="text-grey">#{{index < 9 ? '0'+(index+1) : index+1}}</view>
+				<view style="margin-right:20rpx;font-weight:bold;">#{{index < 9 ? '0'+(index+1) : index+1}}</view>
 				<view
 					style="border-radius:10rpx;width:130rpx;height:130rpx;overflow:hidden;background:#f7f7f7;padding:10rpx;">
 					<image src="{{item.prize.prize_pic}}" style="border-radius:10rpx;width:100%;height:100%;"
@@ -23,12 +23,12 @@
 					<view
 						style="display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 2;overflow: hidden;font-weight:500;font-size:26rpx;">
 						{{item.prize.prize_title}}</view>
-					<view style="margin-top:10rpx;">
-						<view class='cu-tag radius sm'>提交时间</view>
+					<view style="margin-top:10rpx;margin-bottom: 4rpx;">
+						<view class='cu-tag radius sm get_time'>提交时间</view>
 						<text style="font-size:20rpx;">{{item.time}}</text>
 					</view>
 					<view>
-						<view class='cu-tag radius sm'>物品类型</view>
+						<view class='cu-tag radius sm get_time'>物品类型</view>
 						<text style="font-size:20rpx;">{{item.prize.prize_type=='4'?'红包':''}}{{item.prize.prize_type=='1'?'实物':''}}{{item.prize.prize_type=='2'?'虚拟物品':''}}{{item.prize.prize_type=='3'?'卡密':''}}{{item.prize.prize_type=='5'?'其他':''}}</text>
 					</view>
 				</view>
@@ -38,5 +38,5 @@
 			</view>
 		</view>
 	</view>
-	<view style="height:400rpx;margin-top:30rpx;text-align:center;font-weight:20rpx;">没有更多了</view>
+	<view style="height:400rpx;margin-top:30rpx;text-align:center;font-size:24rpx;">没有更多了</view>
 </view>
