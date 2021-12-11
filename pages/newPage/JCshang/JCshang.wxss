@@ -49,6 +49,15 @@
 	z-index: 2;
 	border-radius: 24rpx;
 }
+.show_wrapper .middle_area .yi_chou_wan {
+	width: 92rpx;
+    height: 26rpx;
+	position: absolute;
+	top: 132rpx;
+	left: 50%;
+	transform: translateX(-51%);
+	z-index: 2;
+}
 .show_wrapper .middle_area .big_img {
 	display: block !important;
 	width: 100%;

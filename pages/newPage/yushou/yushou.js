@@ -49,7 +49,8 @@ Page({
 		app.util.request({
 			url: 'entry/wxapp/get_series_ist',
 			data: {
-				m: app.globalData.module_name
+				m: app.globalData.module_name,
+				type: '2'
 			},
 			method: 'get',
 			success: function (response) {

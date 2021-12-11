@@ -7,12 +7,13 @@
 		<view class="middle_area">
 			<image class="title_img" src="{{imgUrl}}JCshang_05.png" mode="scaleToFill"></image>
 			<image wx:if="{{boxObj.last_prize_cover}}" class="series_img" src="{{projecturl + boxObj.last_prize_cover}}" data-url="{{projecturl + boxObj.last_prize_cover}}" bindtap="viewBigPic_1" mode="aspectFill"></image>
+			<image wx:if="{{!remainNum}}" class="yi_chou_wan" src="/resource/icon/soldout.png" mode="scaleToFill"></image>
 			<image class="big_img" src="{{imgUrl}}JCshang_02.png" mode="widthFix"></image>
 			<!-- 九宫格 -->
 			<view class="sudoku">
 				<view class="sudoku_item" wx:for="{{goodsList}}" wx:key="index" data-all="{{goodsList}}" data-index="{{index}}" bindtap="viewBigPic">
-					<image wx:if="{{item.prize_pic}}" class="goods_img {{item.num == '0' ? 'gray' : ''}}" src="{{item.prize_pic}}" mode="scaleToFill"></image>
-					<image wx:if="{{item.num == '0'}}" class="sold_out" src="/resource/icon/soldout.png" mode="scaleToFill"></image>
+					<image wx:if="{{item.prize_pic}}" class="goods_img {{0 >= item.num ? 'gray' : ''}}" src="{{item.prize_pic}}" mode="scaleToFill"></image>
+					<image wx:if="{{0 >= item.num}}" class="sold_out" src="/resource/icon/soldout.png" mode="scaleToFill"></image>
 				</view>
 			</view>
 		</view>

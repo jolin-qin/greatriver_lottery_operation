@@ -51,7 +51,8 @@ Page({
 		app.util.request({
 			url: 'entry/wxapp/get_series_ist',
 			data: {
-				m: app.globalData.module_name
+				m: app.globalData.module_name,
+				type: '2'
 			},
 			method: 'get',
 			success: function (response) {
@@ -179,7 +180,7 @@ Page({
 			tabIndex: index,
 			pageNumber: 1,
 			seriesId: id,
-			classList: []
+			goodsList: []
 		})
 		//请求系列下的盒子列表
 		this.getGoodsListFun(id, this.data.pageNumber)
