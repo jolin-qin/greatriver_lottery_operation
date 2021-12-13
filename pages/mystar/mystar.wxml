@@ -263,4 +263,6 @@
 	</view>
 </view>
 <loginmodal wx:if="{{!islogin}}" />
+<!-- 跳转公众号文章 -->
+<jump></jump>
 <bar navtab="mystar" />

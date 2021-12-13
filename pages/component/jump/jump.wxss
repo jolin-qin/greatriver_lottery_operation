@@ -1,0 +1,38 @@
+.jump_wrapper {
+	position: fixed;
+	left: 0;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 100rpx;
+	height: 100rpx;
+	z-index: 2;
+	/* background: #fff; */
+	animation: ChuizhiMovement 3s infinite linear;
+}
+.jump_wrapper .img {
+	width: 100%;
+	height: 100%;
+}
+@keyframes ChuizhiMovement {
+	0% {
+		transform: translateY(0);
+	}
+	15% {
+		transform: translateY(-20rpx);
+    }
+    30% {
+		transform: translateY(0);
+	}
+	45% {
+		transform: translateY(-20rpx);
+	}
+	60% {
+		transform: translateY(0);
+    }
+    60% {
+		transform: translateY(0);
+	}
+	100% {
+		transform: translateY(0);
+	}
+}

@@ -1665,14 +1665,19 @@ Page({
 			},
 			method: 'get',
 			success: function (response) {
-				console.log('getindexparameter', response.data);
+				console.log('跳转链接:', response.data);
 				if (response.data.errno == 0) {
+					let result = response.data.data
+					//保存跳转公众号文章链接
+					app.globalData.jump_url = result.other_parameter.wechat_article_url
+					app.globalData.jump_png = t.data.projecturl + result.other_parameter.wechat_article_url_logo
+					t.selectComponent("#jump").setJumpUrl()
 					t.setData({
-						indexparameter: response.data.data,
-						box_class: response.data.data.box_class,
-						rand_box: response.data.data.rand_box,
-						liuliangzhu_parameter: response.data.data.liuliangzhu_parameter,
-						ads: response.data.data.ad,
+						indexparameter: result,
+						box_class: result.box_class,
+						rand_box: result.rand_box,
+						liuliangzhu_parameter: result.liuliangzhu_parameter,
+						ads: result.ad,
 					})
 					var randomnum2 = 0;
 					setInterval(() => {

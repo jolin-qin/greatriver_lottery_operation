@@ -1,0 +1,3 @@
+<view class="jump_wrapper" bindtap="tiaozhuan">
+	<image src="{{jumppng}}" class="img" mode="aspectFill"></image>
+</view>

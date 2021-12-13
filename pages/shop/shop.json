@@ -1,7 +1,8 @@
 {
   "navigationStyle": "custom",
   "usingComponents": {
-    "bar":"/pages/component/bar/bar"
+    "bar":"/pages/component/bar/bar",
+    "jump":"/pages/component/jump/jump"
   },
   "enablePullDownRefresh":true
 }

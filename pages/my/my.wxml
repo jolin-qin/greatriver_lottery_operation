@@ -241,4 +241,6 @@
 <view style="font-size:25rpx;color:#fff;text-align:center;height:80rpx;">ver{{version}}-{{develop_version}}</view>
 
 <loginmodal wx:if="{{!islogin}}" />
+<!-- 跳转公众号文章 -->
+<jump id="jump"></jump>
 <bar navtab="my" />

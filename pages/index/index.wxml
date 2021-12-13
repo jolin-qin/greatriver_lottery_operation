@@ -113,5 +113,7 @@
 </view>
 <!-- 授权弹窗组件 -->
 <loginmodal wx:if="{{!islogin}}"/>
+<!-- 跳转公众号文章 -->
+<jump id="jump"></jump>
 <!-- 底部tabBar -->
 <bar navtab="index" scrolltop="{{scrolltopenable}}" />

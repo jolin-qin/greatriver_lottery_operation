@@ -39,7 +39,6 @@
 	z-index: 2;
 }
 .show_wrapper .middle_area .series_img {
-	display: block;
 	width: 390rpx;
 	height: 160rpx;
 	position: absolute;
@@ -47,16 +46,23 @@
 	left: 50%;
 	transform: translateX(-51%);
 	z-index: 2;
+}
+.show_wrapper .middle_area .series_img .img {
+	width: 100%;
+	height: 100%;
 	border-radius: 24rpx;
+}
+.show_wrapper .middle_area .series_img .img.active {
+	-webkit-filter: grayscale(100%);
+	filter: grayscale(100%);
 }
 .show_wrapper .middle_area .yi_chou_wan {
 	width: 92rpx;
     height: 26rpx;
 	position: absolute;
-	top: 132rpx;
+	top: 50%;
 	left: 50%;
-	transform: translateX(-51%);
-	z-index: 2;
+	transform: translate(-51%, -50%);
 }
 .show_wrapper .middle_area .big_img {
 	display: block !important;

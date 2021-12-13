@@ -2,7 +2,8 @@
   "navigationStyle": "custom",
   "usingComponents": {
     "bar":"/pages/component/bar/bar",
-    "loginmodal":"/pages/component/loginmodal/loginmodal"
+    "loginmodal":"/pages/component/loginmodal/loginmodal",
+    "jump":"/pages/component/jump/jump"
   },
   "enablePullDownRefresh":true
 }

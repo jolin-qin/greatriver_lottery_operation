@@ -125,5 +125,7 @@
 		</view>
 	</view>
 </view>
+<!-- 跳转公众号文章 -->
+<jump id="jump"></jump>
 <!-- 底部tabBar -->
 <bar navtab="shop" />

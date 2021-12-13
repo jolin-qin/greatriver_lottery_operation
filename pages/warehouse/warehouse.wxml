@@ -146,5 +146,6 @@
 
 
 <loginmodal wx:if="{{!islogin}}" />
-
+<!-- 跳转公众号文章 -->
+<jump id="jump"></jump>
 <bar navtab="warehouse" />
