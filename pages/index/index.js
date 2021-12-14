@@ -1459,16 +1459,18 @@ Page({
 	onShareAppMessage: function () {
 		var memberinfo = wx.getStorageSync('memberinfo');
 		var uid = 0;
-		console.log('uid', memberinfo.id);
+		// console.log('uid', memberinfo.id);
 		memberinfo.id && (uid = memberinfo.id);
-		var t = this;
-		console.log(this.data.openboxinfo == false ? '礼品盒子无限抽！' : this.data.openboxinfo['box_title']);
-		console.log(this.data.openboxinfo == false ? '' : this.data.openboxinfo['box_cover']);
-		console.log(this.data.openboxinfo == false ? '/pages/index/index' : '/pages/index/index?sharetype=sendbox&senduid=' + uid + '&boxid=' + this.data.openboxinfo['membersbox_id']);
+		// var t = this;
+		// return {
+		// 	title: t.data.openboxinfo == false ? '礼品盒子无限抽！' : t.data.openboxinfo['box_title'],
+		// 	imageUrl: t.data.openboxinfo == false ? '' : t.data.openboxinfo['box_cover'],
+		// 	path: t.data.openboxinfo == false ? '/pages/index/index?sharetype=invite&uid=' + uid : '/pages/index/index?sharetype=sendbox&senduid=' + uid + '&boxid=' + t.data.openboxinfo['membersbox_id'],
+		// }
 		return {
-			title: t.data.openboxinfo == false ? '礼品盒子无限抽！' : t.data.openboxinfo['box_title'],
-			imageUrl: t.data.openboxinfo == false ? '' : t.data.openboxinfo['box_cover'],
-			path: t.data.openboxinfo == false ? '/pages/index/index?sharetype=invite&uid=' + uid : '/pages/index/index?sharetype=sendbox&senduid=' + uid + '&boxid=' + t.data.openboxinfo['membersbox_id'],
+			title: '胶潮-潮玩聚集地!',
+			imageUrl: 'https://www.jiaochao.top/imageurl/share_pic.jpg',
+			path: '/pages/index/index?sharetype=invite&uid=' + uid
 		}
 	},
 	onHide: function () {
@@ -1954,16 +1956,18 @@ Page({
 	onShareTimeline() {
 		var memberinfo = wx.getStorageSync('memberinfo');
 		var uid = 0;
-		console.log('uid', memberinfo.id);
+		// console.log('uid', memberinfo.id);
 		memberinfo.id && (uid = memberinfo.id);
-		var t = this;
-		console.log(this.data.openboxinfo == false ? '礼品盒子无限抽！' : this.data.openboxinfo['box_title']);
-		console.log(this.data.openboxinfo == false ? '' : this.data.openboxinfo['box_cover']);
-		console.log(this.data.openboxinfo == false ? '/pages/index/index' : '/pages/index/index?sharetype=sendbox&senduid=' + uid + '&boxid=' + this.data.openboxinfo['membersbox_id']);
+		// var t = this;
+		// return {
+		// 	title: t.data.openboxinfo == false ? '礼品盒子无限抽！' : t.data.openboxinfo['box_title'],
+		// 	imageUrl: t.data.openboxinfo == false ? '' : t.data.openboxinfo['box_cover'],
+		// 	query: t.data.openboxinfo == false ? '' : 'sharetype=sendbox&senduid=' + uid + '&boxid=' + t.data.openboxinfo['membersbox_id'],
+		// }
 		return {
-			title: t.data.openboxinfo == false ? '礼品盒子无限抽！' : t.data.openboxinfo['box_title'],
-			imageUrl: t.data.openboxinfo == false ? '' : t.data.openboxinfo['box_cover'],
-			query: t.data.openboxinfo == false ? '' : 'sharetype=sendbox&senduid=' + uid + '&boxid=' + t.data.openboxinfo['membersbox_id'],
+			title: '胶潮-潮玩聚集地!',
+			imageUrl: 'https://www.jiaochao.top/imageurl/share_pic.jpg',
+			path: '/pages/index/index?sharetype=invite&uid=' + uid
 		}
 	},
 	onPageScroll: function (res) {

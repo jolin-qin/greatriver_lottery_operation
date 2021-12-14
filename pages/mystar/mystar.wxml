@@ -253,7 +253,8 @@
 </view>
 <!-- 盲盒列表 -->
 <view class="list_view">
-	<image class="list_title_img" src="/resource/images/new_07.png" mode="aspectFill"></image>
+	<!-- <image class="list_title_img" src="/resource/images/new_07.png" mode="aspectFill"></image> -->
+	<view class="list_title_img">JC大赏</view>
 	<!-- 列表 -->
 	<view class="list_wrapper flex_start">
 		<view class="list_item" wx:for="{{classList}}" wx:key="index" data-id="{{item.id}}" data-type="{{0}}" bindtap="goJCshangPage">

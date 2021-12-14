@@ -199,8 +199,8 @@ Page({
 		var t = this;
 		console.log('/pages/index/index?sharetype=invite&uid=' + uid);
 		return {
-			title: '礼品盒子无限抽！',
-			imageUrl: '',
+			title: '胶潮-潮玩聚集地!',
+			imageUrl: 'https://www.jiaochao.top/imageurl/share_pic.jpg',
 			path: '/pages/index/index?sharetype=invite&uid=' + uid
 		}
 	},

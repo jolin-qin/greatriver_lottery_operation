@@ -1,4 +1,4 @@
-<view class="cu-custom" style="height:{{CustomBar}}px;">
+<view class="cu-custom top_bar" style="height:{{CustomBar}}px;">
 	<view class="cu-bar fixed tab" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;color:#d7d7d7;">
 		<view class="{{activeTab==1?' normal ':' active '}} titlefont" style="margin-left:20rpx" bindtap="clickchange"
 			data-tab="0">

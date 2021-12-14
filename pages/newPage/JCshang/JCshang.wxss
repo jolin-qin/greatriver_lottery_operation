@@ -199,16 +199,28 @@
 	left: 0;
 	width: 100%;
 	height: 180rpx;
-	padding: 0 60rpx;
+	padding: 30rpx 60rpx 0;
 	flex-wrap: wrap;
 	background: #f7f7f7;
 	z-index: 2;
+	align-items: flex-start;
 }
 .buy_num .img {
 	display: block;
 	width: 190rpx;
 	height: 72rpx;
 	margin: 0 40rpx;
+}
+.buy_num .word {
+	width: 350rpx;
+	height: 90rpx;
+	line-height: 90rpx;
+	text-align: center;
+	background: url('https://www.jiaochao.top/imageurl/HOTTOYS.png') no-repeat;
+	background-size: 100% 100%;
+	color: #fff;
+	font-size: 32rpx;
+	font-weight: bold;
 }
 .buy_num .prop_img {
 	display: block;

@@ -121,6 +121,10 @@ pg {
 }
 
 /* 新增css */
+.top_bar {
+	z-index: 2;
+	background: #f7f8fd;
+}
 .get_time {
 	background-color: #F294A2 !important;
 	color: #fff !important;

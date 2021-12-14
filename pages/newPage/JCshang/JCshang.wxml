@@ -37,11 +37,15 @@
 	</view>
 	<view class="zhanwei"></view>
 	<!-- 抽盲盒按钮 -->
-	<view class="buy_num flex_center">
+	<!-- <view class="buy_num flex_center">
 		<image class="one_img img" src="{{imgUrl}}JCshang_06.png" mode="scaleToFill" bindtap="openBuyPopup" data-num="{{1}}"></image>
 		<image class="three_img img" src="{{imgUrl}}JCshang_07.png" mode="scaleToFill" bindtap="openBuyPopup" data-num="{{3}}"></image>
 		<image class="five_img img" src="{{imgUrl}}JCshang_08.png" mode="scaleToFill" bindtap="openBuyPopup" data-num="{{5}}"></image>
 		<image class="turnkey_img img" src="{{imgUrl}}JCshang_09.png" mode="scaleToFill" bindtap="openBuyPopup" data-num="{{remainNum}}"></image>
+	</view> -->
+	<view class="buy_num flex_center">
+		<!-- <image class="one_img img" src="{{imgUrl}}JCshang_06.png" mode="scaleToFill" bindtap="openBuyPopup" data-num="{{1}}"></image> -->
+		<view class="word" bindtap="openBuyPopup" data-num="{{1}}">去抽盲盒</view>
 	</view>
 	<!-- 购买弹窗 -->
 	<van-popup show="{{ buyPopupShow }}" position="bottom" custom-style="height: 100%;background: #f7f8fd;"

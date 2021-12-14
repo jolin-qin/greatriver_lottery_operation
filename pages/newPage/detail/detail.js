@@ -516,6 +516,16 @@ Page({
      * 用户点击右上角分享
      */
     onShareAppMessage: function () {
-
+        var memberinfo = wx.getStorageSync('memberinfo');
+		var uid = 0;
+		// console.log('uid', memberinfo.id);
+		memberinfo.id && (uid = memberinfo.id);
+		// var t = this;
+		console.log('/pages/index/index?sharetype=invite&uid=' + uid);
+		return {
+			title: '胶潮-潮玩聚集地!',
+			imageUrl: 'https://www.jiaochao.top/imageurl/share_pic.jpg',
+			path: '/pages/index/index?sharetype=invite&uid=' + uid
+		}
     }
 })
