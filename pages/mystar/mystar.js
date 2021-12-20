@@ -37,6 +37,7 @@ Page({
 		pageNumber: 1,
 		seriesId: '',//系列Id
 		classList: [],//系列下的盒子
+		scrollLeft: 0,
 	},
 
 	/**
@@ -199,6 +200,19 @@ Page({
 					})
 					//根据seriesId请求盒子列表
 					t.getClassListFun(result[0].box_class_id, 1)
+					//设置scroll-view的横向滚动距离
+					if (result.length > 4) {
+						setTimeout(() => {
+							t.setData({
+								scrollLeft: 180 + 'rpx'
+							})
+						}, 500)
+						setTimeout(() => {
+							t.setData({
+								scrollLeft: 0
+							})
+						}, 1500)
+					}
 				} else {
 					//失败
 					wx.showToast({

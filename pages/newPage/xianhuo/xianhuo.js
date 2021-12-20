@@ -15,7 +15,7 @@ Page({
 		baseNumber: 0,//px与rpx转换基数
 		isFixed: false,
 		pageNumber: 1,
-		
+		scrollLeft: 0,
     },
 
     /**
@@ -65,6 +65,19 @@ Page({
 					})
 					//根据seriesId请求盒子列表
 					t.getGoodsListFun(result[0].box_class_id, 1)
+					//设置scroll-view的横向滚动距离
+					if (result.length > 4) {
+						setTimeout(() => {
+							t.setData({
+								scrollLeft: 180 + 'rpx'
+							})
+						}, 500)
+						setTimeout(() => {
+							t.setData({
+								scrollLeft: 0
+							})
+						}, 1500)
+					}
 				} else {
 					//失败
 					wx.showToast({

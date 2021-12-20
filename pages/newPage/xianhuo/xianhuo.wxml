@@ -15,7 +15,7 @@
 	<!-- tab切换 -->
 	<view class="xiding_box">
 		<view class="tab_container flex-center {{isFixed ? 'Fixed' : ''}}">
-			<scroll-view scroll-x="true" class="tab_wrapper">
+			<scroll-view scroll-x="{{true}}" class="tab_wrapper" scroll-left="{{scrollLeft}}" scroll-with-animation="{{true}}">
 				<view wx:for="{{tabs}}" wx:key="index" class="tab_item {{tabIndex === index ? 'active':'' }}" data-index="{{index}}" data-id="{{item.box_class_id}}" bindtap="tabClick">{{item.box_class_name}}</view>
 			</scroll-view>
 		</view>
