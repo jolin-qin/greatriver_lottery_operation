@@ -359,7 +359,7 @@
 	margin: 0 auto;
 	border-radius: 20rpx;
 	background: url('https://www.jiaochao.top/imageurl/beijing.png') no-repeat top center;
-	background-size: auto;
+	background-size: cover;
 	padding: 24rpx 0 1px 30rpx;
 	flex-wrap: wrap;
 }

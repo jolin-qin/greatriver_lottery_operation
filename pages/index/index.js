@@ -56,11 +56,14 @@ Page({
 		box_class: [],
 		yindao: [], //新手引导
 		// 我的变量
+		CustomBar: app.globalData.CustomBar,
 		projecturl: app.util.projectUrl,
+		imgUrl: app.util.imageUrl,
 		tabIndex: 0,
 		bannerList: [],//banner数据
 		goodsList: [],//商品列表
 		pageNumber: 1,//商品列表分页
+		searchValue: '',//搜索关键词
 	},
 	onReady: function () {
 		// 页面渲染完成
@@ -1839,7 +1842,8 @@ Page({
 			data: {
 				m: app.globalData.module_name,
 				sale_type: '',
-				page: pageNumber
+				page: pageNumber,
+				keyword: t.data.searchValue
 			},
 			method: 'get',
 			success: function (response) {
@@ -1909,6 +1913,33 @@ Page({
 				wx.stopPullDownRefresh();
 			}
 		});
+	},
+	onChange(e) {
+		this.setData({
+			searchValue: e.detail
+		});
+	},
+	//搜索
+	onSearch() {
+		if (!this.data.searchValue) {
+			wx.showToast({
+				icon: 'none',
+				title: '请输入搜索内容',
+			})
+			return
+		}
+		this.setData({
+			pageNumber: 1
+		})
+		this.getGoodsListFun(this.data.pageNumber)
+	},
+	//点击清空控件
+	onCancel() {
+		this.setData({
+			pageNumber: 1,
+			searchValue: ''
+		})
+		this.getGoodsListFun(this.data.pageNumber)
 	},
 	getboxinfo(box_id) {
 		var t = this;

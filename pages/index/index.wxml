@@ -50,6 +50,10 @@
 </view>
 
 <!-- 新的页面start -->
+<!-- 搜索 -->
+<view class="search_view" style="height:{{CustomBar}}px;">
+	<van-search value="{{ searchValue }}" background="transparent" shape="round" bind:search="onSearch" bind:clear="onCancel" bind:change="onChange" custom-class="search_wrapper" clear-icon="{{imgUrl}}close02.png" left-icon="{{imgUrl}}search.png" placeholder="请输入搜索关键词" />
+</view>
 <view class="new_pages">
 	<!-- swiper -->
 	<view class="swiper_section">

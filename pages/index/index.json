@@ -3,7 +3,8 @@
   "usingComponents": {
     "bar":"/pages/component/bar/bar",
     "loginmodal":"/pages/component/loginmodal/loginmodal",
-    "jump":"/pages/component/jump/jump"
+    "jump":"/pages/component/jump/jump",
+    "van-search": "@vant/weapp/search/index"
   },
   "enablePullDownRefresh":true
 }

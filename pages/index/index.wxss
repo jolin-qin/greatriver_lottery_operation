@@ -580,6 +580,29 @@ page {}
 	width: 100%;
 	border-radius: 30rpx 30rpx 0 0;
 	margin-top: -470rpx;
+	/* margin-top: -578rpx; */
+}
+.search_view {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 550rpx;
+	/* background: yellow; */
+	z-index: 3;
+}
+.search_wrapper {
+	width: 85%;
+	position: absolute;
+	bottom: 10rpx;
+	left: 24rpx;
+	padding: 0 !important;
+}
+.search_wrapper .van-icon__image {
+	display: block;
+	font-size: 0;
+}
+.search_wrapper .van-search__content {
+	background-color: rgba(255, 255, 255, .75) !important;
 }
 .swiper_section {
 	width: 700rpx;
@@ -608,6 +631,7 @@ page {}
 	background: #f9f9f9;
 	border-radius: 30rpx;
 	margin-top: -46rpx;
+	/* margin-top: -54rpx; */
 	position: relative;
 	z-index: 2;
 	overflow: hidden;
