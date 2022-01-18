@@ -35,6 +35,10 @@ Page({
 							title: '没有更多了',
 						})
 					} else {
+                        //积分不用带小数点了
+                        response.data.data.forEach(item => {
+                            item.integral = (Number(item.integral)).toFixed(0)
+                        })
 						t.setData({
 							dailylist: pg > 1 ? t.data.dailylist.concat(response.data.data) : response.data.data,
 							pg: t.data.pg + 1,
