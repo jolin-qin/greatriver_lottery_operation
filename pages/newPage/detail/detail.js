@@ -26,7 +26,8 @@ Page({
         memberinfo_integral: 0,
         requireIntegral: 0,//开盒需要积分
         integralRadio: true,//是否禁用积分支付
-        select_pay_type: '',//支付方式  2微信支付   1积分支付
+        select_pay_type: '',//2微信支付   1积分支付
+        commentNum: 58,//评论数
         isShake: true,//防抖
     },
 
@@ -254,6 +255,13 @@ Page({
         this.setData({
             popupType: type,
             show: true
+        })
+    },
+    //去评论页
+    goCommentPage(e) {
+        
+        wx.navigateTo({
+            url: '/pages/newPage/commentDetail/commentDetail?id=' + this.data.goodsId
         })
     },
     //转义方法

@@ -40,12 +40,20 @@
         </view>
     </view>
     <!-- 发货规则 -->
-    <view class="section_wrapper rules_wrapper flex_between">
+    <!-- <view class="section_wrapper rules_wrapper flex_between">
         <view class="flex_start">
             <text class="title">发货规则</text>
             <text class="content">需手动发货，若30天内未操作发货，系统将自动发出</text>
         </view>
         <view class="check_btn" data-type="{{1}}" bindtap="openPopup">查看</view>
+    </view> -->
+    <!-- 商品评价 -->
+    <view class="section_wrapper rules_wrapper flex_between">
+        <view class="flex_start">
+            <text class="title">商品评价</text>
+            <view class="comment_num">{{commentNum}}</view>
+        </view>
+        <view class="check_btn" bindtap="goCommentPage">查看</view>
     </view>
     <!-- 商品详情 -->
     <view class="details_wrapper">

@@ -11,6 +11,8 @@
         "pages/newPage/yushou/yushou",
         "pages/newPage/xianhuo/xianhuo",
         "pages/newPage/detail/detail",
+        "pages/newPage/commentDetail/commentDetail",
+        "pages/newPage/submitComment/submitComment",
         "pages/warehouse/warehouse",
         "pages/shop/shop",
         "pages/my/my",

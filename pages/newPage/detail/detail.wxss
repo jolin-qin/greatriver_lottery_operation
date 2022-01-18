@@ -59,11 +59,20 @@
     border-bottom: 20rpx solid #EDF1F0;
 }
 .section_wrapper .title {
-    width: 170rpx;
-    flex: 0 0 170rpx;
+    width: 150rpx;
+    flex: 0 0 150rpx;
     font-size: 32rpx;
     font-weight: 500;
     color: #000;
+}
+.section_wrapper .comment_num {
+    height: 40rpx;
+    line-height: 40rpx;
+    padding: 0 12rpx;
+    border-radius: 20rpx;
+    font-size: 24rpx;
+    background-color: #E7463E;
+    color: #fff;
 }
 .section_wrapper .check_btn {
     width: 120rpx;

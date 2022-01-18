@@ -1,138 +1,148 @@
 {
-  "setting": {},
-  "condition": {
-    "plugin": {
-      "list": []
-    },
-    "game": {
-      "list": []
-    },
-    "gamePlugin": {
-      "list": []
-    },
-    "miniprogram": {
-      "list": [
-        {
-          "name": "pages/mystar/mystar",
-          "pathName": "pages/mystar/mystar",
-          "query": "",
-          "scene": null
+    "setting": {},
+    "condition": {
+        "plugin": {
+            "list": []
         },
-        {
-          "name": "pages/warehouse/warehouse",
-          "pathName": "pages/warehouse/warehouse",
-          "query": "",
-          "scene": null
+        "game": {
+            "list": []
         },
-        {
-          "name": "pages/box/box",
-          "pathName": "pages/box/box",
-          "query": "",
-          "scene": null
+        "gamePlugin": {
+            "list": []
         },
-        {
-          "name": "pages/shop/shop",
-          "pathName": "pages/shop/shop",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/my/my",
-          "pathName": "pages/my/my",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/auth/auth",
-          "pathName": "pages/auth/auth",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/my/address/address",
-          "pathName": "pages/my/address/address",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/my/address/addaddress",
-          "pathName": "pages/my/address/addaddress",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/warehouse/applyfordelivery",
-          "pathName": "pages/warehouse/applyfordelivery",
-          "query": "id=39",
-          "scene": null
-        },
-        {
-          "name": "pages/delivery/delivery",
-          "pathName": "pages/delivery/delivery",
-          "query": "state=under_review",
-          "scene": null
-        },
-        {
-          "name": "pages/index/index",
-          "pathName": "pages/index/index",
-          "query": "sharetype=invite&uid=30",
-          "scene": null
-        },
-        {
-          "name": "pages/mystar/steal_log",
-          "pathName": "pages/mystar/steal_log",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "接收好友礼物",
-          "pathName": "pages/index/index",
-          "query": "boxid=37&senduid=48&sharetype=sendbox",
-          "scene": null
-        },
-        {
-          "name": "pages/my/dailyaccount/dailyaccount",
-          "pathName": "pages/my/dailyaccount/dailyaccount",
-          "query": "boxid=15&senduid=48&sharetype=sendbox",
-          "scene": null
-        },
-        {
-          "name": "pages/my/tixian/tixian",
-          "pathName": "pages/my/tixian/tixian",
-          "query": "boxid=15&senduid=48&sharetype=sendbox",
-          "scene": null
-        },
-        {
-          "name": "pages/my/article/article",
-          "pathName": "pages/my/article/article",
-          "query": "type=help",
-          "scene": null
-        },
-        {
-          "name": "赠送奖品",
-          "pathName": "pages/index/index",
-          "query": "sharetype=sendprize&senduid=63&prizeid=40",
-          "scene": null
-        },
-        {
-          "name": "模拟更新",
-          "pathName": "pages/index/index",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/my/fenxiao/fenxiao",
-          "pathName": "pages/my/fenxiao/fenxiao",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/my/canvas/canvas",
-          "pathName": "pages/my/canvas/canvas",
-          "query": "",
-          "scene": null
+        "miniprogram": {
+            "list": [
+                {
+                    "name": "pages/mystar/mystar",
+                    "pathName": "pages/mystar/mystar",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "pages/warehouse/warehouse",
+                    "pathName": "pages/warehouse/warehouse",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "pages/box/box",
+                    "pathName": "pages/box/box",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "pages/shop/shop",
+                    "pathName": "pages/shop/shop",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "pages/my/my",
+                    "pathName": "pages/my/my",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "pages/auth/auth",
+                    "pathName": "pages/auth/auth",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "pages/my/address/address",
+                    "pathName": "pages/my/address/address",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "pages/my/address/addaddress",
+                    "pathName": "pages/my/address/addaddress",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "pages/warehouse/applyfordelivery",
+                    "pathName": "pages/warehouse/applyfordelivery",
+                    "query": "id=39",
+                    "scene": null
+                },
+                {
+                    "name": "pages/delivery/delivery",
+                    "pathName": "pages/delivery/delivery",
+                    "query": "state=under_review",
+                    "scene": null
+                },
+                {
+                    "name": "pages/index/index",
+                    "pathName": "pages/index/index",
+                    "query": "sharetype=invite&uid=30",
+                    "scene": null
+                },
+                {
+                    "name": "pages/mystar/steal_log",
+                    "pathName": "pages/mystar/steal_log",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "接收好友礼物",
+                    "pathName": "pages/index/index",
+                    "query": "boxid=37&senduid=48&sharetype=sendbox",
+                    "scene": null
+                },
+                {
+                    "name": "pages/my/dailyaccount/dailyaccount",
+                    "pathName": "pages/my/dailyaccount/dailyaccount",
+                    "query": "boxid=15&senduid=48&sharetype=sendbox",
+                    "scene": null
+                },
+                {
+                    "name": "pages/my/tixian/tixian",
+                    "pathName": "pages/my/tixian/tixian",
+                    "query": "boxid=15&senduid=48&sharetype=sendbox",
+                    "scene": null
+                },
+                {
+                    "name": "pages/my/article/article",
+                    "pathName": "pages/my/article/article",
+                    "query": "type=help",
+                    "scene": null
+                },
+                {
+                    "name": "赠送奖品",
+                    "pathName": "pages/index/index",
+                    "query": "sharetype=sendprize&senduid=63&prizeid=40",
+                    "scene": null
+                },
+                {
+                    "name": "模拟更新",
+                    "pathName": "pages/index/index",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "pages/my/fenxiao/fenxiao",
+                    "pathName": "pages/my/fenxiao/fenxiao",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "pages/my/canvas/canvas",
+                    "pathName": "pages/my/canvas/canvas",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "全部评论",
+                    "pathName": "pages/newPage/commentDetail/commentDetail",
+                    "query": "",
+                    "scene": null,
+                    "partialCompile": {
+                        "enabled": true,
+                        "pages": []
+                    }
+                }
+            ]
         }
-      ]
     }
-  }
 }
