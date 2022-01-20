@@ -1,2 +1,20 @@
-<!--pages/newPage/submitComment/submitComment.wxml-->
-<text>pages/newPage/submitComment/submitComment.wxml</text>
+<view>
+    <view class="goods_infor flex_start">
+        <image class="img" src="/resource/images/box.jpg" mode="scaleToFill"></image>
+        <view class="goods_name">咩咩咩咩咩咩咩咩咩咩咩咩咩咩咩咩咩咩咩咩咩咩咩咩</view>
+    </view>
+    <view class="comment_content">
+        <van-field
+            value="{{ message }}"
+            type="textarea"
+            placeholder="请输入商品质量、使用效果、特点等评价..."
+            autosize
+            maxlength="{{100}}"
+            show-word-limit="{{true}}"
+            clearable="{{true}}"
+            bind:change="onChange"
+        />
+    </view>
+    <!-- 提交按钮 -->
+    <button class="submit_btn" disabled="{{disable}}">提交评论</button>
+</view>

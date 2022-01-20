@@ -5,7 +5,8 @@ Page({
      * 页面的初始数据
      */
     data: {
-
+        message: '',
+        disable: true
     },
 
     /**
@@ -28,7 +29,23 @@ Page({
     onShow: function () {
 
     },
-
+    onChange(event) {
+        // event.detail 为当前输入的值
+        console.log(event.detail);
+        this.setData({
+            message: event.detail
+        })
+        //判断是否为空
+        if (this.data.message.length) {
+            this.setData({
+                disable: false
+            })
+        } else {
+            this.setData({
+                disable: true
+            })
+        }
+    },
     /**
      * 生命周期函数--监听页面隐藏
      */

@@ -133,8 +133,8 @@
                     "scene": null
                 },
                 {
-                    "name": "全部评论",
-                    "pathName": "pages/newPage/commentDetail/commentDetail",
+                    "name": "提交评论",
+                    "pathName": "pages/newPage/submitComment/submitComment",
                     "query": "",
                     "scene": null,
                     "partialCompile": {
