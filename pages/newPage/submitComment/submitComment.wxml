@@ -15,6 +15,20 @@
             bind:change="onChange"
         />
     </view>
+    <!-- 上传图片 -->
+    <view class="section example">
+        <!-- <view class="title">上传与商家合影照片</view> -->
+        <!-- copy的上传图片代码 -->
+        <view class="upload flex-start">
+			<view class="uploadList" wx:for="{{uploaderList}}" wx:key="index">
+				<image class="image" bindtap="showImg" data-url="{{item.imgUrl}}" data-index="{{index}}" src='{{item.imgUrl}}'></image>
+                <view class="deteimg" wx:if="{{showPopup}}" bindtap="detelImg" data-index="{{index}}">X</view>
+			</view>
+			<view class="choseimg" wx:if="{{showUpload}}" bindtap="uploadChooseImage">
+                <image class="add_icon" src='/resource/icon/add02.png'></image>
+            </view>
+        </view>
+    </view>
     <!-- 提交按钮 -->
     <button class="submit_btn" disabled="{{disable}}">提交评论</button>
 </view>
