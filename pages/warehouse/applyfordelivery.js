@@ -5,7 +5,7 @@ Page({
 	 * 页面的初始数据
 	 */
 	data: {
-		prize: [],
+		prize: {},
 		useraddress: {},
 		member_prize_id: 0,
 		modal: false,
@@ -504,7 +504,13 @@ Page({
 			}
 		})
 	},
-
+	//去提交评论
+	goCommentPage() {
+		let pic = this.data.prize.prize.prize_pic,name = this.data.prize.prize.prize_title,prizeId = this.data.prize.prize.id;
+		wx.navigateTo({
+			url: '/pages/newPage/submitComment/submitComment?pic='+pic+'&name='+name+'&id='+prizeId
+		})
+	},
 	/**
 	 * 页面相关事件处理函数--监听用户下拉动作
 	 */

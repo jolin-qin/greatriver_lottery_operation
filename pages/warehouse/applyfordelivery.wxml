@@ -9,9 +9,7 @@
 			style="display:flex;margin-top:20rpx;align-items:center;padding:0 0 30rpx 0;border-bottom:2rpx solid #f7f7f7">
 			<view class="bg-gradual-orange"
 				style="padding:10rpx;border-radius:30rpx;min-width:180rpx;height:180rpx;overflow:hidden">
-				<image src="{{prize.prize.prize_pic}}" style="border-radius:20rpx;width:100%;height:100%;"
-					mode="aspectFill">
-				</image>
+				<image src="{{prize.prize.prize_pic}}" style="border-radius:20rpx;width:100%;height:100%;"mode="aspectFill"></image>
 			</view>
 			<view style="margin-left:20rpx;">
 				<view
@@ -57,28 +55,42 @@
 						{{prize.prize.prize_type==1?'实物':''}}{{prize.prize.prize_type==2?'虚拟物品':''}}{{prize.prize.prize_type==3?'卡密':''}}{{prize.prize.prize_type==4?'现金红包':''}}{{prize.prize.prize_type==5?'跳转领取':''}}
 					</view>
 				</view>
-				<view wx:if="{{!(prize.order && prize.order.type === '4')}}" style="display:flex;justify-content:space-between;padding: 16rpx 0;">
-					<view>物品来源</view>
-					<view>{{prize.prize_source}}</view>
-				</view>
-				<view wx:if="{{!(prize.order && prize.order.type === '4')}}" style="display:flex;justify-content:space-between;padding: 16rpx 0;">
-					<view>抽中者</view>
-					<view>{{prize.prize_first_owner.nickname}}</view>
-				</view>
-				<view wx:if="{{!(prize.order && prize.order.type === '4')}}" style="display:flex;justify-content:space-between;padding: 16rpx 0;">
-					<view>抽中时间</view>
-					<view>{{prize.prize_first_time}}</view>
-				</view>
-				<view wx:if="{{!(prize.order && prize.order.type === '4')}}" style="display:flex;justify-content:space-between;padding: 16rpx 0;">
-					<view>回收价格</view>
-					<view class="text-price">{{prize.prize.prize_fragment.prizes_fragments_recovery_price}}</view>
-				</view>
+				<block wx:if="{{!(prize.order && prize.order.type === '4')}}">
+					<view style="display:flex;justify-content:space-between;padding: 16rpx 0;">
+						<view>物品来源</view>
+						<view>{{prize.prize_source}}</view>
+					</view>
+					<view style="display:flex;justify-content:space-between;padding: 16rpx 0;">
+						<view>抽中者</view>
+						<view>{{prize.prize_first_owner.nickname}}</view>
+					</view>
+					<view style="display:flex;justify-content:space-between;padding: 16rpx 0;">
+						<view>抽中时间</view>
+						<view>{{prize.prize_first_time}}</view>
+					</view>
+					<view style="display:flex;justify-content:space-between;padding: 16rpx 0;">
+						<view>回收价格</view>
+						<view class="text-price">{{prize.prize.prize_fragment.prizes_fragments_recovery_price}}</view>
+					</view>
+				</block>
+				
 				<view style="display:flex;justify-content:space-between;padding: 16rpx 0;">
 					<view>物品状态</view>
 					<!-- <view class="text-bold" wx:if="{{prize.prize.prize_state!=='0'}}"></view> -->
 					<view class="text-bold" wx:if="{{0 > prize.prize.prize_state}}"></view>
 					<view class="text-bold" wx:else>
-						{{prize.prize_first_state==0?'未申请发货':''}}{{prize.prize_first_state==1?'发货审核中':''}}{{prize.prize_first_state==2?'已发货':''}}{{prize.prize_first_state==3?'已回收':''}}{{prize.prize_first_state==4?'已收货':''}}{{prize.prize_first_state==5?'等待平台发货':''}}{{prize.prize_first_state==-1?'已失效2':''}}{{prize.prize_first_state==6?'已审核待支付运费':''}}{{prize.prize_first_state==7?'已审核待领取':''}}{{prize.prize_first_state==-2?'发货申请已被驳回':''}}
+						<text wx:if="{{prize.prize_first_state===0}}">未申请发货</text>
+						<text wx:elif="{{prize.prize_first_state===1}}">发货审核中</text>
+						<text wx:elif="{{prize.prize_first_state===2}}">已发货</text>
+						<text wx:elif="{{prize.prize_first_state===3}}">已回收</text>
+						<text wx:elif="{{prize.prize_first_state===4}}">已收货</text>
+						<text wx:elif="{{prize.prize_first_state===5}}">等待平台发货</text>
+						<text wx:elif="{{prize.prize_first_state===6}}">已审核待支付运费</text>
+						<text wx:elif="{{prize.prize_first_state===7}}">已审核待领取</text>
+						<text wx:elif="{{prize.prize_first_state===-1}}">已失效2</text>
+						<text wx:elif="{{prize.prize_first_state===-2}}">发货申请已被驳回</text>
+						<text wx:else></text>
+						<!-- {{prize.prize_first_state==0?'未申请发货':''}}{{prize.prize_first_state==1?'发货审核中':''}}{{prize.prize_first_state==2?'已发货':''}}{{prize.prize_first_state==3?'已回收':''}}{{prize.prize_first_state==4?'已收货':''}}{{prize.prize_first_state==5?'等待平台发货':''}}{{prize.prize_first_state==-1?'已失效2':''}}{{prize.prize_first_state==6?'已审核待支付运费':''}}{{prize.prize_first_state==7?'已审核待领取':''}}{{prize.prize_first_state==-2?'发货申请已被驳回':''}} -->
 					</view>
 				</view>
 				<view wx:if="{{prize.prize.need_audit_deliver==0}}" style="display:flex;justify-content:space-between;">
@@ -114,14 +126,22 @@
 					bindgetphonenumber="getPhoneNumber" class="{{openthebox_animation4}} cu-btn round button-hover"
 					style="margin-left:20rpx;height:50rpx;padding:0 20rpx;font-size:25rpx;font-weight:700;background:#fff;border:2rpx solid orange">{{prize.prize_first_state==7?'立即领取':prize.prize_first_state==6?'立即发货':prize.prize_first_state==-2?'重新申请发货':'申请发货'}}</button>
 			</block>
-			<button wx:else class="{{openthebox_animation4}} cu-btn round button-hover"
-				style="margin-left:20rpx;height:50rpx;padding:0 20rpx;font-size:25rpx;font-weight:700;background:#fff;border:2rpx solid #eee">
+
+
+			<block wx:else>
 				<block wx:if="{{prize.prize.prize_state >= 0}}">
-					{{prize.prize_first_state==1?'发货审核中':''}}{{prize.prize_first_state==2?'已发货':''}}{{prize.prize_first_state==3?'已回收':''}}{{prize.prize_first_state==4?'已收货':''}}{{prize.prize_first_state==5?'等待平台发货':''}}{{prize.prize_first_state==-1?'已失效':''}}{{prize.prize_first_state==-2?'发货申请被驳回':''}}
+					<button wx:if="{{prize.prize_first_state==1}}" class="{{openthebox_animation4}} cu-btn round button-hover operation_btn">发货审核中</button>
+					<button wx:elif="{{prize.prize_first_state==2}}" class="{{openthebox_animation4}} cu-btn round button-hover operation_btn">已发货</button>
+					<button wx:elif="{{prize.prize_first_state==3}}" class="{{openthebox_animation4}} cu-btn round button-hover operation_btn">已回收</button>
+					<button wx:elif="{{prize.prize_first_state==4}}" bindtap="goCommentPage" class="{{openthebox_animation4}} cu-btn round button-hover operation_btn">去评论</button>
+					<button wx:elif="{{prize.prize_first_state==5}}" class="{{openthebox_animation4}} cu-btn round button-hover operation_btn">等待平台发货</button>
+					<button wx:elif="{{prize.prize_first_state==-1}}" class="{{openthebox_animation4}} cu-btn round button-hover operation_btn">已失效</button>
+					<button wx:elif="{{prize.prize_first_state==-2}}" class="{{openthebox_animation4}} cu-btn round button-hover operation_btn">发货申请被驳回</button>
+					<view wx:else></view>
+					<!-- {{prize.prize_first_state==1?'发货审核中':''}}{{prize.prize_first_state==2?'已发货':''}}{{prize.prize_first_state==3?'已回收':''}}{{prize.prize_first_state==4?'已收货':''}}{{prize.prize_first_state==5?'等待平台发货':''}}{{prize.prize_first_state==-1?'已失效':''}}{{prize.prize_first_state==-2?'发货申请被驳回':''}} -->
 				</block>
-				<block wx:else>{{'已失效'}}</block>
-				<!-- <block wx:else>{{prize.prize.prize_state?'已失效':''}}</block> -->
-			</button>
+				<button wx:else class="{{openthebox_animation4}} cu-btn round button-hover operation_btn">已失效</button>
+			</block>
 		</view>
 	</view>
 </view>

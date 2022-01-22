@@ -14,7 +14,7 @@
         </view>
     </view>
     <block>
-        <van-loading custom-class="loading" wx:if="{{true}}" type="spinner" />
+        <van-loading custom-class="loading" wx:if="{{isScroll}}" type="spinner" />
         <view class="noMore" wx:else>~已无更多评论了~</view>
     </block>
 </view>

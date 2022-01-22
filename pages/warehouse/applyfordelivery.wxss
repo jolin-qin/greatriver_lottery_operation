@@ -13,3 +13,12 @@
     display: block;
     height: auto;
 }
+.operation_btn {
+    margin-left:20rpx;
+    height:50rpx;
+    padding:0 20rpx;
+    font-size:26rpx;
+    font-weight:700;
+    background:#fff;
+    border:2rpx solid #eee;
+}
