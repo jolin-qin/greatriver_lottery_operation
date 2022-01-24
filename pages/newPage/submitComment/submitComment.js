@@ -13,7 +13,22 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-
+        setTimeout(() => {
+            console.log("3")
+        }, 0)
+        new Promise((resolve, reject) => {
+            console.log("1")
+            resolve()
+        }).then(() => {
+            console.log("2")
+        })
+        new Promise((resolve, reject) => {
+            console.log("5")
+            resolve()
+        }).then(() => {
+            console.log("6")
+        })
+        console.log("4")
     },
 
     /**

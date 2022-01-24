@@ -1,7 +1,7 @@
 <view>
     <view class="goods_infor flex_start">
         <image class="img" src="/resource/images/box.jpg" mode="scaleToFill"></image>
-        <view class="goods_name">咩咩咩咩咩咩咩咩咩咩咩咩咩咩咩咩咩咩咩咩咩咩咩咩</view>
+        <view class="goods_name">咩咩咩咩咩咩</view>
     </view>
     <view class="comment_content">
         <van-field
