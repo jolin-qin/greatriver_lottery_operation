@@ -9,6 +9,7 @@ App({
                 this.globalData.CustomBar = custom.bottom + custom.top - e.statusBarHeight;
             }
         })
+        
     },
     onShow: function (res) {},
     onHide: function () {},

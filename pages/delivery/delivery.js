@@ -18,25 +18,25 @@ Page({
 		var t = this;
 		if (options.state == 'under_review') {
 			t.setData({
-				'page_title': '待审核'
+				page_title: '待审核'
 			})
 		}
 		if (options.state == 'waiting_for_delivery') {
 			t.setData({
-				'page_title': '待发货'
+				page_title: '待发货'
 			})
 
 		}
 		if (options.state == 'completed_delivery') {
 			t.setData({
-				'page_title': '已审核'
+				page_title: '已审核'
 			})
 
 		}
 
 		if (options.state == 'waiting_for_receive') {
 			t.setData({
-				'page_title': '待收货'
+				page_title: '待收货'
 			})
 
 		}
@@ -59,7 +59,7 @@ Page({
 				},
 				method: 'get',
 				success: function (response) {
-					console.log('getintegral', response.data);
+					console.log('订单列表：', response.data);
 					if (response.data.errno == 0) {
 						var aa = []
 

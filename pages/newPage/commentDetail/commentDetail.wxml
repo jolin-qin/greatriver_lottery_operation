@@ -1,20 +1,18 @@
 <view class="comment_wrapper">
     <!-- <image class="good_img" src="/resource/images/box.jpg" mode="aspectFill"></image> -->
-    <view class="comment_item">
+    <view class="comment_item" wx:for="{{commentList}}" wx:key="index">
         <view class="user_infor flex_start">
-            <image class="user_img" src="/resource/images/box.jpg" mode="scaleToFill"></image>
-            <view class="nick_name">微信昵称微信昵称</view>
-            <view class="comment_time">2022/1/18 20:20:20</view>
+            <image class="user_img" src="{{item.user.avatar}}" mode="scaleToFill"></image>
+            <view class="nick_name">{{item.user.nickname}}</view>
+            <view class="comment_time">{{item.time}}</view>
         </view>
-        <view class="comment_content">这潮玩性价比是真的高，大赞XXXXXXXXXXX</view>
+        <view class="comment_content">{{item.content}}</view>
         <view class="comment_picture flex_start">
-            <image class="img" src="/resource/images/box.jpg" mode="aspectFill"></image>
-            <image class="img" src="/resource/images/box.jpg" mode="aspectFill"></image>
-            <image class="img" src="/resource/images/lingqu.jpg" mode="aspectFill"></image>
+            <image wx:for="{{item.img}}" wx:for-item="sonitem" wx:for-key="i" class="img" src="/resource/images/box.jpg" mode="aspectFill"></image>
         </view>
     </view>
     <block>
-        <van-loading custom-class="loading" wx:if="{{true}}" type="spinner" />
+        <van-loading custom-class="loading" wx:if="{{isScroll}}" type="spinner" />
         <view class="noMore" wx:else>~已无更多评论了~</view>
     </block>
 </view>

@@ -109,6 +109,7 @@ function getSign(url, data, token) {
 	var _ = require('underscore.js');
 	var md5 = require('md5.js');
 	var querystring = '';
+	// console.log("此刻的url是：", url)
 	var sign = getUrlParam(url, 'sign');
 	if (sign || (data && data.sign)) {
 		return false;
@@ -303,6 +304,24 @@ util.request = function (option) {
 			}
 		}
 	});
+}
+//专门为了上传图片拼接url的方法
+util.joinurl = function(url) {
+	let app = getApp()
+	let sessionid = wx.getStorageSync('userInfo').sessionid;
+	let newurl = util.url(url);//给url变成“c=xxx&a=xxx&do=xxx”
+	//看拼凑的url中有无state参数，没有把state加上
+	if (sessionid) {
+		newurl = newurl + 'state=we7sid-' + sessionid
+	}
+	//拼接"m="
+	newurl = newurl + '&m=' + app.globalData.module_name
+	//获取请求地址'？'后的所有参数，排序、去重，加token用md5加密生成sign
+	var sign = getSign(newurl);
+	if (sign) {
+		newurl = newurl + "&sign=" + sign;
+	}
+	return newurl
 }
 /*
  * 获取用户信息

@@ -259,7 +259,6 @@ Page({
     },
     //去评论页
     goCommentPage(e) {
-        
         wx.navigateTo({
             url: '/pages/newPage/commentDetail/commentDetail?id=' + this.data.goodsId
         })

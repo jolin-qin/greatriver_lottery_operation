@@ -35,3 +35,56 @@ page {
 .submit_btn::after {
     border: none !important;
 }
+/* 上传图片 */
+.section {
+    width: 700rpx;
+    margin: 20rpx auto;
+    background: #fff;
+    padding: 24rpx;
+    border-radius: 20rpx;
+}
+.upload {
+	margin-top: 40rpx;
+    width: 100%;
+    flex-wrap: wrap;
+}
+.upload .uploadList {
+	width: 160rpx;
+	height: 160rpx;
+	margin-right: 30rpx;
+    position: relative;
+    border-radius: 12rpx;
+}
+.upload .uploadList .image {
+	width:100%;
+    height:100%;
+    border-radius: 12rpx;
+}
+.upload .uploadList .deteimg{
+	position: absolute;
+	width: 40rpx;
+    height: 40rpx;
+    line-height: 40rpx;
+    text-align: center;
+	top:-20rpx;
+    right:-20rpx;
+    background: #ccc;
+    border-radius: 50%;
+    color: #999;
+	z-index: 8;
+}
+.upload .choseimg {
+	width: 160rpx;
+	height: 160rpx;
+    border: 4rpx solid #C2C1C1;
+    border-radius: 16rpx;
+	position: relative;
+}
+.upload .choseimg .add_icon {
+    display: block;
+	width: 80rpx;
+	height: 80rpx;
+    margin-top: 38rpx;
+    margin-left: 38rpx;
+}
+/* end */
