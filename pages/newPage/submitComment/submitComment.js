@@ -11,13 +11,22 @@ Page({
         disable: true,
         uploaderList: [],
         showUpload: true,
+        goodsImg: '',
+        goodsName: '',
+        goodId: '',
+        imgs: [],//上传图片的id数组
+        isShake: true,//防抖
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-
+        this.setData({
+            goodsImg: options.pic,
+            goodsName: options.name,
+            goodId: options.id
+        })
     },
 
     /**
@@ -51,32 +60,10 @@ Page({
         }
     },
     //上传图片
-    random_string(len) {
-        len = len || 32;
-        var chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678';
-        var maxPos = chars.length;
-        var pwd = '';
-        for (var i = 0; i < len; i++) {
-            pwd += chars.charAt(Math.floor(Math.random() * maxPos));
-        }
-        return pwd;
-    },
-    get_suffix(filename) {
-        var pos = filename.lastIndexOf('.');
-        var suffix = '';
-        if (pos != -1) {
-            suffix = filename.substring(pos);
-        }
-        return suffix;
-    },
-    calculate_object_name(filename) {
-        return this.random_string(16) + this.get_suffix(filename);
-    },
-    //上传图片
     uploadChooseImage: function() {
 		let self = this
 		wx.chooseImage({
-			count: 9,
+			count: 3,
 			sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
 			sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
 			success: function(res) {
@@ -85,70 +72,71 @@ Page({
 					title: '上传中',
 					mask: true
                 })
-                console.log("res:", res.tempFilePaths) //图片本地路径数组
+                let showImgs = self.data.uploaderList.concat(res.tempFilePaths)
+                if (showImgs.length > 3) {
+                    wx.hideLoading()
+                    wx.showToast({
+                        icon: 'none',
+                        title: '最多上传3张评论图片',
+                        duration: 2000
+                    })
+                    return false
+                }
                 let length = res.tempFilePaths.length,index = 0;
+                //大于三条隐藏"+"号
+                if (length >= 3) {
+                    self.setData({
+                        showUpload: false
+                    })
+                }
+                self.setData({
+                    uploaderList: showImgs
+                })
+                console.log("res:", res.tempFilePaths) //图片本地路径数组
                 self.signatureAndUpload(res.tempFilePaths, length, 0)
-                
 			},
 		})
     },
-    // 签名上传阿里云
+    
     signatureAndUpload(arr, length, index) {
         var that = this;
         if (index < length) {
             var tempPath = arr[index]
             // 多选的话需要循环上传了
-            var dir = 'punchImg/'
-            var fileName = that.calculate_object_name(tempPath) //加密解析本地图片名称
-            const aliyunFileKey = dir + fileName; //保存图片的文件后缀名
-            //发起后端请求签名
-            wx.request({
-                url: API.mpUploadOssHelper,
-                data: {
-                    dir: dir
-                },
-                success: function(res) {
-                    console.log('签名', res.data)
-                    if (res.data.code == '200') {
-                        let post = res.data.data; //需要的参数都在这里面
-                        wx.uploadFile({
-                            url: post.ossUrl, //开发者服务地址
-                            filePath: tempPath,
-                            name: 'file',
-                            formData: {
-                                'name': tempPath,
-                                'key': aliyunFileKey,
-                                'OSSAccessKeyId': post.OSSAccessKeyId,
-                                'policy': post.policy,
-                                'signature': post.signature,
-                                'success_action_status': '200'
-                            },
-                            success: function(res) {
-                                console.log("阿里云", res.statusCode)
-                                if (res.statusCode == 200) {
-                                    let showUrl = post.ossUrl + '/' + aliyunFileKey
-                                    let uploaderFile = that.data.uploaderList.concat({imgUrl: showUrl});
-                                    //大于三条隐藏"+"号
-                                    if (uploaderFile.length == 9) {
-                                        that.setData({
-                                            showUpload: false
-                                        })
-                                    }
-                                    that.setData({
-                                        uploaderList: uploaderFile
-                                    })
-                                    //递归调用
-                                    that.signatureAndUpload(arr, length, index+1)			
-                                } else {
-                                    common.Toast("上传失败！")
-                                }
-                            },
-                            fail: function(err) {
-                                console.log(err)
-                                common.Toast("上传失败！")
-                            }
+            let url = app.util.joinurl("entry/wxapp/upload_img")
+            console.log("上传url:", url)
+            wx.uploadFile({
+                url: url, //上传图片地址
+                filePath: tempPath,
+                name: 'file',
+                formData: {},
+                success(res) {
+                    console.log("上传图片返回值：", res)
+                    if (res.statusCode === 200) {
+                        //提交图片的ids
+                        let result = JSON.parse(res.data),imgId = result.data.id;
+
+                        let idArr = that.data.imgs.concat(imgId);
+                        that.setData({
+                            imgs: idArr
+                        })
+                        console.log("imgs:", idArr)
+                        //递归调用
+                        that.signatureAndUpload(arr, length, index+1)	
+                    } else {
+                        wx.showToast({
+                            title: '上传失败！',
+                            icon: 'none',
+                            duration: 2000
                         })
                     }
+                },
+                fail: function(err) {
+                    wx.showToast({
+                        title: '上传失败！',
+                        icon: 'none',
+                        duration: 2000
+                    })
                 }
             })
         } else {
@@ -175,6 +163,45 @@ Page({
 			current: url, // 当前显示图片的http链接
 			urls: [url] // 需要预览的图片http链接列表
 		})
+    },
+    //提交评论
+    submitComment() {
+        let self = this
+        if (this.data.isShake) {
+            this.setData({ isShake: false })
+            app.util.request({
+				url: 'entry/wxapp/set_comment',
+				data: {
+                    m: app.globalData.module_name,
+                    content: self.data.message,
+                    img: JSON.stringify(self.data.imgs),
+                    prize_id: self.data.goodId
+				},
+				method: 'post',
+				success: function (response) {
+					console.log('评论返回：', response.data);
+					if (response.data.errno == 0) {
+						wx.redirectTo({
+                            url: '/pages/delivery/delivery?state=completed',
+                        })
+					} else {
+						//失败
+						wx.showToast({
+							icon: 'none',
+							title: response.data.message,
+						})
+                        self.setData({ isShake: true })
+					}
+				},
+				fail: function (response) {
+                    self.setData({ isShake: true })
+					wx.showToast({
+						icon: 'none',
+						title: response.data.message,
+					})
+				}
+			});
+        }
     },
     /**
      * 生命周期函数--监听页面隐藏
