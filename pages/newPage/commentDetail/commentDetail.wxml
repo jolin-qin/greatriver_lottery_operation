@@ -8,7 +8,17 @@
         </view>
         <view class="comment_content">{{item.content}}</view>
         <view class="comment_picture flex_start">
-            <image wx:for="{{item.img}}" wx:for-item="sonitem" wx:for-key="i" class="img" src="/resource/images/box.jpg" mode="aspectFill"></image>
+            <image wx:for="{{item.img}}" wx:for-item="sonitem" wx:for-index="i" wx:key="i" class="img" src="{{sonitem.thumb}}" mode="aspectFill"></image>
+        </view>
+        <!-- 商家回复 -->
+        <view wx:if="{{item.reply.length}}" class="reply">{{item.reply[0].content}}</view>
+        <!-- 点赞 -->
+        <view class="give_like flex_end" bindtap="clickZan" data-index="{{index}}" data-id="{{item.id}}">
+            <block>
+                <image wx:if="{{!item.isClick}}" class="zan_img" src="/resource/icon/zan_01.png" mode="scaleToFill"></image>
+                <image wx:else class="zan_img" src="/resource/icon/zan_02.png" mode="scaleToFill"></image>
+            </block>
+            <view class="zan_number {{item.isClick ? 'active' : ''}}">{{item.like}}</view>
         </view>
     </view>
     <block>

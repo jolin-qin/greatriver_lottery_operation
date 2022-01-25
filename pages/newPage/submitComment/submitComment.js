@@ -174,16 +174,23 @@ Page({
 				data: {
                     m: app.globalData.module_name,
                     content: self.data.message,
-                    img: JSON.stringify(self.data.imgs),
+                    img: self.data.imgs.join(),
                     prize_id: self.data.goodId
 				},
 				method: 'post',
 				success: function (response) {
 					console.log('评论返回：', response.data);
 					if (response.data.errno == 0) {
-						wx.redirectTo({
-                            url: '/pages/delivery/delivery?state=completed',
+                        wx.showToast({
+                            title: '评论成功',
+                            icon: 'success',
+                            duration: 1200
                         })
+                        setTimeout(() => {
+                            wx.redirectTo({
+                                url: '/pages/delivery/delivery?state=completed',
+                            })
+                        }, 1200)
 					} else {
 						//失败
 						wx.showToast({

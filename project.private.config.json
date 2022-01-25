@@ -141,6 +141,16 @@
                         "enabled": true,
                         "pages": []
                     }
+                },
+                {
+                    "name": "pages/newPage/commentDetail/commentDetail",
+                    "pathName": "pages/newPage/commentDetail/commentDetail",
+                    "query": "",
+                    "scene": null,
+                    "partialCompile": {
+                        "enabled": true,
+                        "pages": []
+                    }
                 }
             ]
         }
