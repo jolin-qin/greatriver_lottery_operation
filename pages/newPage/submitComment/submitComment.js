@@ -14,6 +14,7 @@ Page({
         goodsImg: '',
         goodsName: '',
         goodId: '',
+        orderId: '',
         imgs: [],//上传图片的id数组
         isShake: true,//防抖
     },
@@ -25,7 +26,8 @@ Page({
         this.setData({
             goodsImg: options.pic,
             goodsName: options.name,
-            goodId: options.id
+            goodId: options.id,
+            orderId: options.orderid
         })
     },
 
@@ -175,7 +177,8 @@ Page({
                     m: app.globalData.module_name,
                     content: self.data.message,
                     img: self.data.imgs.join(),
-                    prize_id: self.data.goodId
+                    prize_id: self.data.goodId,
+                    order_id: self.data.orderId
 				},
 				method: 'post',
 				success: function (response) {

@@ -37,6 +37,7 @@ Page({
         integralRadio: true,//是否禁用积分支付
         select_pay_type: '',//支付方式  2微信支付   1积分支付
         isShake: true,//防抖
+        showTime: 0,//显示时间
     },
 
     /**
@@ -105,7 +106,9 @@ Page({
                         goodsList: arr,
                         select_pay_type: type,
 						remainNum: shengyu > 0 ? shengyu : 0
-					})
+                    })
+                    //控制每个显示时间
+                    t.addTime(arr.length)
 				} else {
 					//失败
 					wx.showToast({
@@ -121,6 +124,17 @@ Page({
 				})
 			}
 		});
+    },
+    addTime(len) {
+        setTimeout(() => {
+            this.setData({
+                showTime: this.data.showTime + 1
+            })
+            console.log("showTime：", this.data.showTime)
+            if (len >= this.data.showTime) {
+                this.addTime(len)
+            }
+        }, 100)
     },
     //获取可用积分
     getAvailableIntegral() {

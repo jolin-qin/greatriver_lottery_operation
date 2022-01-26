@@ -1,26 +1,26 @@
 <!-- 新的页面start -->
-<view>
+<view class="beijing">
 	<view class="show_wrapper">
-		<image class="img" src="{{imgUrl}}JCshang_01.png" mode="widthFix"></image>
-		<image class="left_img" src="{{imgUrl}}JCshang_03.png" mode="widthFix"></image>
-		<image class="right_img" src="{{imgUrl}}JCshang_04.png" mode="widthFix"></image>
 		<view class="middle_area">
-			<image class="title_img" src="{{imgUrl}}JCshang_05.png" mode="scaleToFill"></image>
 			<view wx:if="{{boxObj.last_prize_cover}}" class="series_img" data-url="{{projecturl + boxObj.last_prize_cover}}" bindtap="viewBigPic_1">
 				<image src="{{projecturl + boxObj.last_prize_cover}}" class="img {{!remainNum ? 'active' : ''}}" mode="aspectFill"></image>
 				<image wx:if="{{!remainNum}}" class="yi_chou_wan" src="/resource/icon/soldout.png" mode="scaleToFill"></image>
 			</view>
-			<image class="big_img" src="{{imgUrl}}JCshang_02.png" mode="widthFix"></image>
+			<!-- 盖在系列图片上view -->
+			<view class="series_gai">
+				<image class="height" src="{{imgUrl}}JCshang_16.png" mode="scaleToFill"></image>
+			</view>
+			
 			<!-- 九宫格 -->
 			<view class="sudoku">
-				<view class="sudoku_item" wx:for="{{goodsList}}" wx:key="index" data-all="{{goodsList}}" data-index="{{index}}" bindtap="viewBigPic">
+				<view class="sudoku_item {{showTime > index ? 'active' : ''}}" wx:for="{{goodsList}}" wx:key="index" data-all="{{goodsList}}" data-index="{{index}}" bindtap="viewBigPic">
 					<image wx:if="{{item.prize_pic}}" class="goods_img {{0 >= item.num ? 'gray' : ''}}" src="{{item.prize_pic}}" mode="scaleToFill"></image>
 					<image wx:if="{{0 >= item.num}}" class="sold_out" src="/resource/icon/soldout.png" mode="scaleToFill"></image>
 				</view>
 			</view>
+			<!-- 特效 -->
 		</view>
 		<!-- 投影 -->
-		<image class="touying" src="{{imgUrl}}JCshang_14.png" mode="scaleToFill"></image>
 		<view class="prompt">尊敬的用户：您所购买的JC明信片将随机附赠上列赠品</view>
 		<view class="residue_num">剩余盲盒：{{remainNum}}</view>
 	</view>

@@ -506,9 +506,9 @@ Page({
 	},
 	//去提交评论
 	goCommentPage() {
-		let pic = this.data.prize.prize.prize_pic,name = this.data.prize.prize.prize_title,prizeId = this.data.prize.prize.id;
+		let pic = this.data.prize.prize.prize_pic,name = this.data.prize.prize.prize_title,prizeId = this.data.prize.prize.id,orderId = this.data.prize.order.order_id;
 		wx.navigateTo({
-			url: '/pages/newPage/submitComment/submitComment?pic='+pic+'&name='+name+'&id='+prizeId
+			url: '/pages/newPage/submitComment/submitComment?pic='+pic+'&name='+name+'&id='+prizeId+'&orderid='+orderId
 		})
 	},
 	/**
