@@ -65,6 +65,10 @@
     font-weight: 500;
     color: #000;
 }
+.section_wrapper .title_new {
+    width: 74rpx;
+    flex: 0 0 74rpx;
+}
 .section_wrapper .comment_num {
     height: 40rpx;
     line-height: 40rpx;

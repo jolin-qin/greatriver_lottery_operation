@@ -10,7 +10,6 @@ Page({
         projecturl: app.util.projectUrl,
         boxId: '',//盒子Id
         myLevel: '',//我的等级
-        
 		boxObj: {},
 		goodsList: [],//盒子里商品种类数
 		remainNum: 0,//剩余数量
@@ -38,6 +37,12 @@ Page({
         select_pay_type: '',//支付方式  2微信支付   1积分支付
         isShake: true,//防抖
         showTime: 0,//显示时间
+        animationPopup: true,//支付完抽奖动画弹窗
+        // 轮播的参数
+        isAuto: false,
+        intervalTime: 250,
+        huandongTime: 200,
+        zhongjiangindex: 3,
     },
 
     /**
@@ -408,6 +413,7 @@ Page({
             allPrizePopupShow: false
         });
     },
+    
     //radio-group改变
 	payradioChange(e) {
         console.log(e);
@@ -625,6 +631,15 @@ Page({
 			current: all[index].prize_pic, // 当前显示图片的http链接
 			urls: arr // 需要预览的图片http链接列表
 		})
+    },
+    //swiper切换
+    handleChange(e) {
+        console.log("currentIndex:"+e.detail.current + "time:" + new Date().getTime())
+        if (this.data.isAuto) {
+            this.setData({
+                currentIndex: e.detail.current
+            })
+        }
     },
     /**
      * 生命周期函数--监听页面隐藏

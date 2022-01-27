@@ -133,9 +133,9 @@
                     "scene": null
                 },
                 {
-                    "name": "提交评论",
-                    "pathName": "pages/newPage/submitComment/submitComment",
-                    "query": "",
+                    "name": "JC赏",
+                    "pathName": "pages/newPage/JCshang/JCshang",
+                    "query": "id=158",
                     "scene": null,
                     "partialCompile": {
                         "enabled": true,

@@ -50,10 +50,10 @@
     <!-- 商品评价 -->
     <view class="section_wrapper rules_wrapper flex_between">
         <view class="flex_start">
-            <text class="title">商品评价</text>
+            <text class="title title_new">评价</text>
             <view class="comment_num">{{commentNum}}</view>
         </view>
-        <view class="check_btn" bindtap="goCommentPage">查看</view>
+        <view wx:if="{{commentNum}}" class="check_btn" bindtap="goCommentPage">查看</view>
     </view>
     <!-- 商品详情 -->
     <view class="details_wrapper">

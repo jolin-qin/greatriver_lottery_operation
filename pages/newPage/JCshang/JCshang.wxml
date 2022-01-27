@@ -18,34 +18,20 @@
 					<image wx:if="{{0 >= item.num}}" class="sold_out" src="/resource/icon/soldout.png" mode="scaleToFill"></image>
 				</view>
 			</view>
-			<!-- 特效 -->
 		</view>
-		<!-- 投影 -->
-		<view class="prompt">尊敬的用户：您所购买的JC明信片将随机附赠上列赠品</view>
-		<view class="residue_num">剩余盲盒：{{remainNum}}</view>
 	</view>
 	<view class="operation_wrapper">
-		<view class="name_introduce">
-			<view class="name">{{boxObj.box_title}}</view>
-			<rich-text nodes="{{boxObj.box_content ? boxObj.box_content : '盒子介绍空空如也'}}"></rich-text>
+		<view class="residue_num">剩余盲盒：{{remainNum}}</view>
+		<!-- 立即开始 -->
+		<view class="liji_start" bindtap="openBuyPopup" data-num="{{1}}">
+			<image class="height" src="{{imgUrl}}JCshang_18.png" mode="scaleToFill"></image>
 		</view>
-		
-		<view class="biaoqian">
-			<image class="img" src="{{imgUrl}}JCshang_11.png" mode="scaleToFill"></image>
-			<image class="title_img img" src="{{imgUrl}}JCshang_12.png" mode="scaleToFill"></image>
+		<view>
+			<view class="name_introduce">
+				<view class="name">{{boxObj.box_title}}</view>
+				<rich-text nodes="{{boxObj.box_content ? boxObj.box_content : '盒子介绍空空如也'}}"></rich-text>
+			</view>
 		</view>
-	</view>
-	<view class="zhanwei"></view>
-	<!-- 抽盲盒按钮 -->
-	<!-- <view class="buy_num flex_center">
-		<image class="one_img img" src="{{imgUrl}}JCshang_06.png" mode="scaleToFill" bindtap="openBuyPopup" data-num="{{1}}"></image>
-		<image class="three_img img" src="{{imgUrl}}JCshang_07.png" mode="scaleToFill" bindtap="openBuyPopup" data-num="{{3}}"></image>
-		<image class="five_img img" src="{{imgUrl}}JCshang_08.png" mode="scaleToFill" bindtap="openBuyPopup" data-num="{{5}}"></image>
-		<image class="turnkey_img img" src="{{imgUrl}}JCshang_09.png" mode="scaleToFill" bindtap="openBuyPopup" data-num="{{remainNum}}"></image>
-	</view> -->
-	<view class="buy_num flex_center">
-		<!-- <image class="one_img img" src="{{imgUrl}}JCshang_06.png" mode="scaleToFill" bindtap="openBuyPopup" data-num="{{1}}"></image> -->
-		<view class="word" bindtap="openBuyPopup" data-num="{{1}}">去抽盲盒</view>
 	</view>
 	<!-- 购买弹窗 -->
 	<van-popup show="{{ buyPopupShow }}" position="bottom" custom-style="height: 100%;background: #f7f8fd;"
@@ -192,5 +178,27 @@
 				</image>
 			</view>
 		</view>
+	</van-popup>
+	<!-- 购买弹窗 -->
+	<van-popup show="{{ animationPopup }}" position="right" custom-style="height: 100%; width:100%;background: #f7f8fd;">
+		<view class="closeBuyPopupImg" bindtap="closeBuyPopup">
+			<image class="img" src="/resource/icon/close04.png" mode="scaleToFill"></image>
+		</view>
+		<!-- 轮播 -->
+		<view class="page_section">
+			<swiper class="swiper" bindchange="handleChange" autoplay="{{isAuto}}" interval="{{intervalTime}}" previous-margin="190rpx" next-margin="190rpx" duration="{{huandongTime}}" current="{{currentIndex}}" circular="true">
+				<block wx:for="{{goodsList}}" wx:key="index">
+					<swiper-item class="item">
+						<!-- <image src="/resource/images/box.jpg" class="itemImg"></image> -->
+						<image src="{{item.prize_pic}}" class="itemImg"></image>
+					</swiper-item>
+				</block>
+			</swiper>
+		</view>
+		
+		
+		
+		
+		
 	</van-popup>
 </view>

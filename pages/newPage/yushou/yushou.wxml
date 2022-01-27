@@ -29,8 +29,9 @@
 				<view class="good_content">
 					<view class="good_name ellipsis_2">{{item.prize_title}}</view>
 					<view class="flex_between">
-						<view class="good_intro ellipsis_1">{{item.prize_remark}}</view>
 						<view class="good_price">￥{{item.prize_market_price}}</view>
+						<!-- <view class="good_intro ellipsis_1">{{item.prize_remark}}</view> -->
+						<view class="good_intro ellipsis_1">{{item.sales_volume}}人付款</view>
 					</view>
 				</view>
 			</view>

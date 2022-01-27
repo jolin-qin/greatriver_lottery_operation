@@ -76,7 +76,27 @@ page {
 		-webkit-transform: scale(1);
 	}
 }
+@keyframes scaleout {
+	0% {
+		transform: scale(0.9);
+	}
 
+	25% {
+		transform: scale(1.0);
+	}
+
+	50% {
+		transform: scale(1.1);
+	}
+
+	75% {
+		transform: scale(1.0);
+	}
+
+	100% {
+		transform: scale(0.9);
+	}
+}
 .triangle-down-left {
 	width: 20rpx;
 	height: 20rpx;

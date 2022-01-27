@@ -42,6 +42,7 @@ Page({
         this.geDetailFun();//请求详情函数
         this.geCouponFun();//请可用优惠券
         this.getDefaultAddressFun();//默认地址
+        this.getCommentListFun() //获取评论数
     },
     /**
      * 生命周期函数--监听页面初次渲染完成
@@ -240,6 +241,36 @@ Page({
 				// 	icon: 'none',
 				// 	title: response.data.message,
 				// })
+			}
+		});
+    },
+    // 获取评论数
+	getCommentListFun() {
+		var t = this;
+		app.util.request({
+			url: 'entry/wxapp/get_comment',
+			data: {
+                m: app.globalData.module_name,
+                prize_id: t.data.goodsId,
+				page: 1
+			},
+			method: 'get',
+			success: function (response) {
+				console.log('评论：', response);
+				if (response.data.errno == 0) {
+                    t.setData({
+                        commentNum: response.data.data.count
+                    })
+				} else {
+					//失败
+					wx.showToast({
+						icon: 'none',
+						title: response.data.message,
+					})
+				}
+			},
+			fail: function (response) {
+				
 			}
 		});
 	},
