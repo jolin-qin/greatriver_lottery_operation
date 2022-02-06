@@ -1,5 +1,6 @@
 // pages/newPage/JCshang/JCshang.js
 const app = getApp();
+var inttime = 100;
 Page({
 
     /**
@@ -37,12 +38,16 @@ Page({
         select_pay_type: '',//支付方式  2微信支付   1积分支付
         isShake: true,//防抖
         showTime: 0,//显示时间
-        animationPopup: true,//支付完抽奖动画弹窗
+        animationPopup: false,//支付完抽奖动画弹窗
         // 轮播的参数
         isAuto: false,
         intervalTime: 250,
         huandongTime: 200,
-        zhongjiangindex: 3,
+        currentIndex: 0,
+        zhongjiangindex: 0,
+        // tabs
+        tabs: ['中奖概率', '玩法说明', '分享减免'],
+        tabIndex: 0
     },
 
     /**
@@ -54,7 +59,12 @@ Page({
 		})
         this.getBoxDetailFun()
         this.geCouponFun() //获取优惠券
-        
+        // this.setData({
+        //     isAuto: true
+        // })
+        // setTimeout(() => {
+        //     this.stop(this.data.zhongjiangindex)
+        // }, 2500)
     },
 
     /**
@@ -70,6 +80,37 @@ Page({
     onShow: function () {
         this.getAvailableIntegral() //获取可用积分
     },
+    stop(which) {
+        let index = this.data.currentIndex
+        this.stopLuch(which, index, inttime)
+    },
+    stopLuch(which, index, time) {
+        // if (index >= 8) {
+        //     index = 0
+        // } else {
+        //     index = this.data.currentIndex + 1
+        // }
+        setTimeout(() => {
+            if(400 > time || which != index) {
+                console.log("isAuto:", this.data.isAuto)
+                console.log("time:", time)
+                console.log("which:", which)
+                console.log("index:", index)
+                // splittime++;
+                time += 50;
+                this.setData({
+                    intervalTime: this.data.intervalTime + time,
+                })
+                // console.log("showTime：", this.data.showTime)
+                this.stopLuch(which, this.data.currentIndex, time)
+            } else {
+                console.log("走的else")
+                this.setData({
+                    isAuto: false
+                })
+            }
+        }, time)
+    },
 	//请求盒子详情
 	getBoxDetailFun() {
 		let t = this;
@@ -84,8 +125,21 @@ Page({
 				console.log('盒子详情函数', response);
 				if (response.data.errno == 0) {
                     let arr = [], shengyu = 0, type = '', result = response.data.data;
+                    //盒子详情内容
                     if (result.box_content) {
 					    result.box_content = result.box_content.replace(/\<img/gi, '<img class="rich_img"')
+                    }
+                    //盒子中奖概率
+                    if (result.box_award_details) {
+					    result.box_award_details = result.box_award_details.replace(/\<img/gi, '<img class="rich_img"')
+                    }
+                    //盒子玩法说明
+                    if (result.box_play_details) {
+					    result.box_play_details = result.box_play_details.replace(/\<img/gi, '<img class="rich_img"')
+                    }
+                    //盒子分享减免
+                    if (result.box_share_details) {
+					    result.box_share_details = result.box_share_details.replace(/\<img/gi, '<img class="rich_img"')
                     }
 					if (result.prizes_list.length > 9) {
 						arr = result.prizes_list.slice(0, 9)
@@ -135,7 +189,7 @@ Page({
             this.setData({
                 showTime: this.data.showTime + 1
             })
-            console.log("showTime：", this.data.showTime)
+            
             if (len >= this.data.showTime) {
                 this.addTime(len)
             }
@@ -634,12 +688,16 @@ Page({
     },
     //swiper切换
     handleChange(e) {
-        console.log("currentIndex:"+e.detail.current + "time:" + new Date().getTime())
-        if (this.data.isAuto) {
-            this.setData({
-                currentIndex: e.detail.current
-            })
-        }
+        console.log("currentIndex:", e.detail.current)
+        this.setData({
+            currentIndex: e.detail.current
+        })
+    },
+    clickTab(e) {
+        let index = e.currentTarget.dataset.index
+        this.setData({
+            tabIndex: index
+        })
     },
     /**
      * 生命周期函数--监听页面隐藏

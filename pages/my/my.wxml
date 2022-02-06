@@ -93,35 +93,36 @@
 		</view>
 	</view>
 	<view
-		style="display:flex;flex-wrap:wrap;justify-content:space-between;background:#fff;padding:20rpx 20rpx;border-radius:20rpx;">
+		style="display:flex;flex-wrap:wrap;justify-content:space-between;background:#fff;padding:0 20rpx;border-radius:20rpx;">
 		<navigator url="/pages/my/address/address" hover-class="none" style="text-align:center;margin-top:10rpx;">
 			<image src="/resource/icon/add.png" style="width:40rpx;height:40rpx;"></image>
 			<view class="text-grey" style="font-size:25rpx;font-weight:300;margin-top:5rpx;">地址管理</view>
 		</navigator>
+		
+		<navigator url="/pages/my/tixian/tixian" hover-class="none" style="text-align:center;margin-top:10rpx;">
+			<image src="/resource/icon/tixian.png" style="width:40rpx;height:40rpx;"></image>
+			<view class="text-grey" style="font-size:25rpx;font-weight:300;margin-top:5rpx;">提现管理</view>
+		</navigator>
 		<navigator url="/pages/newPage/huishouguanli/huishouguanli" hover-class="none" style="text-align:center;margin-top:10rpx;">
 			<image src="/resource/icon/huishou.png" style="width:40rpx;height:40rpx;"></image>
-			<view class="text-grey" style="font-size:25rpx;font-weight:300;margin-top:5rpx;">回收管理</view>
+			<view class="text-grey" style="font-size:25rpx;font-weight:300;margin-top:5rpx;">回收记录</view>
 		</navigator>
 		<navigator url="/pages/my/dailyaccount/dailyaccount" hover-class="none"
 			style="text-align:center;margin-top:10rpx;">
 			<image src="/resource/icon/liushui2.png" style="width:40rpx;height:40rpx;"></image>
 			<view class="text-grey" style="font-size:25rpx;font-weight:300;margin-top:5rpx;">流水明细</view>
 		</navigator>
-		<!-- <navigator url="/pages/my/tixian/tixian" hover-class="none" style="text-align:center;margin-top:10rpx;">
-			<image src="/resource/icon/tixian.png" style="width:40rpx;height:40rpx;"></image>
-			<view class="text-grey" style="font-size:25rpx;font-weight:300;margin-top:5rpx;">提现管理</view>
-		</navigator>
-		<navigator url="/pages/my/tixianziliao/tixianziliao" hover-class="none"
-			style="text-align:center;margin-top:10rpx;">
-			<image src="/resource/icon/ziliao.png" style="width:40rpx;height:40rpx;"></image>
-			<view class="text-grey" style="font-size:25rpx;font-weight:300;margin-top:5rpx;">提现资料</view>
-		</navigator> -->
-		
 		<navigator url="/pages/newPage/integral_detail/integral_detail" hover-class="none"
 			style="text-align:center;margin-top:10rpx;">
 			<image src="/resource/icon/jifen.png" style="width:40rpx;height:40rpx;"></image>
 			<view class="text-grey" style="font-size:25rpx;font-weight:300;margin-top:5rpx;">积分明细</view>
 		</navigator>
+		
+		<!-- <navigator url="/pages/my/tixianziliao/tixianziliao" hover-class="none"
+			style="text-align:center;margin-top:10rpx;">
+			<image src="/resource/icon/ziliao.png" style="width:40rpx;height:40rpx;"></image>
+			<view class="text-grey" style="font-size:25rpx;font-weight:300;margin-top:5rpx;">提现资料</view>
+		</navigator> -->
 	</view>
 </view>
 <!-- 常用工具 -->

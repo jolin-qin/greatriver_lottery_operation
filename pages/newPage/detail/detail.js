@@ -27,7 +27,7 @@ Page({
         requireIntegral: 0,//开盒需要积分
         integralRadio: true,//是否禁用积分支付
         select_pay_type: '',//2微信支付   1积分支付
-        commentNum: 58,//评论数
+        commentNum: 0,//评论数
         isShake: true,//防抖
     },
 

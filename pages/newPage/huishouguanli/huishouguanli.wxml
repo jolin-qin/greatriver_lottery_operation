@@ -1,6 +1,6 @@
 <view class="container">
     <image class="title_img" src="{{imgUrl}}small_banner.png" mode="widthFix"></image>
-    <view class="recycle_title">已回收金额（元）</view>
+    <view class="recycle_title">已回收积分</view>
     <view class="recycle_total_money">{{recycleAmount}}</view>
     <view class="recycle_record">回收记录</view>
     <view class="recycle_list">
@@ -10,7 +10,7 @@
                 <view class="time">{{item.time}}</view>
             </view>
             <view class="status">
-                <view class="recycle_money">￥{{item.prizes_recovery_price}}</view>
+                <view class="recycle_money">{{item.prizes_recovery_price}}</view>
                 <block>
                     <view wx:if="{{item.state === 0}}" class="status_code wait">待审核</view>
                     <view wx:elif="{{item.state === 1}}" class="status_code pass">已通过</view>
