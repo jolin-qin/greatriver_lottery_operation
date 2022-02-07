@@ -21,7 +21,7 @@ Page({
         toolPrizeIndex: '',//选中使用道具的商品index
 		couponPopupShow: false,//优惠券弹窗
         buyPopupShow: false,//购买弹窗
-        winningPopupShow: false,//购买弹窗
+        winningPopupShow: false,//中奖弹窗
         allPrizePopupShow: false,//全部奖品弹窗弹窗
 		couponList: [],//可用优惠券
         toolList: [], //道具列表
@@ -38,13 +38,6 @@ Page({
         select_pay_type: '',//支付方式  2微信支付   1积分支付
         isShake: true,//防抖
         showTime: 0,//显示时间
-        animationPopup: false,//支付完抽奖动画弹窗
-        // 轮播的参数
-        isAuto: false,
-        intervalTime: 250,
-        huandongTime: 200,
-        currentIndex: 0,
-        zhongjiangindex: 0,
         // tabs
         tabs: ['中奖概率', '玩法说明', '分享减免'],
         tabIndex: 0
@@ -59,12 +52,6 @@ Page({
 		})
         this.getBoxDetailFun()
         this.geCouponFun() //获取优惠券
-        // this.setData({
-        //     isAuto: true
-        // })
-        // setTimeout(() => {
-        //     this.stop(this.data.zhongjiangindex)
-        // }, 2500)
     },
 
     /**
@@ -80,37 +67,7 @@ Page({
     onShow: function () {
         this.getAvailableIntegral() //获取可用积分
     },
-    stop(which) {
-        let index = this.data.currentIndex
-        this.stopLuch(which, index, inttime)
-    },
-    stopLuch(which, index, time) {
-        // if (index >= 8) {
-        //     index = 0
-        // } else {
-        //     index = this.data.currentIndex + 1
-        // }
-        setTimeout(() => {
-            if(400 > time || which != index) {
-                console.log("isAuto:", this.data.isAuto)
-                console.log("time:", time)
-                console.log("which:", which)
-                console.log("index:", index)
-                // splittime++;
-                time += 50;
-                this.setData({
-                    intervalTime: this.data.intervalTime + time,
-                })
-                // console.log("showTime：", this.data.showTime)
-                this.stopLuch(which, this.data.currentIndex, time)
-            } else {
-                console.log("走的else")
-                this.setData({
-                    isAuto: false
-                })
-            }
-        }, time)
-    },
+    
 	//请求盒子详情
 	getBoxDetailFun() {
 		let t = this;
@@ -141,11 +98,12 @@ Page({
                     if (result.box_share_details) {
 					    result.box_share_details = result.box_share_details.replace(/\<img/gi, '<img class="rich_img"')
                     }
-					if (result.prizes_list.length > 9) {
-						arr = result.prizes_list.slice(0, 9)
-					} else {
-						arr = result.prizes_list
-					}
+					// if (result.prizes_list.length > 9) {
+					// 	arr = result.prizes_list.slice(0, 9)
+					// } else {
+						
+                    // }
+                    arr = result.prizes_list
 					//计算盒子商品总剩余
 					arr.forEach(item => {
 						if (item.num) {
@@ -549,21 +507,30 @@ Page({
                         }, 1000)
                         setTimeout(() => {
                             wx.hideLoading()
+                            let value = JSON.stringify(response.data.data)
+                            wx.setStorageSync('prizedata', value)
                             //根据times判断为哪个数组赋值
                             if (5 >= t.data.times) {
-                                t.setData({
-                                    winningPopupShow: true,
-                                    buyPopupShow: false,
-                                    winningList: response.data.data,
-                                    isShake: true
+                                // t.setData({
+                                //     winningPopupShow: true,
+                                //     buyPopupShow: false,
+                                //     winningList: response.data.data,
+                                //     isShake: true
+                                // })
+                                
+                                wx.redirectTo({
+                                    url: '/pages/newPage/paySuccess/paySuccess?id='+t.data.boxId+'&time=5'
                                 })
                             } else {
-                                t.setData({
-                                    winningPopupShow: true,
-                                    buyPopupShow: false,
-                                    winningList: response.data.data.slice(0, 5),
-                                    winningAllList: response.data.data,
-                                    isShake: true
+                                // t.setData({
+                                //     winningPopupShow: true,
+                                //     buyPopupShow: false,
+                                //     winningList: response.data.data.slice(0, 5),
+                                //     winningAllList: response.data.data,
+                                //     isShake: true
+                                // })
+                                wx.redirectTo({
+                                    url: '/pages/newPage/paySuccess/paySuccess?id='+t.data.boxId+'&time=6'
                                 })
                             }
                         }, 2000)
@@ -621,32 +588,40 @@ Page({
 				console.log('中奖结果：', response2);
 				if (response2.data.errno == 0) {
                     //根据times判断为哪个数组赋值
+                    let value = JSON.stringify(response2.data.data)
+                    wx.setStorageSync('prizedata', value)
                     if (5 >= t.data.times) {
-                        t.setData({
-                            winningPopupShow: true,
-                            buyPopupShow: false,
-                            couponId: '',
-                            activeIndex: 99999,
-                            toolPrizeIndex: '',
-                            toolPrizeId: '',
-                            toolId: '',
-                            useToolNumber: 0,
-                            winningList: response2.data.data,
-                            isShake: true
+                        // t.setData({
+                        //     winningPopupShow: true,
+                        //     buyPopupShow: false,
+                        //     couponId: '',
+                        //     activeIndex: 99999,
+                        //     toolPrizeIndex: '',
+                        //     toolPrizeId: '',
+                        //     toolId: '',
+                        //     useToolNumber: 0,
+                        //     winningList: response2.data.data,
+                        //     isShake: true
+                        // })
+                        wx.redirectTo({
+                            url: '/pages/newPage/paySuccess/paySuccess?id='+t.data.boxId+'&time=5'
                         })
                     } else {
-                        t.setData({
-                            winningPopupShow: true,
-                            buyPopupShow: false,
-                            couponId: '',
-                            activeIndex: 99999,
-                            toolPrizeIndex: '',
-                            toolPrizeId: '',
-                            toolId: '',
-                            useToolNumber: 0,
-                            winningList: response2.data.data.slice(0, 5),
-                            winningAllList: response2.data.data,
-                            isShake: true
+                        // t.setData({
+                        //     winningPopupShow: true,
+                        //     buyPopupShow: false,
+                        //     couponId: '',
+                        //     activeIndex: 99999,
+                        //     toolPrizeIndex: '',
+                        //     toolPrizeId: '',
+                        //     toolId: '',
+                        //     useToolNumber: 0,
+                        //     winningList: response2.data.data.slice(0, 5),
+                        //     winningAllList: response2.data.data,
+                        //     isShake: true
+                        // })
+                        wx.redirectTo({
+                            url: '/pages/newPage/paySuccess/paySuccess?id='+t.data.boxId+'&time=6'
                         })
                     }
 				}
@@ -660,7 +635,6 @@ Page({
                 t.setData({
                     isShake: true
                 })
-				return;
 			}
 		})
     },
