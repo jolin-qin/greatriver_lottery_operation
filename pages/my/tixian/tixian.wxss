@@ -1,1 +1,5 @@
 /* pages/my/tixian/tixian.wxss */
+.nihaoa {
+    width: 100%;
+    height:300rpx;
+}

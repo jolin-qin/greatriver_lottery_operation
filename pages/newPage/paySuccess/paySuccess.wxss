@@ -1,0 +1,106 @@
+page {
+    overflow-x: hidden;
+}
+.outside_wrapper {
+    width: 330px;
+    margin: 100rpx auto;
+    border: 1px solid red;
+    overflow: hidden;
+}
+.inside_wrapper {
+    width: 4400px;
+    height: 110px;
+    overflow: auto;
+    white-space: nowrap;
+}
+.inside_wrapper .inside_item {
+    float: left;
+    width: 110px;
+    height: 110px;
+    padding: 5px;
+}
+.inside_wrapper .inside_item .img {
+    width: 100%;
+    height: 100%;
+}
+.prize_box_wrapper {
+    width: 330px;
+    margin: 0 auto 200rpx;
+    flex-wrap: wrap;
+}
+.prize_box_wrapper .prize_box_item {
+    width: 110px;
+    height: 110px;
+    padding: 5px;
+    transform: scale(0);
+    transform-origin: 0 0;
+    animation: gaibian 0.5s linear 5.5s 1;
+    animation-fill-mode: forwards;
+}
+@keyframes gaibian {
+    0% {
+        transform: scale(0);
+    }
+    50% {
+        transform: scale(0.5);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+.prize_box_wrapper .prize_box_item .img {
+    width: 100%;
+    height: 100%;
+}
+.jump_btn {
+    width: 312rpx;
+	height: 76rpx;
+	line-height: 76rpx;
+	text-align: center;
+	color: #fff;
+	font-size: 32rpx;
+	font-weight: bold;
+	font-style: italic;
+	margin: 0 30rpx;
+	background: url('https://www.jiaochao.top/imageurl/yaoqing.png') no-repeat;
+    background-size: cover;
+}
+/* 全部中奖弹窗 */
+.allprize_popup .coupon_content {
+	width: 100%;
+	height: 100%;
+	
+	color: #fff;
+	position: relative;
+}
+.allprize_popup .coupon_content .title {
+	line-height: 100rpx;
+	font-size: 32rpx;
+	font-weight: bold;
+	text-align: center;
+	background: #763EE1;
+}
+.allprize_popup .coupon_content .prize_wrapper {
+	width: 100%;
+	height: 700rpx;
+	padding: 0 24rpx 24rpx;
+	background: linear-gradient(#763EE1, #652CD2, #622BD2);
+	border-radius: 0 0 20rpx 20rpx;
+}
+.allprize_popup .coupon_content .prize_box {
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+}
+.allprize_popup .coupon_content .prize_item {
+	line-height: 48rpx;
+	text-align: center;
+	font-size: 30rpx;
+}
+.allprize_popup .coupon_content .close_btn {
+	width: 60rpx;
+	height: 60rpx;
+	border-radius: 50%;
+	border: 2rpx solid #fff;
+	margin: 30rpx auto 0;
+}

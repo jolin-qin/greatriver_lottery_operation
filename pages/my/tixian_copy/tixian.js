@@ -27,13 +27,15 @@ Page({
 			},
 			method: 'get',
 			success: function (response) {
-				console.log("可用积分:", response.data);
+				console.log(response.data);
 				if (response.data.errno == 0) {
 					t.setData({
 						memberinfo: response.data.data,
-						memberinfo_yue: response.data.data.yue.toLocaleString(),
+						memberinfo_yue: parseFloat(response.data.data.yue).toLocaleString(),
 						memberinfo_frozen_money: parseFloat(response.data.data.frozen_money).toLocaleString()
+
 					})
+
 				} else {
 					/*
 					t.setData({
@@ -44,10 +46,12 @@ Page({
 				}
 			},
 			fail: function (response) {
+
 				wx.showToast({
 					icon: 'none',
 					title: '网络错误',
 				})
+
 			}
 		});
 	},
@@ -75,6 +79,8 @@ Page({
 							}
 						}
 					})
+
+
 				} else {
 					/*
 					t.setData({
@@ -98,6 +104,7 @@ Page({
 						}
 					}
 				})
+
 			},
 			complate(response) {
 				console.log(response.data);

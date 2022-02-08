@@ -1,0 +1,35 @@
+<view class="outside_wrapper">
+    <view class="inside_wrapper" animation="{{animationData}}">
+        <view class="inside_item" wx:for="{{finalList}}" wx:key="index">
+            <image class="img" src="{{item.prize_pic}}" mode="scaleToFill"></image>
+        </view>
+    </view>
+</view>
+<!-- 抽奖一次、三次、五次展示中奖商品图片 -->
+<view class="flex_center prize_box_wrapper">
+    <view wx:for="{{winningList}}" wx:key="index" class="prize_box_item">
+        <image class="img" src="/resource/images/box.jpg" mode="scaleToFill"></image>
+    </view>
+</view>
+<!-- 跳转按钮 -->
+<view class="flex_center">
+    <view class="jump_btn" bindtap="goWarehousePage">去胶库申请发货</view>
+    <view class="jump_btn" bindtap="againFun">继续抽盲盒</view>
+</view>
+<!-- 全部中奖奖品 -->
+<van-popup show="{{allPrizePopupShow}}"
+    custom-style="width:630rpx;height:900rpx;background:transparent;padding-bottom:0;" round custom-class="allprize_popup"
+    z-index="{{102}}">
+    <view class="coupon_content">
+        <view class="title">本次全部中奖奖品</view>
+        <view class="prize_wrapper">
+            <view class="prize_box">
+                <view class="prize_item" wx:for="{{winningAllList}}" wx:key="index">{{item.prize.complete_prize_title}}</view>
+            </view>
+        </view>
+        <view class="close_btn">
+            <image class="close_img" src="/resource/icon/close05.png" mode="scaleToFill" bindtap="closeAllPrizePupop">
+            </image>
+        </view>
+    </view>
+</van-popup>

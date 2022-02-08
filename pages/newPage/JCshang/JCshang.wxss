@@ -15,10 +15,10 @@
 
 .show_wrapper .middle_area .series_img {
 	display: block;
-	width: 320rpx;
-	height: 320rpx;
+	width: 280rpx;
+	height: 280rpx;
 	position: absolute;
-	top: 186rpx;
+	top: 240rpx;
 	left: 50%;
 	transform: translateX(-50%);
 	z-index: 1;
@@ -640,4 +640,39 @@
     height: 300rpx;
     top: 0;
     transition: all .12s ease-in 0s;
+}
+/* 中奖概率、玩法说明、分享减免 */
+.tab_wrapper {
+	width: 704rpx;
+	height: 1046rpx;
+	margin: 0 auto 30rpx;
+	background: url('https://www.jiaochao.top/imageurl/JCshang_17.png') no-repeat center center;
+	background-size: 100% 100%;
+	overflow: hidden;
+}
+.tab_view {
+	width: 690rpx;
+	margin: 20rpx auto;
+}
+.tab_view .tab_item {
+	width: 230rpx;
+	height: 104rpx;
+	line-height: 104rpx;
+	text-align: center;
+	color: #fff;
+	font-size: 32rpx;
+}
+.tab_view .tab_item.active {
+	background: url('https://www.jiaochao.top/imageurl/JCshang_19.png') no-repeat center center;
+	background-size: 100% 100%;
+	color: #763EE1;
+}
+.scroll_show {
+	width: 670rpx;
+	padding: 0 20rpx;
+	margin: 50rpx auto 0;
+}
+.scroll_show .scroll_view {
+	width: 100%;
+	height: 840rpx;
 }

@@ -26,10 +26,35 @@
 		<view class="liji_start" bindtap="openBuyPopup" data-num="{{1}}">
 			<image class="height" src="{{imgUrl}}JCshang_18.png" mode="scaleToFill"></image>
 		</view>
-		<view>
+		<!--显示详情 -->
+		<view wx:if="{{!boxObj.box_award_details}}">
 			<view class="name_introduce">
 				<view class="name">{{boxObj.box_title}}</view>
 				<rich-text nodes="{{boxObj.box_content ? boxObj.box_content : '盒子介绍空空如也'}}"></rich-text>
+			</view>
+		</view>
+		<!-- 中奖概率、玩法说明、分享减免 -->
+		<view class="tab_wrapper" wx:else>
+			<view class="tab_view flex_between">
+				<view class="tab_item {{tabIndex == index ? 'active' : ''}}" wx:for="{{tabs}}" wx:key="index" bindtap="clickTab" data-index="{{index}}">{{item}}</view>
+			</view>
+			<!--中奖概率 -->
+			<view class="scroll_show" wx:if="{{tabIndex == 0}}">
+				<scroll-view scroll-y="true" class="scroll_view">
+					<rich-text nodes="{{boxObj.box_award_details ? boxObj.box_award_details : '暂无中奖概率说明'}}"></rich-text>
+				</scroll-view>
+			</view>
+			<!--玩法说明 -->
+			<view class="scroll_show" wx:elif="{{tabIndex == 1}}">
+				<scroll-view scroll-y="true" class="scroll_view">
+					<rich-text nodes="{{boxObj.box_play_details ? boxObj.box_play_details : '暂无玩法说明'}}"></rich-text>
+				</scroll-view>
+			</view>
+			<!--分享减免 -->
+			<view class="scroll_show" wx:else>
+				<scroll-view scroll-y="true" class="scroll_view">
+					<rich-text nodes="{{boxObj.box_share_details ? boxObj.box_share_details : '暂无分享减免说明'}}"></rich-text>
+				</scroll-view>
 			</view>
 		</view>
 	</view>
@@ -186,7 +211,7 @@
 		</view>
 		<!-- 轮播 -->
 		<view class="page_section">
-			<swiper class="swiper" bindchange="handleChange" autoplay="{{isAuto}}" interval="{{intervalTime}}" previous-margin="190rpx" next-margin="190rpx" duration="{{huandongTime}}" current="{{currentIndex}}" circular="true">
+			<swiper class="swiper" bindchange="handleChange" autoplay="{{isAuto}}" interval="{{intervalTime}}" previous-margin="190rpx" next-margin="190rpx" duration="{{huandongTime}}" circular="true">
 				<block wx:for="{{goodsList}}" wx:key="index">
 					<swiper-item class="item">
 						<!-- <image src="/resource/images/box.jpg" class="itemImg"></image> -->

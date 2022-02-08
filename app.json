@@ -1,6 +1,5 @@
 {
     "pages": [
-        
         "pages/index/index",
         "pages/newPage/fenxiangyouli/fenxiangyouli",
         "pages/newPage/huishouguanli/huishouguanli",
@@ -32,8 +31,8 @@
         "pages/my/fenxiao/fenxiao",
         "pages/my/canvas/canvas",
         "pages/newPage/details/details",
-        
-        "pages/newPage/chixuyouli/chixuyouli"
+        "pages/newPage/chixuyouli/chixuyouli",
+        "pages/newPage/paySuccess/paySuccess"
     ],
     "window": {
         "navigationBarTextStyle": "black",
