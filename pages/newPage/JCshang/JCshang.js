@@ -1,5 +1,7 @@
 // pages/newPage/JCshang/JCshang.js
 const app = getApp();
+//值越大旋转时间越长  即旋转速度
+var inttime = 50;
 Page({
 
     /**
@@ -37,12 +39,13 @@ Page({
         select_pay_type: '',//支付方式  2微信支付   1积分支付
         isShake: true,//防抖
         showTime: 0,//显示时间
-        animationPopup: true,//支付完抽奖动画弹窗
+        animationPopup: false,//支付完抽奖动画弹窗
         // 轮播的参数
         isAuto: false,
         intervalTime: 250,
         huandongTime: 200,
         zhongjiangindex: 3,
+        currentIndex: 0,
     },
 
     /**
@@ -54,7 +57,10 @@ Page({
 		})
         this.getBoxDetailFun()
         this.geCouponFun() //获取优惠券
-        
+        //模拟中奖
+        setTimeout(() => {
+            this.stop(this.data.zhongjiangindex)
+        }, 3000)
     },
 
     /**
@@ -69,6 +75,9 @@ Page({
      */
     onShow: function () {
         this.getAvailableIntegral() //获取可用积分
+    },
+    stop(whick) {
+        let index = this.data.currentIndex
     },
 	//请求盒子详情
 	getBoxDetailFun() {
@@ -634,13 +643,14 @@ Page({
     },
     //swiper切换
     handleChange(e) {
-        console.log("currentIndex:"+e.detail.current + "time:" + new Date().getTime())
-        if (this.data.isAuto) {
-            this.setData({
-                currentIndex: e.detail.current
-            })
-        }
+        // console.log("currentIndex:"+e.detail.current + "time:" + new Date().getTime())
+        
+        this.setData({
+            currentIndex: e.detail.current
+        })
+        
     },
+
     /**
      * 生命周期函数--监听页面隐藏
      */
